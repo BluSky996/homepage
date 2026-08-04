@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fan da｜试验平台</title>
+  <meta name="description" content="个人主页：展示我的试验平台、研究与原型。" />
+  <style>
+    :root{
+      --bg:#0b0c10; --card:#11131a; --text:#e9e9ee; --muted:#a7a7b3; --line:#232638; --accent:#7c5cff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:linear-gradient(180deg,#0b0c10 0%, #0b0c10 40%, #0e1020 100%);
+      color:var(--text); font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", Arial;
+    }
+    a{color:inherit}
+    .wrap{max-width:980px; margin:0 auto; padding:56px 18px}
+    header{display:flex; gap:18px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+    .title{font-size:28px; font-weight:700; letter-spacing:.2px}
+    .tagline{color:var(--muted); margin-top:8px; line-height:1.6}
+    .btns{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; gap:8px; align-items:center; padding:10px 12px;
+      border:1px solid var(--line); border-radius:12px; text-decoration:none; background:rgba(255,255,255,.02)
+    }
+    .btn:hover{border-color:#3b3f5c}
+    h2{margin:38px 0 14px; font-size:18px}
+    .grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+    @media (max-width:780px){ .grid{grid-template-columns:1fr} }
+    .card{
+      border:1px solid var(--line); background:rgba(17,19,26,.75); border-radius:16px; padding:14px 14px;
+    }
+    .card h3{margin:0 0 6px; font-size:16px}
+    .meta{color:var(--muted); font-size:13px; line-height:1.6}
+    .pill{display:inline-block; padding:2px 8px; border-radius:999px; border:1px solid var(--line); margin-right:6px; color:var(--muted); font-size:12px}
+    footer{margin-top:44px; color:var(--muted); font-size:13px}
+    .line{height:1px; background:var(--line); margin:26px 0}
+    .accent{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="title">fan da <span class="accent">/ 试验平台</span></div>
+        <div class="tagline">
+          独立探索者 · 研究/情报搜索 · 深港协同方向。<br/>
+          这里集中展示我的工具、原型与长期试验。
+        </div>
+      </div>
+      <div class="btns">
+        <a class="btn" href="mailto:dayfy001@gmail.com">Email</a>
+        <a class="btn" href="#" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn" href="#" target="_blank" rel="noreferrer">Notion</a>
+      </div>
+    </header>
+
+    <div class="line"></div>
+
+    <h2>试验平台 / Experiments</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>实验 01：情报搜索工作流</h3>
+        <div class="meta">
+          <span class="pill">Research</span><span class="pill">Workflow</span>
+          <div>把“问题 → 资料 → 观点 → 行动”变成可复用流程。</div>
+          <div style="margin-top:8px;">
+            <a href="#" target="_blank" rel="noreferrer">Demo</a> ·
+            <a href="#" target="_blank" rel="noreferrer">文档</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>实验 02：深港合作区机会地图</h3>
+        <div class="meta">
+          <span class="pill">SZ–HK</span><span class="pill">Mapping</span>
+          <div>把河套/前海/北部都会区的机会点结构化。</div>
+          <div style="margin-top:8px;">
+            <a href="#" target="_blank" rel="noreferrer">页面</a> ·
+            <a href="#" target="_blank" rel="noreferrer">数据</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Now</h2>
+    <div class="card">
+      <div class="meta">
+        近期关注：把试验拆成可复用模块（输入/处理/输出），并沉淀成公开可阅读的页面。<br/>
+        下一步：补齐实验列表、加一个“订阅/联系表单”、每个实验配一张截图或 demo 链接。
+      </div>
+    </div>
+
+    <h2>关于我</h2>
+    <div class="card">
+      <div class="meta">
+        我偏好自主、探索式工作方式，喜欢把复杂问题拆成结构化流程与工具。<br/>
+        主题：创新生态、深港协同、跨境机会、研究方法论与信息检索。
+      </div>
+    </div>
+
+    <footer>
+      © <span id="y"></span> fan da · Built with plain HTML/CSS
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
