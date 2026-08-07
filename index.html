@@ -1,113 +1,510 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset ="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Data Lab 数据智能学习库</title>
-  <meta name="description" content="个人主页：展示我的试验平台、研究与原型。" />
+  <meta name="description" content="AI Data Lab 数据智能实验室——汇集数据资源、AI 实验项目与数据智能学习路线。" />
+  <meta name="theme-color" content="#050706" />
+  <title>AI Data Lab 数据智能实验室</title>
   <style>
-    :root{
-      --bg:#0b0c10; --card:#11131a; --text:#e9e9ee; --muted:#a7a7b3; --line:#232638; --accent:#7c5cff;
+    :root {
+      --bg: #050706;
+      --surface: #0b0f0d;
+      --surface-2: #101613;
+      --line: rgba(139, 255, 207, 0.13);
+      --line-strong: rgba(139, 255, 207, 0.28);
+      --text: #f0f7f3;
+      --muted: #8d9c95;
+      --green: #6dffb3;
+      --cyan: #47d7ff;
+      --violet: #9c7cff;
+      --max-width: 1160px;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0; background:linear-gradient(180deg,#0b0c10 0%, #0b0c10 40%, #0e1020 100%);
-      color:var(--text); font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", Arial;
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 82% 8%, rgba(71, 215, 255, 0.08), transparent 24rem),
+        radial-gradient(circle at 12% 28%, rgba(109, 255, 179, 0.06), transparent 28rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
     }
-    a{color:inherit}
-    .wrap{max-width:980px; margin:0 auto; padding:56px 18px}
-    header{display:flex; gap:18px; align-items:center; justify-content:space-between; flex-wrap:wrap}
-    .title{font-size:28px; font-weight:700; letter-spacing:.2px}
-    .tagline{color:var(--muted); margin-top:8px; line-height:1.6}
-    .btns{display:flex; gap:10px; flex-wrap:wrap}
-    .btn{
-      display:inline-flex; gap:8px; align-items:center; padding:10px 12px;
-      border:1px solid var(--line); border-radius:12px; text-decoration:none; background:rgba(255,255,255,.02)
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      content: "";
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
     }
-    .btn:hover{border-color:#3b3f5c}
-    h2{margin:38px 0 14px; font-size:18px}
-    .grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
-    @media (max-width:780px){ .grid{grid-template-columns:1fr} }
-    .card{
-      border:1px solid var(--line); background:rgba(17,19,26,.75); border-radius:16px; padding:14px 14px;
+
+    a { color: inherit; }
+
+    .container {
+      width: min(calc(100% - 36px), var(--max-width));
+      margin-inline: auto;
     }
-    .card h3{margin:0 0 6px; font-size:16px}
-    .meta{color:var(--muted); font-size:13px; line-height:1.6}
-    .pill{display:inline-block; padding:2px 8px; border-radius:999px; border:1px solid var(--line); margin-right:6px; color:var(--muted); font-size:12px}
-    footer{margin-top:44px; color:var(--muted); font-size:13px}
-    .line{height:1px; background:var(--line); margin:26px 0}
-    .accent{color:var(--accent)}
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(5, 7, 6, 0.78);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 15px;
+      font-weight: 760;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 11px;
+      height: 11px;
+      border: 2px solid var(--green);
+      border-radius: 3px;
+      box-shadow: 0 0 18px rgba(109, 255, 179, 0.65);
+      transform: rotate(45deg);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { color: var(--green); }
+
+    .hero {
+      min-height: 690px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 72px;
+      padding-block: 108px 90px;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 20px;
+      color: var(--green);
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before,
+    .section-kicker::before {
+      width: 24px;
+      height: 1px;
+      content: "";
+      background: currentColor;
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(48px, 7vw, 84px);
+      line-height: 1.06;
+      letter-spacing: -0.055em;
+    }
+
+    .gradient-text {
+      color: transparent;
+      background: linear-gradient(110deg, var(--green), var(--cyan) 58%, var(--violet));
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      margin: 28px 0 34px;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 19px);
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.025);
+      font-size: 14px;
+      font-weight: 650;
+      text-decoration: none;
+      transition: 180ms ease;
+    }
+
+    .button.primary {
+      border-color: var(--green);
+      color: #03130b;
+      background: var(--green);
+      box-shadow: 0 0 30px rgba(109, 255, 179, 0.16);
+    }
+
+    .button:hover { transform: translateY(-2px); border-color: var(--green); }
+
+    .hero-console {
+      position: relative;
+      padding: 18px;
+      border: 1px solid var(--line-strong);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(16, 22, 19, 0.9), rgba(5, 8, 7, 0.94));
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.42), inset 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    .console-head {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .console-dot { width: 7px; height: 7px; border-radius: 50%; background: #27312c; }
+    .console-dot.active { background: var(--green); box-shadow: 0 0 10px var(--green); }
+
+    .console-body {
+      display: grid;
+      gap: 14px;
+      padding: 24px 8px 8px;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 13px;
+    }
+
+    .console-line { display: flex; justify-content: space-between; gap: 16px; color: var(--muted); }
+    .console-line span:last-child { color: var(--green); }
+    .console-chart { height: 108px; display: flex; align-items: end; gap: 7px; padding-top: 12px; }
+    .console-chart i { flex: 1; min-height: 15%; border-radius: 2px 2px 0 0; background: linear-gradient(var(--cyan), rgba(71, 215, 255, 0.08)); }
+
+    section { padding-block: 94px; scroll-margin-top: 72px; }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 38px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(31px, 4vw, 48px);
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .section-intro { max-width: 520px; margin: 0; color: var(--muted); }
+
+    .dataset-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+    }
+
+    .data-card {
+      grid-column: span 2;
+      min-height: 255px;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(16, 22, 19, 0.74), rgba(8, 11, 9, 0.88));
+      transition: 180ms ease;
+    }
+
+    .data-card:nth-last-child(-n + 2) { grid-column: span 3; }
+    .data-card:hover { transform: translateY(-4px); border-color: var(--line-strong); }
+
+    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .card-index { color: var(--cyan); font-family: Consolas, monospace; font-size: 12px; }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--green);
+      font-size: 11px;
+    }
+
+    .status::before { width: 5px; height: 5px; content: ""; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+    .data-card h3 { margin: 28px 0 8px; font-size: 20px; }
+    .data-card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .future-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: #68746e;
+      font-family: Consolas, monospace;
+      font-size: 12px;
+      text-decoration: none;
+      cursor: not-allowed;
+    }
+
+    .lab-panel {
+      padding: clamp(26px, 5vw, 54px);
+      border: 1px solid var(--line-strong);
+      border-radius: 20px;
+      background: linear-gradient(120deg, rgba(13, 21, 17, 0.94), rgba(8, 10, 9, 0.92));
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 34px;
+      margin-top: 50px;
+      counter-reset: pipeline;
+    }
+
+    .pipeline-step { position: relative; counter-increment: pipeline; }
+    .pipeline-step:not(:last-child)::after { position: absolute; top: 17px; right: -24px; content: "→"; color: var(--green); }
+    .step-number { color: var(--green); font-family: Consolas, monospace; font-size: 12px; }
+    .pipeline-step h3 { margin: 15px 0 7px; font-size: 18px; }
+    .pipeline-step p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .route-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
+    .route-item { min-height: 280px; padding: 30px 24px; background: var(--surface); }
+    .route-item strong { display: block; margin-bottom: 45px; color: var(--green); font-family: Consolas, monospace; font-size: 12px; }
+    .route-item h3 { margin: 0 0 12px; font-size: 20px; }
+    .route-item p { margin: 0; color: var(--muted); font-size: 14px; }
+    .route-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 24px; }
+    .route-tags span { padding: 4px 8px; border: 1px solid var(--line); border-radius: 4px; color: #aebbb5; font-size: 11px; }
+
+    .about-grid { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: 70px; align-items: start; }
+    .about-statement { margin: 0; font-size: clamp(26px, 3.4vw, 42px); line-height: 1.35; letter-spacing: -0.03em; }
+    .about-copy { color: var(--muted); font-size: 16px; }
+    .about-copy p:first-child { margin-top: 0; }
+    .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 30px; }
+    .principle { padding: 16px; border: 1px solid var(--line); border-radius: 8px; color: #b9c5bf; font-size: 13px; }
+    .principle span { display: block; margin-bottom: 6px; color: var(--cyan); font-family: Consolas, monospace; font-size: 11px; }
+
+    footer { padding-block: 30px; border-top: 1px solid var(--line); color: #6e7c75; font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 24px; }
+
+    @media (max-width: 900px) {
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 54px; padding-block: 90px 72px; }
+      .hero-console { max-width: 620px; }
+      .dataset-grid { grid-template-columns: repeat(2, 1fr); }
+      .data-card, .data-card:nth-last-child(-n + 2) { grid-column: auto; }
+      .data-card:last-child { grid-column: 1 / -1; }
+      .route-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 34px; }
+    }
+
+    @media (max-width: 680px) {
+      .nav { min-height: 64px; }
+      .nav-links { max-width: 52vw; gap: 14px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+      .nav-links a:nth-child(n + 4) { display: none; }
+      .hero { padding-top: 74px; }
+      h1 { font-size: clamp(42px, 14vw, 62px); }
+      section { padding-block: 70px; }
+      .section-heading { display: block; }
+      .section-intro { margin-top: 18px; }
+      .dataset-grid, .route-grid, .principles { grid-template-columns: 1fr; }
+      .data-card:last-child { grid-column: auto; }
+      .pipeline { grid-template-columns: 1fr; gap: 34px; }
+      .pipeline-step { padding-left: 32px; }
+      .pipeline-step:not(:last-child)::after { top: auto; right: auto; bottom: -30px; left: 7px; content: "↓"; }
+      .route-item { min-height: 230px; }
+      .footer-inner { flex-direction: column; gap: 6px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
+  <header class="site-header">
+    <nav class="nav container" aria-label="主导航">
+      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>AI DATA LAB</a>
+      <div class="nav-links">
+        <a href="#datasets">数据资源</a>
+        <a href="#experiments">实验项目</a>
+        <a href="#learning">学习路线</a>
+        <a href="#about">关于我们</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero container" aria-labelledby="hero-title">
       <div>
-        <div class="title">fan da <span class="accent">/ 试验平台</span></div>
-        <div class="tagline">
-          独立探索者 · 研究/情报搜索 · 深港协同方向。<br/>
-          这里集中展示我的工具、原型与长期试验。
+        <p class="eyebrow">Data Intelligence Laboratory</p>
+        <h1 id="hero-title">让数据成为<br /><span class="gradient-text">智能的燃料</span></h1>
+        <p class="hero-copy">AI Data Lab 是面向数据学习者与实践者的开放实验室。从真实数据集出发，连接数据治理、模型训练与应用探索。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#datasets">浏览数据资源</a>
+          <a class="button" href="#learning">查看学习路线</a>
         </div>
       </div>
-      <div class="btns">
-        <a class="btn" href="mailto:dayfy001@gmail.com">Email</a>
-        <a class="btn" href="#" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#" target="_blank" rel="noreferrer">Notion</a>
-      </div>
-    </header>
 
-    <div class="line"></div>
-
-    <h2>试验平台 / Experiments</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>实验 01：情报搜索工作流</h3>
-        <div class="meta">
-          <span class="pill">Research</span><span class="pill">Workflow</span>
-          <div>把“问题 → 资料 → 观点 → 行动”变成可复用流程。</div>
-          <div style="margin-top:8px;">
-            <a href="#" target="_blank" rel="noreferrer">Demo</a> ·
-            <a href="#" target="_blank" rel="noreferrer">文档</a>
+      <div class="hero-console" aria-label="数据实验室运行状态">
+        <div class="console-head">
+          <span class="console-dot active"></span><span class="console-dot"></span><span class="console-dot"></span>
+        </div>
+        <div class="console-body">
+          <div class="console-line"><span>LAB_STATUS</span><span>ONLINE</span></div>
+          <div class="console-line"><span>DATA_DOMAINS</span><span>05</span></div>
+          <div class="console-line"><span>PIPELINE</span><span>READY</span></div>
+          <div class="console-chart" aria-hidden="true">
+            <i style="height:28%"></i><i style="height:44%"></i><i style="height:35%"></i><i style="height:68%"></i><i style="height:53%"></i><i style="height:82%"></i><i style="height:64%"></i><i style="height:96%"></i><i style="height:76%"></i>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>实验 02：深港合作区机会地图</h3>
-        <div class="meta">
-          <span class="pill">SZ–HK</span><span class="pill">Mapping</span>
-          <div>把河套/前海/北部都会区的机会点结构化。</div>
-          <div style="margin-top:8px;">
-            <a href="#" target="_blank" rel="noreferrer">页面</a> ·
-            <a href="#" target="_blank" rel="noreferrer">数据</a>
+    <section id="datasets">
+      <div class="container">
+        <p class="section-kicker">01 / Dataset Library</p>
+        <div class="section-heading">
+          <h2>数据资源库</h2>
+          <p class="section-intro">围绕五类真实业务场景，持续整理可用于分析、建模和实验的数据资源。</p>
+        </div>
+
+        <div class="dataset-grid">
+          <article class="data-card">
+            <div class="card-top"><span class="card-index">DATA_01</span><span class="status">建设中</span></div>
+            <h3>金融市场数据</h3>
+            <p>覆盖股票行情、财务指标与宏观经济变量，为量化分析和风险预测提供基础。</p>
+            <span class="future-link" aria-disabled="true">DOWNLOAD / SOON <span>↗</span></span>
+          </article>
+          <article class="data-card">
+            <div class="card-top"><span class="card-index">DATA_02</span><span class="status">建设中</span></div>
+            <h3>电商运营数据</h3>
+            <p>包含商品、订单、用户行为与营销转化数据，用于消费洞察和推荐实验。</p>
+            <span class="future-link" aria-disabled="true">DOWNLOAD / SOON <span>↗</span></span>
+          </article>
+          <article class="data-card">
+            <div class="card-top"><span class="card-index">DATA_03</span><span class="status">规划中</span></div>
+            <h3>短视频直播数据</h3>
+            <p>聚焦内容表现、互动行为、直播转化和账号增长，探索内容智能分析。</p>
+            <span class="future-link" aria-disabled="true">DOWNLOAD / SOON <span>↗</span></span>
+          </article>
+          <article class="data-card">
+            <div class="card-top"><span class="card-index">DATA_04</span><span class="status">整理中</span></div>
+            <h3>气候环境数据</h3>
+            <p>汇集气象观测、空气质量与环境变化数据，支持时序预测和可视化研究。</p>
+            <span class="future-link" aria-disabled="true">DOWNLOAD / SOON <span>↗</span></span>
+          </article>
+          <article class="data-card">
+            <div class="card-top"><span class="card-index">DATA_05</span><span class="status">规划中</span></div>
+            <h3>工业生产数据</h3>
+            <p>面向设备运行、质量检测和能耗管理场景，服务异常检测与预测性维护。</p>
+            <span class="future-link" aria-disabled="true">DOWNLOAD / SOON <span>↗</span></span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiments">
+      <div class="container lab-panel">
+        <p class="section-kicker">02 / AI Experiments</p>
+        <div class="section-heading">
+          <h2>AI 实验项目</h2>
+          <p class="section-intro">用标准化流程把杂乱数据转化为可训练、可评估、可复用的智能能力。</p>
+        </div>
+        <div class="pipeline" aria-label="数据处理流程">
+          <div class="pipeline-step"><span class="step-number">01 INPUT</span><h3>原始数据</h3><p>采集多来源、多格式的真实业务数据，建立数据资产清单。</p></div>
+          <div class="pipeline-step"><span class="step-number">02 PROCESS</span><h3>清洗</h3><p>处理缺失、异常与重复记录，统一格式并完成质量校验。</p></div>
+          <div class="pipeline-step"><span class="step-number">03 CONTEXT</span><h3>标注</h3><p>定义任务标签与规则，构建具备业务语义的高质量样本。</p></div>
+          <div class="pipeline-step"><span class="step-number">04 MODEL</span><h3>训练</h3><p>选择算法、评估表现并迭代模型，沉淀可复现的实验结果。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="learning">
+      <div class="container">
+        <p class="section-kicker">03 / Learning Path</p>
+        <div class="section-heading">
+          <h2>数据智能学习路线</h2>
+          <p class="section-intro">由基础工具走向 AI 项目实践，建立完整、可迁移的数据问题解决能力。</p>
+        </div>
+        <div class="route-grid">
+          <article class="route-item"><strong>LEVEL 01</strong><h3>数据基础</h3><p>理解数据结构，掌握获取、查询与基础分析方法。</p><div class="route-tags"><span>Excel</span><span>SQL</span><span>Statistics</span></div></article>
+          <article class="route-item"><strong>LEVEL 02</strong><h3>编程分析</h3><p>使用代码完成数据处理、探索分析与可视化表达。</p><div class="route-tags"><span>Python</span><span>Pandas</span><span>Visualization</span></div></article>
+          <article class="route-item"><strong>LEVEL 03</strong><h3>机器学习</h3><p>建立从特征工程到模型评估的标准实验工作流。</p><div class="route-tags"><span>ML</span><span>Features</span><span>Evaluation</span></div></article>
+          <article class="route-item"><strong>LEVEL 04</strong><h3>AI 应用</h3><p>围绕实际场景完成模型集成、部署与持续优化。</p><div class="route-tags"><span>LLM</span><span>Agents</span><span>MLOps</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <p class="section-kicker">04 / About</p>
+        <div class="about-grid">
+          <p class="about-statement">学习数据，<br />理解世界，<br /><span class="gradient-text">创造智能。</span></p>
+          <div class="about-copy">
+            <p>AI Data Lab 数据智能实验室是一个持续生长的数据学习与实验空间。我们关注数据如何被采集、理解和应用，也关注 AI 如何从可靠的数据基础中产生真实价值。</p>
+            <p>这里将持续开放数据资源、实验记录与学习路径，帮助每一位探索者从数据出发，完成属于自己的智能项目。</p>
+            <div class="principles">
+              <div class="principle"><span>OPEN</span>开放共享</div>
+              <div class="principle"><span>PRACTICAL</span>实践驱动</div>
+              <div class="principle"><span>ITERATIVE</span>持续迭代</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+  </main>
 
-    <h2>Now</h2>
-    <div class="card">
-      <div class="meta">
-        近期关注：把试验拆成可复用模块（输入/处理/输出），并沉淀成公开可阅读的页面。<br/>
-        下一步：补齐实验列表、加一个“订阅/联系表单”、每个实验配一张截图或 demo 链接。
-      </div>
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> AI Data Lab</span>
+      <span>DATA · MODEL · INTELLIGENCE</span>
     </div>
-
-    <h2>关于我</h2>
-    <div class="card">
-      <div class="meta">
-        我偏好自主、探索式工作方式，喜欢把复杂问题拆成结构化流程与工具。<br/>
-        主题：创新生态、深港协同、跨境机会、研究方法论与信息检索。
-      </div>
-    </div>
-
-    <footer>
-      © <span id="y"></span> fan da · Built with plain HTML/CSS
-    </footer>
-  </div>
+  </footer>
 
   <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
