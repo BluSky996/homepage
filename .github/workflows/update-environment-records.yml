@@ -1,0 +1,34 @@
+name: Update environment experiment records
+
+on:
+  push:
+    paths:
+      - "datasets/environment/data/**"
+      - "datasets/environment/reports/**"
+      - "scripts/update_environment_records.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-records:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Generate latest record lists
+        run: python scripts/update_environment_records.py
+
+      - name: Commit generated page when changed
+        run: |
+          if git diff --quiet -- datasets/environment.html; then
+            echo "No record changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add datasets/environment.html
+          git commit -m "Update environment experiment records"
+          git push
