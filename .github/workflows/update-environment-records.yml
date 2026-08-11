@@ -5,6 +5,7 @@ on:
     paths:
       - "datasets/environment/data/**"
       - "datasets/environment/reports/**"
+      - "datasets/environment/records.json"
       - "scripts/update_environment_records.py"
   workflow_dispatch:
 

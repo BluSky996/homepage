@@ -1,0 +1,11 @@
+{
+  "experiments": [
+    {
+      "date": "2026-08-11",
+      "project": "ESP32温度与光照环境监测实验",
+      "csv": "esp32_light_temp_LED_behavior_20260709_233950.csv",
+      "report": "ESP32温度与光照环境监测实验分析报告",
+      "png": "esp32_light_temp_LED_behavior_20260622_111116.png"
+    }
+  ]
+}
