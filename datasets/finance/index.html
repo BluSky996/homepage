@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AI Data Lab 金融市场实验数据">
+  <title>金融市场实验数据｜AI Data Lab</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .page-head{padding-block:100px 58px;text-align:center}
+    .page-head .kicker{justify-content:center}
+    .page-head h1{max-width:none;margin-inline:auto;white-space:nowrap;font-size:clamp(40px,6.4vw,78px)}
+    .page-head .lead{max-width:760px;margin-inline:auto}
+    .environment-section{padding-top:38px;padding-bottom:42px}
+    .strategy-section{padding-top:42px;padding-bottom:72px}
+    .future-section{padding-top:20px;padding-bottom:100px}
+    .strategy-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .strategy-card{position:relative;min-height:390px;display:flex;flex-direction:column;overflow:hidden;padding:30px;border:1px solid var(--line);border-radius:14px;background:rgba(11,16,13,.88);transition:.18s ease}
+    .strategy-card:hover{transform:translateY(-3px);border-color:var(--strong)}
+    .strategy-card::before{position:absolute;inset:0 auto 0 0;width:2px;content:"";background:linear-gradient(var(--green),transparent)}
+    .strategy-index{color:var(--green);font:11px Consolas,monospace}
+    .strategy-card h3{margin:13px 0 25px;font-size:25px}
+    .strategy-meta{display:grid;grid-template-columns:105px 1fr;gap:9px 12px;color:var(--muted);font-size:14px}
+    .strategy-meta b{color:#c8d4ce;font-weight:600}
+    .data-label{margin:24px 0 9px;color:#c8d4ce;font-size:12px}
+    .data-tags{display:flex;flex-wrap:wrap;gap:7px}
+    .data-tags span{padding:4px 8px;border:1px solid var(--line);border-radius:5px;color:#aebbb5;font-size:11px}
+    .strategy-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto;padding-top:25px;border-top:1px solid var(--line)}
+    .action-button{display:inline-flex;min-height:44px;align-items:center;justify-content:center;border:1px solid var(--strong);border-radius:8px;color:var(--text);background:rgba(255,255,255,.025);font-size:13px;font-weight:700;text-decoration:none;cursor:not-allowed}
+    .action-button.primary{border-color:var(--green);color:#06140c;background:var(--green)}
+    .future-grid{grid-template-columns:1fr}
+    @media(max-width:800px){.strategy-grid{grid-template-columns:1fr}}
+    @media(max-width:600px){.page-head{padding-block:72px 42px}.page-head h1{font-size:clamp(34px,11vw,50px)}.strategy-section{padding-top:24px}.strategy-meta{grid-template-columns:1fr}.strategy-actions{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+      <a class="brand" href="../../index.html"><span class="mark"></span>AI DATA LAB</a>
+      <div class="navlinks"><a href="../../index.html">首页</a><a href="../../index.html#datasets">Dataset Library</a></div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-head container">
+      <div class="crumbs"><a href="../../index.html">AI Data Lab</a> / <a href="../../index.html#datasets">Dataset Library</a> / DATA_01</div>
+      <p class="kicker">Financial Market Lab</p>
+      <h1>金融市场<span class="gradient">实验数据</span></h1>
+      <p class="lead">记录和分析真实金融交易数据，集中管理期货策略运行记录、交易数据与分析结果。</p>
+    </section>
+
+    <section class="section environment-section container">
+      <div class="section-head">
+        <div><p class="kicker">01 / Equipment</p><h2>交易环境介绍</h2></div>
+        <p class="section-intro">保留策略运行所处的市场、交易软件与数据分析环境档案。</p>
+      </div>
+      <div class="equipment-grid">
+        <article class="panel">
+          <h3>Hardware / Trading Environment</h3>
+          <div class="item-list">
+            <div class="item"><strong>期货市场</strong><span>商品期货交易</span></div>
+            <div class="item"><strong>交易软件</strong><span>文华财经交易软件</span></div>
+          </div>
+        </article>
+        <article class="panel">
+          <h3>Data / Analysis Environment</h3>
+          <div class="item-list">
+            <div class="item"><strong>交易记录</strong><span>CSV 数据文件</span></div>
+            <div class="item"><strong>分析工具</strong><span>数据模型</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section strategy-section container">
+      <div class="section-head">
+        <div><p class="kicker">02 / Strategy Information</p><h2>策略项目</h2></div>
+        <p class="section-intro">每个策略作为独立实验档案，交易数据与分析报告归属于对应项目。</p>
+      </div>
+      <div class="strategy-grid">
+        <article class="strategy-card">
+          <span class="strategy-index">STRATEGY / 01</span>
+          <h3>尿素期货 一号策略</h3>
+          <div class="strategy-meta"><b>运行产品</b><span>云财富期货有限公司</span><b>交易品种</b><span>尿素期货</span></div>
+          <p class="data-label">数据内容</p>
+          <div class="data-tags"><span>开仓记录</span><span>平仓记录</span><span>盈亏数据</span><span>持仓变化</span><span>策略运行记录</span></div>
+          <div class="strategy-actions"><span class="action-button primary">交易数据&nbsp;&nbsp;下载</span><span class="action-button">分析报告&nbsp;&nbsp;下载</span></div>
+        </article>
+        <article class="strategy-card">
+          <span class="strategy-index">STRATEGY / 02</span>
+          <h3>尿素期货 二号策略</h3>
+          <div class="strategy-meta"><b>运行产品</b><span>新世纪期货有限公司</span><b>交易品种</b><span>尿素期货</span></div>
+          <p class="data-label">数据内容</p>
+          <div class="data-tags"><span>开仓记录</span><span>平仓记录</span><span>盈亏数据</span><span>持仓变化</span><span>策略运行记录</span></div>
+          <div class="strategy-actions"><span class="action-button primary">交易数据&nbsp;&nbsp;下载</span><span class="action-button">分析报告&nbsp;&nbsp;下载</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section future-section container">
+      <div class="section-head"><div><p class="kicker">Future Finance Data</p><h2>未来金融数据</h2></div><p class="section-intro">为后续金融实验方向预留独立项目空间。</p></div>
+      <div class="future-grid">
+        <article class="future"><div><span>规划中 / PLANNED</span><h3>股票交易数据</h3><p>未来策略项目预留</p></div></article>
+        <article class="future"><div><span>规划中 / PLANNED</span><h3>加密货币交易数据</h3><p>未来策略项目预留</p></div></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>DATA_01 / FINANCIAL MARKET</span></div></footer>
+</body>
+</html>
