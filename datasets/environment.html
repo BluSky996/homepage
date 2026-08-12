@@ -38,19 +38,20 @@
     .cover-content .kicker { justify-content: center; }
     .cover-content h1 { max-width: none; font-size: clamp(58px,9vw,112px); }
     .cover-code { margin-top: 34px; color: var(--muted); font: 11px Consolas,monospace; letter-spacing: .22em; }
-    .archive-list { overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: rgba(11,16,13,.86); }
-    .archive-head,.archive-row { display: grid; grid-template-columns: 120px 1.1fr 1.35fr 120px 128px; align-items: center; gap: 18px; }
-    .archive-head { padding: 13px 20px; border-bottom: 1px solid var(--line); color: #68776f; font: 10px Consolas,monospace; letter-spacing: .1em; }
-    .archive-row { min-height: 82px; padding: 15px 20px; border-bottom: 1px solid var(--line); }
-    .archive-row:last-child { border-bottom: 0; }
+    .experiment-history { display: grid; gap: 14px; }
+    .experiment-record { overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: rgba(11,16,13,.86); }
+    .experiment-record-head { display: flex; align-items: center; gap: 18px; padding: 15px 20px; border-bottom: 1px solid var(--line); }
+    .experiment-record-head strong { font-size: 15px; font-weight: 650; }
+    .experiment-files { display: grid; }
+    .experiment-file-row { display: grid; grid-template-columns: 100px minmax(0,1fr) 128px; align-items: center; gap: 18px; min-height: 66px; padding: 12px 20px; border-bottom: 1px solid var(--line); }
+    .experiment-file-row:last-child { border-bottom: 0; }
+    .experiment-file-label { color: #c8d4ce; font-size: 13px; font-weight: 650; }
+    .experiment-file-name { overflow: hidden; color: var(--muted); font: 12px Consolas,monospace; text-overflow: ellipsis; white-space: nowrap; }
+    .experiment-file-row.missing .experiment-file-name { color: #68776f; }
     .archive-date { color: var(--cyan); font: 12px Consolas,monospace; }
-    .archive-title { font-size: 14px; font-weight: 650; }
-    .archive-file,.archive-size { color: var(--muted); font: 12px Consolas,monospace; }
     .record-action { min-height: 38px; display: inline-flex; align-items: center; justify-content: center; padding-inline: 13px; border: 1px solid var(--strong); border-radius: 7px; color: #b8c6be; background: rgba(255,255,255,.02); font-size: 12px; text-decoration: none; transition: .18s ease; }
     .record-action:hover { border-color: var(--green); color: var(--green); }
     .archive-empty { padding: 36px 20px; color: var(--muted); text-align: center; font-size: 14px; }
-    .report-list .archive-head,.report-list .archive-row { grid-template-columns: 120px 1fr 128px; }
-    .report-list .archive-title { font-size: 15px; }
     .archive-note { display: flex; align-items: center; gap: 8px; margin-top: 14px; color: #69776f; font-size: 12px; }
     .archive-note::before { width: 6px; height: 6px; content: ""; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
     .equipment-section { padding-block: 38px; }
@@ -67,18 +68,16 @@
     .equipment-section .step h3 { margin-top: 5px; }
     @media(max-width:800px){
       .project-cover { min-height: 480px; padding-block: 90px; }
-      .archive-head { display: none; }
-      .archive-row,.report-list .archive-row { grid-template-columns: 1fr auto; gap: 7px 16px; padding: 18px; }
-      .archive-date { grid-column: 1; }
-      .archive-title { grid-column: 1; }
-      .archive-file,.archive-size { grid-column: 1; }
-      .record-action { grid-column: 2; grid-row: 1 / span 4; }
+      .experiment-file-row { grid-template-columns: 1fr auto; gap: 7px 16px; padding: 14px 18px; }
+      .experiment-file-label,.experiment-file-name { grid-column: 1; }
+      .record-action { grid-column: 2; grid-row: 1 / span 2; }
     }
     @media(max-width:520px){
       .project-cover { min-height: 420px; }
       .cover-content .crumbs { margin-bottom: 38px; }
       .cover-content h1 { font-size: clamp(48px,15vw,70px); }
-      .archive-row,.report-list .archive-row { grid-template-columns: 1fr; }
+      .experiment-record-head { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .experiment-file-row { grid-template-columns: 1fr; }
       .record-action { width: 100%; grid-column: 1; grid-row: auto; margin-top: 7px; }
     }
   </style>
@@ -138,30 +137,15 @@
 
     <section class="section container">
       <div class="section-head">
-        <div><p class="kicker">02 / Data Archive</p><h2>实验数据记录</h2></div>
-        <p class="section-intro">按真实 CSV 文件日期自动更新，仅展示最近 5 条 ESP32 环境采集记录。</p>
+        <div><p class="kicker">02 / Experiment Archive</p><h2>实验历史记录</h2></div>
+        <p class="section-intro">以完整实验批次归档原始数据与对应分析报告，展示最近 5 次实验。</p>
       </div>
-      <div class="archive-list">
-        <div class="archive-head"><span>DATE</span><span>EXPERIMENT</span><span>FILE</span><span>SIZE</span><span>ACTION</span></div>
-        <!-- DATA_RECORDS_START -->
-        <div class="archive-row"><span class="archive-date">2026-08-11</span><span class="archive-title">ESP32温度与光照环境监测实验</span><span class="archive-file">esp32_light_temp_LED_behavior_20260709_233950.csv</span><span class="archive-size">23.8 KB</span><a class="record-action" href="environment/data/esp32_light_temp_LED_behavior_20260709_233950.csv" download>下载 CSV</a></div>
-        <!-- DATA_RECORDS_END -->
+      <div class="experiment-history">
+        <!-- EXPERIMENT_RECORDS_START -->
+<article class="experiment-record"><div class="experiment-record-head"><span class="archive-date">2026-08-11</span><strong>ESP32 温度与光照环境监测实验</strong></div><div class="experiment-files"><div class="experiment-file-row"><span class="experiment-file-label">原始数据</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260709_233950.csv</span><a class="record-action" href="environment/data/esp32_light_temp_LED_behavior_20260709_233950.csv" download>下载 CSV</a></div><div class="experiment-file-row"><span class="experiment-file-label">分析报告</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260622_111116.png</span><a class="record-action" href="environment/reports/esp32_light_temp_LED_behavior_20260622_111116.png" target="_blank" rel="noreferrer">查看 PNG</a></div></div></article>
+<!-- EXPERIMENT_RECORDS_END -->
       </div>
-      <p class="archive-note">新文件推送后自动更新；历史文件不会删除，列表仅显示最近 5 条。</p>
-    </section>
-
-    <section class="section container">
-      <div class="section-head">
-        <div><p class="kicker">03 / Report Archive</p><h2>实验分析报告记录</h2></div>
-        <p class="section-intro">按真实 PNG 文件日期自动更新，每次实验以一份完整分析报告归档。</p>
-      </div>
-      <div class="archive-list report-list">
-        <div class="archive-head"><span>DATE</span><span>REPORT</span><span>ACTION</span></div>
-        <!-- REPORT_RECORDS_START -->
-        <div class="archive-row"><span class="archive-date">2026-08-11</span><span class="archive-title">ESP32温度与光照环境监测实验分析报告</span><a class="record-action" href="environment/reports/esp32_light_temp_LED_behavior_20260622_111116.png" target="_blank" rel="noreferrer">查看 PNG</a></div>
-        <!-- REPORT_RECORDS_END -->
-      </div>
-      <p class="archive-note">新报告推送后自动更新；历史报告不会删除，列表仅显示最近 5 份。</p>
+      <p class="archive-note">新文件由人工放入对应目录；更新后按批次展示最近 5 次，不删除任何历史文件。</p>
     </section>
 
     <section class="section container">
