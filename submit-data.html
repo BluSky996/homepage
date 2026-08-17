@@ -77,8 +77,8 @@
         <div class="signal-line"><span class="signal-dot"></span>Local interface preview / offline</div>
       </section>
 
-      <!-- FORM BACKEND INTEGRATION: 下一阶段在此处配置 Formspree 或其他表单后端；当前不设置 action，不发送任何数据。 -->
-      <form id="data-form" novalidate>
+      <!-- FORM BACKEND INTEGRATION: 第一阶段仅提交 email 与 message；文件上传服务将在后续阶段接入。 -->
+      <form id="data-form" action="https://formspree.io/f/xzepjeng" method="POST">
       <section class="form-card" aria-label="数据提交表单">
         <div id="form-view">
           <div class="form-head"><span class="form-code">SUBMISSION FORM / 01</span><span class="form-state">LOCAL PREVIEW</span></div>
@@ -94,7 +94,7 @@
               <div class="field">
                 <div class="field-label"><label for="data-file">数据文件</label><span>Data File / Single</span></div>
                 <label class="file-zone" for="data-file">
-                  <input id="data-file" name="data_file" type="file" accept=".xlsx,.xls,.csv,.doc,.docx,.pdf">
+                  <input id="data-file" type="file" accept=".xlsx,.xls,.csv,.doc,.docx,.pdf">
                   <span><span class="file-icon">＋</span><strong>选择一个数据文件</strong><small>EXCEL / CSV / WORD / PDF</small><span class="file-name" id="file-name">.xlsx · .xls · .csv · .doc · .docx · .pdf</span></span>
                 </label>
               </div>
@@ -103,7 +103,7 @@
             <div class="form-block">
               <div class="field">
                 <div class="field-label"><label for="description">需求说明 <span class="required">*</span></label><span>Description / Required</span></div>
-                <textarea id="description" name="description" placeholder="请简单描述数据内容，以及您希望讨论、整理或分析的问题。" required></textarea>
+                <textarea id="description" name="message" placeholder="请简单描述数据内容，以及您希望讨论、整理或分析的问题。" required></textarea>
               </div>
             </div>
 
@@ -129,40 +129,13 @@
   <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>SUBMIT DATA / LOCAL PREVIEW</span></div></footer>
 
   <script>
-    const form = document.querySelector('#data-form');
-    const formView = document.querySelector('#form-view');
-    const successState = document.querySelector('#success-state');
-    const previewMessage = document.querySelector('#preview-message');
     const fileInput = document.querySelector('#data-file');
     const fileName = document.querySelector('#file-name');
-    const submitAction = document.querySelector('#submit-action');
 
     fileInput.addEventListener('change', () => {
       fileName.textContent = fileInput.files[0]?.name || '.xlsx · .xls · .csv · .doc · .docx · .pdf';
     });
 
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      previewMessage.classList.add('show');
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-      window.setTimeout(() => {
-        formView.hidden = true;
-        submitAction.hidden = true;
-        successState.classList.add('show');
-      }, 220);
-    });
-
-    document.querySelector('#reset-preview').addEventListener('click', () => {
-      successState.classList.remove('show');
-      formView.hidden = false;
-      submitAction.hidden = false;
-      previewMessage.classList.remove('show');
-      form.reset();
-      fileName.textContent = '.xlsx · .xls · .csv · .doc · .docx · .pdf';
-    });
   </script>
 </body>
 </html>
