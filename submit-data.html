@@ -175,11 +175,16 @@
         if (!response.ok) throw new Error(`Formspree request failed: ${response.status}`);
 
         formView.hidden = true;
-        submitAction.disabled = false;
-        submitAction.type = 'button';
-        submitAction.dataset.state = 'success';
-        submitAction.textContent = '关闭　CLOSE';
         successState.classList.add('show');
+
+        const visibleSubmitAction = document.querySelector('#submit-action');
+        visibleSubmitAction.hidden = false;
+        visibleSubmitAction.removeAttribute('hidden');
+        visibleSubmitAction.disabled = false;
+        visibleSubmitAction.removeAttribute('disabled');
+        visibleSubmitAction.type = 'button';
+        visibleSubmitAction.dataset.state = 'success';
+        visibleSubmitAction.textContent = '关闭　CLOSE';
       } catch (error) {
         previewMessage.classList.add('show');
         submitAction.disabled = false;
@@ -187,8 +192,9 @@
       }
     });
 
-    submitAction.addEventListener('click', () => {
-      if (submitAction.dataset.state === 'success') {
+    form.addEventListener('click', (event) => {
+      const closeAction = event.target.closest('#submit-action[data-state="success"]');
+      if (closeAction) {
         document.querySelector('#reset-preview').click();
       }
     });
