@@ -175,7 +175,10 @@
         if (!response.ok) throw new Error(`Formspree request failed: ${response.status}`);
 
         formView.hidden = true;
-        submitAction.hidden = true;
+        submitAction.disabled = false;
+        submitAction.type = 'button';
+        submitAction.dataset.state = 'success';
+        submitAction.textContent = '关闭　CLOSE';
         successState.classList.add('show');
       } catch (error) {
         previewMessage.classList.add('show');
@@ -184,11 +187,19 @@
       }
     });
 
+    submitAction.addEventListener('click', () => {
+      if (submitAction.dataset.state === 'success') {
+        document.querySelector('#reset-preview').click();
+      }
+    });
+
     document.querySelector('#reset-preview').addEventListener('click', () => {
       successState.classList.remove('show');
       formView.hidden = false;
       submitAction.hidden = false;
       submitAction.disabled = false;
+      submitAction.type = 'submit';
+      delete submitAction.dataset.state;
       submitAction.innerHTML = submitButtonText;
       previewMessage.classList.remove('show');
       form.reset();
