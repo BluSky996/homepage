@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AI Data Lab 数据合作与数据提交本地预览页面">
+  <title>提交数据｜AI Data Lab</title>
+  <link rel="stylesheet" href="datasets/styles.css">
+  <style>
+    :root { --gold: #ffd66b; }
+    body { min-height: 100vh; }
+    .submit-main { min-height: calc(100vh - 127px); padding-block: 72px 88px; }
+    .submit-shell { display: grid; width: min(calc(100% - 36px),980px); gap: 46px; }
+    .submit-intro { padding-top: 12px; text-align: center; }
+    .submit-intro .crumbs { margin-bottom: 26px; }
+    .submit-intro .kicker { justify-content: center; }
+    .submit-intro h1 { max-width: none; font-size: clamp(56px,7vw,88px); }
+    .submit-intro .lead { max-width: 650px; margin-inline: auto; }
+    .signal-line { display: flex; align-items: center; justify-content: center; gap: 11px; margin-top: 30px; color: #718078; font: 11px Consolas,monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .signal-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 13px var(--green); }
+    .form-card { position: relative; overflow: hidden; padding: 32px; border: 1px solid var(--strong); border-radius: 16px; background: linear-gradient(145deg,rgba(16,23,19,.96),rgba(7,10,8,.96)); box-shadow: 0 28px 90px rgba(0,0,0,.28); }
+    .form-card::before { position: absolute; inset: 0 0 auto; height: 2px; content: ""; background: linear-gradient(90deg,var(--green),var(--cyan),transparent 78%); }
+    .form-head { display: flex; justify-content: space-between; gap: 24px; margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+    .form-code { color: var(--green); font: 11px Consolas,monospace; letter-spacing: .14em; }
+    .form-state { color: var(--gold); font: 10px Consolas,monospace; letter-spacing: .12em; }
+    .form-block { padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: rgba(3,7,5,.38); }
+    .form-block + .form-block { margin-top: 20px; }
+    .field { display: grid; gap: 12px; }
+    .field-label { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+    .field-label label { font-size: 14px; font-weight: 700; }
+    .field-label span { color: #65736c; font: 10px Consolas,monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .required { color: var(--green); }
+    input,textarea { width: 100%; border: 1px solid var(--line); border-radius: 9px; outline: 0; color: var(--text); background: rgba(3,7,5,.72); font: inherit; transition: border-color .18s ease,box-shadow .18s ease; }
+    input[type="email"],textarea { padding: 14px 15px; }
+    textarea { min-height: 150px; resize: vertical; }
+    input::placeholder,textarea::placeholder { color: #56635c; }
+    input:focus,textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(109,255,179,.08); }
+    .file-zone { position: relative; display: grid; place-items: center; min-height: 132px; padding: 22px; border: 1px dashed var(--strong); border-radius: 11px; background: rgba(109,255,179,.025); text-align: center; transition: border-color .18s ease,background .18s ease; }
+    .file-zone:hover,.file-zone:focus-within { border-color: var(--green); background: rgba(109,255,179,.045); }
+    .file-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .file-icon { display: grid; place-items: center; width: 37px; height: 37px; margin: 0 auto 10px; border: 1px solid var(--strong); border-radius: 9px; color: var(--green); font: 17px Consolas,monospace; }
+    .file-zone strong { display: block; font-size: 13px; }
+    .file-zone small { display: block; margin-top: 5px; color: var(--muted); font: 10px Consolas,monospace; }
+    .file-name { margin: 9px 0 0; color: var(--cyan); font: 11px Consolas,monospace; word-break: break-all; }
+    .submit-button { display: block; width: min(100%,320px); min-height: 50px; margin: 34px auto 0; border: 1px solid var(--green); border-radius: 9px; color: #04120a; background: var(--green); font-size: 14px; font-weight: 800; letter-spacing: .02em; cursor: pointer; transition: transform .18s ease,box-shadow .18s ease; }
+    .submit-button:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(109,255,179,.16); }
+    .preview-message { display: none; margin-top: 18px; padding: 13px 15px; border: 1px solid rgba(255,214,107,.26); border-radius: 9px; color: #d6bd77; background: rgba(255,214,107,.045); font-size: 12px; }
+    .preview-message.show { display: block; }
+    .success-state { display: none; min-height: 420px; place-items: center; padding: 34px; text-align: center; }
+    .success-state.show { display: grid; }
+    .success-mark { width: 58px; height: 58px; display: grid; place-items: center; margin: 0 auto 22px; border: 1px solid var(--green); border-radius: 50%; color: var(--green); box-shadow: 0 0 28px rgba(109,255,179,.18); font-size: 26px; }
+    .success-state h2 { font-size: clamp(32px,4vw,46px); }
+    .success-state p { max-width: 440px; margin: 16px auto 0; color: var(--muted); }
+    .success-preview { display: inline-flex; margin-top: 24px; padding: 6px 10px; border: 1px solid rgba(255,214,107,.25); border-radius: 999px; color: var(--gold); font: 10px Consolas,monospace; letter-spacing: .1em; }
+    .reset-button { margin-top: 24px; padding: 9px 14px; border: 1px solid var(--strong); border-radius: 7px; color: #b9c6bf; background: transparent; cursor: pointer; }
+    .footer { background: rgba(5,7,6,.72); }
+    @media(max-width:900px){.submit-shell{gap:36px}.submit-intro{padding-top:0}.submit-intro h1{font-size:clamp(50px,12vw,76px)}}
+    @media(max-width:650px){.submit-main{padding-block:48px 62px}.form-card{padding:22px}.form-block{padding:18px}.form-head{align-items:flex-start;flex-direction:column;gap:8px}.field-label{align-items:flex-start;flex-direction:column;gap:2px}.navlinks{display:none}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+      <a class="brand" href="index.html"><span class="mark"></span>AI DATA LAB</a>
+      <div class="navlinks"><a href="index.html">首页</a><a href="index.html#datasets">Dataset Library</a></div>
+    </nav>
+  </header>
+
+  <main class="submit-main">
+    <div class="container submit-shell">
+      <section class="submit-intro" aria-labelledby="submit-title">
+        <div class="crumbs"><a href="index.html">AI Data Lab</a> / SUBMIT DATA</div>
+        <p class="kicker">Data Submission</p>
+        <h1 id="submit-title">提交<span class="gradient">数据</span></h1>
+        <p class="lead">如果您有希望整理、分析或进一步交流的数据，可以在这里提交文件和需求说明。</p>
+        <div class="signal-line"><span class="signal-dot"></span>Local interface preview / offline</div>
+      </section>
+
+      <!-- FORM BACKEND INTEGRATION: 下一阶段在此处配置 Formspree 或其他表单后端；当前不设置 action，不发送任何数据。 -->
+      <form id="data-form" novalidate>
+      <section class="form-card" aria-label="数据提交表单">
+        <div id="form-view">
+          <div class="form-head"><span class="form-code">SUBMISSION FORM / 01</span><span class="form-state">LOCAL PREVIEW</span></div>
+
+            <div class="form-block">
+              <div class="field">
+                <div class="field-label"><label for="email">联系邮箱 <span class="required">*</span></label><span>Email / Required</span></div>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+              </div>
+            </div>
+
+            <div class="form-block">
+              <div class="field">
+                <div class="field-label"><label for="data-file">数据文件</label><span>Data File / Single</span></div>
+                <label class="file-zone" for="data-file">
+                  <input id="data-file" name="data_file" type="file" accept=".xlsx,.xls,.csv,.doc,.docx,.pdf">
+                  <span><span class="file-icon">＋</span><strong>选择一个数据文件</strong><small>EXCEL / CSV / WORD / PDF</small><span class="file-name" id="file-name">.xlsx · .xls · .csv · .doc · .docx · .pdf</span></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-block">
+              <div class="field">
+                <div class="field-label"><label for="description">需求说明 <span class="required">*</span></label><span>Description / Required</span></div>
+                <textarea id="description" name="description" placeholder="请简单描述数据内容，以及您希望讨论、整理或分析的问题。" required></textarea>
+              </div>
+            </div>
+
+        </div>
+
+        <div class="success-state" id="success-state" aria-live="polite">
+          <div>
+            <div class="success-mark">✓</div>
+            <p class="kicker" style="justify-content:center">Submission Complete</p>
+            <h2>提交成功</h2>
+            <p>您的数据和需求已经收到。<br>我们会尽快查看，并通过您留下的邮箱与您联系。</p>
+            <span class="success-preview">VISUAL STATE PREVIEW · NO DATA SENT</span><br>
+            <button class="reset-button" id="reset-preview" type="button">返回表单</button>
+          </div>
+        </div>
+      </section>
+      <button class="submit-button" id="submit-action" type="submit">发送数据&nbsp;&nbsp; SUBMIT</button>
+      <div class="preview-message" id="preview-message" role="status">当前为本地预览版本，提交接口尚未接入。</div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>SUBMIT DATA / LOCAL PREVIEW</span></div></footer>
+
+  <script>
+    const form = document.querySelector('#data-form');
+    const formView = document.querySelector('#form-view');
+    const successState = document.querySelector('#success-state');
+    const previewMessage = document.querySelector('#preview-message');
+    const fileInput = document.querySelector('#data-file');
+    const fileName = document.querySelector('#file-name');
+    const submitAction = document.querySelector('#submit-action');
+
+    fileInput.addEventListener('change', () => {
+      fileName.textContent = fileInput.files[0]?.name || '.xlsx · .xls · .csv · .doc · .docx · .pdf';
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      previewMessage.classList.add('show');
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      window.setTimeout(() => {
+        formView.hidden = true;
+        submitAction.hidden = true;
+        successState.classList.add('show');
+      }, 220);
+    });
+
+    document.querySelector('#reset-preview').addEventListener('click', () => {
+      successState.classList.remove('show');
+      formView.hidden = false;
+      submitAction.hidden = false;
+      previewMessage.classList.remove('show');
+      form.reset();
+      fileName.textContent = '.xlsx · .xls · .csv · .doc · .docx · .pdf';
+    });
+  </script>
+</body>
+</html>
