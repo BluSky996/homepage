@@ -37,11 +37,14 @@
     input:focus,textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(109,255,179,.08); }
     .file-zone { position: relative; display: grid; place-items: center; min-height: 132px; padding: 22px; border: 1px dashed var(--strong); border-radius: 11px; background: rgba(109,255,179,.025); text-align: center; transition: border-color .18s ease,background .18s ease; }
     .file-zone:hover,.file-zone:focus-within { border-color: var(--green); background: rgba(109,255,179,.045); }
+    .file-zone.has-file { border-color: rgba(109,255,179,.68); background: rgba(109,255,179,.055); box-shadow: inset 0 0 28px rgba(109,255,179,.025); }
     .file-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
     .file-icon { display: grid; place-items: center; width: 37px; height: 37px; margin: 0 auto 10px; border: 1px solid var(--strong); border-radius: 9px; color: var(--green); font: 17px Consolas,monospace; }
     .file-zone strong { display: block; font-size: 13px; }
     .file-zone small { display: block; margin-top: 5px; color: var(--muted); font: 10px Consolas,monospace; }
     .file-name { margin: 9px 0 0; color: var(--cyan); font: 11px Consolas,monospace; word-break: break-all; }
+    .selection-note { display: none; margin-top: 7px; color: #718078; font-size: 11px; }
+    .file-zone.has-file .selection-note { display: block; }
     .submit-button { display: block; width: min(100%,320px); min-height: 50px; margin: 34px auto 0; border: 1px solid var(--green); border-radius: 9px; color: #04120a; background: var(--green); font-size: 14px; font-weight: 800; letter-spacing: .02em; cursor: pointer; transition: transform .18s ease,box-shadow .18s ease; }
     .submit-button:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(109,255,179,.16); }
     .preview-message { display: none; margin-top: 18px; padding: 13px 15px; border: 1px solid rgba(255,214,107,.26); border-radius: 9px; color: #d6bd77; background: rgba(255,214,107,.045); font-size: 12px; }
@@ -77,8 +80,8 @@
         <div class="signal-line"><span class="signal-dot"></span>Local interface preview / offline</div>
       </section>
 
-      <!-- FORM BACKEND INTEGRATION: 第一阶段仅提交 email 与 message；文件上传服务将在后续阶段接入。 -->
-      <form id="data-form" action="https://formspree.io/f/xzepjeng" method="POST">
+      <!-- FORM BACKEND INTEGRATION: 通过 Formspree multipart 请求提交 email、message 与单个 data_file。 -->
+      <form id="data-form" action="https://formspree.io/f/xzepjeng" method="POST" enctype="multipart/form-data">
       <section class="form-card" aria-label="数据提交表单">
         <div id="form-view">
           <div class="form-head"><span class="form-code">SUBMISSION FORM / 01</span><span class="form-state">LOCAL PREVIEW</span></div>
@@ -93,9 +96,9 @@
             <div class="form-block">
               <div class="field">
                 <div class="field-label"><label for="data-file">数据文件</label><span>Data File / Single</span></div>
-                <label class="file-zone" for="data-file">
-                  <input id="data-file" type="file" accept=".xlsx,.xls,.csv,.doc,.docx,.pdf">
-                  <span><span class="file-icon">＋</span><strong>选择一个数据文件</strong><small>EXCEL / CSV / WORD / PDF</small><span class="file-name" id="file-name">.xlsx · .xls · .csv · .doc · .docx · .pdf</span></span>
+                <label class="file-zone" id="file-zone" for="data-file">
+                  <input id="data-file" name="data_file" type="file" accept=".xlsx,.xls,.csv,.doc,.docx,.pdf">
+                  <span><span class="file-icon" id="file-icon">＋</span><strong id="file-status">选择一个数据文件</strong><small>EXCEL / CSV / WORD / PDF</small><span class="file-name" id="file-name">.xlsx · .xls · .csv · .doc · .docx · .pdf</span><span class="selection-note">文件将在点击“发送数据”后上传。</span></span>
                 </label>
               </div>
             </div>
@@ -114,14 +117,14 @@
             <div class="success-mark">✓</div>
             <p class="kicker" style="justify-content:center">Submission Complete</p>
             <h2>提交成功</h2>
-            <p>您的数据和需求已经收到。<br>我们会尽快查看，并通过您留下的邮箱与您联系。</p>
-            <span class="success-preview">VISUAL STATE PREVIEW · NO DATA SENT</span><br>
+            <p>您的文件和需求已经成功提交。<br>我们会尽快查看，并通过您留下的邮箱与您联系。</p>
+            <span class="success-preview">文件已成功上传</span><br>
             <button class="reset-button" id="reset-preview" type="button">返回表单</button>
           </div>
         </div>
       </section>
       <button class="submit-button" id="submit-action" type="submit">发送数据&nbsp;&nbsp; SUBMIT</button>
-      <div class="preview-message" id="preview-message" role="status">当前为本地预览版本，提交接口尚未接入。</div>
+      <div class="preview-message" id="preview-message" role="alert">提交失败，请稍后重试。</div>
       </form>
     </div>
   </main>
@@ -129,11 +132,70 @@
   <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>SUBMIT DATA / LOCAL PREVIEW</span></div></footer>
 
   <script>
+    const form = document.querySelector('#data-form');
+    const formView = document.querySelector('#form-view');
+    const successState = document.querySelector('#success-state');
+    const submitAction = document.querySelector('#submit-action');
+    const previewMessage = document.querySelector('#preview-message');
     const fileInput = document.querySelector('#data-file');
     const fileName = document.querySelector('#file-name');
+    const fileZone = document.querySelector('#file-zone');
+    const fileIcon = document.querySelector('#file-icon');
+    const fileStatus = document.querySelector('#file-status');
+    const emptyFileText = '.xlsx · .xls · .csv · .doc · .docx · .pdf';
+    const submitButtonText = submitAction.innerHTML;
 
     fileInput.addEventListener('change', () => {
-      fileName.textContent = fileInput.files[0]?.name || '.xlsx · .xls · .csv · .doc · .docx · .pdf';
+      const selectedFile = fileInput.files[0];
+      fileZone.classList.toggle('has-file', Boolean(selectedFile));
+      fileIcon.textContent = selectedFile ? '✓' : '＋';
+      fileStatus.textContent = selectedFile ? '已选择文件' : '选择一个数据文件';
+      fileName.textContent = selectedFile ? `文件名：${selectedFile.name}` : emptyFileText;
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      previewMessage.classList.remove('show');
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      submitAction.disabled = true;
+      submitAction.textContent = '正在提交…';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+
+        if (!response.ok) throw new Error(`Formspree request failed: ${response.status}`);
+
+        formView.hidden = true;
+        submitAction.hidden = true;
+        successState.classList.add('show');
+      } catch (error) {
+        previewMessage.classList.add('show');
+        submitAction.disabled = false;
+        submitAction.innerHTML = submitButtonText;
+      }
+    });
+
+    document.querySelector('#reset-preview').addEventListener('click', () => {
+      successState.classList.remove('show');
+      formView.hidden = false;
+      submitAction.hidden = false;
+      submitAction.disabled = false;
+      submitAction.innerHTML = submitButtonText;
+      previewMessage.classList.remove('show');
+      form.reset();
+      fileZone.classList.remove('has-file');
+      fileIcon.textContent = '＋';
+      fileStatus.textContent = '选择一个数据文件';
+      fileName.textContent = emptyFileText;
     });
 
   </script>
