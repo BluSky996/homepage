@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AI Data Lab 数据智能实验室——汇集数据资源与 AI 实验项目。" />
+  <meta name="description" content="AI Data Lab 数据智能实验室——汇集数据资源与 AI Agent 项目。" />
   <meta name="theme-color" content="#050706" />
   <title>AI Data Lab 数据智能实验室</title>
   <style>
@@ -298,19 +298,27 @@
       background: linear-gradient(120deg, rgba(13, 21, 17, 0.94), rgba(8, 10, 9, 0.92));
     }
 
-    .pipeline {
+    .agent-card {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 34px;
-      margin-top: 50px;
-      counter-reset: pipeline;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+      gap: clamp(28px, 5vw, 64px);
+      align-items: end;
+      margin-top: 42px;
+      padding: clamp(24px, 4vw, 40px);
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      color: inherit;
+      background: rgba(5, 10, 8, .72);
+      text-decoration: none;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
     }
-
-    .pipeline-step { position: relative; counter-increment: pipeline; }
-    .pipeline-step:not(:last-child)::after { position: absolute; top: 17px; right: -24px; content: "→"; color: var(--green); }
-    .step-number { color: var(--green); font-family: Consolas, monospace; font-size: 12px; }
-    .pipeline-step h3 { margin: 15px 0 7px; font-size: 18px; }
-    .pipeline-step p { margin: 0; color: var(--muted); font-size: 13px; }
+    .agent-card:hover,
+    .agent-card:focus-visible { transform: translateY(-3px); border-color: rgba(109, 255, 179, .62); background: rgba(9, 17, 13, .9); outline: none; }
+    .agent-label { display: block; margin-bottom: 16px; color: var(--green); font: 11px Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .agent-card h3 { margin: 0; font-size: clamp(25px, 3.5vw, 38px); letter-spacing: -.025em; }
+    .agent-card h3 span { display: block; margin-top: 4px; color: #a6b4ad; font-size: 15px; font-weight: 500; letter-spacing: 0; }
+    .agent-card p { max-width: 670px; margin: 18px 0 0; color: var(--muted); font-size: 14px; }
+    .agent-entry { width: 100%; }
 
     .submission-card {
       display: grid;
@@ -372,6 +380,7 @@
       .route-grid { grid-template-columns: repeat(2, 1fr); }
       .about-grid { grid-template-columns: 1fr; gap: 34px; }
       .submission-card { grid-template-columns: 1fr; }
+      .agent-card { grid-template-columns: 1fr; align-items: start; }
     }
 
     @media (max-width: 680px) {
@@ -385,9 +394,6 @@
       .section-intro { margin-top: 18px; }
       .dataset-grid, .route-grid, .principles { grid-template-columns: 1fr; }
       .data-card:last-child { grid-column: auto; }
-      .pipeline { grid-template-columns: 1fr; gap: 34px; }
-      .pipeline-step { padding-left: 32px; }
-      .pipeline-step:not(:last-child)::after { top: auto; right: auto; bottom: -30px; left: 7px; content: "↓"; }
       .route-item { min-height: 230px; }
       .footer-inner { flex-direction: column; gap: 6px; }
     }
@@ -404,7 +410,7 @@
       <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>AI DATA LAB</a>
       <div class="nav-links">
         <a href="#datasets">数据资源</a>
-        <a href="#ai-experiments">实验项目</a>
+        <a href="#ai-agents">Agent 项目</a>
         <a href="submit-data.html">提交数据</a>
       </div>
     </nav>
@@ -418,7 +424,7 @@
         <p class="hero-copy">AI Data Lab 是面向数据学习者与实践者的开放实验室。从真实数据集出发，连接数据治理、模型训练与应用探索。</p>
         <div class="hero-actions">
           <a class="button primary" href="#datasets">浏览数据资源</a>
-          <a class="button primary" href="#ai-experiments">参与 AI 实验</a>
+          <a class="button primary" href="#ai-agents">探索 AI Agent</a>
           <a class="button primary" href="submit-data.html">提交数据材料</a>
         </div>
       </div>
@@ -486,19 +492,21 @@
       </div>
     </section>
 
-    <section id="ai-experiments">
+    <section id="ai-agents">
       <div class="container lab-panel">
-        <p class="section-kicker">02 / AI Experiments</p>
+        <p class="section-kicker">02 / AI Agent Projects</p>
         <div class="section-heading">
-          <h2>AI 实验项目</h2>
-          <p class="section-intro">用标准化流程把杂乱数据转化为可训练、可评估、可复用的智能能力。</p>
+          <h2>AI Agent 项目</h2>
+          <p class="section-intro">面向不同任务构建的可交互 AI Agent 工具。</p>
         </div>
-        <div class="pipeline" aria-label="数据处理流程">
-          <div class="pipeline-step"><span class="step-number">01 INPUT</span><h3>原始数据</h3><p>采集多来源、多格式的真实业务数据，建立数据资产清单。</p></div>
-          <div class="pipeline-step"><span class="step-number">02 PROCESS</span><h3>清洗</h3><p>处理缺失、异常与重复记录，统一格式并完成质量校验。</p></div>
-          <div class="pipeline-step"><span class="step-number">03 CONTEXT</span><h3>标注</h3><p>定义任务标签与规则，构建具备业务语义的高质量样本。</p></div>
-          <div class="pipeline-step"><span class="step-number">04 MODEL</span><h3>训练</h3><p>选择算法、评估表现并迭代模型，沉淀可复现的实验结果。</p></div>
-        </div>
+        <a class="agent-card" href="product-intelligence.html" aria-label="进入 AI Product Intelligence 产品智能分析 Agent">
+          <div>
+            <span class="agent-label">Agent 01 / Market Research / V0.1.1</span>
+            <h3>AI Product Intelligence<span>产品市场智能分析 Agent</span></h3>
+            <p>围绕指定产品或品类，结合产品事实、外部市场信息与可追溯证据，生成结构化的市场研究结果。</p>
+          </div>
+          <span class="button primary agent-entry">进入项目&nbsp;&nbsp; START ANALYSIS</span>
+        </a>
       </div>
     </section>
 

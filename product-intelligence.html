@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI Product Intelligence 产品市场智能分析 Agent 本地交互入口。" />
+  <meta name="theme-color" content="#050706" />
+  <title>AI Product Intelligence · AI Data Lab</title>
+  <style>
+    :root {
+      --bg:#050706; --surface:#0b0f0d; --surface-2:#101613; --line:rgba(139,255,207,.13);
+      --line-strong:rgba(139,255,207,.3); --text:#f0f7f3; --muted:#8d9c95;
+      --green:#6dffb3; --cyan:#47d7ff; --danger:#ff8f8f; --max:1080px;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--text); background:radial-gradient(circle at 84% 6%,rgba(71,215,255,.08),transparent 26rem),radial-gradient(circle at 12% 30%,rgba(109,255,179,.06),transparent 28rem),var(--bg); font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.6; }
+    body::before { position:fixed; inset:0; z-index:-1; content:""; pointer-events:none; background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px); background-size:48px 48px; mask-image:linear-gradient(to bottom,black,transparent 85%); }
+    a { color:inherit; }
+    .container { width:min(calc(100% - 36px),var(--max)); margin-inline:auto; }
+    .site-header { position:sticky; top:0; z-index:20; border-bottom:1px solid rgba(255,255,255,.06); background:rgba(5,7,6,.8); backdrop-filter:blur(16px); }
+    .nav { min-height:72px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .brand { display:inline-flex; align-items:center; gap:11px; font-size:15px; font-weight:760; letter-spacing:.08em; text-decoration:none; }
+    .brand-mark { width:11px; height:11px; border:2px solid var(--green); border-radius:3px; box-shadow:0 0 18px rgba(109,255,179,.65); transform:rotate(45deg); }
+    .back { color:var(--muted); font-size:13px; text-decoration:none; }
+    .back:hover { color:var(--green); }
+    main { padding:76px 0 110px; }
+    .eyebrow { margin:0 0 18px; color:var(--green); font:12px Consolas,monospace; letter-spacing:.15em; text-transform:uppercase; }
+    h1 { max-width:850px; margin:0; font-size:clamp(40px,7vw,72px); line-height:1.08; letter-spacing:-.05em; }
+    .subtitle { display:block; margin-top:12px; color:#a5b2ac; font-size:clamp(18px,2.5vw,26px); font-weight:520; letter-spacing:-.02em; }
+    .intro { max-width:720px; margin:24px 0 0; color:var(--muted); font-size:16px; }
+    .workspace { display:grid; gap:18px; margin-top:52px; }
+    .panel { padding:clamp(22px,4vw,38px); border:1px solid var(--line-strong); border-radius:18px; background:linear-gradient(135deg,rgba(13,21,17,.94),rgba(7,10,9,.94)); }
+    .panel-head { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; margin-bottom:28px; }
+    .panel-kicker { margin:0 0 6px; color:var(--green); font:11px Consolas,monospace; letter-spacing:.12em; text-transform:uppercase; }
+    h2 { margin:0; font-size:23px; }
+    .quota { min-width:190px; padding:10px 14px; border:1px solid var(--line); border-radius:8px; color:#b9c6c0; font-size:12px; text-align:center; }
+    .quota strong { color:var(--green); font-size:20px; }
+    .quota-note { display:block; margin-top:4px; color:#82918a; font-size:10px; line-height:1.45; }
+    .query-row { display:grid; grid-template-columns:minmax(0,1fr) 220px; gap:18px; align-items:end; }
+    .form-grid { display:grid; gap:18px; }
+    .field { display:grid; gap:8px; }
+    .field.full { grid-column:1/-1; }
+    label { color:#c7d2cd; font-size:13px; font-weight:650; }
+    label span { color:#6f7c76; font-weight:400; }
+    input, select { width:100%; min-height:48px; padding:0 14px; border:1px solid var(--line); border-radius:8px; outline:none; color:var(--text); background:#080c0a; font:inherit; font-size:14px; }
+    input:focus, select:focus { border-color:var(--green); box-shadow:0 0 0 3px rgba(109,255,179,.07); }
+    select option { color:var(--text); background:#080c0a; }
+    .query-action { display:grid; gap:8px; }
+    button { min-height:50px; padding:0 24px; border:1px solid var(--green); border-radius:8px; color:#03130b; background:var(--green); font:inherit; font-size:14px; font-weight:700; cursor:pointer; box-shadow:0 0 30px rgba(109,255,179,.14); }
+    button:hover { transform:translateY(-1px); }
+    button:disabled { opacity:.45; cursor:not-allowed; transform:none; }
+    .primary-action { display:flex; width:220px; min-height:50px; flex-direction:column; align-items:center; justify-content:center; padding-block:8px; line-height:1.2; text-align:center; }
+    .primary-action span { display:block; color:inherit; font-size:14px; font-weight:700; line-height:1.2; }
+    .primary-action .button-en { margin-top:4px; white-space:nowrap; }
+    .action-note { display:block; margin-top:13px; color:#718078; font-size:12px; }
+    .request-feedback { min-height:20px; margin:14px 0 0; color:var(--cyan); font-size:12px; }
+    .analysis-progress { display:none; margin-top:22px; padding:18px; border:1px solid var(--line); border-radius:10px; background:rgba(4,8,6,.72); }
+    .analysis-progress.visible { display:block; }
+    .progress-head { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; }
+    .progress-title { margin:0; font-size:14px; }
+    .progress-title span { display:block; margin-top:2px; color:var(--green); font:10px Consolas,monospace; letter-spacing:.1em; }
+    .progress-value { color:var(--green); font:700 15px Consolas,monospace; }
+    .progress-track { height:7px; margin-top:15px; overflow:hidden; border-radius:999px; background:rgba(109,255,179,.1); }
+    .progress-bar { width:0; height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--green),var(--cyan)); box-shadow:0 0 18px rgba(109,255,179,.32); transition:width .55s ease; }
+    .progress-stage { margin:11px 0 0; color:var(--muted); font-size:12px; }
+    .report-actions { display:none; grid-template-columns:repeat(2,minmax(0,220px)); gap:10px; margin-top:16px; }
+    .report-actions.visible { display:grid; }
+    .report-action { display:flex; min-height:48px; align-items:center; justify-content:center; padding:7px 14px; border:1px solid var(--line-strong); border-radius:8px; color:var(--text); background:rgba(255,255,255,.025); font-size:12px; font-weight:700; line-height:1.25; text-align:center; text-decoration:none; }
+    .report-action:hover { border-color:var(--green); }
+    .interpretation { display:grid; grid-template-columns:minmax(0,1fr) 220px; gap:28px; align-items:center; }
+    .interpretation p { max-width:710px; margin:12px 0 0; color:var(--muted); font-size:14px; }
+    .interpretation button { width:220px; }
+    .interpretation-feedback { display:none; grid-column:1/-1; margin:0; padding:14px 16px; border:1px solid var(--line); border-radius:8px; color:#aebcb5; background:rgba(4,8,6,.65); font-size:13px; }
+    .interpretation-feedback.visible { display:block; }
+    footer { padding:28px 0; border-top:1px solid var(--line); color:#68766f; font-size:12px; }
+    .footer-inner { display:flex; justify-content:space-between; gap:16px; }
+    @media(max-width:760px){ .panel-head{display:grid}.quota{text-align:left}.query-row,.interpretation{grid-template-columns:1fr}.primary-action,.interpretation button{width:100%}.report-actions{grid-template-columns:1fr}.footer-inner{flex-direction:column} }
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="项目导航">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>AI DATA LAB</a>
+      <a class="back" href="index.html#ai-agents">← 返回 AI Agent 项目</a>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+      <section aria-labelledby="page-title">
+        <p class="eyebrow">AI Agent 01 / Product Intelligence</p>
+        <h1 id="page-title">AI Product Intelligence<span class="subtitle">产品市场智能分析 Agent</span></h1>
+        <p class="intro">输入一个产品或品类，建立产品事实、外部证据与可解释分析结果的研究任务。本地页面当前仅完成交互结构，正式分析服务将在后续阶段接入。</p>
+      </section>
+
+      <div class="workspace">
+        <section class="panel" aria-labelledby="query-title">
+          <div class="panel-head">
+            <div><p class="panel-kicker">01 / Research Report</p><h2 id="query-title">创建研究任务</h2></div>
+            <div class="quota"><span id="quota-label">当前体验额度：</span><strong id="quota-count">—</strong><span id="quota-suffix">次</span><span class="quota-note" id="quota-note">正在读取本地访问配置…</span></div>
+          </div>
+          <form id="analysis-form">
+            <div class="query-row">
+              <div class="form-grid">
+                <div class="field full">
+                  <label for="target">请输入你想研究的产品或品类 <span>/ Required</span></label>
+                  <input id="target" name="target" required autocomplete="off" placeholder="例如：iPhone 16 / AI儿童陪伴玩具 / 智能手表 / 可口可乐饮料" />
+                </div>
+              </div>
+              <div class="query-action"><button class="primary-action" id="submit-button" type="submit"><span>开始分析</span><span class="button-en">START ANALYSIS</span></button></div>
+            </div>
+            <span class="action-note">分析任务由本地服务执行；状态刷新、查看和下载同一报告不会重复扣减次数。</span>
+            <p class="request-feedback" id="request-feedback" aria-live="polite"></p>
+            <div class="analysis-progress" id="analysis-progress" aria-live="polite">
+              <div class="progress-head">
+                <h3 class="progress-title" id="progress-title">正在分析<span>ANALYSIS IN PROGRESS</span></h3>
+                <span class="progress-value" id="progress-value">0%</span>
+              </div>
+              <div class="progress-track" role="progressbar" aria-label="分析进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar" id="progress-bar"></div></div>
+              <p class="progress-stage" id="progress-stage">正在创建研究任务…</p>
+              <div class="report-actions" id="report-actions">
+                <a class="report-action" id="view-report" href="#">查看研究报告<br />VIEW REPORT</a>
+                <a class="report-action" id="download-report" href="#" download>下载报告<br />DOWNLOAD REPORT</a>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel interpretation" aria-labelledby="interpretation-title">
+          <div>
+            <p class="panel-kicker">02 / Report Interpretation</p>
+            <h2 id="interpretation-title">报告解读</h2>
+            <p>基于研究报告中的事实、证据与统计结果，进一步生成面向市场与商业决策的解读。</p>
+          </div>
+          <button class="primary-action" id="interpretation-button" type="button"><span>商业解读</span><span class="button-en">INSIGHT</span></button>
+          <p class="interpretation-feedback" id="interpretation-feedback" aria-live="polite">商业解读功能暂未接入，后续将基于分析报告生成可读解释。</p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer><div class="container footer-inner"><span>© <span id="year"></span> AI Data Lab</span><span>PRODUCT FACTS · EVIDENCE · ANALYSIS</span></div></footer>
+  <script>
+    const BACKEND_BASE_URL = "http://127.0.0.1:8781";
+    const apiBase = `${BACKEND_BASE_URL}/api/product-intelligence`;
+    const form = document.getElementById("analysis-form");
+    const target = document.getElementById("target");
+    const quotaCount = document.getElementById("quota-count");
+    const submitButton = document.getElementById("submit-button");
+    const requestFeedback = document.getElementById("request-feedback");
+    const progress = document.getElementById("analysis-progress");
+    const progressTitle = document.getElementById("progress-title");
+    const progressValue = document.getElementById("progress-value");
+    const progressBar = document.getElementById("progress-bar");
+    const progressTrack = progress.querySelector("[role=progressbar]");
+    const progressStage = document.getElementById("progress-stage");
+    const reportActions = document.getElementById("report-actions");
+    const viewReport = document.getElementById("view-report");
+    const downloadReport = document.getElementById("download-report");
+    let anonymousQueryLimit = null;
+    let hardQueryLimitEnabled = false;
+    let remainingQueries = null;
+    let pollTimer = null;
+
+    const stageMap = {
+      TASK_CREATED: [5, "创建研究任务"],
+      PRODUCT_REALITY: [20, "正在采集产品事实"],
+      MARKET_EVIDENCE: [45, "正在搜索市场证据"],
+      EVIDENCE_QUALITY: [65, "正在验证和整理证据"],
+      STAT_PROCESSING: [78, "正在整理统计结果"],
+      VISUALIZATION: [90, "正在生成交互式可视化"],
+      ARTIFACT_GENERATION: [96, "正在生成研究报告"],
+      COMPLETED: [100, "分析完成"]
+    };
+
+    function renderQuota() {
+      document.getElementById("quota-label").textContent = hardQueryLimitEnabled ? "剩余免费查询次数：" : "当前体验额度：";
+      quotaCount.textContent = hardQueryLimitEnabled ? (remainingQueries ?? "—") : (anonymousQueryLimit ?? "—");
+      document.getElementById("quota-suffix").textContent = hardQueryLimitEnabled ? ` / ${anonymousQueryLimit ?? "—"}` : "次";
+      document.getElementById("quota-note").textContent = hardQueryLimitEnabled ? "匿名体验额度限制已启用。" : "当前为测试阶段，查询次数限制暂未启用。";
+      submitButton.disabled = hardQueryLimitEnabled && remainingQueries !== null && remainingQueries <= 0;
+    }
+
+    function setRunning(running) {
+      target.disabled = running;
+      submitButton.disabled = running || (hardQueryLimitEnabled && remainingQueries !== null && remainingQueries <= 0);
+    }
+
+    function setProgress(status) {
+      const stage = status.current_stage || "TASK_CREATED";
+      const mapped = stageMap[stage] || [5, "正在处理研究任务"];
+      let value = Number.isFinite(status.stage_progress) ? status.stage_progress : mapped[0];
+      if (status.status !== "completed") value = Math.min(value, 96);
+      if (status.status === "completed") value = 100;
+      value = Math.max(0, Math.min(100, value));
+      progress.classList.add("visible");
+      progressValue.textContent = `${value}%`;
+      progressBar.style.width = `${value}%`;
+      progressTrack.setAttribute("aria-valuenow", String(value));
+      progressStage.textContent = status.message || `${mapped[1]}…`;
+    }
+
+    function showFailure(message, status = {}) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+      setRunning(false);
+      progress.classList.add("visible");
+      progressTitle.innerHTML = "分析未完成<span>ANALYSIS FAILED</span>";
+      progressStage.textContent = message || "本次分析未能生成可用研究报告。";
+      reportActions.classList.remove("visible");
+      if (Number.isFinite(status.remaining_queries)) remainingQueries = status.remaining_queries;
+      renderQuota();
+    }
+
+    function showCompleted(status) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+      setProgress({ ...status, status: "completed", current_stage: "COMPLETED" });
+      setRunning(false);
+      progressTitle.innerHTML = "✓ 分析完成<span>ANALYSIS COMPLETE</span>";
+      const artifact = status.analysis_artifact || {};
+      const downloadPath = artifact.download_url || status.download_url;
+      const reportUrl = artifact.artifact_id
+        ? `product-intelligence-report.html?artifact_id=${encodeURIComponent(artifact.artifact_id)}`
+        : null;
+      const downloadUrl = downloadPath ? new URL(downloadPath, BACKEND_BASE_URL).href : null;
+      if (reportUrl && downloadUrl) {
+        viewReport.href = reportUrl;
+        downloadReport.href = downloadUrl;
+        reportActions.classList.add("visible");
+      }
+      if (Number.isFinite(status.remaining_queries)) remainingQueries = status.remaining_queries;
+      renderQuota();
+    }
+
+    async function readStatus(analysisId) {
+      const response = await fetch(`${apiBase}/analyses/${encodeURIComponent(analysisId)}`, { headers: { "Accept": "application/json" } });
+      if (!response.ok) throw new Error(`任务状态读取失败（HTTP ${response.status}）`);
+      return response.json();
+    }
+
+    async function pollStatus(analysisId) {
+      try {
+        const status = await readStatus(analysisId);
+        if (status.status === "completed" && status.artifact_status === "successfully_generated") return showCompleted(status);
+        if (status.status === "failed") return showFailure(status.error_message, status);
+        if (status.status === "partial") {
+          setProgress(status);
+          progressStage.textContent = status.message || "已生成部分结果，等待后端确认 Artifact 状态。";
+          return;
+        }
+        setProgress(status);
+      } catch (error) {
+        showFailure(error.message);
+      }
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity() || (hardQueryLimitEnabled && remainingQueries !== null && remainingQueries <= 0)) return;
+      const data = new FormData(form);
+      requestFeedback.textContent = "";
+      reportActions.classList.remove("visible");
+      progressTitle.innerHTML = "正在分析<span>ANALYSIS IN PROGRESS</span>";
+      setRunning(true);
+      setProgress({ status: "running", current_stage: "TASK_CREATED", stage_progress: 5 });
+      try {
+        const response = await fetch(`${apiBase}/analyses`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({ query: data.get("target") })
+        });
+        if (response.status === 429) throw new Error("免费体验次数已用完。如需继续使用，请申请访问权限。");
+        if (!response.ok) throw new Error(`本地分析服务暂不可用（HTTP ${response.status}）`);
+        const task = await response.json();
+        if (!task.analysis_id) throw new Error("后端未返回 analysis_id。");
+        setProgress(task);
+        pollTimer = setInterval(() => pollStatus(task.analysis_id), 2000);
+        await pollStatus(task.analysis_id);
+      } catch (error) {
+        showFailure(error.message.includes("Failed to fetch") ? "本地分析服务尚未启动，未消耗免费查询次数。" : error.message);
+      }
+    });
+    document.getElementById("interpretation-button").addEventListener("click", () => {
+      document.getElementById("interpretation-feedback").classList.add("visible");
+    });
+    document.getElementById("year").textContent = new Date().getFullYear();
+    async function loadAccessConfig() {
+      try {
+        const response = await fetch(`${apiBase}/config`, { headers: { "Accept": "application/json" } });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const config = await response.json();
+        anonymousQueryLimit = config.anonymous_query_limit;
+        hardQueryLimitEnabled = config.hard_query_limit_enabled === true;
+        remainingQueries = Number.isFinite(config.remaining_queries) ? config.remaining_queries : null;
+      } catch (error) {
+        document.getElementById("quota-note").textContent = "本地访问配置暂不可用。";
+      }
+      renderQuota();
+    }
+    loadAccessConfig();
+  </script>
+</body>
+</html>

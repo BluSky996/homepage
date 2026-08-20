@@ -1,0 +1,54 @@
+{
+  "contract": "AI Product Intelligence Local Task API V0.1",
+  "base_url": "http://127.0.0.1:8781/api/product-intelligence",
+  "access_gate": {
+    "method": "GET",
+    "path": "/config",
+    "anonymous_query_limit": 3,
+    "hard_query_limit_enabled": false,
+    "limit_exempt_roles": ["owner", "admin", "approved_user"],
+    "authentication_implemented": false,
+    "soft_limit_rule": "When hard_query_limit_enabled=false, the fourth and later queries remain allowed."
+  },
+  "create_analysis": {
+    "method": "POST",
+    "path": "/analyses",
+    "request": { "query": "string" },
+    "response": {
+      "analysis_id": "string",
+      "status": "queued | running | partial | completed | failed",
+      "current_stage": "TASK_CREATED | PRODUCT_REALITY | MARKET_EVIDENCE | EVIDENCE_QUALITY | STAT_PROCESSING | VISUALIZATION | ARTIFACT_GENERATION | COMPLETED",
+      "stage_progress": "number 0..100",
+      "remaining_queries": "non-negative integer; informational while hard limit is disabled"
+    }
+  },
+  "analysis_status": {
+    "method": "GET",
+    "path": "/analyses/{analysis_id}",
+    "completed_response_requires": [
+      "status=completed",
+      "artifact_status=successfully_generated",
+      "analysis_artifact.analysis_id",
+      "analysis_artifact.report_url",
+      "analysis_artifact.download_url"
+    ]
+  },
+  "analysis_artifact": {
+    "single_source_for": ["interactive_report", "download", "future_report_interpretation"],
+    "required_fields": [
+      "analysis_id", "created_at", "query", "request_parameters", "products",
+      "product_reality", "observed_evidence", "sources", "review_opinion",
+      "consumer_voice", "unknowns", "quality_status", "metric_eligibility",
+      "statistics", "visualization_data", "evidence_drilldown", "limitations"
+    ],
+    "quota_rule": "Consume one query only after artifact_status=successfully_generated.",
+    "view_download_rule": "View and download reuse the same artifact and never rerun engines or consume quota."
+  },
+  "future_interpretation": {
+    "method": "POST",
+    "path": "/interpret",
+    "request": { "analysis_id": "string" },
+    "status": "not_implemented",
+    "must_not_rerun": ["Engine 1", "Engine 2", "Crawl4AI", "AnySearch"]
+  }
+}
