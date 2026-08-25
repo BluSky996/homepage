@@ -68,14 +68,9 @@
     .report-actions.visible { display:grid; }
     .report-action { display:flex; min-height:48px; align-items:center; justify-content:center; padding:7px 14px; border:1px solid var(--line-strong); border-radius:8px; color:var(--text); background:rgba(255,255,255,.025); font-size:12px; font-weight:700; line-height:1.25; text-align:center; text-decoration:none; }
     .report-action:hover { border-color:var(--green); }
-    .interpretation { display:grid; grid-template-columns:minmax(0,1fr) 220px; gap:28px; align-items:center; }
-    .interpretation p { max-width:710px; margin:12px 0 0; color:var(--muted); font-size:14px; }
-    .interpretation button { width:220px; }
-    .interpretation-feedback { display:none; grid-column:1/-1; margin:0; padding:14px 16px; border:1px solid var(--line); border-radius:8px; color:#aebcb5; background:rgba(4,8,6,.65); font-size:13px; }
-    .interpretation-feedback.visible { display:block; }
     footer { padding:28px 0; border-top:1px solid var(--line); color:#68766f; font-size:12px; }
     .footer-inner { display:flex; justify-content:space-between; gap:16px; }
-    @media(max-width:760px){ .panel-head{display:grid}.quota{text-align:left}.query-row,.interpretation{grid-template-columns:1fr}.primary-action,.interpretation button{width:100%}.report-actions{grid-template-columns:1fr}.footer-inner{flex-direction:column} }
+    @media(max-width:760px){ .panel-head{display:grid}.quota{text-align:left}.query-row{grid-template-columns:1fr}.primary-action{width:100%}.report-actions{grid-template-columns:1fr}.footer-inner{flex-direction:column} }
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
@@ -125,16 +120,6 @@
               </div>
             </div>
           </form>
-        </section>
-
-        <section class="panel interpretation" aria-labelledby="interpretation-title">
-          <div>
-            <p class="panel-kicker">02 / Report Interpretation</p>
-            <h2 id="interpretation-title">报告解读</h2>
-            <p>基于研究报告中的事实、证据与统计结果，进一步生成面向市场与商业决策的解读。</p>
-          </div>
-          <button class="primary-action" id="interpretation-button" type="button"><span>商业解读</span><span class="button-en">INSIGHT</span></button>
-          <p class="interpretation-feedback" id="interpretation-feedback" aria-live="polite">商业解读功能暂未接入，后续将基于分析报告生成可读解释。</p>
         </section>
       </div>
     </div>
@@ -280,9 +265,6 @@
       } catch (error) {
         showFailure(error.message.includes("Failed to fetch") ? "本地分析服务尚未启动，未消耗免费查询次数。" : error.message);
       }
-    });
-    document.getElementById("interpretation-button").addEventListener("click", () => {
-      document.getElementById("interpretation-feedback").classList.add("visible");
     });
     document.getElementById("year").textContent = new Date().getFullYear();
     async function loadAccessConfig() {
