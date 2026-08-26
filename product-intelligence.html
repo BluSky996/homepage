@@ -64,7 +64,7 @@
     .progress-track { height:7px; margin-top:15px; overflow:hidden; border-radius:999px; background:rgba(109,255,179,.1); }
     .progress-bar { width:0; height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--green),var(--cyan)); box-shadow:0 0 18px rgba(109,255,179,.32); transition:width .55s ease; }
     .progress-stage { margin:11px 0 0; color:var(--muted); font-size:12px; }
-    .report-actions { display:none; grid-template-columns:repeat(2,minmax(0,220px)); gap:10px; margin-top:16px; }
+    .report-actions { display:none; grid-template-columns:minmax(0,220px); gap:10px; margin-top:16px; }
     .report-actions.visible { display:grid; }
     .report-action { display:flex; min-height:48px; align-items:center; justify-content:center; padding:7px 14px; border:1px solid var(--line-strong); border-radius:8px; color:var(--text); background:rgba(255,255,255,.025); font-size:12px; font-weight:700; line-height:1.25; text-align:center; text-decoration:none; }
     .report-action:hover { border-color:var(--green); }
@@ -116,7 +116,6 @@
               <p class="progress-stage" id="progress-stage">正在创建研究任务…</p>
               <div class="report-actions" id="report-actions">
                 <a class="report-action" id="view-report" href="#">查看研究报告<br />VIEW REPORT</a>
-                <a class="report-action" id="download-report" href="#" download>下载报告<br />DOWNLOAD REPORT</a>
               </div>
             </div>
           </form>
@@ -141,7 +140,6 @@
     const progressStage = document.getElementById("progress-stage");
     const reportActions = document.getElementById("report-actions");
     const viewReport = document.getElementById("view-report");
-    const downloadReport = document.getElementById("download-report");
     let anonymousQueryLimit = null;
     let hardQueryLimitEnabled = false;
     let remainingQueries = null;
@@ -204,14 +202,11 @@
       setRunning(false);
       progressTitle.innerHTML = "✓ 分析完成<span>ANALYSIS COMPLETE</span>";
       const artifact = status.analysis_artifact || {};
-      const downloadPath = artifact.download_url || status.download_url;
       const reportUrl = artifact.artifact_id
         ? `product-intelligence-report.html?artifact_id=${encodeURIComponent(artifact.artifact_id)}`
         : null;
-      const downloadUrl = downloadPath ? new URL(downloadPath, BACKEND_BASE_URL).href : null;
-      if (reportUrl && downloadUrl) {
+      if (reportUrl) {
         viewReport.href = reportUrl;
-        downloadReport.href = downloadUrl;
         reportActions.classList.add("visible");
       }
       if (Number.isFinite(status.remaining_queries)) remainingQueries = status.remaining_queries;
