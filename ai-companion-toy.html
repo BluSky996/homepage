@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080c0b" />
+  <meta name="description" content="AI 儿童陪伴桌面机器人，给孩子的 AI 对话伙伴。面向儿童陪伴、家庭互动和轻量学习场景的消费级 AI 对话应用。" />
+  <title>AI 儿童陪伴桌面机器人 · AI DATA LAB</title>
+  <style>
+    :root { color-scheme: dark; --bg: #080c0b; --text: #f3f5ed; --muted: #a0ada6; --green: #8cf0bb; --warm: #f4d2a7; --line: #ffffff16; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--green); outline-offset: 5px; }
+    .container { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+    header { position: sticky; top: 0; z-index: 10; background: #080c0bef; border-bottom: 1px solid var(--line); backdrop-filter: blur(16px); }
+    nav { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 750; font-size: 14px; letter-spacing: .1em; white-space: nowrap; }
+    .brand::before { content: ""; width: 10px; height: 10px; border: 2px solid var(--green); border-radius: 3px; transform: rotate(45deg); box-shadow: 0 0 15px #8cf0bb50; }
+    .nav-links { display: flex; gap: 28px; font-size: 13px; color: var(--muted); }
+    .nav-links a:hover { color: var(--green); }
+    .hero { position: relative; padding: 68px 0 38px; overflow: hidden; background: radial-gradient(ellipse at 76% 45%, #b7986420, transparent 45%), radial-gradient(ellipse at 22% 2%, #6dffb309, transparent 50%); }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 24px; }
+    .eyebrow { color: var(--green); font: 11px Consolas, monospace; letter-spacing: .16em; margin: 0 0 24px; }
+    .eyebrow::before { content: "— "; }
+    h1 { margin: 0; font-size: clamp(34px, 4.4vw, 59px); line-height: 1.22; letter-spacing: -.045em; font-weight: 750; }
+    h1 span { display: block; color: var(--warm); }
+    .subtitle { font-size: clamp(20px, 2.3vw, 28px); margin: 22px 0 14px; font-weight: 500; }
+    .intro { max-width: 470px; margin: 0; color: var(--muted); font-size: 15px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button { display: inline-flex; justify-content: center; align-items: center; gap: 24px; min-height: 48px; padding: 10px 23px; border: 1px solid #8cf0bb40; border-radius: 8px; font-size: 14px; font-weight: 650; transition: transform .2s, border-color .2s; }
+    .button:hover { transform: translateY(-2px); border-color: var(--green); }
+    .primary { background: var(--green); color: #082214; border-color: var(--green); }
+    .note { font-size: 12px; color: var(--muted); margin-top: 14px; }
+    .visual { position: relative; margin: 0; min-width: 0; }
+    .stage { position: relative; height: 500px; display: grid; place-items: center; }
+    .halo { position: absolute; width: 76%; aspect-ratio: 1; border-radius: 50%; border: 1px solid #efd8aa15; background: radial-gradient(circle, #efd8aa17, #8cf0bb0a 50%, transparent 70%); box-shadow: 0 0 100px #8cf0bb08; animation: glow 5s ease-in-out infinite; }
+    .halo::after { content: ""; position: absolute; inset: 25px; border: 1px dashed #efd8aa14; border-radius: 50%; }
+    .robot { position: relative; width: auto; max-width: 85%; height: auto; max-height: 440px; object-fit: contain; border: 1px solid #f4d2a735; border-radius: 18px; box-shadow: 0 0 38px #8cf0bb16, 0 20px 35px #0007; animation: float 5s ease-in-out infinite; }
+    .bubble { position: absolute; z-index: 2; max-width: 95%; padding: 11px 16px; border: 1px solid #f4d2a740; border-radius: 14px 14px 14px 3px; background: #1e2723f5; box-shadow: 0 8px 30px #0004; font-size: 13px; opacity: 0; animation: chat 12s ease-in-out infinite; }
+    .bubble::before { content: "●"; color: var(--green); margin-right: 8px; font-size: 8px; }
+    .bubble.one { left: 0; top: 36px; }
+    .bubble.two { right: 0; top: 96px; animation-delay: -8s; }
+    .bubble.three { left: 12px; bottom: 38px; animation-delay: -4s; }
+    figcaption { text-align: center; color: var(--muted); font-size: 11px; }
+    .motion-control { display: block; margin: 10px auto 0; padding: 6px 10px; color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 5px; cursor: pointer; font-size: 11px; }
+    .paused .robot, .paused .halo, .paused .bubble { animation-play-state: paused; }
+    .hero-foot { display: flex; gap: 20px; border-top: 1px solid var(--line); padding-top: 22px; margin-top: 40px; color: #b4c0b8; font-size: 12px; }
+    .hero-foot span + span::before { content: "/"; color: #53665b; margin-right: 20px; }
+    .features { padding-block: 76px; }
+    .photos { padding-bottom: 64px; }
+    .photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .photo-card { margin: 0; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: #101713; }
+    .photo-card a { display: block; border-radius: 8px; overflow: hidden; background: #090d0b; }
+    .photo-card img { display: block; width: 100%; height: 420px; object-fit: contain; }
+    .photo-card figcaption { margin-top: 14px; font-size: 13px; }
+    .photo-card figcaption span { display: block; margin-top: 4px; font-size: 11px; }
+    .section-top { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+    h2 { margin: 0; font-size: clamp(26px, 3vw, 36px); line-height: 1.3; letter-spacing: -.03em; }
+    .section-top .eyebrow { margin-bottom: 12px; }
+    .section-top > p { color: var(--muted); font-size: 13px; margin: 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .feature { padding: 26px 22px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(145deg, #141d17, #0d120f); }
+    .feature-number { color: var(--warm); font: 12px Consolas, monospace; }
+    h3 { margin: 25px 0 10px; font-size: 19px; }
+    .feature p { margin: 0; color: var(--muted); font-size: 13px; }
+    .care-note { margin: 22px 0 0; color: var(--muted); font-size: 12px; }
+    .contact { margin-bottom: 64px; padding: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; border: 1px solid #f4d2a726; border-radius: 14px; background: linear-gradient(120deg, #201e17, #0e1712); }
+    .contact .eyebrow { color: var(--warm); margin-bottom: 14px; }
+    .contact p { color: var(--muted); font-size: 14px; margin: 14px 0 0; }
+    .contact-details { border-left: 1px solid var(--line); padding-left: 30px; }
+    .contact-details strong { font-size: 14px; color: var(--warm); }
+    footer { border-top: 1px solid var(--line); padding-block: 24px; color: var(--muted); font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes glow { 0%, 100% { opacity: .65; } 50% { opacity: 1; } }
+    @keyframes chat { 0%, 29%, 100% { opacity: 0; transform: translateY(7px); } 4%, 25% { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 900px) { .hero-grid { gap: 8px; } .stage { height: 420px; } .robot { max-height: 360px; } .feature-grid { grid-template-columns: repeat(2, 1fr); } .bubble { font-size: 11px; padding: 9px 12px; } }
+    @media (max-width: 650px) {
+      .container { width: calc(100% - 36px); } nav { min-height: 64px; } .nav-links { gap: 16px; } .nav-links .desktop-link { display: none; }
+      .hero { padding-top: 40px; } .hero-grid { grid-template-columns: 1fr; gap: 24px; } h1 { font-size: 40px; } .intro { font-size: 14px; }
+      .stage { height: 390px; } .robot { max-width: 85%; max-height: 330px; } .bubble.one { top: 12px; } .bubble.two { top: 68px; } .bubble.three { bottom: 12px; }
+      .hero-foot { gap: 12px; flex-wrap: wrap; margin-top: 28px; } .hero-foot span + span::before { margin-right: 12px; }
+      .features { padding-block: 50px; } .section-top { display: block; } .section-top > p { margin-top: 14px; } .feature-grid { gap: 10px; } .feature { padding: 20px 16px; }
+      .photo-grid { grid-template-columns: 1fr; } .photo-card img { height: 360px; }
+      .contact { grid-template-columns: 1fr; padding: 26px; gap: 24px; } .contact-details { padding: 22px 0 0; border-left: 0; border-top: 1px solid var(--line); } .footer-inner { flex-wrap: wrap; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } .bubble.one { opacity: 1; } .bubble.two, .bubble.three { display: none; } .motion-control { display: none; } }
+
+    /* Animate nested wrappers so each movement stays independent. */
+    h1 span { color: var(--green); text-shadow: 0 0 36px #8cf0bb18; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .hero-tags span { padding: 5px 11px; border: 1px solid #8cf0bb29; border-radius: 30px; background: #8cf0bb08; color: #c3ead2; font-size: 12px; }
+    .stage { perspective: 1000px; isolation: isolate; }
+    .robot-float { position: relative; width: min(330px, 76%); animation: float 4.8s ease-in-out infinite; z-index: 1; }
+    .robot-turn { transform-origin: 50% 75%; animation: turn 7s ease-in-out infinite; }
+    .robot-hop { transform-origin: 50% 100%; animation: hop 8s ease-in-out infinite; }
+    .robot-breathe { position: relative; animation: breathe 3.6s ease-in-out infinite; }
+    .robot { display: block; width: 100%; max-width: none; max-height: none; height: auto; animation: none; border-color: #8cf0bb50; }
+    .face-overlay { position: absolute; left: 35%; top: 32%; width: 32%; height: 9%; background: #081711; border-radius: 40%; box-shadow: 0 0 10px 5px #081711; color: #91ffd6; }
+    .face-overlay svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 3px #6dffb3); }
+    .expression { opacity: 0; animation: expression 12s linear infinite; }
+    .expression.sleep { animation-delay: -4s; }
+    .expression.smile { animation-delay: -8s; }
+    .blink-eyes { transform-origin: 50% 42%; animation: blink 3s ease-in-out infinite; }
+    .sleep-z { animation: snooze 2s ease-in-out infinite; }
+    .orbit { position: absolute; width: 94%; height: 72%; border: 1px solid #8cf0bb25; border-radius: 50%; transform: rotate(-20deg); pointer-events: none; }
+    .orbit::before, .orbit::after { content: ''; position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 15px var(--green); animation: sparkle 3s ease-in-out infinite; }
+    .orbit::before { left: 10%; top: 16%; } .orbit::after { right: 8%; bottom: 16%; animation-delay: -1.5s; }
+    .ripple { position: absolute; width: 75%; height: 12%; bottom: 8px; border-radius: 50%; border: 1px solid #8cf0bb66; animation: ripple 4s ease-out infinite; }
+    .ripple.second { animation-delay: -2s; }
+    .soundwave { display: flex; align-items: center; justify-content: center; gap: 4px; height: 25px; margin: 10px auto; }
+    .soundwave i { width: 3px; height: 16px; border-radius: 3px; background: var(--green); animation: voice 1.1s ease-in-out infinite alternate; }
+    .soundwave i:nth-child(2n) { animation-delay: -.7s; } .soundwave i:nth-child(3n) { animation-delay: -.3s; }
+    .visual-controls { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .visual-controls .motion-control { margin: 0; min-height: 40px; padding: 7px 15px; border-color: #8cf0bb35; }
+    .visual-controls .motion-control:hover { color: var(--green); background: #8cf0bb0a; }
+    .greeting .robot-hop { animation: greet .85s ease-in-out; }
+    .paused *, .paused *::before, .paused *::after { animation-play-state: paused !important; }
+    .photo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .photo-card { transition: transform .25s, border-color .25s; }
+    .photo-card:hover { transform: translateY(-5px); border-color: #8cf0bb55; }
+    .photo-card img { height: 320px; transition: transform .4s; }
+    .photo-card a:hover img { transform: scale(1.035); }
+    @keyframes turn { 0%, 100% { transform: rotate(-1.5deg); } 50% { transform: rotate(1.5deg); } }
+    @keyframes hop { 0%, 70%, 100% { transform: translateY(0) scale(1); } 75% { transform: translateY(3px) scale(1.015, .985); } 80% { transform: translateY(-19px) scale(.99, 1.01); } 85% { transform: translateY(0) scale(1.015, .985); } 90% { transform: translateY(-5px) scale(1); } }
+    @keyframes breathe { 0%, 100% { transform: scale(.99); } 50% { transform: scale(1.015); } }
+    @keyframes expression { 0%, 31% { opacity: 1; } 33.34%, 100% { opacity: 0; } }
+    @keyframes blink { 0%, 40%, 48%, 100% { transform: scaleY(1); } 44% { transform: scaleY(.08); } }
+    @keyframes snooze { 0%, 100% { opacity: .4; transform: translateY(2px); } 50% { opacity: 1; transform: translateY(-2px); } }
+    @keyframes sparkle { 0%, 100% { opacity: .3; transform: scale(.7); } 50% { opacity: .9; transform: scale(1.25); } }
+    @keyframes ripple { 0% { opacity: 0; transform: scale(.55); } 20% { opacity: .5; } 100% { opacity: 0; transform: scale(1.3); } }
+    @keyframes voice { from { transform: scaleY(.25); opacity: .4; } to { transform: scaleY(1); opacity: 1; } }
+    @keyframes greet { 0%, 100% { transform: translateY(0) rotate(0); } 30% { transform: translateY(-22px) rotate(-3deg); } 65% { transform: translateY(-7px) rotate(3deg); } }
+    @media (max-width: 900px) { .robot-float { width: min(268px, 72%); } .photo-card img { height: 270px; } }
+    @media (max-width: 650px) { .robot-float { width: min(245px, 72%); } .robot { max-width: none; max-height: none; } .photo-grid { grid-template-columns: 1fr; } .photo-card img { height: 340px; } .bubble { max-width: 90%; } }
+    @media (prefers-reduced-motion: reduce) { .expression { opacity: 0; } .expression.smile { opacity: 1; } .ripple, .visual-controls { display: none; } .photo-card:hover, .photo-card a:hover img { transform: none; } }
+
+    /* SVG shell and expressions share the same responsive coordinate space. */
+    .robot.cartoon-robot { width: 100%; height: auto; overflow: visible; border: 0; border-radius: 0; box-shadow: none; filter: drop-shadow(0 18px 20px #0007); }
+    .face-overlay { left: 26%; top: 35%; width: 47%; height: 18%; background: transparent; box-shadow: none; color: #28e9ff; border-radius: 0; }
+    .face-overlay svg { filter: drop-shadow(0 0 5px #00dfff); }
+    .robot-float { width: min(350px, 78%); }
+    .photo-grid { grid-template-columns: minmax(0, 1fr); }
+    .photo-card img { height: auto; max-height: 580px; object-fit: contain; }
+    @media (max-width: 900px) { .robot-float { width: min(300px, 76%); } }
+    @media (max-width: 650px) { .robot-float { width: min(280px, 78%); } .photo-card img { height: auto; } }
+
+    .body-lights { animation: colored-lights 6s ease-in-out infinite; }
+    .console-lights { animation: colored-lights 6s ease-in-out -2s infinite; }
+    .audio-note { margin: 9px 0 0; min-height: 18px; color: var(--muted); text-align: center; font-size: 11px; }
+    @keyframes colored-lights { 0%, 100% { filter: hue-rotate(0deg) drop-shadow(0 0 2px #8cf0bb); } 33% { filter: hue-rotate(85deg) drop-shadow(0 0 3px #47d7ff); } 66% { filter: hue-rotate(210deg) drop-shadow(0 0 3px #f0a8ff); } }
+    @media (prefers-reduced-motion: reduce) { .visual-controls { display: flex; } #motion-toggle, #greet-button { display: none; } #sound-toggle { display: block; } }
+    .product-introduction { margin-bottom: 0; }
+    .introduction-card { padding: 36px; border: 1px solid #8cf0bb20; border-radius: 14px; background: #101713; }
+    .product-introduction .introduction-subtitle { max-width: 380px; color: var(--muted); font-size: 13px; }
+    .introduction-copy { max-width: 850px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.9; }
+    .capability-rows { margin: 32px 0 0; }
+    .capability-row { display: grid; grid-template-columns: 170px minmax(0, 1fr); align-items: baseline; gap: 20px; padding: 18px 0; border-top: 1px solid var(--line); }
+    .capability-row dt { color: #d5e8da; font-size: 15px; font-weight: 600; }
+    .capability-row dd { margin: 0; color: var(--muted); font-size: 14px; }
+    .usage-reminder { padding: 26px 40px 34px; }
+    .usage-reminder h2 { font-size: 14px; font-weight: 500; color: var(--muted); }
+    .usage-reminder p { margin: 10px 0 0; max-width: 950px; font-size: 12px; color: var(--muted); line-height: 1.85; }
+    .contact.contact-closing { padding: 30px 40px; grid-template-columns: minmax(0, 1fr) auto; align-items: center; background: #0d1410; border-color: var(--line); }
+    .contact-closing h2 { font-size: clamp(20px, 2.4vw, 27px); }
+    .contact-closing .eyebrow { margin-bottom: 12px; color: var(--muted); font-size: 11px; letter-spacing: .05em; }
+    .contact-closing p { font-size: 13px; }
+    @media (max-width: 650px) { .introduction-card { padding: 26px; } .capability-row { grid-template-columns: 1fr; gap: 6px; } .usage-reminder { padding: 24px 16px 30px; } .contact.contact-closing { padding: 26px; grid-template-columns: 1fr; gap: 22px; } .contact-closing .button { justify-self: start; } }
+    .product-introduction { margin-bottom: 36px; }
+    .capability-row dt, .capability-row dd { color: #b0f0db; }
+    @supports ((background-clip: text) or (-webkit-background-clip: text)) {
+      .capability-row dt, .capability-row dd {
+        background-image: var(--benefit-gradient, linear-gradient(110deg, #9cf1bf, #84def5, #c6b5ff, #a4f0d6, #9cf1bf));
+        background-size: 200% 100%; background-position: 0% 50%;
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+        animation: benefit-shimmer 10s ease-in-out infinite alternate;
+      }
+    }
+    .capability-row dd { font-weight: 600; }
+    @keyframes benefit-shimmer { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+    @media (prefers-reduced-motion: reduce) {
+      .capability-row dt, .capability-row dd { animation: none !important; background-position: 50% 50%; }
+    }
+    @media (forced-colors: active) {
+      .capability-row dt, .capability-row dd { background: none; color: CanvasText; animation: none; }
+    }
+    .capability-row dd.gradient-model { --benefit-gradient: linear-gradient(110deg, #9edfff, #9ce9c5, #9edfff); }
+    .capability-row dd.gradient-purple { --benefit-gradient: linear-gradient(110deg, #99e6ef, #cab6f5, #99e6ef); }
+    .capability-row dd.gradient-warm { --benefit-gradient: linear-gradient(110deg, #efdaa0, #edb6cc, #efdaa0); }
+    .capability-row dd.gradient-green { --benefit-gradient: linear-gradient(110deg, #b6e99e, #a3cff7, #b6e99e); }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container" aria-label="产品导航">
+      <a class="brand" href="index.html">AI DATA LAB</a>
+      <div class="nav-links"><a class="desktop-link" href="#features">陪伴场景</a><a href="index.html#ai-agents">返回 AI 应用 ↗</a></div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="product-title">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">AI COMPANION / 桌面上的小伙伴</p>
+            <h1 id="product-title">AI 儿童陪伴<span>桌面机器人</span></h1>
+            <p class="subtitle">给孩子的 AI 对话伙伴</p>
+            <p class="intro">面向儿童陪伴、家庭互动和轻量学习场景，将大模型语音对话能力封装进可爱的桌面玩具。</p>
+            <div class="hero-tags" aria-label="产品卖点"><span>儿童陪伴</span><span>家庭互动</span><span>轻量学习</span><span>AI 对话</span></div>
+            <div class="actions"><a class="button primary" href="#consultation">咨询体验 <span aria-hidden="true">↗</span></a><a class="button" href="#" aria-describedby="purchase-note">淘宝购买 <span aria-hidden="true">↗</span></a></div>
+            <p class="note" id="purchase-note">淘宝购买入口准备中，暂未连接店铺。</p>
+          </div>
+          <figure class="visual" id="robot-visual">
+            <div class="stage">
+              <div class="halo" aria-hidden="true"></div>
+              <div class="orbit" aria-hidden="true"></div>
+              <div class="ripple" aria-hidden="true"></div><div class="ripple second" aria-hidden="true"></div>
+              <div class="robot-float"><div class="robot-turn"><div class="robot-hop"><div class="robot-breathe">
+              <svg class="robot cartoon-robot" viewBox="0 0 360 440" role="img" aria-labelledby="robot-art-title robot-art-desc" xmlns="http://www.w3.org/2000/svg">
+                <title id="robot-art-title">AI 儿童陪伴桌面机器人卡通形象</title>
+                <desc id="robot-art-desc">依据本地参考图绘制：浅黄绿色圆角方形机身、两只小天线、黑色屏幕和正面绿色按钮与圆形音箱。</desc>
+                <defs>
+                  <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#faffb2"/><stop offset=".5" stop-color="#dbe982"/><stop offset="1" stop-color="#9fb74f"/></linearGradient>
+                  <linearGradient id="shell-side" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#b4cd65"/><stop offset="1" stop-color="#e8f69b"/></linearGradient>
+                  <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#18272a"/><stop offset="1" stop-color="#03090c"/></linearGradient>
+                  <radialGradient id="speaker"><stop stop-color="#c2ff70"/><stop offset=".55" stop-color="#8ed92c"/><stop offset=".6" stop-color="#34432a"/><stop offset="1" stop-color="#111e1c"/></radialGradient>
+                </defs>
+                <ellipse cx="118" cy="405" rx="36" ry="15" fill="#111b17"/><ellipse cx="242" cy="405" rx="36" ry="15" fill="#111b17"/>
+                <rect x="87" y="376" width="62" height="27" rx="13" fill="url(#shell)"/><rect x="211" y="376" width="62" height="27" rx="13" fill="url(#shell)"/>
+                <path d="M74 108 L49 44 Q47 32 56 41 L102 99 M258 99 L304 41 Q313 32 311 44 L286 108" fill="url(#shell)" stroke="#e3f498" stroke-width="3" stroke-linejoin="round"/>
+                <ellipse cx="47" cy="296" rx="22" ry="47" fill="url(#shell-side)" transform="rotate(13 47 296)"/><ellipse cx="313" cy="296" rx="22" ry="47" fill="url(#shell-side)" transform="rotate(-13 313 296)"/>
+                <rect x="53" y="94" width="260" height="295" rx="54" fill="#8da44a"/>
+                <rect x="47" y="88" width="260" height="295" rx="50" fill="url(#shell)" stroke="#eafaad" stroke-width="2"/>
+                <path d="M110 91 Q118 66 180 66 Q242 66 250 91 Z" fill="#2c3530"/>
+                <g fill="#121c19"><ellipse cx="144" cy="79" rx="4" ry="2"/><ellipse cx="162" cy="76" rx="4" ry="2"/><ellipse cx="180" cy="75" rx="4" ry="2"/><ellipse cx="198" cy="76" rx="4" ry="2"/><ellipse cx="216" cy="79" rx="4" ry="2"/><ellipse cx="155" cy="85" rx="4" ry="2"/><ellipse cx="174" cy="83" rx="4" ry="2"/><ellipse cx="193" cy="83" rx="4" ry="2"/><ellipse cx="210" cy="85" rx="4" ry="2"/></g>
+                <rect x="65" y="113" width="224" height="148" rx="49" fill="#303a31" stroke="#a8b767" stroke-width="4"/>
+                <rect x="77" y="125" width="200" height="122" rx="39" fill="url(#screen)" stroke="#111b19" stroke-width="3"/>
+                <path d="M92 156 Q98 137 128 137 H214" fill="none" stroke="#ffffff0e" stroke-width="5" stroke-linecap="round"/>
+                <g fill="#9af049"><circle cx="116" cy="143" r="2"/><rect x="229" y="138" width="17" height="7" rx="2" fill="none" stroke="#9af049"/><rect x="232" y="140" width="11" height="3" rx="1"/><path d="M248 140 V143" stroke="#9af049"/><path d="M109 138 Q116 131 123 138 M112 140 Q116 136 120 140" fill="none" stroke="#9af049" stroke-width="2"/></g>
+                <path d="M54 275 Q177 286 300 275" fill="none" stroke="#8ea449" stroke-width="2"/>
+                <g fill="#29372c" stroke="#8b9f50" stroke-width="2"><circle cx="74" cy="111" r="4"/><circle cx="281" cy="111" r="4"/><circle cx="74" cy="266" r="4"/><circle cx="281" cy="266" r="4"/></g>
+                <g class="body-lights" fill="url(#speaker)" stroke="#4f6533" stroke-width="2"><circle cx="110" cy="301" r="17"/><circle cx="155" cy="301" r="16"/><circle cx="200" cy="301" r="16"/><circle cx="245" cy="301" r="17"/><circle cx="106" cy="348" r="29"/><circle cx="249" cy="348" r="29"/></g>
+                <g fill="#17251a"><circle cx="106" cy="348" r="8"/><circle cx="249" cy="348" r="8"/></g>
+                <rect x="148" y="328" width="60" height="36" rx="6" fill="#283529" stroke="#f2ffc1" stroke-width="3"/>
+                <g class="console-lights" fill="#9df94d"><circle cx="157" cy="337" r="2"/><circle cx="198" cy="337" r="2"/><rect x="160" y="343" width="4" height="8" rx="1"/><rect x="168" y="343" width="4" height="8" rx="1"/><rect x="176" y="343" width="4" height="8" rx="1"/><rect x="184" y="343" width="4" height="8" rx="1"/></g>
+                <g fill="#37442c"><rect x="151" y="369" width="9" height="7" rx="2"/><rect x="173" y="369" width="9" height="7" rx="2"/><rect x="195" y="369" width="9" height="7" rx="2"/></g>
+              </svg>
+                <div class="face-overlay" aria-hidden="true">
+                  <svg class="expression" viewBox="0 0 100 50" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><g class="blink-eyes"><ellipse cx="29" cy="21" rx="7" ry="9" /><ellipse cx="71" cy="21" rx="7" ry="9" /></g><path d="M42 37 Q50 43 58 37" /></svg>
+                  <svg class="expression sleep" viewBox="0 0 100 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 25 Q29 31 38 25 M62 25 Q71 31 80 25" /><ellipse cx="50" cy="39" rx="4" ry="5" /><path class="sleep-z" d="M80 5 H91 L80 15 H91" /></svg>
+                  <svg class="expression smile" viewBox="0 0 100 50" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M20 24 Q29 10 38 24 M62 24 Q71 10 80 24 M39 34 Q50 48 61 34" /></svg>
+                </div>
+              </div></div></div></div>
+              <span class="bubble one">你好，我可以陪你聊天。</span>
+              <span class="bubble two">我们一起学英语吧。</span>
+              <span class="bubble three">今天想听一个故事吗？</span>
+            </div>
+            <div class="soundwave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <figcaption>依据本地参考绘制 · 卡通形象与表情为网页动画演示</figcaption>
+            <div class="visual-controls"><button class="motion-control" type="button" id="greet-button" aria-controls="robot-visual">打个招呼 ↗</button><button class="motion-control" type="button" id="motion-toggle" aria-pressed="false" aria-controls="robot-visual">暂停动画</button><button class="motion-control" type="button" id="sound-toggle" aria-pressed="false" aria-describedby="audio-status">开启声音 ♪</button></div>
+            <p class="audio-note" id="audio-status" role="status">轻柔电子音效 · 可随时关闭</p>
+          </figure>
+        </div>
+        <div class="hero-foot" aria-label="产品定位"><span>消费级 AI 对话应用</span><span>陪伴 · 启蒙 · 互动</span><span>从一句“你好”开始</span></div>
+      </div>
+    </section>
+
+    <section id="features" class="product-introduction container" aria-labelledby="features-title">
+      <div class="section-top">
+        <div><p class="eyebrow">PRODUCT INTRO / 产品介绍</p><h2 id="features-title">认识你的桌面小伙伴</h2></div>
+        <p class="introduction-subtitle">一款连接多模型 AI 能力的儿童陪伴桌面机器人。</p>
+      </div>
+      <div class="introduction-card">
+      <p class="introduction-copy">它面向儿童陪伴、家庭互动和轻量学习场景，支持语音交流、问答互动、故事陪伴和兴趣启蒙。联网后可接入 DeepSeek、豆包、千问、ChatGPT 等大模型能力，让孩子用更自然的方式和 AI 交流。</p>
+      <dl class="capability-rows">
+        <div class="capability-row"><dt>多模型 AI 引擎</dt><dd class="gradient-model">DeepSeek / 豆包 / 千问 / ChatGPT</dd></div>
+        <div class="capability-row"><dt>自然语音交流</dt><dd class="gradient-purple">用说话完成聊天、提问和互动</dd></div>
+        <div class="capability-row"><dt>儿童陪伴</dt><dd class="gradient-warm">听故事、聊日常、陪伴孩子探索好奇心</dd></div>
+        <div class="capability-row"><dt>轻量学习</dt><dd class="gradient-green">适合英语启蒙、百科问答和兴趣探索</dd></div>
+      </dl>
+      </div>
+    </section>
+    <section class="photos container" aria-labelledby="photos-title">
+      <div class="section-top"><div><p class="eyebrow">DESIGN REFERENCE / 外观参考</p><h2 id="photos-title">认识小伙伴的外观。</h2></div><p>用户提供的本地参考图，非产品实拍。</p></div>
+      <div class="photo-grid">
+        <figure class="photo-card">
+          <a href="assets/images/ai-companion-toy/robot-reference.jpg.png" aria-label="查看机器人外观参考原图"><img src="assets/images/ai-companion-toy/robot-reference.jpg.png" width="1536" height="1024" alt="机器人外观参考图，包括正面、侧面、背面以及表情和动作示意" loading="lazy" /></a>
+          <figcaption>机器人外观与表情参考<span>主视觉由 HTML、CSS 与 SVG 绘制，具体产品外观及功能以实际产品为准。</span></figcaption>
+        </figure>
+      </div>
+    </section>
+    <aside class="usage-reminder container" aria-labelledby="usage-title">
+      <h2 id="usage-title">使用提醒</h2>
+      <p>建议在家长陪同与引导下使用。AI 回答可能存在错误，请结合实际判断；陪伴与辅助学习不能替代家长照护或正规教学。具体功能与适用条件以最终产品说明为准。</p>
+    </aside>
+    <section class="contact contact-closing container" id="consultation" aria-labelledby="consultation-title">
+      <div><p class="eyebrow">咨询体验渠道准备中</p><h2 id="consultation-title">想了解使用方式或体验安排？</h2><p>正式咨询渠道开放后，将在这里更新。淘宝店铺链接暂未配置。</p></div>
+      <a class="button" href="index.html#ai-agents">返回 AI 应用项目 <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+  <footer><div class="container footer-inner"><span>AI DATA LAB · AI 儿童陪伴桌面机器人</span><a href="index.html">返回首页 ↗</a></div></footer>
+  <script>
+    const robotVisual = document.getElementById('robot-visual');
+    const greetButton = document.getElementById('greet-button');
+    const motionToggle = document.getElementById('motion-toggle');
+    const soundToggle = document.getElementById('sound-toggle');
+    const audioStatus = document.getElementById('audio-status');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const AudioEngine = window.AudioContext || window.webkitAudioContext;
+    let audioContext;
+    let soundEnabled = false;
+    let audioGeneration = 0;
+    let lastSoundAt = -Infinity;
+
+    function syncSoundButton() {
+      soundToggle.setAttribute('aria-pressed', String(soundEnabled));
+      soundToggle.textContent = soundEnabled ? '关闭声音 ♫' : '开启声音 ♪';
+    }
+    function robotChirp(kind = 0) {
+      if (!soundEnabled || !audioContext || audioContext.state !== 'running' || document.hidden || robotVisual.classList.contains('paused')) return;
+      const now = audioContext.currentTime;
+      if (now - lastSoundAt < .9) return;
+      lastSoundAt = now;
+      const notes = [[523, 659, 784], [659, 784, 988], [440, 392, 330]][kind];
+      notes.forEach((frequency, index) => {
+        const oscillator = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        const at = now + index * .14;
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(frequency, at);
+        oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.08, at + .1);
+        gain.gain.setValueAtTime(0, at);
+        gain.gain.linearRampToValueAtTime(.035, at + .025);
+        gain.gain.exponentialRampToValueAtTime(.0001, at + .17);
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+        oscillator.start(at);
+        oscillator.stop(at + .19);
+        oscillator.onended = () => { oscillator.disconnect(); gain.disconnect(); };
+      });
+    }
+    async function enableSound(userInitiated) {
+      if (!AudioEngine) {
+        audioStatus.textContent = '当前浏览器不支持电子音效，动画仍可正常播放。';
+        soundToggle.disabled = true;
+        return;
+      }
+      const generation = ++audioGeneration;
+      try {
+        audioContext ||= new AudioEngine();
+        if (userInitiated) await audioContext.resume();
+        if (generation !== audioGeneration) return;
+        soundEnabled = audioContext.state === 'running';
+        syncSoundButton();
+        audioStatus.textContent = soundEnabled ? '电子音效已开启 · 非真人语音，不使用麦克风' : '浏览器限制自动播放，请点击“开启声音”。';
+        if (soundEnabled) robotChirp();
+      } catch {
+        soundEnabled = false;
+        syncSoundButton();
+        audioStatus.textContent = '音效暂时不可用，请稍后点击重试。';
+      }
+    }
+    soundToggle.addEventListener('click', () => {
+      if (soundEnabled) {
+        audioGeneration++;
+        soundEnabled = false;
+        if (audioContext) audioContext.suspend().catch(() => {});
+        syncSoundButton();
+        audioStatus.textContent = '声音已关闭';
+      } else enableSound(true);
+    });
+    greetButton.addEventListener('click', () => {
+      if (reducedMotion.matches || robotVisual.classList.contains('paused')) return;
+      robotVisual.classList.remove('greeting');
+      void robotVisual.offsetWidth;
+      robotVisual.classList.add('greeting');
+      robotChirp(1);
+    });
+    robotVisual.addEventListener('animationend', (event) => {
+      if (event.animationName === 'greet') robotVisual.classList.remove('greeting');
+    });
+    // Bubble and face share a 12-second cycle: hello / learning / story.
+    robotVisual.addEventListener('animationiteration', (event) => {
+      if (event.animationName !== 'chat') return;
+      const kind = event.target.classList.contains('two') ? 1 : event.target.classList.contains('three') ? 2 : 0;
+      robotChirp(kind);
+    });
+    motionToggle.addEventListener('click', () => {
+      const paused = robotVisual.classList.toggle('paused');
+      motionToggle.setAttribute('aria-pressed', String(paused));
+      greetButton.disabled = paused;
+      motionToggle.textContent = paused ? '播放动画' : '暂停动画';
+    });
+    // Respect autoplay restrictions; never force sound through another API.
+    enableSound(false);
+  </script>
+</body>
+</html>
