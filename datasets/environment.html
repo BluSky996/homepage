@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="AI Data Lab 气候环境实验数据档案">
-  <title>气候环境实验数据｜AI Data Lab</title>
+  <meta name="description" content="AI Data Lab 环境数据采集实验项目档案">
+  <title>环境数据采集实验｜AI Data Lab</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     .project-cover {
@@ -13,31 +13,74 @@
       display: grid;
       place-items: center;
       overflow: hidden;
-      padding-block: 120px;
+      padding-block: 116px;
       text-align: center;
     }
     .project-cover::before {
       position: absolute;
-      width: min(620px, 80vw);
+      width: min(620px,80vw);
       aspect-ratio: 1;
       content: "";
       border: 1px solid rgba(109,255,179,.12);
       border-radius: 50%;
-      box-shadow: 0 0 80px rgba(71,215,255,.06), inset 0 0 80px rgba(109,255,179,.04);
+      box-shadow: 0 0 80px rgba(71,215,255,.06),inset 0 0 80px rgba(109,255,179,.04);
     }
     .project-cover::after {
       position: absolute;
+      bottom: 0;
       width: 1px;
       height: 95px;
-      bottom: 0;
       content: "";
       background: linear-gradient(transparent,var(--green));
     }
     .cover-content { position: relative; z-index: 1; }
-    .cover-content .crumbs { margin-bottom: 54px; }
+    .cover-content .crumbs { margin-bottom: 48px; }
     .cover-content .kicker { justify-content: center; }
-    .cover-content h1 { max-width: none; font-size: clamp(58px,9vw,112px); }
-    .cover-code { margin-top: 34px; color: var(--muted); font: 11px Consolas,monospace; letter-spacing: .22em; }
+    .cover-content h1 { max-width: none; font-size: clamp(54px,8vw,102px); }
+    .cover-lead { max-width: 760px; margin: 24px auto 0; color: var(--muted); font-size: 16px; }
+    .cover-code { margin-top: 28px; color: var(--muted); font: 11px Consolas,monospace; letter-spacing: .18em; }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(24px,4vw,38px);
+      border: 1px solid var(--strong);
+      border-radius: 18px;
+      background: linear-gradient(135deg,rgba(14,25,20,.96),rgba(7,13,10,.92));
+      box-shadow: 0 28px 80px rgba(0,0,0,.2);
+    }
+    .project-card::after {
+      position: absolute;
+      top: -90px;
+      right: -70px;
+      width: 240px;
+      height: 240px;
+      content: "";
+      border-radius: 50%;
+      background: rgba(71,215,255,.065);
+      filter: blur(8px);
+    }
+    .project-card-head { position: relative; z-index: 1; display: flex; align-items: flex-start; justify-content: space-between; gap: 28px; }
+    .project-id { display: block; margin-bottom: 10px; color: var(--cyan); font: 12px Consolas,monospace; letter-spacing: .13em; }
+    .project-card h3 { margin: 0; font-size: clamp(25px,3vw,34px); }
+    .project-card p { max-width: 760px; margin: 14px 0 0; color: var(--muted); }
+    .project-status { flex: 0 0 auto; padding: 7px 12px; border: 1px solid rgba(109,255,179,.3); border-radius: 999px; color: var(--green); background: rgba(109,255,179,.045); font-size: 12px; }
+    .project-tags { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .project-tags span { padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; color: #bdcbc4; background: rgba(255,255,255,.018); font-size: 12px; }
+
+    .project-details { position: relative; z-index: 1; display: grid; gap: 12px; margin-top: 18px; }
+    .fold { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: rgba(11,16,13,.76); }
+    .fold summary { display: flex; align-items: center; justify-content: space-between; min-height: 62px; padding: 14px 20px; color: #d3e0d9; font-weight: 700; cursor: pointer; list-style: none; }
+    .fold summary::-webkit-details-marker { display: none; }
+    .fold summary:hover { color: var(--green); }
+    .fold .opened { display: none; }
+    .fold[open] .closed { display: none; }
+    .fold[open] .opened { display: inline; }
+    .fold-content { padding: 4px 20px 22px; border-top: 1px solid var(--line); }
+    .equipment-lines { display: grid; gap: 10px; padding-top: 14px; }
+    .equipment-line { color: #bdcbc4; line-height: 1.65; }
+    .equipment-line strong { color: #e3ebe7; font-weight: 650; }
+
     .experiment-history { display: grid; gap: 14px; }
     .experiment-record { overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: rgba(11,16,13,.86); }
     .experiment-record-head { display: flex; align-items: center; gap: 18px; padding: 15px 20px; border-bottom: 1px solid var(--line); }
@@ -47,38 +90,39 @@
     .experiment-file-row:last-child { border-bottom: 0; }
     .experiment-file-label { color: #c8d4ce; font-size: 13px; font-weight: 650; }
     .experiment-file-name { overflow: hidden; color: var(--muted); font: 12px Consolas,monospace; text-overflow: ellipsis; white-space: nowrap; }
-    .experiment-file-row.missing .experiment-file-name { color: #68776f; }
     .archive-date { color: var(--cyan); font: 12px Consolas,monospace; }
     .record-action { min-height: 38px; display: inline-flex; align-items: center; justify-content: center; padding-inline: 13px; border: 1px solid var(--strong); border-radius: 7px; color: #b8c6be; background: rgba(255,255,255,.02); font-size: 12px; text-decoration: none; transition: .18s ease; }
     .record-action:hover { border-color: var(--green); color: var(--green); }
-    .archive-empty { padding: 36px 20px; color: var(--muted); text-align: center; font-size: 14px; }
     .archive-note { display: flex; align-items: center; gap: 8px; margin-top: 14px; color: #69776f; font-size: 12px; }
     .archive-note::before { width: 6px; height: 6px; content: ""; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
-    .equipment-section { padding-block: 38px; }
-    .equipment-section > .section-head { margin-bottom: 20px; }
-    .equipment-section .equipment-grid { gap: 12px; }
-    .equipment-section .panel { padding: 17px 22px; }
-    .equipment-section .panel h3 { margin-bottom: 9px; }
-    .equipment-section .item-list { gap: 0; }
-    .equipment-section .item { padding: 6px 0; }
-    .equipment-section .flow-heading { margin: 28px 0 16px; }
-    .equipment-section .flow { gap: 14px; margin-top: 0; }
-    .equipment-section .step { padding: 11px 14px; }
-    .equipment-section .step:not(:last-child)::after { right: -11px; }
-    .equipment-section .step h3 { margin-top: 5px; }
-    @media(max-width:800px){
-      .project-cover { min-height: 480px; padding-block: 90px; }
+
+    .future-project-list { display: grid; gap: 16px; }
+    .future-project { min-height: 0; }
+    .fan-entry { display: grid; justify-items: end; gap: 6px; margin-top: 22px; text-align: right; }
+    .fan-entry-main { display: flex; align-items: center; justify-content: flex-end; gap: 18px; }
+    .fan-entry h3 { margin: 0; color: #cbd7d1; font-size: 15px; }
+    .fan-entry p { margin: 0; color: #68766f; font-size: 11px; }
+    .resource-link { color: var(--green); font-size: 12px; text-decoration: none; }
+    .resource-link:hover { color: #a7ffd0; }
+
+    @media(max-width:860px) {
+      .project-card-head { flex-direction: column; gap: 14px; }
+    }
+    @media(max-width:800px) {
+      .project-cover { min-height: 480px; padding-block: 88px; }
       .experiment-file-row { grid-template-columns: 1fr auto; gap: 7px 16px; padding: 14px 18px; }
       .experiment-file-label,.experiment-file-name { grid-column: 1; }
       .record-action { grid-column: 2; grid-row: 1 / span 2; }
     }
-    @media(max-width:520px){
-      .project-cover { min-height: 420px; }
-      .cover-content .crumbs { margin-bottom: 38px; }
-      .cover-content h1 { font-size: clamp(48px,15vw,70px); }
+    @media(max-width:520px) {
+      .project-cover { min-height: 430px; }
+      .cover-content .crumbs { margin-bottom: 34px; }
+      .cover-content h1 { font-size: clamp(44px,14vw,66px); }
       .experiment-record-head { align-items: flex-start; flex-direction: column; gap: 4px; }
       .experiment-file-row { grid-template-columns: 1fr; }
       .record-action { width: 100%; grid-column: 1; grid-row: auto; margin-top: 7px; }
+      .fold summary { padding-inline: 16px; }
+      .fold-content { padding-inline: 16px; }
     }
   </style>
 </head>
@@ -93,71 +137,74 @@
   <main>
     <section class="project-cover container">
       <div class="cover-content">
-        <div class="crumbs"><a href="../index.html">AI Data Lab</a> / <a href="../index.html#datasets">Dataset Library</a> / DATA_04</div>
-        <p class="kicker">Climate & Environment Laboratory</p>
-        <h1>气候环境<br><span class="gradient">实验数据</span></h1>
-        <div class="cover-code">ESP32 · SENSOR · DATA ARCHIVE</div>
+        <div class="crumbs"><a href="../index.html">AI Data Lab</a> / <a href="../index.html#datasets">Dataset Library</a> / DATA_02</div>
+        <p class="kicker">Environment Data Collection Lab</p>
+        <h1>环境数据<br><span class="gradient">采集实验</span></h1>
+        <p class="cover-lead">围绕光照、温度、湿度、空气质量等传感器数据，记录硬件采集、数据整理、Python 分析和可视化实验。</p>
+        <div class="cover-code">SENSOR DATA · HARDWARE COLLECTION · CSV · PYTHON · VISUALIZATION</div>
       </div>
     </section>
 
-    <section class="section container equipment-section">
+    <section class="section container" aria-labelledby="projects-title">
       <div class="section-head">
-        <div><p class="kicker">01 / Equipment</p><h2>实验设备介绍</h2></div>
-        <p class="section-intro">实验项目档案记录所使用的硬件设备、软件工具与完整数据采集链路。</p>
-      </div>
-      <div class="equipment-grid">
-        <article class="panel">
-          <h3>硬件 Hardware</h3>
-          <div class="item-list">
-            <div class="item"><strong>ESP32 开发板</strong><span>主控与通信</span></div>
-            <div class="item"><strong>温度传感器</strong><span>温度采集</span></div>
-            <div class="item"><strong>光照传感器</strong><span>亮度采集</span></div>
-            <div class="item"><strong>LCD 显示屏</strong><span>实时显示</span></div>
-          </div>
-        </article>
-        <article class="panel">
-          <h3>软件 Software</h3>
-          <div class="item-list">
-            <div class="item"><strong>Arduino IDE</strong><span>设备程序开发</span></div>
-            <div class="item"><strong>Python</strong><span>数据处理与分析</span></div>
-            <div class="item"><strong>ChatGPT 5.5</strong><span>代码技术辅助</span></div>
-          </div>
-        </article>
+        <div><p class="kicker">01 / Collection Projects</p><h2 id="projects-title">采集项目</h2></div>
+        <p class="section-intro">以项目为单位记录真实世界数据采集实验。每个项目包含采集目标、使用设备、数据流程和历史记录，后续可持续扩展新的传感器实验。</p>
       </div>
 
-      <div class="section-head flow-heading"><div><p class="kicker">Data Pipeline</p><h2>数据流程</h2></div></div>
-      <div class="flow">
-        <div class="step"><span>STEP 01</span><h3>传感器采集</h3></div>
-        <div class="step"><span>STEP 02</span><h3>ESP32 读取数据</h3></div>
-        <div class="step"><span>STEP 03</span><h3>CSV 保存</h3></div>
-        <div class="step"><span>STEP 04</span><h3>Python 分析</h3></div>
-        <div class="step"><span>STEP 05</span><h3>生成可视化报告</h3></div>
-      </div>
-    </section>
-
-    <section class="section container">
-      <div class="section-head">
-        <div><p class="kicker">02 / Experiment Archive</p><h2>实验历史记录</h2></div>
-        <p class="section-intro">以完整实验批次归档原始数据与对应分析报告，展示最近 5 次实验。</p>
-      </div>
+      <article class="project-card">
+        <div class="project-card-head">
+          <div><span class="project-id">PROJECT 01 / LIGHT &amp; TEMPERATURE</span><h3>光照与温度环境监测</h3><p>基于 ESP32、温度传感器、光照传感器和 LCD 显示屏，采集环境中的温度与光照变化，并保存为 CSV 数据用于后续分析和可视化。</p></div>
+          <span class="project-status">已接入历史记录</span>
+        </div>
+        <div class="project-tags"><span>ESP32</span><span>温度传感器</span><span>光照传感器</span><span>CSV 数据</span><span>Python 分析</span><span>可视化报告</span></div>
+        <div class="project-details">
+        <details class="fold">
+          <summary><span class="closed">查看实验设备介绍 ＋</span><span class="opened">收起实验设备介绍 −</span></summary>
+          <div class="fold-content">
+            <div class="equipment-lines">
+              <div class="equipment-line"><strong>硬件 Hardware：</strong>ESP32 开发板 / 温度传感器 / 光照传感器 / LCD 显示屏</div>
+              <div class="equipment-line"><strong>软件 Software：</strong>Arduino IDE / Python</div>
+            </div>
+          </div>
+        </details>
+        <details class="fold">
+          <summary><span class="closed">查看历史记录 ＋</span><span class="opened">收起历史记录 −</span></summary>
+          <div class="fold-content">
+            <p class="section-intro">展示该采集项目最近的实验数据和分析报告。原始数据与可视化结果保存在本地项目目录中，页面仅展示最近记录。</p>
       <div class="experiment-history">
         <!-- EXPERIMENT_RECORDS_START -->
-<article class="experiment-record"><div class="experiment-record-head"><span class="archive-date">2026-08-12</span><strong>ESP32 温度与光照环境监测实验</strong></div><div class="experiment-files"><div class="experiment-file-row"><span class="experiment-file-label">原始数据</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260812_075654.csv</span><a class="record-action" href="environment/data/esp32_light_temp_LED_behavior_20260812_075654.csv" download>下载 CSV</a></div><div class="experiment-file-row"><span class="experiment-file-label">分析报告</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260812_075654.png</span><a class="record-action" href="environment/reports/esp32_light_temp_LED_behavior_20260812_075654.png" target="_blank" rel="noreferrer">查看 PNG</a></div></div></article>
-<article class="experiment-record"><div class="experiment-record-head"><span class="archive-date">2026-08-11</span><strong>ESP32 温度与光照环境监测实验</strong></div><div class="experiment-files"><div class="experiment-file-row"><span class="experiment-file-label">原始数据</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260709_233950.csv</span><a class="record-action" href="environment/data/esp32_light_temp_LED_behavior_20260709_233950.csv" download>下载 CSV</a></div><div class="experiment-file-row"><span class="experiment-file-label">分析报告</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260622_111116.png</span><a class="record-action" href="environment/reports/esp32_light_temp_LED_behavior_20260622_111116.png" target="_blank" rel="noreferrer">查看 PNG</a></div></div></article>
-<!-- EXPERIMENT_RECORDS_END -->
+        <article class="experiment-record"><div class="experiment-record-head"><span class="archive-date">2026-08-12</span><strong>ESP32 温度与光照环境监测实验</strong></div><div class="experiment-files"><div class="experiment-file-row"><span class="experiment-file-label">原始数据</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260812_075654.csv</span><a class="record-action" href="environment/data/esp32_light_temp_LED_behavior_20260812_075654.csv" download>下载 CSV</a></div><div class="experiment-file-row"><span class="experiment-file-label">分析报告</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260812_075654.png</span><a class="record-action" href="environment/reports/esp32_light_temp_LED_behavior_20260812_075654.png" target="_blank" rel="noreferrer">查看 PNG</a></div></div></article>
+        <article class="experiment-record"><div class="experiment-record-head"><span class="archive-date">2026-08-11</span><strong>ESP32 温度与光照环境监测实验</strong></div><div class="experiment-files"><div class="experiment-file-row"><span class="experiment-file-label">原始数据</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260709_233950.csv</span><a class="record-action" href="environment/data/esp32_light_temp_LED_behavior_20260709_233950.csv" download>下载 CSV</a></div><div class="experiment-file-row"><span class="experiment-file-label">分析报告</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260622_111116.png</span><a class="record-action" href="environment/reports/esp32_light_temp_LED_behavior_20260622_111116.png" target="_blank" rel="noreferrer">查看 PNG</a></div></div></article>
+        <!-- EXPERIMENT_RECORDS_END -->
       </div>
-      <p class="archive-note">新文件由人工放入对应目录；更新后按批次展示最近 5 次，不删除任何历史文件。</p>
-    </section>
-
-    <section class="section container">
-      <div class="section-head"><div><p class="kicker">Future Projects</p><h2>未来项目</h2></div><p class="section-intro">预留新的硬件实验位置，方便后续扩展。</p></div>
-      <div class="future-grid">
-        <article class="future"><div><span>PROJECT 02</span><h3>Coming Soon</h3><p>新环境硬件实验预留</p></div></article>
-        <article class="future"><div><span>PROJECT 03</span><h3>Coming Soon</h3><p>新环境硬件实验预留</p></div></article>
+      <p class="archive-note">新文件由人工放入对应目录；更新后按批次展示最近记录，不删除任何历史文件。</p>
+          </div>
+        </details>
+        </div>
+      </article>
+      <div class="future-project-list">
+        <article class="project-card future-project">
+          <div class="project-card-head">
+            <div><span class="project-id">PROJECT 02 / MOTION SENSOR</span><h3>体感运动传感器</h3><p>用于记录人体动作、姿态变化或脚步压力等传感器数据，后续可用于运动数据采集、行为识别和 AI 标注实验。</p></div>
+            <span class="project-status">规划中</span>
+          </div>
+          <div class="project-tags"><span>体感数据</span><span>动作采集</span><span>脚步压力</span><span>传感器实验</span><span>AI 标注</span></div>
+        </article>
+        <article class="project-card future-project">
+          <div class="project-card-head">
+            <div><span class="project-id">PROJECT 03 / SERVO VOICE RADAR</span><h3>舵机声控雷达监测</h3><p>用于记录声控交互、距离感知、雷达传感器与环境反馈设备之间的数据采集和联动实验，后续形成声控雷达数据记录。</p></div>
+            <span class="project-status">规划中</span>
+          </div>
+          <div class="project-tags"><span>声控交互</span><span>雷达传感器</span><span>距离感知</span><span>硬件联动</span><span>数据采集</span></div>
+        </article>
       </div>
+      <aside class="fan-entry">
+        <div class="fan-entry-main"><h3>发烧友资源入口</h3><a class="resource-link" href="#">前往第三方资源 →</a></div>
+        <p>第三方资源仅供学习参考，不代表本站立场。</p>
+      </aside>
     </section>
   </main>
 
-  <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>DATA_04 / ENVIRONMENT</span></div></footer>
+  <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>DATA_02 / ENVIRONMENT COLLECTION</span></div></footer>
 </body>
 </html>
