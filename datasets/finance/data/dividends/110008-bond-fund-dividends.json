@@ -1,0 +1,427 @@
+{
+  "fund_name": "易方达稳健收益债券B",
+  "fund_code": "110008",
+  "source_file": "110008-yifangda-stable-bond-b-dividends.csv",
+  "records": [
+    {
+      "year": 2026,
+      "record_date": "2026-01-13",
+      "ex_dividend_date": "2026-01-13",
+      "dividend_plan": "每10份派现金0.4500元",
+      "dividend_per_10_units_yuan": 0.45,
+      "dividend_per_unit_yuan": 0.045,
+      "payment_date": "2026-01-14",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2025,
+      "record_date": "2025-01-14",
+      "ex_dividend_date": "2025-01-14",
+      "dividend_plan": "每10份派现金0.3800元",
+      "dividend_per_10_units_yuan": 0.38,
+      "dividend_per_unit_yuan": 0.038,
+      "payment_date": "2025-01-15",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2023,
+      "record_date": "2023-12-21",
+      "ex_dividend_date": "2023-12-21",
+      "dividend_plan": "每10份派现金0.2800元",
+      "dividend_per_10_units_yuan": 0.28,
+      "dividend_per_unit_yuan": 0.028,
+      "payment_date": "2023-12-22",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2023,
+      "record_date": "2023-11-23",
+      "ex_dividend_date": "2023-11-23",
+      "dividend_plan": "每10份派现金0.3300元",
+      "dividend_per_10_units_yuan": 0.33,
+      "dividend_per_unit_yuan": 0.033,
+      "payment_date": "2023-11-24",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2022,
+      "record_date": "2022-01-10",
+      "ex_dividend_date": "2022-01-10",
+      "dividend_plan": "每10份派现金0.3200元",
+      "dividend_per_10_units_yuan": 0.32,
+      "dividend_per_unit_yuan": 0.032,
+      "payment_date": "2022-01-11",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2021,
+      "record_date": "2021-12-20",
+      "ex_dividend_date": "2021-12-20",
+      "dividend_plan": "每10份派现金0.3200元",
+      "dividend_per_10_units_yuan": 0.32,
+      "dividend_per_unit_yuan": 0.032,
+      "payment_date": "2021-12-21",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2021,
+      "record_date": "2021-01-12",
+      "ex_dividend_date": "2021-01-12",
+      "dividend_plan": "每10份派现金0.1300元",
+      "dividend_per_10_units_yuan": 0.13,
+      "dividend_per_unit_yuan": 0.013,
+      "payment_date": "2021-01-13",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2020,
+      "record_date": "2020-12-21",
+      "ex_dividend_date": "2020-12-21",
+      "dividend_plan": "每10份派现金0.3900元",
+      "dividend_per_10_units_yuan": 0.39,
+      "dividend_per_unit_yuan": 0.039,
+      "payment_date": "2020-12-22",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2020,
+      "record_date": "2020-01-14",
+      "ex_dividend_date": "2020-01-14",
+      "dividend_plan": "每10份派现金0.4800元",
+      "dividend_per_10_units_yuan": 0.48,
+      "dividend_per_unit_yuan": 0.048,
+      "payment_date": "2020-01-15",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2019,
+      "record_date": "2019-12-26",
+      "ex_dividend_date": "2019-12-26",
+      "dividend_plan": "每10份派现金0.5500元",
+      "dividend_per_10_units_yuan": 0.55,
+      "dividend_per_unit_yuan": 0.055,
+      "payment_date": "2019-12-27",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2019,
+      "record_date": "2019-01-29",
+      "ex_dividend_date": "2019-01-29",
+      "dividend_plan": "每10份派现金0.2800元",
+      "dividend_per_10_units_yuan": 0.28,
+      "dividend_per_unit_yuan": 0.028,
+      "payment_date": "2019-01-30",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2019,
+      "record_date": "2019-01-15",
+      "ex_dividend_date": "2019-01-15",
+      "dividend_plan": "每10份派现金0.2700元",
+      "dividend_per_10_units_yuan": 0.27,
+      "dividend_per_unit_yuan": 0.027,
+      "payment_date": "2019-01-16",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2018,
+      "record_date": "2018-01-12",
+      "ex_dividend_date": "2018-01-12",
+      "dividend_plan": "每10份派现金0.6500元",
+      "dividend_per_10_units_yuan": 0.65,
+      "dividend_per_unit_yuan": 0.065,
+      "payment_date": "2018-01-15",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2017,
+      "record_date": "2017-01-12",
+      "ex_dividend_date": "2017-01-12",
+      "dividend_plan": "每10份派现金0.9500元",
+      "dividend_per_10_units_yuan": 0.95,
+      "dividend_per_unit_yuan": 0.095,
+      "payment_date": "2017-01-13",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2016,
+      "record_date": "2016-01-04",
+      "ex_dividend_date": "2016-01-04",
+      "dividend_plan": "每10份派现金2.0000元",
+      "dividend_per_10_units_yuan": 2.0,
+      "dividend_per_unit_yuan": 0.2,
+      "payment_date": "2016-01-05",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2015,
+      "record_date": "2015-01-20",
+      "ex_dividend_date": "2015-01-20",
+      "dividend_plan": "每10份派现金1.0000元",
+      "dividend_per_10_units_yuan": 1.0,
+      "dividend_per_unit_yuan": 0.1,
+      "payment_date": "2015-01-21",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2013,
+      "record_date": "2013-12-23",
+      "ex_dividend_date": "2013-12-23",
+      "dividend_plan": "每10份派现金0.7600元",
+      "dividend_per_10_units_yuan": 0.76,
+      "dividend_per_unit_yuan": 0.076,
+      "payment_date": "2013-12-24",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2013,
+      "record_date": "2013-01-21",
+      "ex_dividend_date": "2013-01-21",
+      "dividend_plan": "每10份派现金0.6500元",
+      "dividend_per_10_units_yuan": 0.65,
+      "dividend_per_unit_yuan": 0.065,
+      "payment_date": "2013-01-22",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2010,
+      "record_date": "2010-12-22",
+      "ex_dividend_date": "2010-12-22",
+      "dividend_plan": "每10份派现金0.8000元",
+      "dividend_per_10_units_yuan": 0.8,
+      "dividend_per_unit_yuan": 0.08,
+      "payment_date": "2010-12-23",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2010,
+      "record_date": "2010-05-19",
+      "ex_dividend_date": "2010-05-19",
+      "dividend_plan": "每10份派现金0.3200元",
+      "dividend_per_10_units_yuan": 0.32,
+      "dividend_per_unit_yuan": 0.032,
+      "payment_date": "2010-05-20",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2009,
+      "record_date": "2009-12-24",
+      "ex_dividend_date": "2009-12-24",
+      "dividend_plan": "每10份派现金0.0500元",
+      "dividend_per_10_units_yuan": 0.05,
+      "dividend_per_unit_yuan": 0.005,
+      "payment_date": "2009-12-25",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2009,
+      "record_date": "2009-02-16",
+      "ex_dividend_date": "2009-02-16",
+      "dividend_plan": "每10份派现金0.1700元",
+      "dividend_per_10_units_yuan": 0.17,
+      "dividend_per_unit_yuan": 0.017,
+      "payment_date": "2009-02-17",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2008,
+      "record_date": "2008-12-16",
+      "ex_dividend_date": "2008-12-16",
+      "dividend_plan": "每10份派现金0.3800元",
+      "dividend_per_10_units_yuan": 0.38,
+      "dividend_per_unit_yuan": 0.038,
+      "payment_date": "2008-12-17",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2008,
+      "record_date": "2008-04-23",
+      "ex_dividend_date": "2008-04-23",
+      "dividend_plan": "每10份派现金0.0500元",
+      "dividend_per_10_units_yuan": 0.05,
+      "dividend_per_unit_yuan": 0.005,
+      "payment_date": "2008-04-24",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2007,
+      "record_date": "2007-05-25",
+      "ex_dividend_date": "2007-05-25",
+      "dividend_plan": "每10份派现金0.0220元",
+      "dividend_per_10_units_yuan": 0.022,
+      "dividend_per_unit_yuan": 0.0022,
+      "payment_date": "2007-05-28",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2007,
+      "record_date": "2007-03-05",
+      "ex_dividend_date": "2007-03-05",
+      "dividend_plan": "每10份派现金0.0170元",
+      "dividend_per_10_units_yuan": 0.017,
+      "dividend_per_unit_yuan": 0.0017,
+      "payment_date": "2007-03-06",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2007,
+      "record_date": "2007-01-30",
+      "ex_dividend_date": "2007-01-30",
+      "dividend_plan": "每10份派现金0.0200元",
+      "dividend_per_10_units_yuan": 0.02,
+      "dividend_per_unit_yuan": 0.002,
+      "payment_date": "2007-01-31",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2006,
+      "record_date": "2006-12-26",
+      "ex_dividend_date": "2006-12-26",
+      "dividend_plan": "每10份派现金0.0120元",
+      "dividend_per_10_units_yuan": 0.012,
+      "dividend_per_unit_yuan": 0.0012,
+      "payment_date": "2006-12-27",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2006,
+      "record_date": "2006-12-01",
+      "ex_dividend_date": "2006-12-01",
+      "dividend_plan": "每10份派现金0.0170元",
+      "dividend_per_10_units_yuan": 0.017,
+      "dividend_per_unit_yuan": 0.0017,
+      "payment_date": "2006-12-04",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2006,
+      "record_date": "2006-10-31",
+      "ex_dividend_date": "2006-10-31",
+      "dividend_plan": "每10份派现金0.0140元",
+      "dividend_per_10_units_yuan": 0.014,
+      "dividend_per_unit_yuan": 0.0014,
+      "payment_date": "2006-11-01",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2006,
+      "record_date": "2006-09-26",
+      "ex_dividend_date": "2006-09-26",
+      "dividend_plan": "每10份派现金0.0060元",
+      "dividend_per_10_units_yuan": 0.006,
+      "dividend_per_unit_yuan": 0.0006,
+      "payment_date": "2006-09-27",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2006,
+      "record_date": "2006-09-07",
+      "ex_dividend_date": "2006-09-07",
+      "dividend_plan": "每10份派现金0.0150元",
+      "dividend_per_10_units_yuan": 0.015,
+      "dividend_per_unit_yuan": 0.0015,
+      "payment_date": "2006-09-08",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2006,
+      "record_date": "2006-08-01",
+      "ex_dividend_date": "2006-08-01",
+      "dividend_plan": "每10份派现金0.0060元",
+      "dividend_per_10_units_yuan": 0.006,
+      "dividend_per_unit_yuan": 0.0006,
+      "payment_date": "2006-08-02",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2006,
+      "record_date": "2006-06-27",
+      "ex_dividend_date": "2006-06-27",
+      "dividend_plan": "每10份派现金0.0050元",
+      "dividend_per_10_units_yuan": 0.005,
+      "dividend_per_unit_yuan": 0.0005,
+      "payment_date": "2006-06-28",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2006,
+      "record_date": "2006-05-26",
+      "ex_dividend_date": "2006-05-26",
+      "dividend_plan": "每10份派现金0.0130元",
+      "dividend_per_10_units_yuan": 0.013,
+      "dividend_per_unit_yuan": 0.0013,
+      "payment_date": "2006-05-29",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2006,
+      "record_date": "2006-04-25",
+      "ex_dividend_date": "2006-04-25",
+      "dividend_plan": "每10份派现金0.0220元",
+      "dividend_per_10_units_yuan": 0.022,
+      "dividend_per_unit_yuan": 0.0022,
+      "payment_date": "2006-04-26",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2006,
+      "record_date": "2006-03-28",
+      "ex_dividend_date": "2006-03-28",
+      "dividend_plan": "每10份派现金0.0220元",
+      "dividend_per_10_units_yuan": 0.022,
+      "dividend_per_unit_yuan": 0.0022,
+      "payment_date": "2006-03-29",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2006,
+      "record_date": "2006-02-23",
+      "ex_dividend_date": "2006-02-23",
+      "dividend_plan": "每10份派现金0.0180元",
+      "dividend_per_10_units_yuan": 0.018,
+      "dividend_per_unit_yuan": 0.0018,
+      "payment_date": "2006-02-24",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2006,
+      "record_date": "2006-01-20",
+      "ex_dividend_date": "2006-01-20",
+      "dividend_plan": "每10份派现金0.0140元",
+      "dividend_per_10_units_yuan": 0.014,
+      "dividend_per_unit_yuan": 0.0014,
+      "payment_date": "2006-01-23",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2005,
+      "record_date": "2005-12-27",
+      "ex_dividend_date": "2005-12-27",
+      "dividend_plan": "每10份派现金0.0200元",
+      "dividend_per_10_units_yuan": 0.02,
+      "dividend_per_unit_yuan": 0.002,
+      "payment_date": "2005-12-28",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2005,
+      "record_date": "2005-11-25",
+      "ex_dividend_date": "2005-11-25",
+      "dividend_plan": "每10份派现金0.0200元",
+      "dividend_per_10_units_yuan": 0.02,
+      "dividend_per_unit_yuan": 0.002,
+      "payment_date": "2005-11-28",
+      "source": "天天基金/东方财富分红送配"
+    },
+    {
+      "year": 2005,
+      "record_date": "2005-10-25",
+      "ex_dividend_date": "2005-10-25",
+      "dividend_plan": "每10份派现金0.0200元",
+      "dividend_per_10_units_yuan": 0.02,
+      "dividend_per_unit_yuan": 0.002,
+      "payment_date": "2005-10-26",
+      "source": "天天基金/东方财富分红送配"
+    }
+  ]
+}

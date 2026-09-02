@@ -1,0 +1,143 @@
+{
+  "stock_name": "海天味业",
+  "stock_code": "603288",
+  "source_file": "603288-haitian-flavouring-dividends.csv",
+  "aggregation_basis": "除权除息日所在年份",
+  "records": [
+    {
+      "year": 2026,
+      "report_period": "2025年报",
+      "dividend_plan": "10派8元(含税)",
+      "dividend_per_10_shares": 8.0,
+      "dividend_per_share": 0.8,
+      "record_date": "2026-06-12",
+      "ex_dividend_date": "2026-06-15"
+    },
+    {
+      "year": 2026,
+      "report_period": "2025-12-19",
+      "dividend_plan": "10派3.0元(含税)",
+      "dividend_per_10_shares": 3.0,
+      "dividend_per_share": 0.3,
+      "record_date": "2026-02-05",
+      "ex_dividend_date": "2026-02-06"
+    },
+    {
+      "year": 2025,
+      "report_period": "2025中报",
+      "dividend_plan": "10派2.6元(含税)",
+      "dividend_per_10_shares": 2.6,
+      "dividend_per_share": 0.26,
+      "record_date": "2025-09-23",
+      "ex_dividend_date": "2025-09-24"
+    },
+    {
+      "year": 2025,
+      "report_period": "2024年报",
+      "dividend_plan": "10派8.6元(含税)",
+      "dividend_per_10_shares": 8.6,
+      "dividend_per_share": 0.86,
+      "record_date": "2025-06-04",
+      "ex_dividend_date": "2025-06-05"
+    },
+    {
+      "year": 2024,
+      "report_period": "2023年报",
+      "dividend_plan": "10派6.6元(含税)",
+      "dividend_per_10_shares": 6.6,
+      "dividend_per_share": 0.66,
+      "record_date": "2024-06-18",
+      "ex_dividend_date": "2024-06-19"
+    },
+    {
+      "year": 2023,
+      "report_period": "2022年报",
+      "dividend_plan": "10送2股派7元(含税)",
+      "dividend_per_10_shares": 7.0,
+      "dividend_per_share": 0.7,
+      "record_date": "2023-05-31",
+      "ex_dividend_date": "2023-06-01"
+    },
+    {
+      "year": 2022,
+      "report_period": "2021年报",
+      "dividend_plan": "10送1股派7.6元(含税)",
+      "dividend_per_10_shares": 7.6,
+      "dividend_per_share": 0.76,
+      "record_date": "2022-04-28",
+      "ex_dividend_date": "2022-04-29"
+    },
+    {
+      "year": 2021,
+      "report_period": "2020年报",
+      "dividend_plan": "10送1股转2股派10.30元(含税)",
+      "dividend_per_10_shares": 10.3,
+      "dividend_per_share": 1.03,
+      "record_date": "2021-05-14",
+      "ex_dividend_date": "2021-05-17"
+    },
+    {
+      "year": 2020,
+      "report_period": "2019年报",
+      "dividend_plan": "10转2股派10.8元(含税)",
+      "dividend_per_10_shares": 10.8,
+      "dividend_per_share": 1.08,
+      "record_date": "2020-05-06",
+      "ex_dividend_date": "2020-05-07"
+    },
+    {
+      "year": 2019,
+      "report_period": "2018年报",
+      "dividend_plan": "10派9.80元(含税)",
+      "dividend_per_10_shares": 9.8,
+      "dividend_per_share": 0.98,
+      "record_date": "2019-05-06",
+      "ex_dividend_date": "2019-05-07"
+    },
+    {
+      "year": 2018,
+      "report_period": "2017年报",
+      "dividend_plan": "10派8.5元(含税)",
+      "dividend_per_10_shares": 8.5,
+      "dividend_per_share": 0.85,
+      "record_date": "2018-04-25",
+      "ex_dividend_date": "2018-04-26"
+    },
+    {
+      "year": 2017,
+      "report_period": "2016年报",
+      "dividend_plan": "10派6.8元(含税)",
+      "dividend_per_10_shares": 6.8,
+      "dividend_per_share": 0.68,
+      "record_date": "2017-04-24",
+      "ex_dividend_date": "2017-04-25"
+    },
+    {
+      "year": 2016,
+      "report_period": "2015年报",
+      "dividend_plan": "10派6元(含税)",
+      "dividend_per_10_shares": 6.0,
+      "dividend_per_share": 0.6,
+      "record_date": "2016-04-14",
+      "ex_dividend_date": "2016-04-15"
+    },
+    {
+      "year": 2015,
+      "report_period": "2014年报",
+      "dividend_plan": "10转8股派8.5元(含税)",
+      "dividend_per_10_shares": 8.5,
+      "dividend_per_share": 0.85,
+      "record_date": "2015-04-14",
+      "ex_dividend_date": "2015-04-15"
+    },
+    {
+      "year": 2014,
+      "report_period": "2013年报",
+      "dividend_plan": "10转10股派5元(含税)",
+      "dividend_per_10_shares": 5.0,
+      "dividend_per_share": 0.5,
+      "record_date": "2014-05-16",
+      "ex_dividend_date": "2014-05-19"
+    }
+  ]
+}

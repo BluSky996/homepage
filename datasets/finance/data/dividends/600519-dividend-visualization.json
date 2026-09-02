@@ -1,0 +1,215 @@
+{
+  "stock_name": "贵州茅台",
+  "stock_code": "600519",
+  "source_file": "600519-kweichow-moutai-dividends.csv",
+  "aggregation_basis": "除权除息日所在年份",
+  "records": [
+    {
+      "year": 2026,
+      "report_period": "2025年报",
+      "dividend_plan": "10派280.2423元(含税)",
+      "dividend_per_10_shares": 280.2423,
+      "dividend_per_share": 28.02423,
+      "record_date": "2026-06-25",
+      "ex_dividend_date": "2026-06-26"
+    },
+    {
+      "year": 2025,
+      "report_period": "2025三季报",
+      "dividend_plan": "10派239.57元(含税)",
+      "dividend_per_10_shares": 239.57,
+      "dividend_per_share": 23.957,
+      "record_date": "2025-12-18",
+      "ex_dividend_date": "2025-12-19"
+    },
+    {
+      "year": 2025,
+      "report_period": "2024年报",
+      "dividend_plan": "10派276.73元(含税)",
+      "dividend_per_10_shares": 276.73,
+      "dividend_per_share": 27.673,
+      "record_date": "2025-06-25",
+      "ex_dividend_date": "2025-06-26"
+    },
+    {
+      "year": 2024,
+      "report_period": "2024三季报",
+      "dividend_plan": "10派238.82元(含税)",
+      "dividend_per_10_shares": 238.82,
+      "dividend_per_share": 23.882,
+      "record_date": "2024-12-19",
+      "ex_dividend_date": "2024-12-20"
+    },
+    {
+      "year": 2024,
+      "report_period": "2023年报",
+      "dividend_plan": "10派308.76元(含税)",
+      "dividend_per_10_shares": 308.76,
+      "dividend_per_share": 30.876,
+      "record_date": "2024-06-18",
+      "ex_dividend_date": "2024-06-19"
+    },
+    {
+      "year": 2023,
+      "report_period": "2023-11-21",
+      "dividend_plan": "10派191.06元(含税)",
+      "dividend_per_10_shares": 191.06,
+      "dividend_per_share": 19.106,
+      "record_date": "2023-12-19",
+      "ex_dividend_date": "2023-12-20"
+    },
+    {
+      "year": 2023,
+      "report_period": "2022年报",
+      "dividend_plan": "10派259.11元(含税)",
+      "dividend_per_10_shares": 259.11,
+      "dividend_per_share": 25.911,
+      "record_date": "2023-06-29",
+      "ex_dividend_date": "2023-06-30"
+    },
+    {
+      "year": 2022,
+      "report_period": "2022-11-29",
+      "dividend_plan": "10派219.1元(含税)",
+      "dividend_per_10_shares": 219.1,
+      "dividend_per_share": 21.91,
+      "record_date": "2022-12-26",
+      "ex_dividend_date": "2022-12-27"
+    },
+    {
+      "year": 2022,
+      "report_period": "2021年报",
+      "dividend_plan": "10派216.75元(含税)",
+      "dividend_per_10_shares": 216.75,
+      "dividend_per_share": 21.675,
+      "record_date": "2022-06-29",
+      "ex_dividend_date": "2022-06-30"
+    },
+    {
+      "year": 2021,
+      "report_period": "2020年报",
+      "dividend_plan": "10派192.93元(含税)",
+      "dividend_per_10_shares": 192.93,
+      "dividend_per_share": 19.293,
+      "record_date": "2021-06-24",
+      "ex_dividend_date": "2021-06-25"
+    },
+    {
+      "year": 2020,
+      "report_period": "2019年报",
+      "dividend_plan": "10派170.25元(含税)",
+      "dividend_per_10_shares": 170.25,
+      "dividend_per_share": 17.025,
+      "record_date": "2020-06-23",
+      "ex_dividend_date": "2020-06-24"
+    },
+    {
+      "year": 2019,
+      "report_period": "2018年报",
+      "dividend_plan": "10派145.39元(含税)",
+      "dividend_per_10_shares": 145.39,
+      "dividend_per_share": 14.539,
+      "record_date": "2019-06-27",
+      "ex_dividend_date": "2019-06-28"
+    },
+    {
+      "year": 2018,
+      "report_period": "2017年报",
+      "dividend_plan": "10派109.99元(含税)",
+      "dividend_per_10_shares": 109.99,
+      "dividend_per_share": 10.999,
+      "record_date": "2018-06-14",
+      "ex_dividend_date": "2018-06-15"
+    },
+    {
+      "year": 2017,
+      "report_period": "2016年报",
+      "dividend_plan": "10派67.87元(含税)",
+      "dividend_per_10_shares": 67.87,
+      "dividend_per_share": 6.787,
+      "record_date": "2017-07-06",
+      "ex_dividend_date": "2017-07-07"
+    },
+    {
+      "year": 2016,
+      "report_period": "2015年报",
+      "dividend_plan": "10派61.71元(含税)",
+      "dividend_per_10_shares": 61.71,
+      "dividend_per_share": 6.171,
+      "record_date": "2016-06-30",
+      "ex_dividend_date": "2016-07-01"
+    },
+    {
+      "year": 2013,
+      "report_period": "2012年报",
+      "dividend_plan": "10派64.19元(含税)",
+      "dividend_per_10_shares": 64.19,
+      "dividend_per_share": 6.419,
+      "record_date": "2013-06-06",
+      "ex_dividend_date": "2013-06-07"
+    },
+    {
+      "year": 2012,
+      "report_period": "2011年报",
+      "dividend_plan": "10派39.97元(含税)",
+      "dividend_per_10_shares": 39.97,
+      "dividend_per_share": 3.997,
+      "record_date": "2012-07-04",
+      "ex_dividend_date": "2012-07-05"
+    },
+    {
+      "year": 2010,
+      "report_period": "2009年报",
+      "dividend_plan": "10派11.85元(含税)",
+      "dividend_per_10_shares": 11.85,
+      "dividend_per_share": 1.185,
+      "record_date": "2010-07-02",
+      "ex_dividend_date": "2010-07-05"
+    },
+    {
+      "year": 2009,
+      "report_period": "2008年报",
+      "dividend_plan": "10派11.56元(含税)",
+      "dividend_per_10_shares": 11.56,
+      "dividend_per_share": 1.156,
+      "record_date": "2009-06-30",
+      "ex_dividend_date": "2009-07-01"
+    },
+    {
+      "year": 2008,
+      "report_period": "2007年报",
+      "dividend_plan": "10派8.36元(含税)",
+      "dividend_per_10_shares": 8.36,
+      "dividend_per_share": 0.836,
+      "record_date": "2008-06-13",
+      "ex_dividend_date": "2008-06-16"
+    },
+    {
+      "year": 2007,
+      "report_period": "2006年报",
+      "dividend_plan": "10派7元(含税)",
+      "dividend_per_10_shares": 7.0,
+      "dividend_per_share": 0.7,
+      "record_date": "2007-07-12",
+      "ex_dividend_date": "2007-07-13"
+    },
+    {
+      "year": 2006,
+      "report_period": "2006-04-05",
+      "dividend_plan": "10派5.91元(含税)",
+      "dividend_per_10_shares": 5.91,
+      "dividend_per_share": 0.591,
+      "record_date": "2006-05-23",
+      "ex_dividend_date": "2006-05-24"
+    },
+    {
+      "year": 2006,
+      "report_period": "2005年报",
+      "dividend_plan": "10派3元(含税)",
+      "dividend_per_10_shares": 3.0,
+      "dividend_per_share": 0.3,
+      "record_date": "2006-05-18",
+      "ex_dividend_date": "2006-05-19"
+    }
+  ]
+}
