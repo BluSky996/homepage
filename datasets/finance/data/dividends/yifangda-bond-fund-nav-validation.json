@@ -1,6 +1,6 @@
 {
-  "fund_code": "110008",
-  "fund_name": "易方达稳健收益债券B",
+  "fund_code": "未公开",
+  "fund_name": "易方达债券基金",
   "nav_record_count": 5111,
   "first_nav_date": "2005-09-19",
   "last_nav_date": "2026-09-01",
@@ -57,5 +57,5 @@
   "source": "https://api.fund.eastmoney.com/f10/lsjz（东方财富基金历史净值接口，分页抓取全部 256 页）",
   "generated_at": "2026-09-02T13:54:10+08:00",
   "is_full_nav_data": true,
-  "validation_notes": "接口声明与实际去重记录均为 5111 条；日期连续覆盖基金成立附近至当前最新可获取净值，各年度均有记录，未使用 sample 文件。"
+  "validation_notes": "接口声明与实际去重记录均为 5111 条；日期连续覆盖基金成立附近至当前最新可获取净值，各年度均有记录，未使用 测试 文件。"
 }

@@ -1,7 +1,7 @@
 {
-  "fund_name": "易方达稳健收益债券B",
-  "fund_code": "110008",
-  "source_file": "110008-yifangda-stable-bond-b-annual-dividends.csv",
+  "fund_name": "易方达债券基金",
+  "fund_code": "未公开",
+  "source_file": "yifangda-bond-fund-annual-dividends.json",
   "records": [
     {
       "year": 2026,
