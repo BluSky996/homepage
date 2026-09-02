@@ -237,12 +237,12 @@
 
     .dataset-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
     }
 
     .data-card {
-      grid-column: span 2;
+      grid-column: auto;
       min-height: 255px;
       display: flex;
       flex-direction: column;
@@ -255,7 +255,6 @@
       text-decoration: none;
     }
 
-    .data-card:nth-last-child(-n + 2) { grid-column: span 3; }
     .data-card:hover { transform: translateY(-4px); border-color: var(--line-strong); }
 
     .card-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
@@ -375,8 +374,7 @@
       .hero { min-height: auto; grid-template-columns: 1fr; gap: 54px; padding-block: 90px 72px; }
       .hero-console { max-width: 620px; }
       .dataset-grid { grid-template-columns: repeat(2, 1fr); }
-      .data-card, .data-card:nth-last-child(-n + 2) { grid-column: auto; }
-      .data-card:last-child { grid-column: 1 / -1; }
+      .data-card { grid-column: auto; }
       .route-grid { grid-template-columns: repeat(2, 1fr); }
       .about-grid { grid-template-columns: 1fr; gap: 34px; }
       .submission-card { grid-template-columns: 1fr; }
@@ -449,7 +447,7 @@
         <p class="section-kicker">01 / Dataset Library</p>
         <div class="section-heading">
           <h2>数据资源库</h2>
-          <p class="section-intro">围绕五类真实业务场景，持续整理可用于分析、建模和实验的数据资源。</p>
+          <p class="section-intro">聚焦金融市场与环境采集两个可持续方向，沉淀用于分析、建模和实验的真实数据资源。</p>
         </div>
 
         <div class="dataset-grid">
@@ -457,36 +455,15 @@
             <div class="card-top"><span class="card-index">DATA_01</span></div>
             <span class="card-en">Financial Market</span>
             <h3>金融市场数据</h3>
-            <p>覆盖股票行情、财务指标与宏观经济变量，为量化分析和风险预测提供基础。</p>
-            <span class="future-link">OPEN CATEGORY <span>→</span></span>
-          </a>
-          <a class="data-card" href="datasets/ecommerce.html">
-            <div class="card-top"><span class="card-index">DATA_02</span><span class="status">建设中</span></div>
-            <span class="card-en">E-Commerce</span>
-            <h3>电商运营数据</h3>
-            <p>包含商品、订单、用户行为与营销转化数据，用于消费洞察和推荐实验。</p>
-            <span class="future-link">OPEN CATEGORY <span>→</span></span>
-          </a>
-          <a class="data-card" href="datasets/livestream.html">
-            <div class="card-top"><span class="card-index">DATA_03</span></div>
-            <span class="card-en">Short Video &amp; Live</span>
-            <h3>短视频直播数据</h3>
-            <p>聚焦内容表现、互动行为、直播转化和账号增长，探索内容智能分析。</p>
+            <p>围绕期货策略、A股分红、债券基金收益测算与风险管理研究，整理可用于分析、复盘与建模的金融数据资源。</p>
             <span class="future-link">OPEN CATEGORY <span>→</span></span>
           </a>
           <a class="data-card" href="datasets/environment.html">
-            <div class="card-top"><span class="card-index">DATA_04</span></div>
-            <span class="card-en">Climate &amp; Environment</span>
-            <h3>气候环境数据</h3>
-            <p>汇集气象观测、空气质量与环境变化数据，支持时序预测和可视化研究。</p>
+            <div class="card-top"><span class="card-index">DATA_02</span></div>
+            <span class="card-en">Environment Data Collection</span>
+            <h3>环境数据采集</h3>
+            <p>围绕光照、温度、湿度、空气质量等传感器数据，记录硬件采集、数据整理与可视化实验。</p>
             <span class="future-link">VIEW EXPERIMENTS <span>→</span></span>
-          </a>
-          <a class="data-card" href="datasets/industry.html">
-            <div class="card-top"><span class="card-index">DATA_05</span><span class="status">规划中</span></div>
-            <span class="card-en">Industrial Production</span>
-            <h3>工业生产数据</h3>
-            <p>面向设备运行、质量检测和能耗管理场景，服务异常检测与预测性维护。</p>
-            <span class="future-link">OPEN CATEGORY <span>→</span></span>
           </a>
         </div>
       </div>
