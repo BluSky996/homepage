@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI Data Lab 数据采集、清洗整理、数据训练与模型生成流程入口。" />
+  <meta name="theme-color" content="#050706" />
+  <title>AI 数据训练｜AI Data Lab</title>
+  <style>
+    :root{--bg:#050706;--surface:#0b0f0d;--surface-2:#101613;--line:rgba(139,255,207,.13);--line-strong:rgba(139,255,207,.28);--text:#f0f7f3;--muted:#8d9c95;--green:#6dffb3;--cyan:#47d7ff;--violet:#9c7cff;--max-width:1160px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);background:radial-gradient(circle at 82% 8%,rgba(71,215,255,.08),transparent 24rem),radial-gradient(circle at 12% 28%,rgba(109,255,179,.06),transparent 28rem),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6}body:before{position:fixed;inset:0;z-index:-1;content:"";pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(#000,transparent 85%)}a{color:inherit}.container{width:min(calc(100% - 36px),var(--max-width));margin-inline:auto}.site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(5,7,6,.8);backdrop-filter:blur(16px)}.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:inline-flex;align-items:center;gap:11px;font-size:15px;font-weight:760;letter-spacing:.08em;text-decoration:none}.brand-mark{width:11px;height:11px;border:2px solid var(--green);border-radius:3px;box-shadow:0 0 18px rgba(109,255,179,.65);transform:rotate(45deg)}.back-link{color:var(--muted);font-size:14px;text-decoration:none}.back-link:hover{color:var(--green)}
+    .hero{padding-block:100px 66px}.eyebrow,.section-kicker{display:flex;align-items:center;gap:10px;margin:0 0 20px;color:var(--green);font:12px "SFMono-Regular",Consolas,monospace;letter-spacing:.16em;text-transform:uppercase}.eyebrow:before,.section-kicker:before{width:24px;height:1px;content:"";background:currentColor}.hero h1{margin:0;font-size:clamp(48px,7vw,82px);line-height:1.06;letter-spacing:-.055em}.gradient-text{color:transparent;background:linear-gradient(110deg,var(--green),var(--cyan) 58%,var(--violet));background-clip:text;-webkit-background-clip:text}.hero-copy{max-width:760px;margin:28px 0 0;color:var(--muted);font-size:clamp(16px,2vw,19px)}
+    .workflow{padding-block:42px 100px}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:32px;margin-bottom:36px}.section-heading h2{margin:0;font-size:clamp(31px,4vw,48px);line-height:1.15;letter-spacing:-.035em}.section-intro{max-width:520px;margin:0;color:var(--muted)}.flow-line{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;padding:1px;background:var(--line)}.stage{min-height:350px;display:flex;flex-direction:column;padding:28px 24px;background:linear-gradient(145deg,rgba(16,22,19,.94),rgba(8,11,9,.98))}.stage-number{color:var(--green);font:12px Consolas,monospace;letter-spacing:.08em}.stage h3{margin:40px 0 14px;font-size:22px;line-height:1.3}.stage p{margin:0;color:var(--muted);font-size:14px}.stage-entry{margin-top:auto;padding-top:28px}.button{display:inline-flex;min-height:46px;align-items:center;justify-content:center;padding:0 17px;border:1px solid var(--line-strong);border-radius:8px;color:var(--text);background:rgba(255,255,255,.025);font-size:13px;font-weight:700;text-decoration:none;transition:180ms ease}.button:hover{transform:translateY(-2px);border-color:var(--green)}.status{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid rgba(156,124,255,.25);border-radius:999px;color:#b9a8ff;font:11px Consolas,monospace;letter-spacing:.08em}.status:before{width:5px;height:5px;border-radius:50%;content:"";background:currentColor}.boundary{margin:24px 0 0;color:#6e7c75;font-size:12px}.footer{padding-block:30px;border-top:1px solid var(--line);color:#6e7c75;font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:24px}
+    @media(max-width:900px){.flow-line{grid-template-columns:repeat(2,1fr)}.stage{min-height:300px}}@media(max-width:680px){.nav{min-height:64px}.hero{padding-block:74px 48px}.hero h1{font-size:clamp(42px,14vw,62px)}.workflow{padding-bottom:70px}.section-heading{display:block}.section-intro{margin-top:18px}.flow-line{grid-template-columns:1fr}.stage{min-height:260px}.footer-inner{flex-direction:column;gap:6px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="页面导航">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>AI DATA LAB</a>
+      <a class="back-link" href="index.html">返回首页</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero container">
+      <p class="eyebrow">AI Data Training</p>
+      <h1>AI <span class="gradient-text">数据训练</span></h1>
+      <p class="hero-copy">从数据采集、上传、清洗整理，到训练处理与模型生成，整理 AI 数据训练的完整流程入口。</p>
+    </section>
+    <section class="workflow container" aria-labelledby="workflow-title">
+      <p class="section-kicker">01 / Training Workflow</p>
+      <div class="section-heading">
+        <h2 id="workflow-title">完整流程</h2>
+        <p class="section-intro">从真实原始数据开始，逐步形成可用于 AI 任务的数据和模型结果。</p>
+      </div>
+      <div class="flow-line">
+        <article class="stage">
+          <span class="stage-number">01 / DATA COLLECTION</span>
+          <h3>数据采集 / 数据上传</h3>
+          <p>从传感器、网页、文件或人工方式获取原始数据，形成后续清洗和训练的基础。</p>
+          <div class="stage-entry"><a class="button" href="datasets/environment.html">查看环境数据采集 →</a></div>
+        </article>
+        <article class="stage">
+          <span class="stage-number">02 / DATA CLEANING</span>
+          <h3>数据清洗整理</h3>
+          <p>对采集或上传的数据进行去重、格式统一、字段整理、异常检查和结构化处理。</p>
+          <div class="stage-entry"><a class="button" href="submit-data.html">进入数据清洗整理 →</a></div>
+        </article>
+        <article class="stage">
+          <span class="stage-number">03 / DATA TRAINING</span>
+          <h3>数据训练</h3>
+          <p>将清洗后的数据用于训练、微调、标注质量验证或模型输入准备。</p>
+          <div class="stage-entry"><span class="status">COMING SOON / 建设中</span></div>
+        </article>
+        <article class="stage">
+          <span class="stage-number">04 / MODEL GENERATION</span>
+          <h3>模型生成</h3>
+          <p>基于训练数据和任务目标，形成可测试、可部署或可继续优化的模型结果。</p>
+          <div class="stage-entry"><span class="status">COMING SOON / 建设中</span></div>
+        </article>
+      </div>
+      <p class="boundary">数据训练与模型生成目前为流程框架，相关功能尚在建设中。</p>
+    </section>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>DATA · TRAINING · MODEL</span></div></footer>
+</body>
+</html>

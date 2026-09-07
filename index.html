@@ -237,7 +237,7 @@
 
     .dataset-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       gap: 14px;
     }
 
@@ -351,6 +351,38 @@
     .submission-step p { margin: 5px 0 0; color: #718078; font-size: 11px; line-height: 1.55; }
     .submission-action { width: 100%; }
 
+    .training-flow {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .training-node {
+      position: relative;
+      min-height: 112px;
+      padding: 15px 14px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: rgba(7, 11, 9, .82);
+    }
+
+    .training-node::before {
+      position: absolute;
+      top: 20px;
+      right: -9px;
+      z-index: 2;
+      content: "→";
+      color: var(--green);
+      font: 14px Consolas, monospace;
+      text-shadow: 0 0 12px rgba(109, 255, 179, .6);
+    }
+
+    .training-node:nth-child(3)::before,
+    .training-node:last-child::before { content: none; }
+    .training-node span { display: block; color: var(--green); font: 11px Consolas, monospace; letter-spacing: .08em; }
+    .training-node strong { display: block; margin-top: 8px; font-size: 14px; }
+    .training-node p { margin: 5px 0 0; color: #718078; font-size: 11px; line-height: 1.5; }
+
     .route-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
     .route-item { min-height: 280px; padding: 30px 24px; background: var(--surface); }
     .route-item strong { display: block; margin-bottom: 45px; color: var(--green); font-family: Consolas, monospace; font-size: 12px; }
@@ -373,7 +405,7 @@
     @media (max-width: 900px) {
       .hero { min-height: auto; grid-template-columns: 1fr; gap: 54px; padding-block: 90px 72px; }
       .hero-console { max-width: 620px; }
-      .dataset-grid { grid-template-columns: repeat(2, 1fr); }
+      .dataset-grid { grid-template-columns: 1fr; }
       .data-card { grid-column: auto; }
       .route-grid { grid-template-columns: repeat(2, 1fr); }
       .about-grid { grid-template-columns: 1fr; gap: 34px; }
@@ -391,6 +423,17 @@
       .section-heading { display: block; }
       .section-intro { margin-top: 18px; }
       .dataset-grid, .route-grid, .principles { grid-template-columns: 1fr; }
+      .training-flow { grid-template-columns: 1fr; }
+      .training-node { min-height: auto; }
+      .training-node::before,
+      .training-node:nth-child(3)::before {
+        top: auto;
+        right: auto;
+        bottom: -10px;
+        left: 18px;
+        content: "↓";
+      }
+      .training-node:last-child::before { content: none; }
       .data-card:last-child { grid-column: auto; }
       .route-item { min-height: 230px; }
       .footer-inner { flex-direction: column; gap: 6px; }
@@ -409,7 +452,7 @@
       <div class="nav-links">
         <a href="#datasets">数据资源</a>
         <a href="#ai-agents">AI 应用</a>
-        <a href="submit-data.html">数据清洗整理</a>
+        <a href="ai-data-training.html">AI 数据训练</a>
       </div>
     </nav>
   </header>
@@ -423,7 +466,7 @@
         <div class="hero-actions">
           <a class="button primary" href="#datasets">浏览数据资源</a>
           <a class="button primary" href="#ai-agents">探索 AI Agent</a>
-          <a class="button primary" href="submit-data.html">数据清洗整理</a>
+          <a class="button primary" href="ai-data-training.html">AI 数据训练</a>
         </div>
       </div>
 
@@ -447,7 +490,7 @@
         <p class="section-kicker">01 / Dataset Library</p>
         <div class="section-heading">
           <h2>数据资源库</h2>
-          <p class="section-intro">聚焦金融市场与环境采集两个可持续方向，沉淀用于分析、建模和实验的真实数据资源。</p>
+          <p class="section-intro">聚焦金融市场数据，沉淀可用于分析、建模和复盘的真实数据资源。</p>
         </div>
 
         <div class="dataset-grid">
@@ -457,13 +500,6 @@
             <h3>金融市场数据</h3>
             <p>围绕期货策略、A股分红、债券基金收益测算与风险管理研究，整理可用于分析、复盘与建模的金融数据资源。</p>
             <span class="future-link">OPEN CATEGORY <span>→</span></span>
-          </a>
-          <a class="data-card" href="datasets/environment.html">
-            <div class="card-top"><span class="card-index">DATA_02</span></div>
-            <span class="card-en">Environment Data Collection</span>
-            <h3>环境数据采集</h3>
-            <p>围绕光照、温度、湿度、空气质量等传感器数据，记录硬件采集、数据整理与可视化实验。</p>
-            <span class="future-link">VIEW EXPERIMENTS <span>→</span></span>
           </a>
         </div>
       </div>
@@ -498,20 +534,23 @@
       </div>
     </section>
 
-    <section id="data-submission">
-      <a class="container submission-card" href="submit-data.html" aria-label="进入数据清洗整理页面">
+    <section id="data-training">
+      <a class="container submission-card" href="ai-data-training.html" aria-label="进入 AI 数据训练流程">
         <div class="submission-copy">
-          <p class="section-kicker">03 / Data Cleaning</p>
-          <h2>数据清洗整理</h2>
-          <p>数据杂乱、格式不统一，或内容需要分类和标注？上传文件，帮助您完成清洗、整理、分类、标注和格式转换，把难处理的数据整理成更容易使用的结果。</p>
+          <p class="section-kicker">03 / AI Data Training</p>
+          <h2>AI 数据训练</h2>
+          <p>从数据采集、上传、清洗整理、数据标注，到训练处理与模型生成，形成一条完整的 AI 数据训练流程。</p>
         </div>
         <div class="submission-side">
-          <div class="submission-steps" aria-label="数据清洗整理步骤">
-            <div class="submission-step"><span>01 FILE UPLOAD</span><strong>上传待整理文件</strong><p>支持 Excel / CSV / Word / PDF 等常见文件，包括表格、文字、图片混合内容。</p></div>
-            <div class="submission-step"><span>02 CLEANING NEED</span><strong>说明整理要求</strong><p>简单说明需要清洗、分类、标注、格式转换，或者希望整理成什么样的结果。</p></div>
-            <div class="submission-step"><span>03 CLEAN RESULT</span><strong>整理为可用数据</strong><p>清理杂乱内容、统一格式、整理分类，形成便于后续继续使用的数据。</p></div>
+          <div class="training-flow" aria-label="AI 数据训练六阶段流程">
+            <div class="training-node"><span>01</span><strong>数据采集</strong><p>传感器、网页、文件与人工数据来源</p></div>
+            <div class="training-node"><span>02</span><strong>数据上传</strong><p>将原始数据汇入训练流程</p></div>
+            <div class="training-node"><span>03</span><strong>清洗整理</strong><p>去重、格式统一、字段整理与异常检查</p></div>
+            <div class="training-node"><span>04</span><strong>数据标注</strong><p>分类、框选、文本或动作标注</p></div>
+            <div class="training-node"><span>05</span><strong>数据训练</strong><p>用于训练或微调准备</p></div>
+            <div class="training-node"><span>06</span><strong>模型生成</strong><p>形成可测试、部署或继续优化的模型结果</p></div>
           </div>
-          <span class="button primary submission-action">清理数据&nbsp;&nbsp; CLEAN DATA</span>
+          <span class="button primary submission-action">进入完整流程 →</span>
         </div>
       </a>
     </section>
