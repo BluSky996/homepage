@@ -353,45 +353,40 @@
     }
     .submission-copy h2 { margin-bottom: 16px; }
     .submission-copy > p:not(.section-kicker) { max-width: 650px; margin: 0; color: var(--muted); }
-    .submission-side { display: grid; gap: 22px; }
+    .submission-copy .submission-action { width: auto; margin-top: 26px; }
+    .submission-side { display: grid; place-items: center; min-height: 250px; }
     .submission-steps { display: grid; gap: 1px; border: 1px solid var(--line); background: var(--line); }
     .submission-step { min-height: 92px; padding: 14px; background: rgba(7, 11, 9, .96); }
     .submission-step span { display: block; color: var(--green); font: 11px Consolas, monospace; letter-spacing: .06em; }
     .submission-step strong { display: block; margin-top: 7px; font-size: 13px; font-weight: 650; }
     .submission-step p { margin: 5px 0 0; color: #718078; font-size: 11px; line-height: 1.55; }
-    .submission-action { width: 100%; }
-
-    .training-flow {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .training-node {
+    .training-visual {
       position: relative;
-      min-height: 112px;
-      padding: 15px 14px;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      background: rgba(7, 11, 9, .82);
-    }
-
-    .training-node::before {
-      position: absolute;
-      top: 20px;
-      right: -9px;
-      z-index: 2;
-      content: "→";
+      width: min(100%, 390px);
+      aspect-ratio: 1.45;
       color: var(--green);
-      font: 14px Consolas, monospace;
-      text-shadow: 0 0 12px rgba(109, 255, 179, .6);
+      pointer-events: none;
+      filter: drop-shadow(0 0 13px rgba(109, 255, 179, .2));
     }
-
-    .training-node:nth-child(3)::before,
-    .training-node:last-child::before { content: none; }
-    .training-node span { display: block; color: var(--green); font: 11px Consolas, monospace; letter-spacing: .08em; }
-    .training-node strong { display: block; margin-top: 8px; font-size: 14px; }
-    .training-node p { margin: 5px 0 0; color: #718078; font-size: 11px; line-height: 1.5; }
+    .training-visual::before {
+      position: absolute;
+      inset: 14% 11%;
+      content: "";
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(109, 255, 179, .11), rgba(88, 217, 255, .04) 42%, transparent 70%);
+      animation: training-breathe 4.5s ease-in-out infinite;
+    }
+    .training-visual svg { position: relative; width: 100%; height: 100%; overflow: visible; }
+    .training-core { transform-origin: 210px 135px; animation: training-core-pulse 3.8s ease-in-out infinite; }
+    .training-stream { stroke-dasharray: 7 11; animation: training-stream 5s linear infinite; }
+    .training-stream.reverse { animation-direction: reverse; animation-duration: 6s; }
+    .training-node-dot { animation: training-dot 3s ease-in-out infinite; }
+    .training-node-dot.delay-1 { animation-delay: -.8s; }
+    .training-node-dot.delay-2 { animation-delay: -1.6s; }
+    @keyframes training-stream { to { stroke-dashoffset: -72; } }
+    @keyframes training-breathe { 50% { opacity: .68; transform: scale(1.05); } }
+    @keyframes training-core-pulse { 50% { filter: drop-shadow(0 0 9px rgba(109,255,179,.55)); } }
+    @keyframes training-dot { 50% { opacity: .45; } }
 
     .route-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
     .route-item { min-height: 280px; padding: 30px 24px; background: var(--surface); }
@@ -435,17 +430,8 @@
       .section-heading { display: block; }
       .section-intro { margin-top: 18px; }
       .dataset-grid, .route-grid, .principles { grid-template-columns: 1fr; }
-      .training-flow { grid-template-columns: 1fr; }
-      .training-node { min-height: auto; }
-      .training-node::before,
-      .training-node:nth-child(3)::before {
-        top: auto;
-        right: auto;
-        bottom: -10px;
-        left: 18px;
-        content: "↓";
-      }
-      .training-node:last-child::before { content: none; }
+      .submission-side { min-height: 210px; }
+      .training-visual { width: min(100%, 330px); }
       .data-card:last-child { grid-column: auto; }
       .market-card-copy { max-width: none; }
       .compass-decoration { display: none; }
@@ -458,6 +444,7 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; }
       .compass-needle { animation: none; }
+      .training-visual::before, .training-core, .training-stream, .training-node-dot { animation: none; }
     }
   </style>
 </head>
@@ -574,18 +561,32 @@
         <div class="submission-copy">
           <p class="section-kicker">03 / AI Data Training</p>
           <h2>AI 数据训练</h2>
-          <p>从数据采集、上传、清洗整理、数据标注，到训练处理与模型生成，形成一条完整的 AI 数据训练流程。</p>
+          <p>围绕真实数据的采集、上传、清洗整理、标注、训练与模型生成，构建完整的 AI 数据训练流程入口。</p>
+          <span class="button primary submission-action">进入完整流程 →</span>
         </div>
         <div class="submission-side">
-          <div class="training-flow" aria-label="AI 数据训练六阶段流程">
-            <div class="training-node"><span>01</span><strong>数据采集</strong><p>传感器、网页、文件与人工数据来源</p></div>
-            <div class="training-node"><span>02</span><strong>数据上传</strong><p>将原始数据汇入训练流程</p></div>
-            <div class="training-node"><span>03</span><strong>清洗整理</strong><p>去重、格式统一、字段整理与异常检查</p></div>
-            <div class="training-node"><span>04</span><strong>数据标注</strong><p>分类、框选、文本或动作标注</p></div>
-            <div class="training-node"><span>05</span><strong>数据训练</strong><p>用于训练或微调准备</p></div>
-            <div class="training-node"><span>06</span><strong>模型生成</strong><p>形成可测试、部署或继续优化的模型结果</p></div>
+          <div class="training-visual" aria-hidden="true">
+            <svg viewBox="0 0 420 270" fill="none">
+              <defs>
+                <linearGradient id="training-line" x1="50" y1="35" x2="370" y2="235" gradientUnits="userSpaceOnUse"><stop stop-color="#58f7ff"/><stop offset=".52" stop-color="#6bffbd"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+                <linearGradient id="training-chip" x1="162" y1="87" x2="258" y2="183" gradientUnits="userSpaceOnUse"><stop stop-color="#10261f"/><stop offset="1" stop-color="#07100d"/></linearGradient>
+              </defs>
+              <g opacity=".2" stroke="#6bffbd" stroke-width="1"><circle cx="210" cy="135" r="112"/><circle cx="210" cy="135" r="92" stroke-dasharray="3 8"/><path d="M210 13v24M210 233v24M88 135H64M356 135h-24"/></g>
+              <g stroke="url(#training-line)" stroke-width="1.7" stroke-linecap="round">
+                <path class="training-stream" d="M42 55h58l35 35h39"/><path class="training-stream reverse" d="M42 135h132"/><path class="training-stream" d="M42 215h58l35-35h39"/>
+                <path class="training-stream reverse" d="M246 90h40l34-35h58"/><path class="training-stream" d="M246 135h132"/><path class="training-stream reverse" d="M246 180h40l34 35h58"/>
+              </g>
+              <g fill="#09130f" stroke="#58f7ff" stroke-width="1.5"><circle class="training-node-dot" cx="42" cy="55" r="5"/><circle class="training-node-dot delay-1" cx="42" cy="135" r="5"/><circle class="training-node-dot delay-2" cx="42" cy="215" r="5"/></g>
+              <g fill="#09130f" stroke="#a78bfa" stroke-width="1.5"><circle class="training-node-dot delay-2" cx="378" cy="55" r="5"/><circle class="training-node-dot" cx="378" cy="135" r="5"/><circle class="training-node-dot delay-1" cx="378" cy="215" r="5"/></g>
+              <g class="training-core">
+                <rect x="162" y="87" width="96" height="96" rx="19" fill="url(#training-chip)" stroke="#6bffbd" stroke-width="2"/>
+                <rect x="178" y="103" width="64" height="64" rx="13" stroke="#58f7ff" stroke-opacity=".55"/>
+                <path d="M188 142c9-20 18-20 27 0s18 20 27 0M190 123h9m22 24h10" stroke="#9affdd" stroke-width="2.2" stroke-linecap="round"/>
+                <circle cx="188" cy="142" r="3.5" fill="#58f7ff"/><circle cx="215" cy="142" r="3.5" fill="#6bffbd"/><circle cx="242" cy="142" r="3.5" fill="#a78bfa"/>
+                <path d="M178 112h-12m12 18h-12m12 18h-12m12 18h-12M242 112h12m-12 18h12m-12 18h12m-12 18h12" stroke="#6bffbd" stroke-opacity=".65"/>
+              </g>
+            </svg>
           </div>
-          <span class="button primary submission-action">进入完整流程 →</span>
         </div>
       </a>
     </section>
