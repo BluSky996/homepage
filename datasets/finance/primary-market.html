@@ -6,19 +6,146 @@
   <meta name="description" content="AI Data Lab 金融一级市场数据框架。">
   <title>金融一级市场｜AI Data Lab</title>
   <style>
-    :root{--bg:#050706;--panel:#0b100d;--text:#eef8f2;--muted:#8d9c95;--green:#6dffb3;--cyan:#47d7ff;--gold:#ffd66b;--line:rgba(139,255,207,.14);--strong:rgba(139,255,207,.3);--max:1160px}*{box-sizing:border-box}body{margin:0;color:var(--text);background:radial-gradient(circle at 82% 5%,rgba(71,215,255,.08),transparent 28rem),radial-gradient(circle at 10% 35%,rgba(109,255,179,.06),transparent 32rem),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65}body:before{position:fixed;inset:0;z-index:-1;content:"";pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(#000,transparent 90%)}a{color:inherit}.container{width:min(calc(100% - 36px),var(--max));margin-inline:auto}.header{position:sticky;top:0;z-index:10;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(5,7,6,.82);backdrop-filter:blur(16px)}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:11px;font-weight:780;letter-spacing:.08em;text-decoration:none}.mark{width:11px;height:11px;border:2px solid var(--green);border-radius:3px;box-shadow:0 0 16px var(--green);transform:rotate(45deg)}.navlinks{display:flex;gap:22px;color:var(--muted);font-size:14px}.navlinks a{text-decoration:none}.preview-badge{padding:5px 10px;border:1px solid rgba(255,214,107,.3);border-radius:999px;color:var(--gold);font:11px Consolas,monospace}.page-head{padding-block:100px 58px;text-align:center}.crumbs{margin-bottom:32px;color:var(--muted);font-size:13px}.kicker{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 18px;color:var(--green);font:12px Consolas,monospace;letter-spacing:.15em;text-transform:uppercase}.kicker:before{width:24px;height:1px;content:"";background:currentColor}.page-head h1{margin:0;font-size:clamp(42px,6.4vw,76px);line-height:1.08;letter-spacing:-.05em}.gradient{color:transparent;background:linear-gradient(110deg,var(--green),var(--cyan));background-clip:text;-webkit-background-clip:text}.lead{max-width:850px;margin:26px auto 0;color:var(--muted);font-size:17px}.framework{padding-block:38px 100px}.framework-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{min-height:260px;padding:26px;border:1px dashed rgba(139,255,207,.18);border-radius:14px;background:rgba(11,16,13,.62)}.status{display:inline-flex;align-items:center;gap:7px;margin-bottom:30px;padding:5px 9px;border:1px solid rgba(255,214,107,.22);border-radius:999px;color:var(--gold);font:10px Consolas,monospace;letter-spacing:.08em}.status:before{width:5px;height:5px;border-radius:50%;content:"";background:currentColor}.card h2{margin:0 0 14px;font-size:22px}.card p{margin:0;color:var(--muted);font-size:14px}.boundary{margin:28px 0 0;color:#68776f;font-size:12px;text-align:center}.footer{padding-block:28px;border-top:1px solid var(--line);color:#6f7d76;font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:20px}@media(max-width:800px){.framework-grid{grid-template-columns:1fr}.card{min-height:auto}.navlinks{display:none}.page-head{padding-block:74px 44px}.footer-inner{flex-direction:column}}
+    :root{--bg:#050706;--panel:#0b100d;--text:#eef8f2;--muted:#8d9c95;--green:#6dffb3;--cyan:#47d7ff;--gold:#ffd66b;--line:rgba(139,255,207,.14);--strong:rgba(139,255,207,.3);--max:1160px}*{box-sizing:border-box}body{margin:0;color:var(--text);background:radial-gradient(circle at 82% 5%,rgba(71,215,255,.08),transparent 28rem),radial-gradient(circle at 10% 35%,rgba(109,255,179,.06),transparent 32rem),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65}body:before{position:fixed;inset:0;z-index:-1;content:"";pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(#000,transparent 90%)}a{color:inherit}.container{width:min(calc(100% - 36px),var(--max));margin-inline:auto}.header{position:sticky;top:0;z-index:10;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(5,7,6,.82);backdrop-filter:blur(16px)}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:11px;font-weight:780;letter-spacing:.08em;text-decoration:none}.mark{width:11px;height:11px;border:2px solid var(--green);border-radius:3px;box-shadow:0 0 16px var(--green);transform:rotate(45deg)}.navlinks{display:flex;gap:22px;color:var(--muted);font-size:14px}.navlinks a{text-decoration:none}.preview-badge,.status{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border:1px solid rgba(255,214,107,.28);border-radius:999px;color:var(--gold);font:10px Consolas,monospace;letter-spacing:.08em}.status:before{width:5px;height:5px;border-radius:50%;content:"";background:currentColor}.page-head{padding-block:100px 58px;text-align:center}.crumbs{margin-bottom:32px;color:var(--muted);font-size:13px}.kicker{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 18px;color:var(--green);font:12px Consolas,monospace;letter-spacing:.15em;text-transform:uppercase}.kicker:before{width:24px;height:1px;content:"";background:currentColor}.page-head h1{margin:0;font-size:clamp(42px,6.4vw,76px);line-height:1.08;letter-spacing:-.05em}.gradient{color:transparent;background:linear-gradient(110deg,var(--green),var(--cyan));background-clip:text;-webkit-background-clip:text}.lead{max-width:900px;margin:26px auto 0;color:var(--muted);font-size:17px}.framework{padding-block:30px 100px}.market-panel{padding:clamp(24px,4vw,42px);border:1px solid var(--strong);border-radius:20px;background:linear-gradient(135deg,rgba(13,23,18,.92),rgba(7,11,9,.86));box-shadow:0 24px 70px rgba(0,0,0,.22)}.market-head{display:flex;justify-content:space-between;gap:28px;align-items:flex-start;margin-bottom:30px}.eyebrow{margin:0 0 8px;color:var(--cyan);font:11px Consolas,monospace;letter-spacing:.13em;text-transform:uppercase}.market-head h2{margin:0 0 12px;font-size:clamp(28px,4vw,42px)}.market-head p{max-width:780px;margin:0;color:var(--muted)}.framework-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{display:flex;min-height:270px;padding:25px;border:1px solid var(--line);border-radius:14px;background:rgba(5,10,8,.68);text-decoration:none;transition:.2s ease}.card:hover,.card:focus-visible{transform:translateY(-3px);border-color:rgba(109,255,179,.52);background:rgba(10,19,14,.9);outline:none}.card-body{display:flex;flex-direction:column;width:100%}.card-label{color:var(--green);font:10px Consolas,monospace;letter-spacing:.12em}.card h3{margin:22px 0 12px;font-size:21px}.card p{margin:0;color:var(--muted);font-size:14px}.card-action{margin-top:auto;padding-top:24px;color:var(--green);font-size:13px;font-weight:700}.card:nth-child(2) .card-label,.card:nth-child(2) .card-action{color:var(--cyan)}.card:nth-child(3) .card-label,.card:nth-child(3) .card-action{color:var(--gold)}.boundary{margin:26px 0 0;color:#68776f;font-size:12px;text-align:center}.footer{padding-block:28px;border-top:1px solid var(--line);color:#6f7d76;font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:20px}@media(max-width:800px){.market-head{display:block}.market-head .status{margin-top:18px}.framework-grid{grid-template-columns:1fr}.card{min-height:auto}.navlinks{display:none}.page-head{padding-block:74px 44px}.footer-inner{flex-direction:column}}
+    .market-panel{padding:0;border:0;background:none;box-shadow:none;overflow:visible}
+    .market-summary{display:block;width:min(100%,720px);margin-inline:auto;padding:clamp(25px,4vw,36px);cursor:pointer;list-style:none;text-align:center;border:1px solid var(--strong);border-radius:18px;background:linear-gradient(135deg,rgba(14,26,20,.96),rgba(7,13,10,.94));box-shadow:0 18px 52px rgba(0,0,0,.26),0 0 28px rgba(109,255,179,.055);transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+    .market-summary::-webkit-details-marker{display:none}
+    .market-summary:hover,.market-summary:focus-visible{transform:translateY(-2px);border-color:rgba(109,255,179,.58);box-shadow:0 20px 56px rgba(0,0,0,.3),0 0 34px rgba(109,255,179,.1);outline:none}
+    .market-head{display:block;margin:0}.market-head h2{margin:0 0 10px;font-size:clamp(27px,4vw,38px)}.market-head p{max-width:620px;margin-inline:auto;font-size:14px}
+    .market-summary-side{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:20px}
+    .expand-label{display:grid;place-items:center;width:32px;height:32px;border:1px solid rgba(109,255,179,.5);border-radius:50%;color:var(--green);background:rgba(109,255,179,.06);box-shadow:0 0 18px rgba(109,255,179,.12);font:20px/1 Consolas,monospace}
+    .expand-label:after{content:"+"}.market-panel[open] .expand-label:after{content:"−"}
+    .submodule-shell{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .3s ease,opacity .24s ease}
+    .market-panel[open] .submodule-shell{grid-template-rows:1fr;opacity:1}
+    .submodule-inner{min-height:0;overflow:hidden}
+    .framework-grid{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,38px);padding:66px clamp(12px,3vw,30px) 8px}
+    .framework-grid:before{position:absolute;top:30px;left:16.666%;right:16.666%;height:1px;content:"";background:linear-gradient(90deg,rgba(109,255,179,.26),rgba(71,215,255,.7),rgba(109,255,179,.26));box-shadow:0 0 9px rgba(109,255,179,.25)}
+    .framework-grid:after{position:absolute;top:0;left:50%;width:1px;height:31px;content:"";background:var(--green);box-shadow:0 0 9px rgba(109,255,179,.35)}
+    .card{position:relative;display:block;min-height:0;padding:20px 18px;text-align:center;border:1px solid rgba(139,255,207,.2);border-radius:10px;background:rgba(7,13,10,.82);box-shadow:0 10px 30px rgba(0,0,0,.2)}
+    .card:before{position:absolute;left:50%;bottom:100%;width:1px;height:36px;content:"";background:rgba(109,255,179,.58);box-shadow:0 0 7px rgba(109,255,179,.23)}
+    .card:hover,.card:focus-visible{transform:translateY(-2px)}
+    .card h3{margin:7px 0 6px;font-size:18px}.card-label{font-size:10px}.node-description{margin:0;color:#c2cec8;font-size:12px;line-height:1.55}.card-action{display:block;margin-top:12px;padding:0;font-size:12px}
+    .theory-node{width:100%;color:inherit;font:inherit;cursor:pointer}.theory-node .card-action:after{content:" +"}.theory-node[aria-expanded="true"] .card-action:before{content:"收起目录"}.theory-node[aria-expanded="true"] .card-action{font-size:0}.theory-node[aria-expanded="true"] .card-action:after{content:" −";font-size:12px}.theory-node[aria-expanded="true"] .card-action:before{font-size:12px}
+    .theory-directory{display:grid;grid-template-rows:0fr;opacity:0;width:min(100%,620px);margin:0 auto;transition:grid-template-rows .3s ease,opacity .24s ease}
+    .theory-directory.is-open{grid-template-rows:1fr;opacity:1}
+    .directory-inner{position:relative;min-height:0;overflow:hidden;padding:0 10px 0 42px}
+    .theory-directory.is-open .directory-inner{padding-top:48px}
+    .directory-inner:before{position:absolute;top:0;left:20px;width:1px;height:100%;content:"";background:linear-gradient(var(--green),rgba(71,215,255,.35));box-shadow:0 0 8px rgba(109,255,179,.25)}
+    .directory-list{display:grid;gap:10px}
+    .directory-item{--directory-accent:var(--green);position:relative;display:grid;grid-template-columns:56px 1fr;align-items:center;gap:14px;width:100%;min-height:74px;padding:12px 18px;color:inherit;font:inherit;text-align:left;cursor:pointer;border:1px solid color-mix(in srgb,var(--directory-accent) 25%,transparent);border-radius:9px;background:rgba(6,12,9,.9);text-decoration:none;opacity:0;transform:translateY(-8px);transition:opacity .22s ease,transform .22s ease,border-color .2s ease}
+    .theory-directory.is-open .directory-item{opacity:1;transform:none}.theory-directory.is-open .directory-item:nth-child(2){transition-delay:.05s}.theory-directory.is-open .directory-item:nth-child(3){transition-delay:.1s}.theory-directory.is-open .directory-item:nth-child(4){transition-delay:.15s}
+    .directory-item:nth-child(2){--directory-accent:#47d7ff}.directory-item:nth-child(3){--directory-accent:#75e6c3}.directory-item:nth-child(4){--directory-accent:#ffd66b}.directory-item:before{position:absolute;right:100%;top:50%;width:22px;height:1px;content:"";background:var(--directory-accent)}.directory-item:hover,.directory-item:focus-visible{border-color:color-mix(in srgb,var(--directory-accent) 65%,transparent);transform:translateX(3px);outline:none}.directory-number{color:var(--directory-accent);font:700 25px Consolas,monospace}.directory-copy strong{display:block;font-size:15px}.directory-copy span{display:block;margin-top:2px;color:#b9c7c0;font-size:12px}
+    .document-viewer{width:min(1060px,calc(100% - 32px));max-height:calc(100vh - 32px);padding:0;color:var(--text);border:1px solid rgba(109,255,179,.34);border-radius:16px;background:#080d0a;box-shadow:0 34px 100px rgba(0,0,0,.7),0 0 38px rgba(109,255,179,.1);overflow:hidden}.document-viewer::backdrop{background:rgba(1,5,3,.82);backdrop-filter:blur(8px)}.viewer-shell{display:grid;grid-template-rows:auto minmax(300px,1fr) auto;max-height:calc(100vh - 34px)}.viewer-header{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding:20px 24px;border-bottom:1px solid var(--line);background:rgba(13,22,17,.92)}.viewer-kicker{display:block;margin-bottom:4px;color:var(--green);font:10px Consolas,monospace;letter-spacing:.12em}.viewer-header h2{margin:0;font-size:22px}.viewer-subtitle{margin:4px 0 0;color:#b9c7c0;font-size:13px}.viewer-close{display:grid;place-items:center;width:36px;height:36px;flex:none;color:#c7d5ce;font-size:25px;cursor:pointer;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.025)}.viewer-close:hover{color:var(--green);border-color:rgba(109,255,179,.5)}.viewer-stage{position:relative;display:grid;place-items:center;min-height:480px;padding:60px 116px;background:radial-gradient(circle at 50% 42%,rgba(109,255,179,.055),transparent 48%),#050806}.viewer-image{display:block;width:min(100%,960px);height:auto;aspect-ratio:16/9;object-fit:contain;border:1px solid rgba(109,255,179,.18);box-shadow:0 14px 46px rgba(0,0,0,.45),0 0 24px rgba(109,255,179,.08)}.viewer-image[hidden]{display:none}.viewer-placeholder{max-width:540px;text-align:center;color:#c6d3cc}.viewer-placeholder strong{display:block;margin-bottom:10px;font-size:20px}.viewer-placeholder span{color:var(--muted);font-size:13px}.viewer-nav{position:absolute;top:50%;min-width:98px;padding:10px 13px;color:#c6d3cc;font-size:12px;cursor:pointer;border:1px solid var(--line);border-radius:999px;background:rgba(8,15,11,.86);transform:translateY(-50%)}.viewer-nav:hover:not(:disabled){color:var(--green);border-color:rgba(109,255,179,.5)}.viewer-nav:disabled{cursor:not-allowed;opacity:.32}.viewer-prev{left:18px}.viewer-next{right:18px}.viewer-footer{display:flex;align-items:center;justify-content:center;min-height:52px;padding:10px 24px;border-top:1px solid var(--line);color:var(--muted);font:12px Consolas,monospace;background:rgba(10,16,12,.92)}
+    @media(max-width:800px){.market-summary{width:100%}.market-summary-side{margin-top:18px}.framework-grid{grid-template-columns:1fr;gap:16px;padding:50px 18px 6px 52px}.framework-grid:before{top:24px;bottom:26px;left:27px;right:auto;width:1px;height:auto;background:linear-gradient(rgba(109,255,179,.7),rgba(71,215,255,.35))}.framework-grid:after{top:0;left:27px;height:25px}.card:before{right:100%;left:auto;bottom:auto;top:50%;width:25px;height:1px}.card{text-align:left}.card-action{margin-top:8px}.theory-directory{margin-left:0}.directory-inner{padding-left:52px}.directory-inner:before{left:27px}.directory-item{grid-template-columns:42px 1fr}.viewer-stage{min-height:430px;padding:42px 18px 92px}.viewer-nav{top:auto;bottom:22px;transform:none}.viewer-prev{left:18px}.viewer-next{right:18px}.viewer-header{padding:17px 18px}}
+    @media(prefers-reduced-motion:reduce){.submodule-shell{transition:none}}
   </style>
 </head>
 <body>
   <header class="header"><nav class="nav container"><a class="brand" href="../../index.html"><span class="mark"></span>AI DATA LAB</a><div class="navlinks"><a href="index.html">返回金融市场数据</a><a href="../../index.html">首页</a></div><span class="preview-badge">PRIMARY</span></nav></header>
   <main>
-    <section class="page-head container"><div class="crumbs">AI Data Lab / Financial Data / Primary Market</div><p class="kicker">Primary Financial Market</p><h1><span class="gradient">金融一级市场</span></h1><p class="lead">围绕股权投资、企业融资、项目估值、商业尽调及非公开交易场景，逐步建立用于项目判断、风险识别与投资研究的数据框架。</p></section>
-    <section class="framework container" aria-label="一级市场数据建设框架"><div class="framework-grid">
-      <article class="card"><span class="status">COMING SOON / 建设中</span><h2>股权投资市场</h2><p>记录企业融资、股权投资、估值变化与项目阶段信息，用于观察一级市场项目流动。</p></article>
-      <article class="card"><span class="status">COMING SOON / 建设中</span><h2>企业融资数据</h2><p>整理融资轮次、投资机构、融资金额、行业赛道与时间线等信息，用于项目研究和行业观察。</p></article>
-      <article class="card"><span class="status">COMING SOON / 建设中</span><h2>项目尽调资料</h2><p>围绕商业模式、团队背景、财务指标、合规风险与增长数据，建立项目尽调资料框架。</p></article>
-    </div><p class="boundary">当前页面仅展示建设框架，尚未开放数据查询功能。</p></section>
+    <section class="page-head container"><div class="crumbs">AI Data Lab / Financial Data / Primary Market</div><p class="kicker">Primary Financial Market</p><h1><span class="gradient">金融一级市场</span></h1><p class="lead">围绕股权投资、企业融资、项目估值、商业尽调与非公开交易场景，逐步建立股权投融资市场的学习、案例与模板资料库。</p></section>
+    <section class="framework container" aria-label="股权投融资市场资料入口">
+      <details class="market-panel">
+        <summary class="market-summary">
+          <div class="market-head"><p class="eyebrow">EQUITY FINANCING MARKET</p><h2>股权投融资市场</h2><p>围绕企业股权融资、股权投资判断、项目估值、商业尽调与投融资文件整理，建立面向一级市场学习与实操的资料入口。</p></div>
+          <div class="market-summary-side"><span class="status">COMING SOON / 建设中</span><span class="expand-label" aria-hidden="true"></span></div>
+        </summary>
+        <div class="submodule-shell"><div class="submodule-inner"><div class="framework-grid">
+          <button class="card theory-node" type="button" aria-expanded="false" aria-controls="theory-directory"><span class="card-body"><span class="card-label">实操手册</span><h3>理论原则</h3><span class="node-description">整理股权投资、企业融资、估值判断、投资条款与风险识别等基础方法。</span><span class="card-action">展开目录</span></span></button>
+          <a class="card" href="equity-financing-cases.html"><div class="card-body"><span class="card-label">案例库</span><h3>真实案例</h3><p class="node-description">记录亲身经历或脱敏整理的股权投融资案例，用于理解项目判断与商业尽调过程。</p><span class="card-action">查看案例库 →</span></div></a>
+          <a class="card" href="equity-financing-templates.html"><div class="card-body"><span class="card-label">模板库</span><h3>范文模板</h3><p class="node-description">沉淀股东合作协议、融资计划书、尽调清单、项目介绍与投资分析框架等常用模板。</p><span class="card-action">查看模板库 →</span></div></a>
+        </div>
+          <div class="theory-directory" id="theory-directory"><div class="directory-inner"><div class="directory-list">
+            <button class="directory-item" type="button" data-document="founder-equity-allocation"><span class="directory-number">1</span><span class="directory-copy"><strong>创始股权分配</strong><span>解决潜在的纷争问题</span></span></button>
+            <button class="directory-item" type="button" data-document="equity-financing-basics"><span class="directory-number">2</span><span class="directory-copy"><strong>企业股权融资</strong><span>解决经营的资金问题</span></span></button>
+            <button class="directory-item" type="button" data-document="employee-equity-incentive"><span class="directory-number">3</span><span class="directory-copy"><strong>员工股权激励</strong><span>解决齐心协力的问题</span></span></button>
+            <button class="directory-item" type="button" data-document="equity-layout-design"><span class="directory-number">4</span><span class="directory-copy"><strong>股权布局设计</strong><span>解决长远规划的问题</span></span></button>
+          </div></div></div>
+        </div></div>
+      </details>
+      <p class="boundary">当前页面仅展示资料框架，内容仍在持续建设中。</p>
+    </section>
   </main>
+  <dialog class="document-viewer" aria-labelledby="viewer-title">
+    <div class="viewer-shell">
+      <header class="viewer-header"><div><span class="viewer-kicker">EQUITY FINANCING MATERIAL</span><h2 id="viewer-title">资料查看器</h2><p class="viewer-subtitle" id="viewer-subtitle"></p></div><button class="viewer-close" type="button" aria-label="关闭资料查看器">×</button></header>
+      <div class="viewer-stage"><button class="viewer-nav viewer-prev" type="button" aria-label="上一页">← 上一页</button><img class="viewer-image" alt="" hidden><div class="viewer-placeholder"><strong>资料图片整理中</strong><span>后续将以逐页图片形式展示。</span></div><button class="viewer-nav viewer-next" type="button" aria-label="下一页">下一页 →</button></div>
+      <footer class="viewer-footer"><span class="viewer-page">0 / 0</span></footer>
+    </div>
+  </dialog>
   <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>FINANCIAL DATA / PRIMARY MARKET</span></div></footer>
+  <script>
+    const marketPanel = document.querySelector('.market-panel');
+    const marketSummary = marketPanel.querySelector('.market-summary');
+    marketSummary.addEventListener('click', (event) => {
+      event.preventDefault();
+      marketPanel.open = !marketPanel.open;
+    });
+    const theoryNode = document.querySelector('.theory-node');
+    const theoryDirectory = document.querySelector('.theory-directory');
+    theoryNode.addEventListener('click', () => {
+      const willOpen = theoryNode.getAttribute('aria-expanded') !== 'true';
+      theoryNode.setAttribute('aria-expanded', String(willOpen));
+      theoryDirectory.classList.toggle('is-open', willOpen);
+    });
+    const documentSets = {
+      'founder-equity-allocation': { title: '创始股权分配', description: '解决潜在的纷争问题', basePath: '../../assets/docs/finance/equity-financing/founder-equity-allocation/', images: ['page-01.png', 'page-02.png', 'page-03.png', 'page-04.png'] },
+      'equity-financing-basics': { title: '企业股权融资', description: '解决经营的资金问题', basePath: '../../assets/docs/finance/equity-financing/enterprise-equity-financing/', images: ['page-01.png', 'page-02.png', 'page-03.png', 'page-04.png'] },
+      'employee-equity-incentive': { title: '员工股权激励', description: '解决齐心协力的问题', basePath: 'assets/docs/finance/equity-financing/employee-equity-incentive/', images: [] },
+      'equity-layout-design': { title: '股权布局设计', description: '解决长远规划的问题', basePath: 'assets/docs/finance/equity-financing/equity-layout-design/', images: [] }
+    };
+    const viewer = document.querySelector('.document-viewer');
+    const viewerTitle = viewer.querySelector('#viewer-title');
+    const viewerSubtitle = viewer.querySelector('#viewer-subtitle');
+    const viewerImage = viewer.querySelector('.viewer-image');
+    const viewerPlaceholder = viewer.querySelector('.viewer-placeholder');
+    const viewerPage = viewer.querySelector('.viewer-page');
+    const previousButton = viewer.querySelector('.viewer-prev');
+    const nextButton = viewer.querySelector('.viewer-next');
+    let activeDocument = null;
+    let activePage = 0;
+    let returnFocus = null;
+
+    function renderViewer() {
+      const images = activeDocument.images;
+      const hasImages = images.length > 0;
+      viewerPlaceholder.hidden = hasImages;
+      viewerImage.hidden = !hasImages;
+      previousButton.disabled = !hasImages || activePage === 0;
+      nextButton.disabled = !hasImages || activePage === images.length - 1;
+      viewerPage.textContent = hasImages ? `${activePage + 1} / ${images.length}` : '0 / 0';
+      if (hasImages) {
+        viewerImage.src = activeDocument.basePath + images[activePage];
+        viewerImage.alt = `${activeDocument.title}，第 ${activePage + 1} 页`;
+      } else {
+        viewerImage.removeAttribute('src');
+        viewerImage.alt = '';
+      }
+    }
+
+    function openViewer(key, trigger) {
+      activeDocument = documentSets[key];
+      activePage = 0;
+      returnFocus = trigger;
+      viewerTitle.textContent = activeDocument.title;
+      viewerSubtitle.textContent = activeDocument.description;
+      renderViewer();
+      viewer.showModal();
+    }
+
+    document.querySelectorAll('[data-document]').forEach((button) => {
+      button.addEventListener('click', () => openViewer(button.dataset.document, button));
+    });
+    viewer.querySelector('.viewer-close').addEventListener('click', () => viewer.close());
+    previousButton.addEventListener('click', () => { if (activePage > 0) { activePage -= 1; renderViewer(); } });
+    nextButton.addEventListener('click', () => { if (activePage < activeDocument.images.length - 1) { activePage += 1; renderViewer(); } });
+    viewer.addEventListener('click', (event) => { if (event.target === viewer) viewer.close(); });
+    viewer.addEventListener('close', () => { if (returnFocus) returnFocus.focus(); });
+    document.addEventListener('keydown', (event) => {
+      if (!viewer.open) return;
+      if (event.key === 'ArrowLeft' && !previousButton.disabled) previousButton.click();
+      if (event.key === 'ArrowRight' && !nextButton.disabled) nextButton.click();
+    });
+  </script>
 </body>
 </html>
