@@ -50,22 +50,67 @@
     openButtons.forEach(button=>button.addEventListener('click',()=>openLightbox(button)));closeButton.addEventListener('click',closeLightbox);lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lightbox.classList.contains('is-open'))closeLightbox()});
 
     const priceFields=document.querySelectorAll('[data-btc-price]'),changeFields=document.querySelectorAll('[data-btc-change]'),updatedFields=document.querySelectorAll('[data-btc-updated]'),countdownFields=document.querySelectorAll('[data-btc-countdown]');
-    const priceEndpoint='https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true&include_last_updated_at=true';
     const setText=(fields,value)=>fields.forEach(field=>field.textContent=value);
     const flash=fields=>fields.forEach(field=>{field.classList.remove('is-refreshing');void field.offsetWidth;field.classList.add('is-refreshing')});
+    const btcPriceSources=[
+      {
+        name:'AiCoin',
+        // AiCoin 未提供可确认的免鉴权浏览器 ticker 地址时，可在页面加载前配置此 URL。
+        url:window.AI_DATA_LAB_AICOIN_TICKER_URL||'',
+        parse:data=>({price:Number(data?.data?.last??data?.data?.price??data?.ticker?.last??data?.price),change:Number(data?.data?.changePercent??data?.ticker?.changePercent??data?.changePercent)})
+      },
+      {
+        name:'OKX',
+        url:'https://www.okx.com/api/v5/market/ticker?instId=BTC-USDT',
+        parse:data=>{const ticker=data?.data?.[0],price=Number(ticker?.last),open=Number(ticker?.open24h);return{price,change:Number.isFinite(price)&&Number.isFinite(open)&&open!==0?(price-open)/open*100:NaN}}
+      },
+      {
+        name:'Gate.io',
+        url:'https://api.gateio.ws/api/v4/spot/tickers?currency_pair=BTC_USDT',
+        parse:data=>({price:Number(data?.[0]?.last),change:Number(data?.[0]?.change_percentage)})
+      },
+      {
+        name:'Binance Data API',
+        url:'https://data-api.binance.vision/api/v3/ticker/24hr?symbol=BTCUSDT',
+        parse:data=>({price:Number(data?.lastPrice),change:Number(data?.priceChangePercent)})
+      },
+      {
+        name:'CoinGecko',
+        url:'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true&include_last_updated_at=true',
+        parse:data=>({price:Number(data?.bitcoin?.usd),change:Number(data?.bitcoin?.usd_24h_change)})
+      }
+    ];
+    async function fetchSourceJson(source){
+      if(!source.url)throw new Error('endpoint not configured');
+      const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),8000);
+      try{
+        const response=await fetch(source.url,{headers:{accept:'application/json'},signal:controller.signal,cache:'no-store'});
+        if(!response.ok)throw new Error(`HTTP ${response.status}`);
+        return await response.json();
+      }finally{clearTimeout(timeout)}
+    }
+    async function fetchBtcPrice(){
+      for(const source of btcPriceSources){
+        try{
+          const quote=source.parse(await fetchSourceJson(source));
+          if(!Number.isFinite(quote.price)||quote.price<=0)throw new Error('invalid price response');
+          return{...quote,source:source.name};
+        }catch(error){
+          console.warn(`[BTC price] ${source.name} failed:`,error);
+        }
+      }
+      throw new Error('all BTC price sources failed');
+    }
     async function updateBtcPrice(){
       try{
-        const response=await fetch(priceEndpoint,{headers:{accept:'application/json'}});
-        if(!response.ok)throw new Error(`HTTP ${response.status}`);
-        const bitcoin=(await response.json()).bitcoin;
-        if(!bitcoin||!Number.isFinite(bitcoin.usd))throw new Error('Invalid price response');
-        const price=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(bitcoin.usd);
-        const change=Number(bitcoin.usd_24h_change);
+        const quote=await fetchBtcPrice();
+        const price=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(quote.price);
         setText(priceFields,price);
-        setText(changeFields,Number.isFinite(change)?`24h ${change>=0?'+':''}${change.toFixed(2)}%`:'24h --');
+        setText(changeFields,Number.isFinite(quote.change)?`24h ${quote.change>=0?'+':''}${quote.change.toFixed(2)}%`:'24h --');
         setText(updatedFields,`Updated: ${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})}`);
         flash(priceFields);
       }catch(error){
+        console.warn('[BTC price] All sources failed:',error);
         setText(priceFields,'Price unavailable');
         setText(changeFields,'24h --');
         setText(updatedFields,`Updated: ${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})}`);
@@ -78,7 +123,7 @@
       setText(countdownFields,value);
       countdownFields.forEach(field=>field.classList.toggle('btc-countdown-reached',remainingDays<=0));
     }
-    updateBtcPrice();updateCountdown();setInterval(updateBtcPrice,60*60*1000);setInterval(updateCountdown,60*60*1000);
+    updateBtcPrice();updateCountdown();setInterval(updateBtcPrice,60*1000);setInterval(updateCountdown,60*60*1000);
 
   </script>
 </body>
