@@ -369,6 +369,8 @@
     .data-card h3 { margin: 7px 0 8px; font-size: 20px; }
     .data-card .market-card-copy h3 { font-size: 31px; font-weight: 850; line-height: 1.12; letter-spacing: -.025em; }
     .data-card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .market-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 22px; }
+    .market-chips span { padding: 4px 9px; border: 1px solid rgba(109,255,179,.16); border-radius: 999px; color: #9fb9ad; background: rgba(109,255,179,.035); font-size: 11px; }
     .future-link {
       display: flex;
       align-items: center;
@@ -588,19 +590,20 @@
 
     <section id="datasets">
       <div class="container">
-        <p class="section-kicker">01 / FINANCIAL MARKET DATA</p>
+        <p class="section-kicker">01 / Dataset Library</p>
         <div class="section-heading">
-          <h2>金融市场数据</h2>
-          <p class="section-intro">围绕金融一级市场与二级市场，持续整理用于研究、分析、复盘与风险观察的真实数据与项目资料。</p>
+          <h2>数据资源库</h2>
+          <p class="section-intro">聚焦金融市场数据，沉淀可用于分析、建模和复盘的真实数据资源。</p>
         </div>
 
         <div class="dataset-grid">
           <a class="data-card" href="datasets/finance/index.html">
             <div class="market-card-copy">
               <div class="card-top"><span class="card-index">DATA_01</span></div>
-              <span class="card-en">FINANCIAL MARKET</span>
+              <span class="card-en">Financial Market</span>
               <h3>金融市场数据</h3>
-              <p>围绕金融一级市场与二级市场，整理可用于分析、复盘、建模与风险观察的数据资源。</p>
+              <p>围绕金融一级市场与二级市场，整理可用于分析、复盘、建模与风险观察的金融数据资源。当前重点建设二级市场内容，包括股票、基金、期货与期权等；一级市场内容将围绕股权投资、企业融资与项目尽调逐步完善。</p>
+              <div class="market-chips" aria-label="金融市场数据分类"><span>金融二级市场</span><span>金融一级市场</span><span>股票基金</span><span>期货期权</span><span>数字资产</span><span>股权投资</span></div>
             </div>
             <svg class="compass-decoration" viewBox="0 0 160 160" fill="none" aria-hidden="true">
               <defs><linearGradient id="compass-ring" x1="24" y1="24" x2="136" y2="136" gradientUnits="userSpaceOnUse"><stop stop-color="#6bffbd"/><stop offset="1" stop-color="#58f7ff"/></linearGradient><linearGradient id="compass-needle" x1="62" y1="118" x2="99" y2="42" gradientUnits="userSpaceOnUse"><stop stop-color="#ff6b4a"/><stop offset=".46" stop-color="#58f7ff"/><stop offset="1" stop-color="#6bffbd"/></linearGradient></defs>
@@ -618,7 +621,7 @@
                 <circle cx="80" cy="80" r="2.4" fill="#58f7ff"/>
               </g>
             </svg>
-            <span class="future-link">进入金融市场数据 <span>→</span></span>
+            <span class="future-link">OPEN CATEGORY <span>→</span></span>
           </a>
         </div>
       </div>
