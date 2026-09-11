@@ -49,11 +49,23 @@
     .cross-delivery .delivery-item:hover,.cross-delivery .delivery-item:focus-visible{border-color:rgba(71,215,255,.38);box-shadow:0 12px 28px rgba(0,0,0,.2),0 0 18px rgba(71,215,255,.06)}
     .delivery-item strong{display:block;margin-bottom:3px;color:#c8ded3;font-size:12px;font-weight:700}
     .delivery-item span{display:block;color:#91a49a}
+    .delivery-hint{margin-top:6px;color:#65d9c1!important;font:10px Consolas,monospace;letter-spacing:.05em}
+
+    body.modal-open{overflow:hidden}
+    .strategy-modal{position:fixed;z-index:100;inset:0;display:grid;place-items:center;padding:28px;background:rgba(0,5,4,.84);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .24s ease,visibility .24s ease}
+    .strategy-modal.open{opacity:1;visibility:visible}
+    .strategy-modal-dialog{position:relative;width:min(92vw,1240px);max-height:94vh;padding:22px;border:1px solid rgba(109,255,179,.38);border-radius:18px;background:linear-gradient(145deg,rgba(12,24,19,.97),rgba(4,9,7,.98));box-shadow:0 28px 90px rgba(0,0,0,.62),0 0 38px rgba(71,215,255,.08);overflow:auto;transform:translateY(8px) scale(.99);transition:transform .24s ease}
+    .strategy-modal.open .strategy-modal-dialog{transform:none}
+    .strategy-modal-head{padding:0 48px 16px 2px}
+    .strategy-modal-head h3{color:#d9fff0;font-size:20px}.strategy-modal-head p{margin:5px 0 0;color:#83968d;font-size:12px}
+    .strategy-modal-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border:1px solid rgba(109,255,179,.24);border-radius:9px;color:#bcebd6;background:rgba(6,15,12,.9);font-size:22px;line-height:1;cursor:pointer;transition:.2s ease}
+    .strategy-modal-close:hover,.strategy-modal-close:focus-visible{border-color:var(--green);color:var(--green);box-shadow:0 0 18px rgba(109,255,179,.1);outline:none}
+    .strategy-modal img{display:block;max-width:88vw;max-height:82vh;width:auto;height:auto;margin:auto;border:1px solid rgba(71,215,255,.18);border-radius:12px;object-fit:contain}
 
     .account-overview{position:relative;margin-top:64px;padding:1px;overflow:hidden;border:1px solid rgba(71,215,255,.28);border-radius:24px;background:linear-gradient(135deg,rgba(71,215,255,.15),rgba(109,255,179,.04) 42%,rgba(255,214,107,.12));box-shadow:0 28px 70px rgba(0,0,0,.4),0 0 30px rgba(71,215,255,.09)}.account-overview:before{position:absolute;z-index:2;inset:-35% auto -35% -25%;width:24%;content:"";pointer-events:none;background:linear-gradient(90deg,transparent,rgba(115,255,235,.15),transparent);transform:skewX(-18deg);animation:overviewScan 9s ease-in-out infinite}.account-overview img{position:relative;z-index:1;display:block;width:100%;height:auto;border-radius:22px;animation:overviewFloat 5.8s ease-in-out infinite;transition:transform .35s ease,filter .35s ease}.account-overview:hover img{transform:scale(1.01);filter:brightness(1.05) saturate(1.04)}.orbit-scan{position:absolute;z-index:3;inset:0;width:100%;height:100%;overflow:visible;border-radius:inherit;pointer-events:none;animation:overviewFloat 5.8s ease-in-out infinite;transition:transform .35s ease}.account-overview:hover .orbit-scan{transform:scale(1.01)}.orbit-scan-track{fill:none;stroke:rgba(75,239,217,.2);stroke-width:2}.orbit-scan-beam{fill:none;stroke:#79ffe9;stroke-width:5;stroke-linecap:round;stroke-dasharray:120 3600;opacity:.58;filter:url(#orbitLaserGlow);animation:orbitLaser 12s linear infinite}@keyframes overviewFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}@keyframes overviewScan{0%,18%{left:-25%;opacity:0}28%{opacity:1}58%,100%{left:112%;opacity:0}}@keyframes orbitLaser{to{stroke-dashoffset:-3720}}@media(prefers-reduced-motion:reduce){.account-overview:before,.account-overview img,.orbit-scan,.orbit-scan-beam{animation:none}.orbit-scan-beam{display:none}}
 
     @media(max-width:900px){.direction-grid{grid-template-columns:1fr;grid-template-areas:"domestic" "domestic-delivery" "cross" "cross-delivery"}.direction-card{min-height:auto}.delivery-standard{min-height:auto}}
-    @media(max-width:600px){.account-overview{margin-top:54px;border-radius:17px}.account-overview img{border-radius:15px}}
+    @media(max-width:600px){.account-overview{margin-top:54px;border-radius:17px}.account-overview img{border-radius:15px}.strategy-modal{padding:12px}.strategy-modal-dialog{width:96vw;padding:15px}.strategy-modal-head{padding-right:42px}.strategy-modal img{max-width:calc(96vw - 32px);max-height:78vh}}
   </style>
 </head>
 <body>
@@ -65,13 +77,62 @@
       <div class="direction-grid">
         <article class="direction-card domestic"><h3>境内金融交易</h3><p>面向境内市场的金融数据整理与交易研究，覆盖 A 股股票、债券基金、商品期货与股指期权等方向。</p><div class="direction-tags"><a class="direction-tag spot direction-link" href="./a-share-dividends.html"><strong>现货类</strong>A 股股票 / 债券基金</a><a class="direction-tag derivative direction-link" href="derivatives.html"><strong>衍生品类</strong>商品期货 / 股指期权</a></div></article>
         <article class="direction-card cross-border"><h3>跨境金融交易</h3><p>以香港及海外市场为主要观察对象，关注港股、海外基金与数字资产等跨境金融数据。</p><div class="direction-tags"><a class="direction-tag spot direction-link" href="cross-border-spot.html"><strong>现货类</strong>港股 / 海外基金</a><a class="direction-tag digital direction-link" href="web3-framework.html"><strong>数字资产</strong>加密货币 / Web3</a></div></article>
-        <section class="delivery-standard domestic-delivery" aria-labelledby="domestic-delivery-title"><h4 id="domestic-delivery-title">交付标准</h4><div class="delivery-list"><a class="delivery-item" href="#" data-link-placeholder="strategy-research" target="_blank" rel="noopener"><strong>策略研究交付</strong><span>市场数据整理、交易品种分类、指标口径说明、策略逻辑梳理。</span></a><a class="delivery-item" href="#" data-link-placeholder="strategy-review" target="_blank" rel="noopener"><strong>策略复盘交付</strong><span>交易假设记录、执行过程整理、结果复盘、风险暴露与改进建议。</span></a></div></section>
-        <section class="delivery-standard cross-delivery" aria-labelledby="cross-delivery-title"><h4 id="cross-delivery-title">交付标准</h4><div class="delivery-list"><a class="delivery-item" href="#" data-link-placeholder="account-process" target="_blank" rel="noopener"><strong>账户与流程资料整理</strong><span>港股、美股、海外基金与数字资产相关账户、通道、资料结构和流程信息整理。</span></a><a class="delivery-item" href="#" data-link-placeholder="cross-border-review" target="_blank" rel="noopener"><strong>跨境策略复盘交付</strong><span>跨市场标的观察、资金路径记录、汇率与合规风险提示、策略复盘摘要。</span></a></div></section>
+        <section class="delivery-standard domestic-delivery" aria-labelledby="domestic-delivery-title"><h4 id="domestic-delivery-title">交付标准</h4><div class="delivery-list"><a class="delivery-item" href="https://mp.weixin.qq.com/s/SZyELC7CsAEb3FK8uaNJow" data-link-placeholder="strategy-research" target="_blank" rel="noopener"><strong>策略研究交付</strong><span>市场数据整理、交易品种分类、指标口径说明、策略逻辑梳理。</span></a><a class="delivery-item" href="https://mp.weixin.qq.com/s/cb6V9e8wtjN-ihl_u6Exgw" data-link-placeholder="strategy-review" target="_blank" rel="noopener"><strong>策略复盘交付</strong><span>交易假设记录、执行过程整理、结果复盘、风险暴露与改进建议。</span></a></div></section>
+        <section class="delivery-standard cross-delivery" aria-labelledby="cross-delivery-title"><h4 id="cross-delivery-title">交付标准</h4><div class="delivery-list"><a class="delivery-item" href="#" data-link-placeholder="account-process" data-modal-image="../../assets/images/finance/hk-otc-exchange-counter-reference.jpg" data-modal-title="账户与流程资料整理样例" data-modal-description="仅作为跨境金融账户与线下服务场景资料整理示例，不构成交易建议或服务承诺。" aria-haspopup="dialog"><strong>账户与流程资料整理</strong><span>港股、美股、海外基金与数字资产相关账户、通道、资料结构和流程信息整理。</span><span class="delivery-hint">点击查看样例</span></a><a class="delivery-item" href="#" data-link-placeholder="cross-border-review" data-modal-image="../../assets/images/finance/cross-border-strategy-review.jpg" data-modal-title="跨境策略复盘样例" data-modal-description="仅用于历史策略复盘与数据展示，不构成投资建议或收益承诺。" aria-haspopup="dialog"><strong>跨境策略复盘交付</strong><span>跨市场标的观察、资金路径记录、汇率与合规风险提示、策略复盘摘要。</span><span class="delivery-hint">点击查看样例</span></a></div></section>
       </div>
       <figure class="account-overview"><img src="../../assets/images/web3/finance-account-orbit-overview.png?v=20260910-1125" alt="以钱包为中心、各类金融账户环绕分布的钱包账户全景图"><svg class="orbit-scan" viewBox="0 0 1448 1086" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><defs><filter id="orbitLaserGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><ellipse class="orbit-scan-track" cx="724" cy="700" rx="590" ry="255"/><ellipse class="orbit-scan-beam" cx="724" cy="700" rx="590" ry="255"/></svg></figure>
     </section>
     <div class="container"><p class="risk-note">本页面仅用于金融数据学习、市场观察和策略研究展示，不构成任何投资建议。</p></div>
   </main>
+  <div class="strategy-modal" id="cross-border-review-modal" role="dialog" aria-modal="true" aria-labelledby="cross-border-review-modal-title" aria-hidden="true">
+    <div class="strategy-modal-dialog">
+      <button class="strategy-modal-close" type="button" aria-label="关闭图片窗口">×</button>
+      <div class="strategy-modal-head"><h3 id="cross-border-review-modal-title">图片展示</h3><p id="cross-border-review-modal-description"></p></div>
+      <img id="cross-border-review-modal-image" src="../../assets/images/finance/cross-border-strategy-review.jpg" alt="">
+    </div>
+  </div>
   <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>FINANCIAL DATA / SECONDARY MARKET</span></div></footer>
+  <script>
+    const reviewTriggers = [...document.querySelectorAll("[data-modal-image]")];
+    const reviewModal = document.getElementById("cross-border-review-modal");
+    const reviewClose = reviewModal.querySelector(".strategy-modal-close");
+    const reviewTitle = document.getElementById("cross-border-review-modal-title");
+    const reviewDescription = document.getElementById("cross-border-review-modal-description");
+    const reviewImage = document.getElementById("cross-border-review-modal-image");
+    let activeReviewTrigger = null;
+
+    function openReviewModal(trigger) {
+      activeReviewTrigger = trigger;
+      reviewTitle.textContent = trigger.dataset.modalTitle;
+      reviewDescription.textContent = trigger.dataset.modalDescription;
+      reviewImage.src = trigger.dataset.modalImage;
+      reviewImage.alt = trigger.dataset.modalTitle;
+      reviewModal.classList.add("open");
+      reviewModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      reviewClose.focus();
+    }
+
+    function closeReviewModal() {
+      reviewModal.classList.remove("open");
+      reviewModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      if (activeReviewTrigger) activeReviewTrigger.focus();
+    }
+
+    reviewTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", (event) => {
+        event.preventDefault();
+        openReviewModal(trigger);
+      });
+    });
+    reviewClose.addEventListener("click", closeReviewModal);
+    reviewModal.addEventListener("click", (event) => {
+      if (event.target === reviewModal) closeReviewModal();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && reviewModal.classList.contains("open")) closeReviewModal();
+    });
+  </script>
 </body>
 </html>
