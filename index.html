@@ -173,13 +173,28 @@
       padding: 7px 13px;
       border: 1px solid rgba(57, 239, 197, .24);
       border-radius: 999px;
-      color: #68ead0;
       background: rgba(32, 174, 143, .055);
-      box-shadow: 0 0 18px rgba(57, 239, 197, .055);
+      box-shadow: 0 0 20px rgba(57, 239, 197, .075);
       font-size: clamp(16px, 1.2vw, 18px);
       font-weight: 650;
       letter-spacing: .055em;
       line-height: 1.4;
+    }
+
+    .hero-positioning span {
+      color: transparent;
+      background: linear-gradient(105deg, #f2c958 0%, #55efb8 24%, #47d7ff 49%, #9c7cff 72%, #55efb8 100%);
+      background-size: 260% 100%;
+      background-position: 0% 50%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: positioning-gradient-flow 7s ease-in-out infinite;
+    }
+
+    @keyframes positioning-gradient-flow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .hero-copy {
@@ -519,6 +534,7 @@
       *, *::before, *::after { transition: none !important; }
       .compass-needle { animation: none; }
       .training-visual::before, .training-core, .training-stream, .training-node-dot { animation: none; }
+      .hero-positioning span { animation: none; }
     }
   </style>
 </head>
@@ -539,7 +555,7 @@
       <div>
         <p class="eyebrow">DATA INTELLIGENCE LABORATORY</p>
         <h1 id="hero-title">让数据成为<br /><span class="gradient-text">智能的燃料</span></h1>
-        <p class="hero-positioning">金融数据 × 商业分析 × AI 应用</p>
+        <p class="hero-positioning"><span>金融数据 × 商业分析 × AI 应用</span></p>
         <p class="hero-copy">AI Data Lab 是一个围绕金融市场数据、分析研究与人工智能应用持续建设的个人研究与实践平台，结合金融分析、市场营销与人工智能训练背景，沉淀真实数据、项目经验与应用实践。</p>
       </div>
 
