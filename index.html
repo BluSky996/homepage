@@ -166,9 +166,25 @@
       -webkit-background-clip: text;
     }
 
+    .hero-positioning {
+      display: inline-flex;
+      align-items: center;
+      margin: 26px 0 0;
+      padding: 7px 13px;
+      border: 1px solid rgba(57, 239, 197, .24);
+      border-radius: 999px;
+      color: #68ead0;
+      background: rgba(32, 174, 143, .055);
+      box-shadow: 0 0 18px rgba(57, 239, 197, .055);
+      font-size: clamp(16px, 1.2vw, 18px);
+      font-weight: 650;
+      letter-spacing: .055em;
+      line-height: 1.4;
+    }
+
     .hero-copy {
       max-width: 680px;
-      margin: 32px 0 0;
+      margin: 22px 0 0;
       color: rgba(218, 229, 223, .76);
       font-size: clamp(18px, 1.45vw, 21px);
       line-height: 1.8;
@@ -177,16 +193,16 @@
     .identity-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 18px;
+      gap: 15px;
     }
 
     .identity-card {
-      min-height: 126px;
+      min-height: 106px;
       display: grid;
-      grid-template-columns: 72px minmax(0, 1fr);
+      grid-template-columns: 62px minmax(0, 1fr);
       align-items: center;
-      column-gap: 22px;
-      padding: 22px 26px;
+      column-gap: 18px;
+      padding: 18px 22px;
       border: 1px solid var(--identity-line, rgba(109, 255, 179, 0.22));
       border-radius: 16px;
       background: linear-gradient(135deg, var(--identity-wash, rgba(15, 27, 22, .72)), rgba(5, 10, 9, .91));
@@ -202,11 +218,11 @@
     .identity-card.active { transform: translateY(-2px); border-color: var(--identity-accent); background: radial-gradient(circle at 18% 50%, var(--identity-glow), transparent 42%), linear-gradient(135deg, var(--identity-wash), rgba(5,10,9,.94)); box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 18px 42px rgba(0,0,0,.3), 0 0 32px var(--identity-glow); filter: brightness(1.08); }
     .identity-card.active .identity-icon { border-color: var(--identity-accent); box-shadow: inset 0 0 28px var(--identity-glow), 0 0 25px var(--identity-glow); }
     .identity-card:focus-visible { outline: 2px solid var(--identity-accent); outline-offset: 3px; }
-    .identity-icon { grid-row: 1 / span 3; width: 72px; height: 72px; display: grid; place-items: center; border: 1px solid var(--identity-line); border-radius: 16px; color: var(--identity-accent); background: rgba(0,0,0,.24); box-shadow: inset 0 0 24px var(--identity-glow), 0 0 18px var(--identity-glow); }
-    .identity-icon svg { width: 38px; height: 38px; stroke: currentColor; filter: drop-shadow(0 0 7px currentColor); }
+    .identity-icon { grid-row: 1 / span 3; width: 62px; height: 62px; display: grid; place-items: center; border: 1px solid var(--identity-line); border-radius: 14px; color: var(--identity-accent); background: rgba(0,0,0,.24); box-shadow: inset 0 0 24px var(--identity-glow), 0 0 18px var(--identity-glow); }
+    .identity-icon svg { width: 32px; height: 32px; stroke: currentColor; filter: drop-shadow(0 0 7px currentColor); }
     .identity-label { align-self: end; color: var(--identity-accent); font-family: Consolas, monospace; font-size: 11px; font-weight: 700; letter-spacing: .14em; }
-    .identity-card strong { color: rgba(255,255,255,.96); font-size: clamp(18px, 1.5vw, 25px); line-height: 1.3; }
-    .identity-card small { align-self: start; color: #9aa8a1; font-size: 14px; line-height: 1.45; }
+    .identity-card strong { color: rgba(255,255,255,.96); font-size: clamp(17px, 1.35vw, 21px); line-height: 1.28; }
+    .identity-card small { align-self: start; color: #9aa8a1; font-size: 12px; line-height: 1.4; }
 
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
@@ -240,7 +256,7 @@
       width: 100%;
       max-width: 540px;
       justify-self: end;
-      padding: 22px 24px 26px;
+      padding: 16px 18px 20px;
       border: 1px solid rgba(82, 236, 193, .48);
       border-radius: 22px;
       background: linear-gradient(145deg, rgba(10, 27, 23, .76), rgba(4, 10, 9, .92));
@@ -251,8 +267,8 @@
       display: flex;
       align-items: center;
       gap: 7px;
-      padding-bottom: 18px;
-      margin-bottom: 22px;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
       border-bottom: 1px solid var(--line);
     }
 
@@ -489,9 +505,9 @@
       .compass-decoration { display: none; }
       .data-card .market-card-copy h3 { font-size: 27px; }
       .identity-grid { grid-template-columns: 1fr; }
-      .identity-card { min-height: 112px; grid-template-columns: 64px minmax(0, 1fr); gap: 16px; padding: 18px; }
-      .identity-icon { width: 64px; height: 64px; border-radius: 14px; }
-      .identity-icon svg { width: 31px; height: 31px; }
+      .identity-card { min-height: 104px; grid-template-columns: 58px minmax(0, 1fr); gap: 15px; padding: 17px; }
+      .identity-icon { width: 58px; height: 58px; border-radius: 13px; }
+      .identity-icon svg { width: 29px; height: 29px; }
       .identity-card strong { font-size: 17px; }
       .identity-card small { font-size: 11px; }
       .route-item { min-height: 230px; }
@@ -523,6 +539,7 @@
       <div>
         <p class="eyebrow">DATA INTELLIGENCE LABORATORY</p>
         <h1 id="hero-title">让数据成为<br /><span class="gradient-text">智能的燃料</span></h1>
+        <p class="hero-positioning">金融数据 × 商业分析 × AI 应用</p>
         <p class="hero-copy">AI Data Lab 是一个围绕金融市场数据、分析研究与人工智能应用持续建设的个人研究与实践平台，结合金融分析、市场营销与人工智能训练背景，沉淀真实数据、项目经验与应用实践。</p>
       </div>
 
