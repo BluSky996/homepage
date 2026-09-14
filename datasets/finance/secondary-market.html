@@ -60,7 +60,7 @@
     .strategy-modal-head h3{color:#d9fff0;font-size:20px}.strategy-modal-head p{margin:5px 0 0;color:#83968d;font-size:12px}
     .strategy-modal-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border:1px solid rgba(109,255,179,.24);border-radius:9px;color:#bcebd6;background:rgba(6,15,12,.9);font-size:22px;line-height:1;cursor:pointer;transition:.2s ease}
     .strategy-modal-close:hover,.strategy-modal-close:focus-visible{border-color:var(--green);color:var(--green);box-shadow:0 0 18px rgba(109,255,179,.1);outline:none}
-    .strategy-modal img{display:block;max-width:88vw;max-height:82vh;width:auto;height:auto;margin:auto;border:1px solid rgba(71,215,255,.18);border-radius:12px;object-fit:contain}
+    .strategy-modal img{display:block;max-width:88vw;max-height:82vh;width:auto;height:auto;margin:auto;border:1px solid rgba(71,215,255,.18);border-radius:12px;object-fit:contain;opacity:1;transition:opacity .18s ease}.strategy-modal img.is-loading{opacity:0}
 
     .account-overview{position:relative;margin-top:64px;padding:1px;overflow:hidden;border:1px solid rgba(71,215,255,.28);border-radius:24px;background:linear-gradient(135deg,rgba(71,215,255,.15),rgba(109,255,179,.04) 42%,rgba(255,214,107,.12));box-shadow:0 28px 70px rgba(0,0,0,.4),0 0 30px rgba(71,215,255,.09)}.account-overview:before{position:absolute;z-index:2;inset:-35% auto -35% -25%;width:24%;content:"";pointer-events:none;background:linear-gradient(90deg,transparent,rgba(115,255,235,.15),transparent);transform:skewX(-18deg);animation:overviewScan 9s ease-in-out infinite}.account-overview img{position:relative;z-index:1;display:block;width:100%;height:auto;border-radius:22px;animation:overviewFloat 5.8s ease-in-out infinite;transition:transform .35s ease,filter .35s ease}.account-overview:hover img{transform:scale(1.01);filter:brightness(1.05) saturate(1.04)}.orbit-scan{position:absolute;z-index:3;inset:0;width:100%;height:100%;overflow:visible;border-radius:inherit;pointer-events:none;animation:overviewFloat 5.8s ease-in-out infinite;transition:transform .35s ease}.account-overview:hover .orbit-scan{transform:scale(1.01)}.orbit-scan-track{fill:none;stroke:rgba(75,239,217,.2);stroke-width:2}.orbit-scan-beam{fill:none;stroke:#79ffe9;stroke-width:5;stroke-linecap:round;stroke-dasharray:120 3600;opacity:.58;filter:url(#orbitLaserGlow);animation:orbitLaser 12s linear infinite}@keyframes overviewFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}@keyframes overviewScan{0%,18%{left:-25%;opacity:0}28%{opacity:1}58%,100%{left:112%;opacity:0}}@keyframes orbitLaser{to{stroke-dashoffset:-3720}}@media(prefers-reduced-motion:reduce){.account-overview:before,.account-overview img,.orbit-scan,.orbit-scan-beam{animation:none}.orbit-scan-beam{display:none}}
 
@@ -88,7 +88,7 @@
     <div class="strategy-modal-dialog">
       <button class="strategy-modal-close" type="button" aria-label="关闭图片窗口">×</button>
       <div class="strategy-modal-head"><h3 id="cross-border-review-modal-title">图片展示</h3><p id="cross-border-review-modal-description"></p></div>
-      <img id="cross-border-review-modal-image" src="../../assets/images/finance/cross-border-strategy-review.jpg" alt="">
+      <img id="cross-border-review-modal-image" alt="">
     </div>
   </div>
   <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>FINANCIAL DATA / SECONDARY MARKET</span></div></footer>
@@ -100,13 +100,31 @@
     const reviewDescription = document.getElementById("cross-border-review-modal-description");
     const reviewImage = document.getElementById("cross-border-review-modal-image");
     let activeReviewTrigger = null;
+    let reviewImageRequest = 0;
+
+    reviewTriggers.forEach((trigger) => {
+      const preload = new Image();
+      preload.src = trigger.dataset.modalImage;
+    });
 
     function openReviewModal(trigger) {
+      const imageSource = trigger.dataset.modalImage;
+      const modalTitle = trigger.dataset.modalTitle;
+      const modalDescription = trigger.dataset.modalDescription;
+      const requestId = ++reviewImageRequest;
       activeReviewTrigger = trigger;
-      reviewTitle.textContent = trigger.dataset.modalTitle;
-      reviewDescription.textContent = trigger.dataset.modalDescription;
-      reviewImage.src = trigger.dataset.modalImage;
-      reviewImage.alt = trigger.dataset.modalTitle;
+      reviewTitle.textContent = modalTitle;
+      reviewDescription.textContent = modalDescription;
+      reviewImage.classList.add("is-loading");
+      reviewImage.removeAttribute("src");
+      reviewImage.alt = modalTitle;
+      const revealCurrentImage = () => {
+        if (requestId === reviewImageRequest) reviewImage.classList.remove("is-loading");
+      };
+      reviewImage.addEventListener("load", revealCurrentImage, { once: true });
+      reviewImage.addEventListener("error", revealCurrentImage, { once: true });
+      reviewImage.src = imageSource;
+      if (reviewImage.complete) requestAnimationFrame(revealCurrentImage);
       reviewModal.classList.add("open");
       reviewModal.setAttribute("aria-hidden", "false");
       document.body.classList.add("modal-open");
@@ -114,16 +132,21 @@
     }
 
     function closeReviewModal() {
+      reviewImageRequest += 1;
       reviewModal.classList.remove("open");
       reviewModal.setAttribute("aria-hidden", "true");
       document.body.classList.remove("modal-open");
+      reviewImage.classList.add("is-loading");
+      reviewImage.removeAttribute("src");
+      reviewImage.alt = "";
       if (activeReviewTrigger) activeReviewTrigger.focus();
     }
 
     reviewTriggers.forEach((trigger) => {
       trigger.addEventListener("click", (event) => {
         event.preventDefault();
-        openReviewModal(trigger);
+        const clickedTrigger = event.target.closest("[data-modal-image]");
+        if (clickedTrigger) openReviewModal(clickedTrigger);
       });
     });
     reviewClose.addEventListener("click", closeReviewModal);
