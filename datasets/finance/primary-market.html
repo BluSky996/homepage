@@ -43,6 +43,25 @@
     @media(max-width:800px){.market-summary{width:100%}.market-summary-side{margin-top:18px}.framework-grid{grid-template-columns:1fr;gap:16px;padding:50px 18px 6px 52px}.framework-grid:before{top:24px;bottom:26px;left:27px;right:auto;width:1px;height:auto;background:linear-gradient(rgba(109,255,179,.7),rgba(71,215,255,.35))}.framework-grid:after{top:0;left:27px;height:25px}.card:before{right:100%;left:auto;bottom:auto;top:50%;width:25px;height:1px}.card{text-align:left}.card-action{margin-top:8px}.theory-directory{margin-left:0}.directory-inner{padding-left:52px}.directory-inner:before{left:27px}.directory-item{grid-template-columns:42px 1fr}.viewer-stage{min-height:430px;padding:42px 18px 92px}.viewer-nav{top:auto;bottom:22px;transform:none}.viewer-prev{left:18px}.viewer-next{right:18px}.viewer-header{padding:17px 18px}.primary-principle{margin-top:17px}.primary-principle p{font-size:12px}.delivery-grid{grid-template-columns:1fr}.delivery-panel{margin-top:28px}}
     @media(prefers-reduced-motion:reduce){.submodule-shell{transition:none}}
   </style>
+<style>
+.framework-grid > .theory-node{grid-row:1}
+.framework-grid > .theory-directory{grid-column:1/-1;grid-row:2;width:100%;margin:0;display:none}
+.framework-grid > .theory-directory.is-open{display:block}
+.framework-grid .directory-inner{padding:32px 0 0;overflow:visible}
+.framework-grid .directory-inner:before{left:50%;top:calc(-1 * clamp(18px,3vw,38px) - 1px);height:calc(32px + clamp(18px,3vw,38px) + 1px)}
+.framework-grid .directory-list{position:relative;width:min(100%,620px);margin:0 auto}
+.framework-grid .directory-item:before{display:none}
+#theory-directory .directory-inner:before{left:calc((100% - 2 * clamp(18px,3vw,38px))/6)}
+#research-directory .directory-inner:before{left:calc(100% - (100% - 2 * clamp(18px,3vw,38px))/6)}
+#theory-directory .directory-list{margin-left:0}#research-directory .directory-list{margin-right:0}
+@media(max-width:800px){
+.framework-grid > .theory-node,.framework-grid > .theory-directory{grid-row:auto}
+.framework-grid > [aria-controls="theory-directory"]{order:1}#theory-directory{order:2}
+.framework-grid > [aria-controls="cases-directory"]{order:3}#cases-directory{order:4}
+.framework-grid > [aria-controls="research-directory"]{order:5}#research-directory{order:6}
+.framework-grid .directory-inner:before,#theory-directory .directory-inner:before,#research-directory .directory-inner:before{left:50%;top:-16px;height:48px}
+}
+</style>
 </head>
 <body>
   <header class="header"><nav class="nav container"><a class="brand" href="../../index.html"><span class="mark"></span>AI DATA LAB</a><div class="navlinks"><a href="index.html">返回金融市场数据</a><a href="../../index.html">首页</a></div><span class="preview-badge">PRIMARY</span></nav></header>
@@ -56,17 +75,23 @@
           <div class="market-summary-side"><span class="expand-label" aria-hidden="true"></span></div>
         </summary>
         <div class="submodule-shell"><div class="submodule-inner"><div class="framework-grid">
-          <button class="card theory-node" type="button" aria-expanded="false" aria-controls="theory-directory"><span class="card-body"><span class="card-label">实操手册</span><h3>股权理论原则</h3><span class="node-description">整理股权投资、企业融资、估值判断、控制权设计、合伙机制与风险识别等基础原则。</span><span class="card-action">查看目录 →</span></span></button>
-          <a class="card" href="equity-financing-cases.html"><div class="card-body"><span class="card-label">案例库</span><h3>融资真实案例</h3><p class="node-description">记录真实企业融资、股权合作、现金流压力与项目估值中的典型问题，用于理解融资谈判与方案形成过程。</p><span class="card-action">查看案例 →</span></div></a>
-          <article class="card"><div class="card-body"><span class="card-label">经营投研</span><h3>商业经营投研</h3><p class="node-description">围绕真实商业项目，梳理业务流程、收入来源、成本结构、现金流路径与经营放大逻辑，用于判断企业是否具备资本进入和股权融资的基础。</p><span class="card-action">查看投研框架 →</span></div></article>
-        </div>
-          <div class="theory-directory" id="theory-directory"><div class="directory-inner"><div class="directory-list">
+          <button class="card theory-node" type="button" aria-expanded="false" aria-controls="theory-directory"><span class="card-body"><span class="card-label">实操手册</span><h3>股权重要原则</h3><span class="node-description">整理股权投资、企业融资、估值判断、控制权设计、合伙机制与风险识别等基础原则。</span><span class="card-action">查看目录 →</span></span></button>
+          <button class="card theory-node" type="button" aria-expanded="false" aria-controls="cases-directory"><div class="card-body"><span class="card-label">案例库</span><h3>融资真实案例</h3><p class="node-description">记录真实企业融资、股权合作、现金流压力与项目估值中的典型问题，用于理解融资谈判与方案形成过程。</p><span class="card-action">查看案例 →</span></div></button>
+          <button class="card theory-node" type="button" aria-expanded="false" aria-controls="research-directory"><div class="card-body"><span class="card-label">经营投研</span><h3>商业经营投研</h3><p class="node-description">围绕真实商业项目，梳理业务流程、收入来源、成本结构、现金流路径与经营放大逻辑，用于判断企业是否具备资本进入和股权融资的基础。</p><span class="card-action">查看投研框架 →</span></div></button>
+          <div class="theory-directory" id="theory-directory" inert><div class="directory-inner"><div class="directory-list">
             <button class="directory-item" type="button" data-document="founder-equity-allocation"><span class="directory-number">1</span><span class="directory-copy"><strong>创始股权分配</strong><span>解决潜在的纷争问题</span></span></button>
             <button class="directory-item" type="button" data-document="equity-financing-basics"><span class="directory-number">2</span><span class="directory-copy"><strong>企业股权融资</strong><span>解决经营的资金问题</span></span></button>
             <button class="directory-item" type="button" data-document="employee-equity-incentive"><span class="directory-number">3</span><span class="directory-copy"><strong>员工股权激励</strong><span>解决齐心协力的问题</span></span></button>
             <button class="directory-item" type="button" data-document="equity-layout-design"><span class="directory-number">4</span><span class="directory-copy"><strong>股权布局设计</strong><span>解决长远规划的问题</span></span></button>
           </div></div></div>
-        </div></div>
+          <div class="theory-directory" id="cases-directory" inert><div class="directory-inner"><div class="directory-list">
+            <button class="directory-item" type="button" data-document="small-capital-control-case"><span class="directory-number">1</span><span class="directory-copy"><strong>小资金当大股东，是福还是祸？</strong></span></button>
+            <button class="directory-item" type="button" data-document="restaurant-equity-expansion-case"><span class="directory-number">2</span><span class="directory-copy"><strong>餐饮行业的扩张，是自掏腰包还是股权规划？</strong></span></button>
+            <button class="directory-item" type="button" data-document="state-owned-ma-asset-loss-case"><span class="directory-number">3</span><span class="directory-copy"><strong>国企并购如何规避国有资产流失？</strong></span></button>
+            <button class="directory-item" type="button" data-document="nonprofit-sustainable-revenue-case"><span class="directory-number">4</span><span class="directory-copy"><strong>非营利性机构是如何更持久地盈利的？</strong></span></button>
+          </div></div></div>
+          <div class="theory-directory" id="research-directory" inert><div class="directory-inner"><div class="directory-list"><div class="directory-item"><span class="directory-number">1</span><span class="directory-copy"><strong>商业经营投研</strong><span>围绕真实商业项目，梳理业务流程、收入来源、成本结构、现金流路径与经营放大逻辑，用于判断企业是否具备资本进入和股权融资的基础。</span></span></div></div></div></div>
+        </div></div></div>
       </details>
       <section class="delivery-panel" aria-labelledby="delivery-title">
         <div class="delivery-heading"><h2 id="delivery-title">交付标准</h2><p>根据项目需求，提供轻量方案诊断与现场辅导两种交付方式。</p></div>
@@ -92,18 +117,26 @@
       event.preventDefault();
       marketPanel.open = !marketPanel.open;
     });
-    const theoryNode = document.querySelector('.theory-node');
-    const theoryDirectory = document.querySelector('.theory-directory');
-    theoryNode.addEventListener('click', () => {
-      const willOpen = theoryNode.getAttribute('aria-expanded') !== 'true';
-      theoryNode.setAttribute('aria-expanded', String(willOpen));
-      theoryDirectory.classList.toggle('is-open', willOpen);
-    });
+    const moduleNodes = [...document.querySelectorAll('.theory-node')];
+    moduleNodes.forEach(node => node.addEventListener('click', () => {
+      const willOpen = node.getAttribute('aria-expanded') !== 'true';
+      moduleNodes.forEach(other => {
+        const expanded = other === node && willOpen;
+        const directory = document.getElementById(other.getAttribute('aria-controls'));
+        other.setAttribute('aria-expanded', String(expanded));
+        directory.classList.toggle('is-open', expanded);
+        directory.inert = !expanded;
+      });
+    }));
     const documentSets = {
+      'small-capital-control-case': { title: '小资金当大股东，是福还是祸？', description: '', basePath: '../../assets/docs/finance/equity-financing/small-capital-control-case/', images: ['small-capital-control-case.png'] },
+      'restaurant-equity-expansion-case': { title: '餐饮行业的扩张，是自掏腰包还是股权规划？', description: '', basePath: '../../assets/docs/finance/equity-financing/restaurant-equity-expansion-case/', images: ['restaurant-equity-expansion-case.png.png'] },
+      'state-owned-ma-asset-loss-case': { title: '国企并购如何规避国有资产流失？', description: '', basePath: '../../assets/docs/finance/equity-financing/state-owned-ma-asset-loss-case/', images: ['state-owned-ma-asset-loss-case.png'] },
+      'nonprofit-sustainable-revenue-case': { title: '非营利性机构是如何更持久地盈利的？', description: '', basePath: '../../assets/docs/finance/equity-financing/nonprofit-sustainable-revenue-case/', images: ['nonprofit-sustainable-revenue-case.png'] },
       'founder-equity-allocation': { title: '创始股权分配', description: '解决潜在的纷争问题', basePath: '../../assets/docs/finance/equity-financing/founder-equity-allocation/', images: ['page-01.png', 'page-02.png', 'page-03.png', 'page-04.png'] },
       'equity-financing-basics': { title: '企业股权融资', description: '解决经营的资金问题', basePath: '../../assets/docs/finance/equity-financing/enterprise-equity-financing/', images: ['page-01.png', 'page-02.png', 'page-03.png', 'page-04.png'] },
-      'employee-equity-incentive': { title: '员工股权激励', description: '解决齐心协力的问题', basePath: 'assets/docs/finance/equity-financing/employee-equity-incentive/', images: [] },
-      'equity-layout-design': { title: '股权布局设计', description: '解决长远规划的问题', basePath: 'assets/docs/finance/equity-financing/equity-layout-design/', images: [] }
+      'employee-equity-incentive': { title: '员工股权激励', description: '解决齐心协力的问题', basePath: '../../assets/docs/finance/equity-financing/employee-equity-incentive/', images: ['employee-equity-incentive-01.png', 'employee-equity-incentive-02.png', 'employee-equity-incentive-03.png', 'employee-equity-incentive-04.png', 'employee-equity-incentive-05.png'] },
+      'equity-layout-design': { title: '股权布局设计', description: '解决长远规划的问题', basePath: '../../assets/docs/finance/equity-financing/equity-structure-design/', images: ['equity-structure-design-01.png', 'equity-structure-design-02.png'] }
     };
     const viewer = document.querySelector('.document-viewer');
     const viewerTitle = viewer.querySelector('#viewer-title');
