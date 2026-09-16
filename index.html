@@ -492,6 +492,155 @@
     footer { padding-block: 30px; border-top: 1px solid var(--line); color: #6e7c75; font-size: 12px; }
     .footer-inner { display: flex; justify-content: space-between; gap: 24px; }
 
+    .agenda-trigger {
+      position: fixed;
+      right: 28px;
+      bottom: 28px;
+      z-index: 82;
+      width: min(360px, calc(100vw - 42px));
+    }
+    .agenda-trigger-desktop { display: grid; grid-template-columns: minmax(0, 215px) 160px; align-items: center; }
+    .agenda-entry-copy { position: relative; z-index: 2; display: grid; gap: 11px; justify-items: start; text-align: left; }
+    .agenda-availability { display: flex; align-items: center; gap: 7px; color: #b8c9c0; font-size: 10px; letter-spacing: .02em; white-space: nowrap; text-shadow: 0 2px 9px rgba(0, 0, 0, .86); }
+    .agenda-availability::before { width: 7px; height: 7px; content: ""; flex: 0 0 auto; border-radius: 50%; background: #6bffb3; box-shadow: 0 0 10px rgba(109, 255, 179, .72); }
+    .agenda-trigger-value { display: block; background: linear-gradient(110deg, #e9fff4 4%, #6bffb3 48%, #58dfff 82%, #9c8cff 100%); background-size: 220% auto; -webkit-background-clip: text; background-clip: text; color: transparent; font-size: 17px; font-weight: 780; line-height: 1.28; letter-spacing: -.035em; white-space: nowrap; filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .78)); animation: agenda-value-flow 8s ease-in-out infinite; }
+    .agenda-trigger-action { cursor: pointer; }
+    .agenda-cta { min-height: 34px; padding: 0 15px; border: 1px solid rgba(88, 223, 255, .48); border-radius: 999px; color: #a9f2ff; background: rgba(5, 22, 22, .24); box-shadow: 0 0 14px rgba(88, 223, 255, .08); font-size: 12px; font-weight: 700; letter-spacing: .05em; transition: color .2s ease, border-color .2s ease, background .2s ease, transform .2s ease; }
+    .agenda-cta:hover, .agenda-cta:focus-visible { color: #e0fcff; border-color: rgba(88, 223, 255, .8); background: rgba(16, 56, 57, .34); transform: translateY(-1px); outline: none; }
+    .agenda-lens-button { width: 160px; margin-left: -15px; padding: 0; border: 0; background: transparent; cursor: pointer; transition: transform .2s ease, filter .2s ease; }
+    .agenda-lens-button:hover, .agenda-lens-button:focus-visible { filter: brightness(1.04); transform: translateY(-2px) scale(1.015); outline: none; }
+    .agenda-lens-button:active { transform: scale(.985); }
+    .agenda-lens-image { display: block; width: 100%; height: auto; }
+    .agenda-trigger-mobile { display: none; }
+    @keyframes agenda-value-flow { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .agenda-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 88;
+      visibility: hidden;
+      opacity: 0;
+      background: rgba(0, 5, 3, .46);
+      backdrop-filter: blur(2px);
+      pointer-events: none;
+      transition: opacity .28s ease, visibility .28s ease;
+    }
+    .agenda-panel {
+      position: fixed;
+      top: 58%;
+      right: 32px;
+      z-index: 90;
+      width: min(390px, calc(100vw - 40px));
+      padding: 34px 30px 28px;
+      border: 1px solid rgba(109, 255, 179, .38);
+      border-radius: 18px;
+      color: #edf8f2;
+      background:
+        radial-gradient(circle at 100% 0, rgba(88, 247, 255, .08), transparent 42%),
+        linear-gradient(145deg, rgba(11, 26, 20, .82), rgba(5, 12, 9, .74));
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .3), 0 0 0 1px rgba(109, 255, 179, .04);
+      backdrop-filter: blur(12px);
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(calc(-50% + 14px)) scale(.985);
+      transform-origin: right center;
+      pointer-events: none;
+      transition: opacity .28s ease, transform .28s ease, visibility .28s ease;
+    }
+    .agenda-confirmation-widget.is-open .agenda-overlay,
+    .agenda-confirmation-widget.is-open .agenda-panel {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .agenda-confirmation-widget.is-open .agenda-panel { transform: translateY(-50%) scale(1); }
+    .agenda-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(109, 255, 179, .22);
+      border-radius: 50%;
+      color: #bcd0c6;
+      background: rgba(4, 11, 8, .72);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      transition: color .22s ease, border-color .22s ease, background .22s ease;
+    }
+    .agenda-close:hover,
+    .agenda-close:focus-visible { color: #6bffb3; border-color: rgba(109, 255, 179, .6); background: rgba(14, 34, 25, .92); outline: none; }
+    .agenda-panel h2 {
+      margin: 2px 20px 8px;
+      background: linear-gradient(110deg, #effff6 4%, #6bffb3 52%, #58dfff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 22px;
+      line-height: 1.18;
+      text-align: center;
+      letter-spacing: -.035em;
+      white-space: nowrap;
+    }
+    .agenda-copy { margin: 0; color: #b7c9bf; font-size: 14px; line-height: 1.7; text-align: center; }
+    .agenda-steps { position: relative; display: grid; gap: 15px; margin: 24px 0 0; padding: 0; list-style: none; }
+    .agenda-steps::before { position: absolute; top: 9px; bottom: 9px; left: 7px; width: 1px; content: ""; background: linear-gradient(rgba(109, 255, 179, .58), rgba(88, 247, 255, .16)); }
+    .agenda-step { position: relative; }
+    .agenda-stage { display: block; width: 100%; padding: 8px 10px 8px 30px; border: 1px solid transparent; border-radius: 9px; color: inherit; background: transparent; text-align: left; cursor: pointer; transition: border-color .22s ease, background .22s ease, transform .22s ease; }
+    .agenda-stage::before { position: absolute; top: 15px; left: 3px; width: 9px; height: 9px; content: ""; border: 1px solid #6bffb3; border-radius: 50%; background: #09150f; box-shadow: 0 0 10px rgba(109, 255, 179, .28); transition: background .22s ease, box-shadow .22s ease; }
+    .agenda-stage:hover, .agenda-stage:focus-visible { border-color: rgba(109, 255, 179, .28); background: rgba(109, 255, 179, .05); outline: none; }
+    .agenda-stage.is-selected { border-color: rgba(109, 255, 179, .55); background: rgba(109, 255, 179, .09); }
+    .agenda-stage.is-selected::before { background: #6bffb3; box-shadow: 0 0 14px rgba(109, 255, 179, .72); }
+    .agenda-stage strong { display: block; color: #e7f8ef; font-size: 14px; line-height: 1.4; }
+    .agenda-step strong span { margin-right: 8px; color: #6bffb3; font: 11px Consolas, monospace; }
+    .agenda-step p { margin: 3px 0 0; color: #83978d; font-size: 12px; line-height: 1.5; }
+    .agenda-payment { margin-top: 18px; padding: 14px; border: 1px solid rgba(109, 255, 179, .2); border-radius: 11px; background: rgba(109, 255, 179, .035); }
+    .agenda-payment[hidden] { display: none; }
+    .agenda-payment-copy { margin: 0 0 11px; color: #91a69b; font-size: 11px; line-height: 1.5; text-align: center; }
+    .agenda-payment-actions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
+    .agenda-payment-button { min-height: 38px; border: 1px solid rgba(88, 223, 255, .3); border-radius: 8px; color: #b9f6ff; background: rgba(88, 223, 255, .045); font-size: 12px; cursor: pointer; transition: border-color .2s ease, color .2s ease, background .2s ease; }
+    .agenda-payment-button:hover, .agenda-payment-button:focus-visible { border-color: rgba(88, 223, 255, .68); color: #e0fcff; background: rgba(88, 223, 255, .1); outline: none; }
+    .agenda-payment-status { min-height: 18px; margin: 9px 0 0; color: #82978d; font-size: 11px; text-align: center; }
+    .payment-qr-modal { position: absolute; inset: 0; z-index: 4; display: grid; padding: 28px; place-items: center; border-radius: inherit; background: rgba(2, 10, 7, .88); backdrop-filter: blur(8px); }
+    .payment-qr-modal[hidden] { display: none; }
+    .payment-qr-card { position: relative; width: min(280px, 100%); padding: 24px; border: 1px solid rgba(109, 255, 179, .34); border-radius: 14px; background: rgba(7, 22, 16, .92); text-align: center; }
+    .payment-qr-card h3 { margin: 0 30px 16px; color: #dfffee; font-size: 17px; }
+    .payment-qr-image { display: block; width: min(210px, 100%); margin: 0 auto; border-radius: 10px; }
+    .payment-qr-close { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border: 1px solid rgba(109, 255, 179, .24); border-radius: 50%; color: #bcd0c6; background: rgba(4, 11, 8, .72); font-size: 19px; cursor: pointer; }
+    .payment-qr-close:hover, .payment-qr-close:focus-visible { color: #6bffb3; border-color: rgba(109, 255, 179, .58); outline: none; }
+    .agenda-view[hidden] { display: none; }
+    .agenda-back { margin: -8px 0 14px; padding: 6px 0; border: 0; color: #8deec5; background: transparent; font-size: 12px; cursor: pointer; }
+    .agenda-back:hover, .agenda-back:focus-visible { color: #caffea; outline: none; }
+    .booking-timezone { margin: 3px 0 18px; color: #789087; font-size: 11px; text-align: center; }
+    .booking-grid { display: grid; gap: 8px; }
+    .booking-day { display: grid; grid-template-columns: minmax(96px, 1fr) repeat(2, 82px); gap: 8px; align-items: center; }
+    .booking-day-label { color: #b9cbc2; font-size: 12px; }
+    .booking-slot { min-height: 36px; border: 1px solid rgba(109, 255, 179, .25); border-radius: 8px; color: #bdf9dc; background: rgba(109, 255, 179, .045); font: 12px Consolas, monospace; cursor: pointer; transition: border-color .2s ease, background .2s ease, color .2s ease; }
+    .booking-slot:hover, .booking-slot:focus-visible { border-color: rgba(109, 255, 179, .62); background: rgba(109, 255, 179, .09); outline: none; }
+    .booking-slot.is-selected { border-color: #6bffb3; color: #06120d; background: #6bffb3; box-shadow: 0 0 14px rgba(109, 255, 179, .22); }
+    .booking-slot:disabled { border-color: rgba(120, 140, 130, .12); color: #526159; background: rgba(80, 96, 88, .035); cursor: not-allowed; box-shadow: none; }
+    .booking-selection { min-height: 34px; margin: 16px 0 0; color: #9caf9f; font-size: 12px; line-height: 1.55; text-align: center; }
+    .agenda-confirm-button[aria-disabled="true"] { opacity: .45; cursor: not-allowed; filter: grayscale(.35); }
+    .agenda-meeting-button {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      margin-top: 22px;
+      border: 1px solid rgba(109, 255, 179, .58);
+      border-radius: 10px;
+      color: #06120d;
+      background: linear-gradient(110deg, #6bffb3, #58f7ff);
+      box-shadow: 0 10px 30px rgba(88, 247, 255, .1);
+      font-size: 15px;
+      font-weight: 750;
+      text-decoration: none;
+      transition: filter .22s ease, transform .22s ease;
+    }
+    .agenda-meeting-button:hover,
+    .agenda-meeting-button:focus-visible { filter: brightness(1.07); transform: translateY(-1px); outline: none; }
+
     @media (max-width: 900px) {
       .hero { min-height: auto; grid-template-columns: 1fr; gap: 52px; padding: 72px 0 62px; }
       .hero-console { width: 100%; max-width: 720px; }
@@ -531,12 +680,58 @@
       .footer-inner { flex-direction: column; gap: 6px; }
     }
 
+    @media (max-width: 768px) {
+      html { overflow-x: hidden; }
+      body { padding-bottom: calc(116px + env(safe-area-inset-bottom)); }
+      body.agenda-open { overflow: hidden; }
+      .agenda-trigger {
+        top: auto;
+        right: 10px;
+        bottom: calc(10px + env(safe-area-inset-bottom));
+        left: auto;
+        width: min(246px, calc(100vw - 24px));
+        transform: none;
+      }
+      .agenda-trigger-desktop { display: none; }
+      .agenda-trigger-mobile { display: grid; grid-template-columns: minmax(0, 154px) 96px; align-items: center; }
+      .agenda-trigger-mobile .agenda-entry-copy { gap: 7px; }
+      .agenda-trigger-mobile .agenda-availability { font-size: 8px; }
+      .agenda-trigger-mobile .agenda-trigger-value { font-size: 12px; }
+      .agenda-trigger-mobile .agenda-cta { min-height: 29px; padding-inline: 11px; font-size: 10px; }
+      .agenda-trigger-mobile .agenda-lens-button { width: 96px; margin-left: -7px; }
+      .agenda-panel {
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-height: min(82vh, 680px);
+        padding: 28px 22px calc(24px + env(safe-area-inset-bottom));
+        overflow-y: auto;
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+        border-radius: 22px 22px 0 0;
+        transform: translateY(105%);
+        transform-origin: center bottom;
+        transition: transform .38s cubic-bezier(.22, .8, .26, 1), visibility .38s ease;
+      }
+      .agenda-confirmation-widget.is-open .agenda-panel { transform: translateY(0); }
+      .agenda-panel h2 { margin-inline: 16px; font-size: 22px; }
+      .agenda-meeting-button { min-height: 52px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; }
       .compass-needle { animation: none; }
       .training-visual::before, .training-core, .training-stream, .training-node-dot { animation: none; }
       .hero-positioning span { animation: none; }
+      .agenda-trigger, .agenda-overlay, .agenda-panel, .agenda-close, .agenda-meeting-button { transition: none; }
+      .agenda-trigger:hover, .agenda-trigger:active { transform: none; }
+      .agenda-trigger-value { animation: none; }
+      .agenda-cta, .agenda-lens-button { transition: none; }
+      .agenda-cta:hover, .agenda-lens-button:hover { transform: none; }
     }
   </style>
 </head>
@@ -684,6 +879,58 @@
 
   </main>
 
+  <aside class="agenda-confirmation-widget" aria-label="议题确认与预约会议" hidden>
+    <div class="agenda-trigger">
+      <span class="agenda-trigger-desktop">
+        <img class="agenda-lens-image" src="assets/images/ai-lens-entry.png" alt="AI Data Lab 分析透镜入口">
+        <button class="agenda-trigger-action" type="button" aria-label="会议预约" aria-expanded="false" aria-controls="agenda-panel"></button>
+      </span>
+      <span class="agenda-trigger-mobile">
+        <img class="agenda-lens-image" src="assets/images/ai-lens-entry.png" alt="AI Data Lab 分析透镜入口">
+        <button class="agenda-trigger-action" type="button" aria-label="会议预约" aria-expanded="false" aria-controls="agenda-panel"></button>
+      </span>
+    </div>
+    <div class="agenda-overlay" aria-hidden="true"></div>
+    <section class="agenda-panel" id="agenda-panel" role="dialog" aria-modal="true" aria-labelledby="agenda-panel-title" aria-hidden="true">
+      <button class="agenda-close" type="button" aria-label="关闭预约窗口">×</button>
+      <div class="agenda-view agenda-overview">
+        <h2 id="agenda-panel-title">先确认任务，再交付项目</h2>
+        <p class="agenda-copy" id="agenda-panel-subtitle">线上 30 分钟，清晰收集材料</p>
+        <ol class="agenda-steps">
+          <li class="agenda-step"><button class="agenda-stage" type="button" data-stage="define" aria-pressed="false"><strong><span>01</span>定义任务</strong><p>议题・数据条件・期望产出</p></button></li>
+          <li class="agenda-step"><button class="agenda-stage" type="button" data-stage="confirm" aria-pressed="false"><strong><span>02</span>项目确认</strong><p>范围・周期・交付物・报价</p></button></li>
+          <li class="agenda-step"><button class="agenda-stage" type="button" data-stage="payment" aria-pressed="false"><strong><span>03</span>付费启动</strong><p>确认后签约启动</p></button></li>
+          <li class="agenda-step"><button class="agenda-stage" type="button" data-stage="delivery" aria-pressed="false"><strong><span>04</span>项目交付</strong><p>按节点交付与复盘</p></button></li>
+        </ol>
+        <div class="agenda-payment" hidden>
+          <p class="agenda-payment-copy">费用根据确认后的工作范围与工作量确定</p>
+          <div class="agenda-payment-actions">
+            <button class="agenda-payment-button" type="button" data-payment="wechat">微信支付</button>
+            <button class="agenda-payment-button" type="button" data-payment="alipay">支付宝</button>
+          </div>
+          <p class="agenda-payment-status" aria-live="polite"></p>
+        </div>
+        <button class="agenda-meeting-button agenda-open-scheduler" type="button">会议预约</button>
+      </div>
+      <div class="agenda-view agenda-scheduler" hidden>
+        <button class="agenda-back" type="button">← 返回任务流程</button>
+        <h2>选择本周预约时间</h2>
+        <p class="booking-timezone">北京时间 · Asia/Shanghai</p>
+        <div class="booking-grid" aria-label="本周预约时段"></div>
+        <p class="booking-selection" aria-live="polite">请选择任务阶段与预约时间</p>
+        <!-- TODO: 替换为腾讯会议预约链接，并提交 selectedTaskStage 与 selectedBookingSlot -->
+        <a class="agenda-meeting-button agenda-confirm-button" href="#" aria-disabled="true">确认预约</a>
+      </div>
+      <div class="payment-qr-modal" role="dialog" aria-modal="true" aria-labelledby="payment-qr-title" hidden>
+        <div class="payment-qr-card">
+          <button class="payment-qr-close" type="button" aria-label="关闭支付二维码">×</button>
+          <h3 id="payment-qr-title">支付二维码</h3>
+          <img class="payment-qr-image" alt="" hidden>
+        </div>
+      </div>
+    </section>
+  </aside>
+
   <footer>
     <div class="container footer-inner">
       <span>© <span id="year"></span> AI Data Lab</span>
@@ -715,6 +962,310 @@
         }
       });
     });
+
+    const meetingBookingUrl = "#";
+    const meetingDeepLink = "";
+    const meetingTopicPrefix = "AI Data Lab - 会议预约";
+    const BOOKING_TIMEZONE = "Asia/Shanghai";
+    const WEEKDAY_BOOKING_SLOTS = ["11:00", "15:00"];
+    const BOOKING_WEEKDAYS = ["周一", "周二", "周三", "周四", "周五"];
+    const TASK_STAGE_LABELS = { define: "定义任务", confirm: "项目确认", payment: "付费启动", delivery: "项目交付" };
+    const TASK_STAGE_CONTENT = {
+      define: { title: "先确认任务，再交付项目", subtitle: "线上 30 分钟，清晰收集材料" },
+      confirm: { title: "确认议题，校准方向", subtitle: "确认需求理解，明确范围与预期产出" },
+      payment: { title: "确认费用，启动项目", subtitle: "根据工作量确认报价，完成付款后启动" },
+      delivery: { title: "交付结果，讲清方法", subtitle: "解释结论与使用方式，说明后续怎么做" }
+    };
+    const PAYMENT_QR = { wechat: "", alipay: "" };
+
+    const agendaWidget = document.querySelector(".agenda-confirmation-widget");
+    const agendaOpenButtons = [...agendaWidget.querySelectorAll(".agenda-trigger-action")];
+    const agendaPanel = agendaWidget.querySelector(".agenda-panel");
+    const agendaOverlay = agendaWidget.querySelector(".agenda-overlay");
+    const agendaClose = agendaWidget.querySelector(".agenda-close");
+    const agendaTitle = agendaWidget.querySelector("#agenda-panel-title");
+    const agendaSubtitle = agendaWidget.querySelector("#agenda-panel-subtitle");
+    const agendaOverview = agendaWidget.querySelector(".agenda-overview");
+    const agendaScheduler = agendaWidget.querySelector(".agenda-scheduler");
+    const agendaOpenScheduler = agendaWidget.querySelector(".agenda-open-scheduler");
+    const agendaBack = agendaWidget.querySelector(".agenda-back");
+    const bookingGrid = agendaWidget.querySelector(".booking-grid");
+    const bookingSelection = agendaWidget.querySelector(".booking-selection");
+    const agendaConfirmButton = agendaWidget.querySelector(".agenda-confirm-button");
+    const agendaStageButtons = [...agendaWidget.querySelectorAll(".agenda-stage")];
+    const agendaPayment = agendaWidget.querySelector(".agenda-payment");
+    const agendaPaymentStatus = agendaWidget.querySelector(".agenda-payment-status");
+    const agendaPaymentButtons = [...agendaWidget.querySelectorAll(".agenda-payment-button")];
+    const paymentQrModal = agendaWidget.querySelector(".payment-qr-modal");
+    const paymentQrTitle = agendaWidget.querySelector("#payment-qr-title");
+    const paymentQrImage = agendaWidget.querySelector(".payment-qr-image");
+    const paymentQrClose = agendaWidget.querySelector(".payment-qr-close");
+    let agendaPreviousFocus = null;
+    let selectedTaskStage = null;
+    let selectedBookingSlot = null;
+    let selectedBookingRequest = null;
+
+    agendaConfirmButton.href = meetingBookingUrl;
+
+    function updateStageContent(stage = selectedTaskStage || "define") {
+      const content = TASK_STAGE_CONTENT[stage] || TASK_STAGE_CONTENT.define;
+      agendaTitle.textContent = content.title;
+      agendaSubtitle.textContent = content.subtitle;
+      agendaPayment.hidden = stage !== "payment";
+      if (stage !== "payment") agendaPaymentStatus.textContent = "";
+    }
+
+    function closePaymentQr() {
+      paymentQrModal.hidden = true;
+      paymentQrImage.hidden = true;
+      paymentQrImage.removeAttribute("src");
+      paymentQrImage.alt = "";
+    }
+
+    function openPaymentQr(method) {
+      const paymentLabel = method === "wechat" ? "微信支付" : "支付宝";
+      const qrUrl = PAYMENT_QR[method];
+      if (!qrUrl) {
+        agendaPaymentStatus.textContent = `${paymentLabel}二维码待配置`;
+        return;
+      }
+      paymentQrTitle.textContent = paymentLabel;
+      paymentQrImage.src = qrUrl;
+      paymentQrImage.alt = `${paymentLabel}二维码`;
+      paymentQrImage.hidden = false;
+      paymentQrModal.hidden = false;
+      paymentQrClose.focus();
+    }
+
+    function getZonedDateParts(date = new Date()) {
+      const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone: BOOKING_TIMEZONE,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hourCycle: "h23"
+      }).formatToParts(date);
+      return Object.fromEntries(parts.filter((part) => part.type !== "literal").map((part) => [part.type, Number(part.value)]));
+    }
+
+    function getBookingWeek(now = new Date()) {
+      const current = getZonedDateParts(now);
+      const localToday = new Date(Date.UTC(current.year, current.month - 1, current.day));
+      const mondayOffset = (localToday.getUTCDay() + 6) % 7;
+      const monday = new Date(localToday.getTime() - mondayOffset * 86400000);
+      const currentWallClock = Date.UTC(current.year, current.month - 1, current.day, current.hour, current.minute, current.second);
+
+      return BOOKING_WEEKDAYS.map((weekday, dayIndex) => {
+        const date = new Date(monday.getTime() + dayIndex * 86400000);
+        const year = date.getUTCFullYear();
+        const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+        const day = String(date.getUTCDate()).padStart(2, "0");
+        const dateKey = `${year}-${month}-${day}`;
+        return {
+          date: dateKey,
+          dateLabel: `${month}/${day}`,
+          weekday,
+          slots: WEEKDAY_BOOKING_SLOTS.map((time) => {
+            const [hour, minute] = time.split(":").map(Number);
+            const slotWallClock = Date.UTC(year, date.getUTCMonth(), date.getUTCDate(), hour, minute, 0);
+            return { date: dateKey, weekday, time, timezone: BOOKING_TIMEZONE, available: slotWallClock > currentWallClock };
+          })
+        };
+      });
+    }
+
+    function updateAvailability(now = new Date()) {
+      const schedule = getBookingWeek(now);
+      const availableCount = schedule.flatMap((day) => day.slots).filter((slot) => slot.available).length;
+      agendaWidget.querySelectorAll(".agenda-slot-count").forEach((element) => { element.textContent = String(availableCount); });
+      return schedule;
+    }
+
+    function updateBookingSelection() {
+      const hasCompleteSelection = Boolean(selectedTaskStage && selectedBookingSlot);
+      agendaConfirmButton.setAttribute("aria-disabled", String(!hasCompleteSelection));
+      if (hasCompleteSelection) {
+        bookingSelection.textContent = `${TASK_STAGE_LABELS[selectedTaskStage]} · ${selectedBookingSlot.weekday} ${selectedBookingSlot.date.slice(5).replace("-", "/")} ${selectedBookingSlot.time}`;
+      } else if (selectedBookingSlot) {
+        bookingSelection.textContent = `已选 ${selectedBookingSlot.weekday} ${selectedBookingSlot.date.slice(5).replace("-", "/")} ${selectedBookingSlot.time}，请选择任务阶段`;
+      } else if (selectedTaskStage) {
+        bookingSelection.textContent = `已选 ${TASK_STAGE_LABELS[selectedTaskStage]}，请选择预约时间`;
+      } else {
+        bookingSelection.textContent = "请选择任务阶段与预约时间";
+      }
+    }
+
+    function buildMeetingRequest() {
+      if (!selectedTaskStage || !selectedBookingSlot) return null;
+      return {
+        topic: `${meetingTopicPrefix} - ${TASK_STAGE_LABELS[selectedTaskStage]}`,
+        stage: selectedTaskStage,
+        stageLabel: TASK_STAGE_LABELS[selectedTaskStage],
+        date: selectedBookingSlot.date,
+        weekday: selectedBookingSlot.weekday,
+        time: selectedBookingSlot.time,
+        timezone: selectedBookingSlot.timezone,
+        startTimeText: `${selectedBookingSlot.date} ${selectedBookingSlot.time} (${selectedBookingSlot.timezone})`
+      };
+    }
+
+    function fillMeetingTarget(template, request) {
+      const values = {
+        topic: request.topic,
+        stage: request.stage,
+        stageLabel: request.stageLabel,
+        date: request.date,
+        weekday: request.weekday,
+        time: request.time,
+        timezone: request.timezone,
+        startTime: request.startTimeText
+      };
+      return Object.entries(values).reduce(
+        (target, [key, value]) => target.replaceAll(`{${key}}`, encodeURIComponent(value)),
+        template
+      );
+    }
+
+    function openConfiguredMeetingEntry(request) {
+      const deepLinkTarget = meetingDeepLink ? fillMeetingTarget(meetingDeepLink, request) : "";
+      const bookingTarget = meetingBookingUrl && meetingBookingUrl !== "#" ? fillMeetingTarget(meetingBookingUrl, request) : "";
+
+      if (deepLinkTarget) {
+        window.location.href = deepLinkTarget;
+        if (bookingTarget) {
+          window.setTimeout(() => {
+            if (document.visibilityState === "visible") window.location.href = bookingTarget;
+          }, 1400);
+        }
+        return true;
+      }
+      if (bookingTarget) {
+        window.open(bookingTarget, "_blank", "noopener");
+        return true;
+      }
+      return false;
+    }
+
+    function renderBookingGrid(now = new Date()) {
+      const schedule = updateAvailability(now);
+      bookingGrid.replaceChildren();
+      const availableKeys = new Set();
+
+      schedule.forEach((day) => {
+        const row = document.createElement("div");
+        row.className = "booking-day";
+        const label = document.createElement("span");
+        label.className = "booking-day-label";
+        label.textContent = `${day.weekday} ${day.dateLabel}`;
+        row.append(label);
+
+        day.slots.forEach((slot) => {
+          const button = document.createElement("button");
+          const slotKey = `${slot.date}-${slot.time}`;
+          button.type = "button";
+          button.className = "booking-slot";
+          button.disabled = !slot.available;
+          button.textContent = slot.available ? slot.time : `${slot.time} 已过`;
+          button.setAttribute("aria-pressed", String(Boolean(selectedBookingSlot && `${selectedBookingSlot.date}-${selectedBookingSlot.time}` === slotKey)));
+          if (slot.available) availableKeys.add(slotKey);
+          if (selectedBookingSlot && `${selectedBookingSlot.date}-${selectedBookingSlot.time}` === slotKey) button.classList.add("is-selected");
+          button.addEventListener("click", () => {
+            selectedBookingSlot = { date: slot.date, weekday: slot.weekday, time: slot.time, timezone: slot.timezone };
+            renderBookingGrid();
+            updateBookingSelection();
+          });
+          row.append(button);
+        });
+        bookingGrid.append(row);
+      });
+
+      if (selectedBookingSlot && !availableKeys.has(`${selectedBookingSlot.date}-${selectedBookingSlot.time}`)) selectedBookingSlot = null;
+      updateBookingSelection();
+    }
+
+    function showAgendaOverview() {
+      agendaOverview.hidden = false;
+      agendaScheduler.hidden = true;
+      updateStageContent();
+    }
+
+    function showAgendaScheduler() {
+      agendaOverview.hidden = true;
+      agendaScheduler.hidden = false;
+      renderBookingGrid();
+      agendaBack.focus();
+    }
+
+    function setAgendaOpen(isOpen) {
+      agendaWidget.classList.toggle("is-open", isOpen);
+      document.body.classList.toggle("agenda-open", isOpen);
+      agendaOpenButtons.forEach((button) => button.setAttribute("aria-expanded", String(isOpen)));
+      agendaPanel.setAttribute("aria-hidden", String(!isOpen));
+      agendaOverlay.setAttribute("aria-hidden", String(!isOpen));
+
+      if (isOpen) {
+        agendaPreviousFocus = document.activeElement;
+        showAgendaOverview();
+        agendaClose.focus();
+      } else {
+        closePaymentQr();
+        if (agendaPreviousFocus) {
+          agendaPreviousFocus.focus();
+          agendaPreviousFocus = null;
+        }
+      }
+    }
+
+    agendaOpenButtons.forEach((button) => {
+      button.addEventListener("click", () => setAgendaOpen(true));
+    });
+    agendaClose.addEventListener("click", () => setAgendaOpen(false));
+    agendaOverlay.addEventListener("click", () => setAgendaOpen(false));
+    agendaStageButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        selectedTaskStage = button.dataset.stage;
+        agendaStageButtons.forEach((stageButton) => {
+          const isSelected = stageButton === button;
+          stageButton.classList.toggle("is-selected", isSelected);
+          stageButton.setAttribute("aria-pressed", String(isSelected));
+        });
+        updateStageContent(selectedTaskStage);
+        updateBookingSelection();
+      });
+    });
+    agendaPaymentButtons.forEach((button) => {
+      button.addEventListener("click", () => openPaymentQr(button.dataset.payment));
+    });
+    paymentQrClose.addEventListener("click", closePaymentQr);
+    paymentQrModal.addEventListener("click", (event) => {
+      if (event.target === paymentQrModal) closePaymentQr();
+    });
+    agendaOpenScheduler.addEventListener("click", showAgendaScheduler);
+    agendaBack.addEventListener("click", () => {
+      showAgendaOverview();
+      agendaOpenScheduler.focus();
+    });
+    agendaConfirmButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      selectedBookingRequest = buildMeetingRequest();
+      if (!selectedBookingRequest) return;
+      if (!openConfiguredMeetingEntry(selectedBookingRequest)) {
+        bookingSelection.textContent = `${selectedBookingRequest.stageLabel} · ${selectedBookingRequest.weekday} ${selectedBookingRequest.date.slice(5).replace("-", "/")} ${selectedBookingRequest.time} · 预约信息已准备`;
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (!paymentQrModal.hidden) closePaymentQr();
+      else if (agendaWidget.classList.contains("is-open")) setAgendaOpen(false);
+    });
+    updateAvailability();
+    setInterval(() => {
+      updateAvailability();
+      if (!agendaScheduler.hidden) renderBookingGrid();
+    }, 60000);
   </script>
 </body>
 </html>

@@ -16,6 +16,25 @@
     .entry b{transition:transform .18s ease}.gateway-card:hover .entry b{transform:translateX(4px)}
     @media(max-width:760px){.market-icon{width:50px;height:50px;padding:10px}}
   </style>
+  <style>
+    body.finance-booking-open{overflow:hidden}.finance-booking-trigger{position:fixed;right:24px;bottom:28px;z-index:70;width:264px;padding:16px 17px;border:1px solid rgba(109,255,179,.34);border-radius:15px;color:var(--text);background:rgba(5,18,13,.13);box-shadow:0 10px 28px rgba(0,0,0,.13),0 0 18px rgba(109,255,179,.06);backdrop-filter:blur(3px);text-align:left}.finance-booking-status{display:flex;align-items:center;gap:7px;color:#a9bdb3;font-size:10px}.finance-booking-status:before{width:7px;height:7px;content:"";border-radius:50%;background:var(--green);box-shadow:0 0 9px rgba(109,255,179,.7)}.finance-booking-slogan{display:block;margin:10px 0;background:linear-gradient(110deg,#ecfff5,var(--green),var(--cyan));background-clip:text;-webkit-background-clip:text;color:transparent;font-size:15px;font-weight:780;text-align:center}.finance-booking-open-button{display:block;min-height:33px;margin-left:auto;padding:0 14px;border:1px solid rgba(71,215,255,.45);border-radius:999px;color:#a9efff;background:rgba(71,215,255,.055);font-weight:700;cursor:pointer}.finance-booking-overlay{position:fixed;inset:0;z-index:78;visibility:hidden;opacity:0;background:rgba(0,5,3,.48);backdrop-filter:blur(2px);pointer-events:none;transition:.25s ease}.finance-booking-panel{position:fixed;right:24px;bottom:28px;z-index:80;width:min(390px,calc(100vw - 40px));max-height:calc(100vh - 56px);padding:30px 28px 26px;overflow:auto;border:1px solid rgba(109,255,179,.38);border-radius:18px;background:linear-gradient(145deg,rgba(11,26,20,.9),rgba(5,12,9,.85));box-shadow:0 20px 58px rgba(0,0,0,.36);visibility:hidden;opacity:0;transform:translateY(12px) scale(.985);pointer-events:none;transition:.25s ease}.finance-booking.is-open .finance-booking-overlay,.finance-booking.is-open .finance-booking-panel{visibility:visible;opacity:1;pointer-events:auto}.finance-booking.is-open .finance-booking-panel{transform:none}.finance-booking-close{position:absolute;top:12px;right:12px;width:32px;height:32px;border:1px solid var(--line);border-radius:50%;color:#bcd0c6;background:rgba(4,11,8,.7);font-size:20px;cursor:pointer}.finance-booking-panel h2{margin:2px 18px 7px;background:linear-gradient(110deg,#effff6,var(--green),var(--cyan));background-clip:text;-webkit-background-clip:text;color:transparent;font-size:21px;line-height:1.25;text-align:center;white-space:nowrap}.finance-booking-subtitle{margin:0;color:#aebfb6;font-size:13px;text-align:center}.finance-booking-steps{position:relative;display:grid;gap:12px;margin:21px 0 0;padding:0;list-style:none}.finance-booking-steps:before{position:absolute;top:12px;bottom:12px;left:7px;width:1px;content:"";background:linear-gradient(rgba(109,255,179,.58),rgba(71,215,255,.12))}.finance-stage{position:relative;width:100%;padding:8px 10px 8px 29px;border:1px solid transparent;border-radius:9px;color:inherit;background:transparent;text-align:left;cursor:pointer}.finance-stage:before{position:absolute;top:15px;left:3px;width:9px;height:9px;content:"";border:1px solid var(--green);border-radius:50%;background:#09150f}.finance-stage.is-selected{border-color:rgba(109,255,179,.48);background:rgba(109,255,179,.07)}.finance-stage.is-selected:before{background:var(--green);box-shadow:0 0 12px rgba(109,255,179,.7)}.finance-stage strong{display:block;font-size:14px}.finance-stage strong span{margin-right:8px;color:var(--green);font:11px Consolas,monospace}.finance-stage p{margin:3px 0 0;color:#83978d;font-size:12px}.finance-payment{margin-top:15px;padding:12px;border:1px solid var(--line);border-radius:10px;background:rgba(109,255,179,.025)}.finance-payment[hidden],.finance-booking-view[hidden]{display:none}.finance-payment p{margin:0 0 9px;color:#91a69b;font-size:11px;text-align:center}.finance-payment-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.finance-payment-button,.finance-slot{min-height:36px;border:1px solid rgba(71,215,255,.28);border-radius:8px;color:#b9f6ff;background:rgba(71,215,255,.04);cursor:pointer}.finance-payment-status{min-height:17px;margin:8px 0 0!important}.finance-meeting-button{display:flex;width:100%;min-height:46px;margin-top:18px;align-items:center;justify-content:center;border:1px solid rgba(109,255,179,.55);border-radius:10px;color:#06120d;background:linear-gradient(110deg,var(--green),#58f7ff);font-weight:760;text-decoration:none;cursor:pointer}.finance-back{padding:5px 0;border:0;color:#8deec5;background:transparent;cursor:pointer}.finance-timezone{margin:0 0 14px;color:#789087;font-size:11px;text-align:center}.finance-booking-grid{display:grid;gap:7px}.finance-booking-day{display:grid;grid-template-columns:minmax(90px,1fr) repeat(2,78px);gap:7px;align-items:center}.finance-day-label{color:#b9cbc2;font-size:12px}.finance-slot.is-selected{border-color:var(--green);color:#06120d;background:var(--green)}.finance-slot:disabled{color:#526159;background:rgba(80,96,88,.035);cursor:not-allowed}.finance-selection{min-height:32px;margin:13px 0 0;color:#9caf9f;font-size:12px;text-align:center}.finance-confirm[aria-disabled=true]{opacity:.45;cursor:not-allowed}@media(max-width:760px){body{padding-bottom:calc(92px + env(safe-area-inset-bottom))}.finance-booking-trigger{right:10px;bottom:calc(9px + env(safe-area-inset-bottom));width:235px;padding:11px 13px}.finance-booking-panel{right:0;bottom:0;width:100%;max-height:82vh;padding:27px 21px calc(22px + env(safe-area-inset-bottom));border-right:0;border-bottom:0;border-left:0;border-radius:20px 20px 0 0}.finance-booking-panel h2{font-size:20px}.finance-booking-day{grid-template-columns:minmax(82px,1fr) repeat(2,72px)}}@media(prefers-reduced-motion:reduce){.finance-booking-overlay,.finance-booking-panel{transition:none}}
+  </style>
+  <style>.finance-qr-image[hidden]{display:none!important}</style>
+  <style>
+    .finance-booking-trigger{position:fixed;right:18px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:70;width:330px;max-width:calc(100vw - 24px);aspect-ratio:750/510;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;overflow:hidden}
+    .finance-booking-entry-image{position:absolute;width:153.6%;max-width:none;height:auto;left:-26.667%;top:-98.039%;background:transparent;border:0;box-shadow:none;pointer-events:none;animation:finance-entry-glow 8s ease-in-out infinite}
+    .finance-booking-trigger .finance-booking-status{position:absolute;left:6.5%;top:17.2%;width:35.5%;height:10.4%;justify-content:center;gap:3px;border:1px solid #58efd2;border-radius:999px;background:#032b30;color:#eafffa;font-size:8px;white-space:nowrap;box-shadow:0 0 5px rgba(61,240,212,.4)}
+    .finance-booking-trigger .finance-booking-status:before{width:5px;height:5px;flex-shrink:0}
+    .finance-booking-trigger .finance-slot-count{color:#47efff;font-weight:800}
+    .finance-booking-trigger .finance-booking-slogan{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+    .finance-booking-trigger .finance-booking-open-button{position:absolute;left:16%;top:66.5%;width:34%;height:13%;min-height:0;margin:0;padding:0;border:0;border-radius:999px;background:transparent;color:transparent;font-size:0;cursor:pointer}
+    .finance-booking-trigger .finance-booking-open-button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+    .finance-booking-panel{left:50%;top:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);max-height:calc(100dvh - 32px)}
+    .finance-booking.is-open .finance-booking-panel{transform:translate(-50%,-50%)}
+    @keyframes finance-entry-glow{0%,100%{filter:drop-shadow(0 0 1px rgba(71,215,255,.08))}50%{filter:drop-shadow(0 0 2px rgba(71,215,255,.16))}}
+    @media(max-width:760px){body{padding-bottom:0}.finance-booking-trigger{width:260px;right:10px}.finance-booking-trigger .finance-booking-status{font-size:6.5px;gap:2px}.finance-booking-panel{width:calc(100vw - 28px);border:1px solid rgba(109,255,179,.38);border-radius:18px}}
+    @media(prefers-reduced-motion:reduce){.finance-booking-entry-image{animation:none}}
+  </style>
 </head>
 <body>
   <header class="header"><nav class="nav container"><a class="brand" href="../../index.html"><span class="mark"></span>AI DATA LAB</a><div class="navlinks"><a href="../../index.html">首页</a><a href="../../index.html#datasets">Dataset Library</a></div><span class="preview-badge">FINANCIAL DATA</span></nav></header>
@@ -24,8 +43,124 @@
     <section class="gateway container" aria-label="金融市场数据分类入口"><div class="gateway-grid">
       <a class="gateway-card" href="secondary-market.html"><div class="gateway-head"><span class="card-en">Secondary Financial Market</span><svg class="market-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M7 39V9M7 39h34M13 31v-9m0 3h-3m3 2h3M23 27V13m0 4h-3m3 3h3M33 34V20m0 4h-3m3 5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><h2>金融二级市场</h2><p>覆盖股票、基金、债券、商品期货、期权及数字资产等公开交易市场，沉淀行情观察、收益测算、策略复盘与风险管理相关数据。</p><span class="entry">进入金融二级市场 <b>→</b></span></a>
       <a class="gateway-card primary" href="primary-market.html"><div class="gateway-head"><span class="card-en">Primary Financial Market</span><svg class="market-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M8 40h32M12 40V20h24v20M10 20l14-11 14 11M18 26v8m6-8v8m6-8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="15" r="2" fill="currentColor"/></svg></div><h2>金融一级市场</h2><p>围绕股权投资、企业融资、项目估值、商业尽调及非公开交易场景，逐步建立用于项目判断、风险识别与投资研究的数据框架。</p><span class="entry">进入金融一级市场 <b>→</b></span></a>
-    </div><p class="risk-note">本页面仅用于金融数据学习、市场观察和研究展示，不构成任何投资建议。</p></section>
+    </div>
+  <aside class="finance-booking" aria-label="会议预约">
+    <div class="finance-booking-trigger">
+      <img class="finance-booking-entry-image" src="../../assets/images/ai-lens-entry.png" alt="" aria-hidden="true">
+      <span class="finance-booking-status">当前可接 <span class="finance-slot-count">0</span> 个任务档期</span>
+      <strong class="finance-booking-slogan">跨市场视角，决策更清晰</strong>
+      <button class="finance-booking-open-button" type="button" aria-expanded="false" aria-controls="finance-booking-panel">会议预约</button>
+    </div>
+    <div class="finance-booking-overlay" aria-hidden="true"></div>
+    <section class="finance-booking-panel" id="finance-booking-panel" role="dialog" aria-modal="true" aria-labelledby="finance-booking-title" aria-hidden="true">
+      <button class="finance-booking-close" type="button" aria-label="关闭预约窗口">×</button>
+      <div class="finance-booking-view finance-overview">
+        <h2 id="finance-booking-title">先确认任务，再交付项目</h2>
+        <p class="finance-booking-subtitle">线上 30 分钟，清晰收集材料</p>
+        <ol class="finance-booking-steps">
+          <li><button class="finance-stage" type="button" data-stage="define" aria-pressed="false"><strong><span>01</span>定义任务</strong><p>议题・数据条件・期望产出</p></button></li>
+          <li><button class="finance-stage" type="button" data-stage="confirm" aria-pressed="false"><strong><span>02</span>项目确认</strong><p>范围・周期・交付物・报价</p></button></li>
+          <li><button class="finance-stage" type="button" data-stage="payment" aria-pressed="false"><strong><span>03</span>付费启动</strong><p>确认后签约启动</p></button></li>
+          <li><button class="finance-stage" type="button" data-stage="delivery" aria-pressed="false"><strong><span>04</span>项目交付</strong><p>按节点交付与复盘</p></button></li>
+        </ol>
+        <button class="finance-meeting-button finance-open-scheduler" type="button">会议预约</button>
+      </div>
+      <div class="finance-booking-view finance-scheduler" hidden>
+        <button class="finance-back" type="button">← 返回任务流程</button>
+        <h2>选择本周预约时间</h2><p class="finance-timezone">北京时间 · Asia/Shanghai</p>
+        <div class="finance-booking-grid"></div><p class="finance-selection" aria-live="polite">请选择任务阶段与预约时间</p>
+        <a class="finance-meeting-button finance-confirm" href="#" aria-disabled="true">确认预约</a>
+      </div>
+      <div class="finance-booking-view finance-contact" hidden>
+        <button class="finance-back finance-contact-back" type="button">← 返回预约时间</button>
+        <h2>联系信息</h2>
+        <p class="finance-booking-subtitle">留下联系方式，方便我确认会议</p>
+        <form class="finance-contact-form" novalidate>
+          <label>称呼（可选）<input name="name" type="text" autocomplete="name"></label>
+          <label>联系方式（可选）<input name="contact" type="text" placeholder="微信 / 手机 / 邮箱，任意填写"></label>
+          <label>备注（可选）<textarea name="notes" rows="3"></textarea></label>
+          <button class="finance-meeting-button" type="submit">提交预约</button>
+          <p class="finance-contact-status" role="status"></p>
+        </form>
+      </div>
+      <div class="finance-booking-view finance-success" hidden>
+        <h2 id="finance-success-title">预约已提交</h2>
+        <p class="finance-booking-subtitle">我会尽快确认会议</p>
+        <button class="finance-meeting-button finance-done" type="button">完成</button>
+      </div>
+      <div class="finance-booking-view finance-payment" hidden aria-label="支付方式选择">
+        <div class="finance-payment-actions"><button class="finance-payment-button" type="button" data-payment="wechat">微信支付</button><button class="finance-payment-button" type="button" data-payment="alipay">支付宝</button></div>
+      </div>
+      <div class="finance-booking-view finance-qr" hidden>
+        <button class="finance-back finance-qr-back" type="button">← 返回支付方式选择</button>
+        <h2 class="finance-qr-title">收款二维码</h2>
+        <img class="finance-qr-image" alt="" hidden style="display:block;max-width:100%;width:240px;height:auto;max-height:55vh;object-fit:contain;margin:16px auto;">
+        <p class="finance-payment-status" aria-live="polite"></p>
+      </div>
+    </section>
+  </aside>
+    <p class="risk-note">本页面仅用于金融数据学习、市场观察和研究展示，不构成任何投资建议。</p></section>
   </main>
   <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>FINANCIAL MARKET DATA</span></div></footer>
+  <style>
+    .finance-contact-form label{display:block;margin:14px 0;color:#cde5df;font-size:13px}
+    .finance-contact-form input,.finance-contact-form textarea{display:block;box-sizing:border-box;width:100%;margin-top:6px;padding:10px 12px;border:1px solid rgba(81,218,181,.3);border-radius:10px;background:rgba(5,24,20,.5);color:#e9fff8;font:inherit}
+    .finance-contact-form input:focus,.finance-contact-form textarea:focus{outline:1px solid #63dcc0;border-color:#63dcc0}
+    .finance-contact-form textarea{resize:vertical}
+    .finance-contact-status{font-size:12px;color:#abd4c8}
+  </style>
+  <script>
+    (()=>{
+      const meetingBookingUrl="#",BOOKING_TIMEZONE="Asia/Shanghai",TIMES=["11:00","15:00"],WEEKDAYS=["周一","周二","周三","周四","周五"];
+      const bookingSubmitUrl="https://script.google.com/macros/s/AKfycbx_bijpy2zBwbOg1egebIqVV1DBWEaJVW44ICr_vs9MmbVdzoVTMLNvViI9Rjy_RIyAiQ/exec";
+      const LABELS={define:"定义任务",confirm:"项目确认",payment:"付费启动",delivery:"项目交付"};
+      // 填入自己的收款二维码路径；留空时不加载图片。
+      const PAYMENT_QR={wechat:"../../assets/images/wechat-pay.jpg",alipay:"../../assets/images/alipay-pay.jpg"};
+      const CONTENT={define:["先确认任务，再交付项目","线上 30 分钟，清晰收集材料"],confirm:["确认议题，校准方向","确认需求理解，明确范围与预期产出"],payment:["确认费用，启动项目","根据工作量确认报价，完成付款后启动"],delivery:["交付结果，讲清方法","解释结论与使用方式，说明后续怎么做"]};
+      const root=document.querySelector(".finance-booking"),panel=root.querySelector(".finance-booking-panel"),overlay=root.querySelector(".finance-booking-overlay"),open=root.querySelector(".finance-booking-open-button"),close=root.querySelector(".finance-booking-close"),overview=root.querySelector(".finance-overview"),scheduler=root.querySelector(".finance-scheduler"),title=root.querySelector("#finance-booking-title"),subtitle=root.querySelector(".finance-booking-subtitle"),payment=root.querySelector(".finance-payment"),paymentStatus=root.querySelector(".finance-payment-status"),stages=[...root.querySelectorAll(".finance-stage")],grid=root.querySelector(".finance-booking-grid"),selection=root.querySelector(".finance-selection"),confirm=root.querySelector(".finance-confirm");
+      const qr=root.querySelector('.finance-qr'),qrImage=root.querySelector('.finance-qr-image'),qrTitle=root.querySelector('.finance-qr-title');
+      const contact=root.querySelector('.finance-contact'),contactForm=root.querySelector('.finance-contact-form'),contactStatus=root.querySelector('.finance-contact-status');
+      const successView=root.querySelector('.finance-success'),done=root.querySelector('.finance-done');
+      done.onclick=()=>{setOpen(false);open.focus()};
+      let selectedTaskStage=null,selectedBookingSlot=null,selectedBookingRequest=null;
+      let bookingSubmitting=false;
+      contactForm.onsubmit=async e=>{
+        e.preventDefault();
+        if(bookingSubmitting||!['define','confirm','delivery'].includes(selectedTaskStage)||!selectedBookingSlot)return;
+        const fields=new FormData(contactForm),name=fields.get('name').trim(),contactInfo=fields.get('contact').trim(),notes=fields.get('notes').trim(),anonymous=!name&&!contactInfo&&!notes;
+        selectedBookingRequest={stage:selectedTaskStage,stageLabel:LABELS[selectedTaskStage],slot:{...selectedBookingSlot},name,contact:contactInfo,notes,anonymous,displayName:anonymous?'匿名预约':name||'未填写称呼'};
+        const payload=new URLSearchParams({stage:selectedTaskStage,date:selectedBookingSlot.date,weekday:selectedBookingSlot.weekday,time:selectedBookingSlot.time,timezone:selectedBookingSlot.timezone,name,contact:contactInfo,note:notes});
+        const submitButton=contactForm.querySelector('[type="submit"]');
+        bookingSubmitting=true;submitButton.disabled=true;contactForm.setAttribute('aria-busy','true');contactStatus.textContent='正在提交…';
+        try{
+          // 使用表单编码，供 Apps Script 的 e.parameter 读取；不使用无法确认结果的 no-cors。
+          const response=await fetch(bookingSubmitUrl,{method:'POST',body:payload,redirect:'follow'});
+          if(!response.ok)throw new Error('Submission failed');
+          const text=(await response.text()).trim();
+          let result;try{result=JSON.parse(text)}catch{result=null}
+          const success=result?(result.success===true||result.ok===true||result.status==='success'):/^(success|ok)$/i.test(text);
+          if(!success)throw new Error('Success not confirmed');
+          contact.hidden=true;overview.hidden=true;scheduler.hidden=true;payment.hidden=true;qr.hidden=true;
+          successView.hidden=false;panel.setAttribute('aria-labelledby','finance-success-title');
+          if(root.classList.contains('is-open'))done.focus();
+        }catch{
+          contactStatus.textContent='提交失败，请稍后重试';
+        }finally{
+          bookingSubmitting=false;submitButton.disabled=false;contactForm.removeAttribute('aria-busy');
+        }
+      };
+      root.querySelector('.finance-contact-back').onclick=()=>{contact.hidden=true;scheduler.hidden=false;confirm.focus()};
+      function clearQr(){qrImage.hidden=true;qrImage.removeAttribute('src');paymentStatus.textContent=''}
+      function showPayment(){contact.hidden=true;overview.hidden=true;scheduler.hidden=true;qr.hidden=true;clearQr();payment.hidden=false;payment.querySelector('button').focus()}
+      function parts(date=new Date()){return Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:BOOKING_TIMEZONE,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"}).formatToParts(date).filter(x=>x.type!=="literal").map(x=>[x.type,Number(x.value)]))}
+      function week(){const n=parts(),today=new Date(Date.UTC(n.year,n.month-1,n.day)),monday=new Date(today.getTime()-((today.getUTCDay()+6)%7)*864e5),wall=Date.UTC(n.year,n.month-1,n.day,n.hour,n.minute,n.second);return WEEKDAYS.map((weekday,i)=>{const d=new Date(monday.getTime()+i*864e5),date=`${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}`;return{weekday,date,slots:TIMES.map(time=>{const[h,min]=time.split(":").map(Number);return{time,available:Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),h,min)>wall}})}})}
+      function updateAvailability(){const count=week().flatMap(d=>d.slots).filter(s=>s.available).length;root.querySelector(".finance-slot-count").textContent=count}
+      function updateContent(){successView.hidden=true;panel.setAttribute('aria-labelledby','finance-booking-title');contact.hidden=true;const c=CONTENT[selectedTaskStage||"define"];title.textContent=c[0];subtitle.textContent=c[1];payment.hidden=true;qr.hidden=true;clearQr()}
+      function updateSelection(){confirm.setAttribute("aria-disabled",String(!(selectedTaskStage&&selectedBookingSlot)));selection.textContent=selectedTaskStage&&selectedBookingSlot?`${LABELS[selectedTaskStage]} · ${selectedBookingSlot.weekday} ${selectedBookingSlot.date.slice(5).replace("-","/")} ${selectedBookingSlot.time}`:selectedTaskStage?`已选 ${LABELS[selectedTaskStage]}，请选择预约时间`:selectedBookingSlot?`已选 ${selectedBookingSlot.weekday} ${selectedBookingSlot.time}，请选择任务阶段`:"请选择任务阶段与预约时间"}
+      function render(){grid.innerHTML="";week().forEach(day=>{const row=document.createElement("div");row.className="finance-booking-day";row.innerHTML=`<span class="finance-day-label">${day.weekday} ${day.date.slice(5).replace("-","/")}</span>`;day.slots.forEach(slot=>{const b=document.createElement("button");b.className="finance-slot";b.type="button";b.textContent=slot.time;b.disabled=!slot.available;if(selectedBookingSlot&&selectedBookingSlot.date===day.date&&selectedBookingSlot.time===slot.time)b.classList.add("is-selected");b.onclick=()=>{selectedBookingSlot={date:day.date,weekday:day.weekday,time:slot.time,timezone:BOOKING_TIMEZONE};render();updateSelection()};row.append(b)});grid.append(row)});updateSelection()}
+      function setOpen(on){root.classList.toggle("is-open",on);document.body.classList.toggle("finance-booking-open",on);open.setAttribute("aria-expanded",String(on));panel.setAttribute("aria-hidden",String(!on));overlay.setAttribute("aria-hidden",String(!on));if(on){overview.hidden=false;scheduler.hidden=true;updateContent()}}
+      open.onclick=()=>setOpen(true);close.onclick=()=>setOpen(false);overlay.onclick=()=>setOpen(false);stages.forEach(b=>b.onclick=()=>{selectedTaskStage=b.dataset.stage;stages.forEach(x=>{const on=x===b;x.classList.toggle("is-selected",on);x.setAttribute("aria-pressed",String(on))});updateContent();updateSelection()});root.querySelectorAll(".finance-payment-button").forEach(b=>b.onclick=()=>{clearQr();payment.hidden=true;qr.hidden=false;qrTitle.textContent=b.textContent;const url=PAYMENT_QR[b.dataset.payment];if(url){qrImage.onload=()=>{qrImage.hidden=false};qrImage.onerror=()=>{qrImage.hidden=true;paymentStatus.textContent="二维码加载失败，请检查配置"};qrImage.src=url;qrImage.alt=b.textContent+"收款二维码"}else paymentStatus.textContent="二维码待配置";root.querySelector(".finance-qr-back").focus()});root.querySelector(".finance-qr-back").onclick=showPayment;root.querySelector(".finance-open-scheduler").onclick=()=>{if(selectedTaskStage==="payment"){showPayment();return}overview.hidden=true;scheduler.hidden=false;render()};root.querySelector(".finance-back").onclick=()=>{scheduler.hidden=true;overview.hidden=false;updateContent()};confirm.onclick=e=>{e.preventDefault();if(!(selectedTaskStage&&selectedBookingSlot)||selectedTaskStage==="payment")return;scheduler.hidden=true;contact.hidden=false;contactStatus.textContent="";contactForm.elements.name.focus()};document.addEventListener("keydown",e=>{if(e.key==="Escape"&&root.classList.contains("is-open"))setOpen(false)});updateAvailability();setInterval(updateAvailability,60000);
+    })();
+  </script>
 </body>
 </html>
