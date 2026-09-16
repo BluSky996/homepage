@@ -62,6 +62,16 @@
 .framework-grid .directory-inner:before,#theory-directory .directory-inner:before,#research-directory .directory-inner:before{left:50%;top:-16px;height:48px}
 }
 </style>
+  <style>
+    .document-viewer.business-research{width:720px;max-width:90vw;height:88vh;height:88dvh;max-height:88dvh}
+    .business-research .viewer-shell{height:100%;max-height:100%;grid-template-rows:auto minmax(0,1fr) auto}
+    .business-research .viewer-stage{min-height:0;min-width:0;padding:10px 12px 54px;overflow:hidden}
+    .business-research .viewer-image{width:100%;height:100%;min-height:0;max-width:100%;max-height:100%;aspect-ratio:auto;object-fit:contain;border:0;box-shadow:none}
+    .business-research .viewer-nav{top:auto;bottom:9px;transform:none}
+    .business-research .viewer-header{padding:14px 18px}
+    .business-research .viewer-footer{min-height:36px;padding:6px 18px}
+    @media(max-width:800px){.document-viewer.business-research{width:94vw;max-width:94vw}.business-research .viewer-stage{padding:8px 6px 54px}.business-research .viewer-header h2{font-size:18px}}
+  </style>
 </head>
 <body>
   <header class="header"><nav class="nav container"><a class="brand" href="../../index.html"><span class="mark"></span>AI DATA LAB</a><div class="navlinks"><a href="index.html">返回金融市场数据</a><a href="../../index.html">首页</a></div><span class="preview-badge">PRIMARY</span></nav></header>
@@ -90,7 +100,10 @@
             <button class="directory-item" type="button" data-document="state-owned-ma-asset-loss-case"><span class="directory-number">3</span><span class="directory-copy"><strong>国企并购如何规避国有资产流失？</strong></span></button>
             <button class="directory-item" type="button" data-document="nonprofit-sustainable-revenue-case"><span class="directory-number">4</span><span class="directory-copy"><strong>非营利性机构是如何更持久地盈利的？</strong></span></button>
           </div></div></div>
-          <div class="theory-directory" id="research-directory" inert><div class="directory-inner"><div class="directory-list"><div class="directory-item"><span class="directory-number">1</span><span class="directory-copy"><strong>商业经营投研</strong><span>围绕真实商业项目，梳理业务流程、收入来源、成本结构、现金流路径与经营放大逻辑，用于判断企业是否具备资本进入和股权融资的基础。</span></span></div></div></div></div>
+          <div class="theory-directory" id="research-directory" inert><div class="directory-inner"><div class="directory-list">
+            <button class="directory-item" type="button" data-document="traditional-food-supply-chain-to-consumer"><span class="directory-number">1</span><span class="directory-copy"><strong>传统食品供应链，走向消费终端</strong></span></button>
+            <button class="directory-item" type="button" data-document="interior-design-to-homestay-manufacturer"><span class="directory-number">2</span><span class="directory-copy"><strong>室内设计公司，化身民宿厂家</strong></span></button>
+          </div></div></div>
         </div></div></div>
       </details>
       <section class="delivery-panel" aria-labelledby="delivery-title">
@@ -129,6 +142,8 @@
       });
     }));
     const documentSets = {
+      'traditional-food-supply-chain-to-consumer': { title: '传统食品供应链，走向消费终端', description: '', basePath: '../../assets/docs/finance/equity-financing/traditional-food-supply-chain-to-consumer/', images: ['traditional-food-supply-chain-to-consumer-01.png', 'traditional-food-supply-chain-to-consumer-02.png'] },
+      'interior-design-to-homestay-manufacturer': { title: '室内设计公司，化身民宿厂家', description: '', basePath: '../../assets/docs/finance/equity-financing/interior-design-to-homestay-manufacturer/', images: ['interior-design-to-homestay-manufacturer-01.png', 'interior-design-to-homestay-manufacturer-02.png'] },
       'small-capital-control-case': { title: '小资金当大股东，是福还是祸？', description: '', basePath: '../../assets/docs/finance/equity-financing/small-capital-control-case/', images: ['small-capital-control-case.png'] },
       'restaurant-equity-expansion-case': { title: '餐饮行业的扩张，是自掏腰包还是股权规划？', description: '', basePath: '../../assets/docs/finance/equity-financing/restaurant-equity-expansion-case/', images: ['restaurant-equity-expansion-case.png.png'] },
       'state-owned-ma-asset-loss-case': { title: '国企并购如何规避国有资产流失？', description: '', basePath: '../../assets/docs/finance/equity-financing/state-owned-ma-asset-loss-case/', images: ['state-owned-ma-asset-loss-case.png'] },
@@ -168,6 +183,7 @@
     }
 
     function openViewer(key, trigger) {
+      viewer.classList.toggle('business-research', ['traditional-food-supply-chain-to-consumer', 'interior-design-to-homestay-manufacturer'].includes(key));
       activeDocument = documentSets[key];
       activePage = 0;
       returnFocus = trigger;
