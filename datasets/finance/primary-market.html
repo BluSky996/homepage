@@ -72,6 +72,17 @@
     .business-research .viewer-footer{min-height:36px;padding:6px 18px}
     @media(max-width:800px){.document-viewer.business-research{width:94vw;max-width:94vw}.business-research .viewer-stage{padding:8px 6px 54px}.business-research .viewer-header h2{font-size:18px}}
   </style>
+  <style>
+    button.delivery-item{width:100%;color:inherit;font:inherit;text-align:left;cursor:pointer}
+    .document-viewer.on-site-guidance{width:720px;max-width:90vw;height:88vh;height:88dvh;max-height:88dvh}
+    .on-site-guidance .viewer-shell{height:100%;max-height:100%;grid-template-rows:auto minmax(0,1fr) auto}
+    .on-site-guidance .viewer-stage{min-height:0;min-width:0;padding:10px 12px 54px;overflow:hidden}
+    .on-site-guidance .viewer-image{width:100%;height:100%;min-height:0;max-width:100%;max-height:100%;aspect-ratio:auto;object-fit:contain;border:0;box-shadow:none}
+    .on-site-guidance .viewer-nav{top:auto;bottom:9px;transform:none}
+    .on-site-guidance .viewer-header{padding:14px 18px}
+    .on-site-guidance .viewer-footer{min-height:36px;padding:6px 18px}
+    @media(max-width:800px){.document-viewer.on-site-guidance{width:94vw;max-width:94vw}.on-site-guidance .viewer-stage{padding:8px 6px 54px}.on-site-guidance .viewer-header h2{font-size:18px}}
+  </style>
 </head>
 <body>
   <header class="header"><nav class="nav container"><a class="brand" href="../../index.html"><span class="mark"></span>AI DATA LAB</a><div class="navlinks"><a href="index.html">返回金融市场数据</a><a href="../../index.html">首页</a></div><span class="preview-badge">PRIMARY</span></nav></header>
@@ -109,8 +120,8 @@
       <section class="delivery-panel" aria-labelledby="delivery-title">
         <div class="delivery-heading"><h2 id="delivery-title">交付标准</h2><p>根据项目需求，提供轻量方案诊断与现场辅导两种交付方式。</p></div>
         <div class="delivery-grid">
-          <article class="delivery-item"><h3>方案诊断交付</h3><p>梳理企业现状、融资目标、资料短板与推进路径，形成一份可执行的诊断方案。交付后由项目方自行推进，我负责讲清楚方案逻辑与执行重点。</p></article>
-          <article class="delivery-item"><h3>现场辅导交付</h3><p>到现场参与资料梳理、融资沟通准备与关键文件整理，协助项目方把商业计划书、路演要点、问答材料和协议模板准备清楚。</p></article>
+          <button class="delivery-item" type="button" data-document="shareholder-exit-equity-refinancing-demo"><h3>方案诊断交付</h3><p>梳理企业现状、融资目标、资料短板与推进路径，形成一份可执行的诊断方案。交付后由项目方自行推进，我负责讲清楚方案逻辑与执行重点。</p></button>
+          <button class="delivery-item" type="button" data-document="on-site-guidance-delivery"><h3>现场辅导交付</h3><p>到现场参与资料梳理、融资沟通准备与关键文件整理，协助项目方把商业计划书、路演要点、问答材料和协议模板准备清楚。</p></button>
         </div>
       </section>
     </section>
@@ -142,6 +153,8 @@
       });
     }));
     const documentSets = {
+      'shareholder-exit-equity-refinancing-demo': { title: '股东退出、公司股权重新融资流程示范', description: '仅作示范用途', basePath: '../../assets/docs/finance/equity-financing/shareholder-exit-equity-refinancing-demo/', images: ['shareholder-exit-equity-refinancing-demo-01.png'] },
+      'on-site-guidance-delivery': { title: '现场辅导交付', description: '', basePath: '../../assets/docs/finance/equity-financing/on-site-guidance-delivery/', images: ['on-site-guidance-delivery-01.png', 'on-site-guidance-delivery-02.png'] },
       'traditional-food-supply-chain-to-consumer': { title: '传统食品供应链，走向消费终端', description: '', basePath: '../../assets/docs/finance/equity-financing/traditional-food-supply-chain-to-consumer/', images: ['traditional-food-supply-chain-to-consumer-01.png', 'traditional-food-supply-chain-to-consumer-02.png'] },
       'interior-design-to-homestay-manufacturer': { title: '室内设计公司，化身民宿厂家', description: '', basePath: '../../assets/docs/finance/equity-financing/interior-design-to-homestay-manufacturer/', images: ['interior-design-to-homestay-manufacturer-01.png', 'interior-design-to-homestay-manufacturer-02.png'] },
       'small-capital-control-case': { title: '小资金当大股东，是福还是祸？', description: '', basePath: '../../assets/docs/finance/equity-financing/small-capital-control-case/', images: ['small-capital-control-case.png'] },
@@ -183,6 +196,7 @@
     }
 
     function openViewer(key, trigger) {
+      viewer.classList.toggle('on-site-guidance', key === 'on-site-guidance-delivery');
       viewer.classList.toggle('business-research', ['traditional-food-supply-chain-to-consumer', 'interior-design-to-homestay-manufacturer'].includes(key));
       activeDocument = documentSets[key];
       activePage = 0;
