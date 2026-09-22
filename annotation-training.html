@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050706">
+  <title>标注训练｜AI Data Lab</title>
+  <meta name="description" content="标注训练项目集合：苹果图像标注与特征分类实验、交通目标框标注。">
+<style>
+    :root{color-scheme:dark;--bg:#050706;--text:#f0f7f3;--muted:#a0b0a8;--green:#6dffb3;--cyan:#47d7ff;--line:rgba(139,255,207,.19)}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% 0,rgba(71,215,255,.08),transparent 45%),var(--bg);color:var(--text);font-family:Inter,system-ui,"Segoe UI","Microsoft YaHei",sans-serif;line-height:1.7}body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(109,255,179,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(109,255,179,.025) 1px,transparent 1px);background-size:48px 48px}.container{width:min(1060px,calc(100% - 36px));margin-inline:auto}header{border-bottom:1px solid var(--line);background:rgba(5,7,6,.85)}nav{min-height:72px;display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-weight:750;letter-spacing:.08em}a{color:inherit;text-decoration:none}a:hover{color:var(--green)}a:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}.nav-links{display:flex;gap:22px;font-size:14px;color:var(--muted)}.hero{padding:76px 0 40px}.eyebrow{color:var(--cyan);font:12px Consolas,monospace;letter-spacing:.12em}h1{margin:18px 0 10px;font-size:clamp(42px,7vw,72px);line-height:1.2;color:var(--green)}.subtitle{font-size:clamp(20px,3vw,28px);margin:0 0 16px}.muted{color:var(--muted)}.hero .muted{max-width:760px}.panel{padding:28px;margin-bottom:24px;border:1px solid var(--line);border-radius:16px;background:rgba(12,20,16,.75)}h2{font-size:22px;margin:0 0 16px}h3{font-size:16px;margin:0 0 12px}.case-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.badge{display:inline-block;font-size:12px;color:var(--green);border:1px solid var(--line);border-radius:99px;padding:4px 12px}.flow{list-style:none;padding:0;margin:20px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.flow li{border-top:1px solid var(--line);padding:14px 0}.flow span{display:block;font:12px Consolas,monospace;color:var(--cyan);margin-bottom:8px}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.metric{padding:18px;border:1px solid var(--line);border-radius:10px;background:rgba(109,255,179,.025)}.metric span{display:block;color:var(--muted);font-size:14px}.metric strong{font-size:32px;color:var(--green);font-variant-numeric:tabular-nums}.breakdown{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}dl{margin:0}dl div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(139,255,207,.08);padding:7px 0}dt{color:var(--muted)}dd{margin:0;color:var(--cyan);font-variant-numeric:tabular-nums}.note{font-size:13px;color:var(--muted);margin:18px 0 0}.next{padding:12px 0 36px}.next p{margin:6px 0}footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}code{overflow-wrap:anywhere}
+    @media(max-width:600px){nav{min-height:66px;gap:10px}.brand{font-size:13px}.nav-links{gap:14px;font-size:13px}.hero{padding-top:48px}.panel{padding:20px}.metrics{grid-template-columns:1fr}.metric{display:flex;justify-content:space-between;align-items:center}.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.breakdown{grid-template-columns:1fr}}
+    .results-accordion{margin-top:20px}.results-accordion summary{width:fit-content;padding:7px 12px;border:1px solid var(--line);border-radius:8px;color:var(--green);cursor:pointer;list-style:none}.results-accordion summary::-webkit-details-marker{display:none}.results-accordion summary:hover{border-color:var(--green)}.results-accordion summary:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}.collapse-label{display:none}.results-accordion[open] .expand-label{display:none}.results-accordion[open] .collapse-label{display:inline}.matrix-image{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;border-radius:8px}
+    .metric{padding:8px 14px;line-height:1.35}.metric span{font-size:12px}.metric strong{font-size:23px}.matrix-panel>.matrix-heading{width:100%;padding:0;border:0;display:flex;justify-content:space-between;gap:12px;align-items:center}.matrix-panel h2{margin:0}.matrix-insights{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0;font-size:13px;color:var(--muted)}.matrix-insights p{margin:0;flex:1;min-width:170px}.matrix-insights strong{color:var(--green)}.plot-wrap{position:relative}.plot-wrap svg{display:block;width:100%;height:auto;overflow:visible}.matrix-legend{display:flex;flex-wrap:wrap;gap:8px}.matrix-legend button{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--text);padding:6px 10px;cursor:pointer}.matrix-legend button:focus-visible{outline:2px solid var(--cyan)}#matrix-tip{position:absolute;left:12px;top:12px;max-width:calc(100% - 24px);padding:12px;border:1px solid var(--cyan);border-radius:8px;background:rgba(5,15,12,.97);color:var(--text);font-size:13px;white-space:pre-line;pointer-events:none}.matrix-image{margin-top:22px}[hidden]{display:none!important}
+    .projects-heading{margin-bottom:24px}.projects-heading .eyebrow{margin-bottom:8px}.cleaning-project>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;list-style:none}.cleaning-project>summary::-webkit-details-marker{display:none}.cleaning-project>summary:focus-visible{outline:2px solid var(--cyan);outline-offset:6px;border-radius:6px}.project-heading{min-width:0}.project-code{display:block;color:var(--cyan);font:11px/1.7 Consolas,monospace;letter-spacing:.06em;overflow-wrap:anywhere}.project-name{display:block;font-size:22px;font-weight:700;margin:6px 0 10px}.project-toggle{flex-shrink:0;color:var(--green);font:24px Consolas,monospace}.project-toggle:before{content:"+"}.cleaning-project[open]>summary .project-toggle:before{content:"−"}.project-content{margin-top:24px;border-top:1px solid var(--line);padding-top:24px}.project-content>.panel{padding:0;border:0;background:transparent;border-radius:0}.project-content>.panel:last-child{margin-bottom:0}@media(max-width:600px){.project-name{font-size:20px}}
+    [aria-labelledby="results-title"] .results-accordion>summary{margin-left:auto;font-size:14px;line-height:1.6}.project-content>.matrix-panel{margin-top:24px;padding-top:24px;border-top:1px solid var(--line)}.matrix-panel>.matrix-heading>.expand-label,.matrix-panel>.matrix-heading>.collapse-label{padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.6;white-space:nowrap}.matrix-panel>.matrix-heading:hover>.expand-label,.matrix-panel>.matrix-heading:hover>.collapse-label{border-color:var(--green)}
+    #results-title,.matrix-panel>.matrix-heading>h2{color:#c2d8d0}.matrix-panel>.matrix-heading{display:grid;grid-template-columns:minmax(0,1fr) auto}
+    #matrix-toggle{font:inherit;font-size:14px;line-height:1.6;color:var(--green);background:transparent;border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;white-space:nowrap}#matrix-toggle:hover{border-color:var(--green)}#matrix-toggle:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}.matrix-window{position:relative;max-height:var(--matrix-preview-height,160px);overflow:hidden}.matrix-window:after{content:"";position:absolute;bottom:0;left:0;right:0;height:22px;background:linear-gradient(transparent,rgba(12,20,16,.94));pointer-events:none}.matrix-panel.is-expanded .matrix-window{max-height:none;overflow:visible}.matrix-panel.is-expanded .matrix-window:after{display:none}#matrix-full-content{display:flow-root}
+    /* PROJECT 03 · 苹果图像数据清洗（仅作用于 .apple-panel，不影响其他项目） */
+    .metrics-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .apple-panel h2{color:#c2d8d0}
+    .apple-panel .results-accordion>summary{margin-left:auto;font-size:14px;line-height:1.6}
+    .apple-panel h3{margin-top:20px;color:#c2d8d0}
+    .apple-shots{display:flex;flex-wrap:wrap;gap:16px;margin:0}
+    .apple-shots>div{flex:1 1 300px;min-width:0;padding:10px;border:1px solid var(--line);border-radius:10px;background:rgba(5,12,9,.6)}
+    .apple-panel img{display:block;width:100%;height:auto;border-radius:6px}
+    .apple-summary{max-width:760px;margin:0 auto}
+    .apple-cap{margin:8px 0 0;text-align:center;font-size:13px;color:var(--muted)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
+    .chips li{padding:5px 12px;border:1px solid var(--line);border-radius:99px;background:rgba(5,12,9,.5);font-size:13px;color:var(--muted)}
+    .table-label{margin:14px 0 6px;font-size:13px}
+    .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:rgba(5,12,9,.55)}
+    .sample-table{border-collapse:collapse;width:100%;min-width:520px;font-size:13px}
+    .sample-table th,.sample-table td{padding:7px 12px;text-align:left;white-space:nowrap;border-bottom:1px solid rgba(139,255,207,.12)}
+    .sample-table th{color:var(--cyan);font:12px Consolas,monospace;letter-spacing:.04em}
+    .sample-table tbody tr:last-child td{border-bottom:0}
+    @media(max-width:600px){.metrics-4{grid-template-columns:1fr}.apple-shots>div{flex-basis:100%}}
+    /* PROJECT 03 · 两级展开：局部预览（外层裁切，不缩放图片） + 查看原图 / 查看图表（逻辑同 PROJECT 01 矩阵预览） */
+    .sec-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px}
+    .sec-head h3{margin:0}
+    .sec-toggle{font:inherit;font-size:14px;line-height:1.6;color:var(--green);background:transparent;border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;white-space:nowrap}
+    .sec-toggle:hover{border-color:var(--green)}
+    .sec-toggle:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+    .sec-toggle .collapse-label{display:none}
+    .sec-toggle[aria-expanded="true"] .expand-label{display:none}
+    .sec-toggle[aria-expanded="true"] .collapse-label{display:inline}
+    .apple-preview{position:relative;max-height:var(--apple-preview-height,150px);overflow:hidden}
+    .apple-preview::after{content:"";position:absolute;left:0;right:0;bottom:0;height:26px;background:linear-gradient(transparent,rgba(12,20,16,.94));pointer-events:none}
+    .apple-preview:not(.is-expanded)>*{margin-top:calc(-1 * var(--apple-preview-shift,0px))}
+    .apple-preview.is-expanded{max-height:none}
+    .apple-preview.is-expanded::after{display:none}
+    /* PROJECT 03 · 结构化数据样例：记录行横向铺满（覆盖 .results-accordion summary 的 width:fit-content / 内边距 / 边框），左标题、右按钮 */
+    .table-acc{margin-top:12px;padding-top:4px;border-top:1px solid var(--line)}
+    .apple-panel .table-acc>summary.apple-record-row{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:none;box-sizing:border-box;gap:16px;padding:14px 0;border:0;border-radius:0;background:transparent;color:var(--text);list-style:none;cursor:pointer}
+    .apple-panel .table-acc>summary.apple-record-row::-webkit-details-marker{display:none}
+    .apple-panel .table-acc>summary.apple-record-row:focus-visible{outline:2px solid var(--cyan);outline-offset:4px;border-radius:6px}
+    .apple-record-info{flex:1 1 auto;min-width:0}
+    .apple-record-title{font-size:16px;font-weight:700}
+    .apple-record-meta{margin-top:2px;font-size:12px;color:var(--muted)}
+    .apple-record-toggle{margin-left:auto;flex:0 0 auto;font-size:14px;line-height:1.6;color:var(--green);border:1px solid var(--line);border-radius:8px;padding:7px 12px;white-space:nowrap;background:transparent}
+    .apple-record-row:hover .apple-record-toggle{border-color:var(--green)}
+    .apple-record-toggle .collapse-label{display:none}
+    .table-acc[open] .apple-record-toggle .expand-label{display:none}
+    .table-acc[open] .apple-record-toggle .collapse-label{display:inline}
+    .table-acc[open]>summary{margin-bottom:12px}
+    .table-notes{margin-top:14px}
+  </style>
+  <style>
+    /* 04 页面补充样式（与 03 共用主体样式；这里只加少量本项目需要的规则） */
+    .class-dist{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0 0 4px}
+    .class-dist li{padding:5px 12px;border:1px solid var(--line);border-radius:99px;background:rgba(5,12,9,.5);font-size:13px;color:var(--muted)}
+    .class-dist strong{margin-left:6px;color:var(--green)}
+    .disclaimer{display:inline-block;margin-top:12px;padding:5px 12px;border:1px dashed var(--line);border-radius:8px;font-size:12px;color:var(--muted)}
+    .sec-toggle.is-disabled{color:var(--muted);border-style:dashed;cursor:default}
+    .sec-toggle.is-disabled:hover{border-color:var(--line)}
+    .placeholder{margin-top:14px;padding:12px 14px;border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:13px}
+    /* 标注展示：每张标注图默认只露约 22% 高度（外层容器裁切，不缩放图片、不用 transform） */
+    .annot-preview{position:relative}
+    .annot-clip{position:relative;overflow:hidden;max-height:140px}
+    .annot-clip::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22px;background:linear-gradient(transparent,rgba(12,20,16,.94));pointer-events:none}
+    .annot-preview:not(.is-expanded) .annot-clip img{margin-top:calc(-1 * var(--annot-shift,0px))}
+    .annot-preview.is-expanded .annot-clip{max-height:none!important;height:auto;overflow:visible}
+    .annot-preview.is-expanded .annot-clip::after{display:none!important}
+    .annot-preview.is-expanded .annot-clip img{margin-top:0}
+    .annot-meta{margin-top:16px}
+    .annot-section-title{margin:0 0 4px}
+    .annot-subtitle{margin:0;font-size:16px;font-weight:700;color:#c2d8d0}
+    .annot-head-sep{border-top:1px solid var(--line);padding-top:16px}
+    .annot-shots-1{max-width:760px}
+  </style>
+</head>
+<body>
+  <header><nav class="container" aria-label="顶部导航"><a class="brand" href="index.html">AI DATA LAB</a><div class="nav-links"><a href="ai-data-training.html#workflow">← 返回流程</a><a href="index.html">首页</a></div></nav></header>
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">04 / ANNOTATION &amp; TRAINING</p>
+      <h1>标注训练</h1>
+      <p class="subtitle">让数据获得标签、类别与可学习结构</p>
+      <p class="muted">以真实项目展示标注质量、类别分布与特征实验；本集合页只展示可复现实验，不宣称模型训练能力。</p>
+    </section>
+
+    <section aria-labelledby="projects-title">
+      <div class="projects-heading"><p class="eyebrow">ANNOTATION &amp; TRAINING PROJECTS</p><h2 id="projects-title">标注训练项目</h2></div>
+
+      <details class="panel cleaning-project" open>
+        <summary><span class="project-heading"><span class="project-code">PROJECT 01 / APPLE ANNOTATION &amp; FEATURE CLASSIFICATION</span><span class="project-name">苹果图像标注与特征分类</span><span class="badge">已完成 / 可复现实验</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
+        <div class="project-content">
+          <section class="panel apple-panel" aria-labelledby="apple-annot-title">
+            <h3 id="apple-annot-title" class="annot-section-title">标注展示</h3>
+
+            <div class="sec-head">
+              <h4 class="annot-subtitle">代表性标注 · 第一组</h4>
+              <button class="sec-toggle" type="button" id="apple-annot-toggle-1" aria-expanded="false" aria-controls="apple-annot-preview-1"><span class="expand-label">+ 查看标注</span><span class="collapse-label">− 收起标注</span></button>
+            </div>
+            <div class="annot-preview" id="apple-annot-preview-1">
+              <div class="apple-shots">
+                <div>
+                  <div class="annot-clip"><img src="assets/images/apple/apple-annotated-rotten.jpg" alt="苹果框选标注样例：烂坏"></div>
+                  <p class="apple-cap">annotated_1 · 烂坏 16 框</p>
+                </div>
+                <div>
+                  <div class="annot-clip"><img src="assets/images/apple/apple-annotated-unripe.jpg" alt="苹果框选标注样例：未熟"></div>
+                  <p class="apple-cap">annotated_8 · 未熟 2 框</p>
+                </div>
+                <div>
+                  <div class="annot-clip"><img src="assets/images/apple/apple-annotated-ripe.jpg" alt="苹果框选标注样例：成熟"></div>
+                  <p class="apple-cap">annotated_6 · 成熟 4 框</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="sec-head annot-head-sep">
+              <h4 class="annot-subtitle">代表性标注 · 混合场景</h4>
+              <button class="sec-toggle" type="button" id="apple-annot-toggle-2" aria-expanded="false" aria-controls="apple-annot-preview-2"><span class="expand-label">+ 查看标注</span><span class="collapse-label">− 收起标注</span></button>
+            </div>
+            <div class="annot-preview" id="apple-annot-preview-2">
+              <div class="apple-shots annot-shots-1">
+                <div>
+                  <div class="annot-clip"><img src="assets/images/apple/apple-annotated-mixed.jpg" alt="苹果框选标注样例：烂坏与成熟混合"></div>
+                  <p class="apple-cap">annotated_3 · 烂坏 + 成熟 混合</p>
+                </div>
+              </div>
+            </div>
+
+            <p class="note annot-meta" id="apple-annot-meta" hidden>类别分布：烂坏 43 · 成熟 13 · 未熟 12（共 68 个有效框 · 标注来源：AnyLabeling 风格 JSON）</p>
+
+            <details class="table-acc apple-record">
+              <summary class="apple-record-row">
+                <div class="apple-record-info">
+                  <div class="apple-record-title">特征与阈值实验</div>
+                  <div class="apple-record-meta">颜色特征散点图 · brightness / RG_ratio · 阈值规则</div>
+                </div>
+                <span class="apple-record-toggle"><span class="expand-label">+ 查看实验</span><span class="collapse-label">− 收起实验</span></span>
+              </summary>
+              <p class="muted table-label">颜色特征散点图（RG_ratio vs brightness，按标注类别着色）</p>
+              <div class="apple-summary"><img src="assets/images/apple/apple-scatter-rg-brightness.png" alt="苹果颜色特征散点图：RG_ratio 与 brightness 的关系"></div>
+              <p class="muted table-label">使用的特征</p>
+              <ul class="chips">
+                <li>brightness = (R_mean + G_mean + B_mean) / 3</li>
+                <li>RG_ratio = R_mean / (G_mean + 1e-6)</li>
+                <li>RB_ratio = R_mean / (B_mean + 1e-6)</li>
+              </ul>
+              <p class="muted table-label">阈值规则（apple-rules.md）</p>
+              <div class="table-scroll">
+                <table class="sample-table">
+                  <thead><tr><th>判定</th><th>条件</th><th>说明</th></tr></thead>
+                  <tbody>
+                    <tr><td>成熟</td><td>brightness ≥ 135 且 RG_ratio ≥ 1.55</td><td>够亮且明显偏红</td></tr>
+                    <tr><td>未熟</td><td>brightness ≤ 95</td><td>亮度过低（偏暗）</td></tr>
+                    <tr><td>烂坏</td><td>其余情况</td><td>介于两者之间（偏暗红 / 褐）</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="disclaimer">特征 + 阈值规则实验 · 非神经网络训练 · 无模型权重</p>
+              <p class="note">阈值来自原项目脚本中的真实规则；本实验不包含训练过程，也没有模型权重文件。</p>
+            </details>
+          </section>
+        </div>
+      </details>
+
+      <details class="panel cleaning-project">
+        <summary><span class="project-heading"><span class="project-code">PROJECT 02 / TRAFFIC OBJECT ANNOTATION</span><span class="project-name">交通目标框标注</span><span class="badge">数据已存在 / 待接入页面</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
+        <div class="project-content">
+          <p class="muted">对交通场景图片进行目标框标注，覆盖行人、车辆、信号灯与自行车等类别；当前仅完成数据与标注结构统计，页面样例尚未接入。</p>
+          <div class="metrics">
+            <div class="metric"><span>图片</span><strong>85张</strong></div>
+            <div class="metric"><span>XML 标注</span><strong>65个</strong></div>
+            <div class="metric"><span>缺少标注</span><strong>20张</strong></div>
+          </div>
+          <p class="muted table-label">主要类别</p>
+          <ul class="class-dist">
+            <li>person</li>
+            <li>car</li>
+            <li>traffic_light</li>
+            <li>bicycle</li>
+          </ul>
+
+          <details class="table-acc apple-record">
+            <summary class="apple-record-row">
+              <div class="apple-record-info">
+                <div class="apple-record-title">查看标注</div>
+                <div class="apple-record-meta">待接入 · 精选样例图与框选展示</div>
+              </div>
+              <span class="apple-record-toggle"><span class="expand-label">+ 查看标注</span><span class="collapse-label">− 收起标注</span></span>
+            </summary>
+            <div class="placeholder">接入计划：从 85 张图片中精选 6～8 张样例（含已标注与缺少标注各若干），展示原图与 XML 目标框叠加效果；本轮不复制 60 多张原图。</div>
+          </details>
+
+          <details class="table-acc apple-record">
+            <summary class="apple-record-row">
+              <div class="apple-record-info">
+                <div class="apple-record-title">查看统计</div>
+                <div class="apple-record-meta">待接入 · 类别分布与标注完整度统计</div>
+              </div>
+              <span class="apple-record-toggle"><span class="expand-label">+ 查看统计</span><span class="collapse-label">− 收起统计</span></span>
+            </summary>
+            <div class="placeholder">接入计划：类别分布（person / car / traffic_light / bicycle）、每图平均框数、缺失标注清单（20 张）、标注完整度统计。</div>
+          </details>
+
+          <p class="note">数据来源：已有本地资产只读扫描结果（图片 85 张 / XML 标注 65 个 / 缺少标注 20 张）；本项目暂未接入处理功能。</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="next"><h2>下一阶段：测试与评估</h2><p class="muted">以标注结果与特征实验为基础，衔接后续测试与评估。</p></section>
+  </main>
+  <footer><div class="container">© 2026 AI Data Lab · ANNOTATION &amp; TRAINING</div></footer>
+<script>
+(() => {
+  // PROJECT 01 · 标注展示：两组独立控制，每组默认只露约 22% 高度（外层容器裁切，不缩放图片）
+  const setup = (previewId, buttonId, ratio, shiftRatio) => {
+    const preview = document.getElementById(previewId);
+    const button = document.getElementById(buttonId);
+    if (!preview || !button) return null;
+    const items = () => Array.from(preview.querySelectorAll('.annot-clip')).map(clip => ({ clip, img: clip.querySelector('img') }));
+    const fit = () => {
+      if (preview.classList.contains('is-expanded')) return;
+      items().forEach(({ clip, img }) => {
+        if (!img) return;
+        const h = img.getBoundingClientRect().height;
+        if (h > 0) {
+          clip.style.maxHeight = Math.max(60, Math.round(h * ratio)) + 'px';
+          clip.style.setProperty('--annot-shift', Math.round(h * shiftRatio) + 'px');
+        }
+      });
+    };
+    button.addEventListener('click', () => {
+      const expanded = preview.classList.toggle('is-expanded');
+      button.setAttribute('aria-expanded', String(expanded));
+      if (expanded) {
+        // 展开：清除内联 max-height（内联样式优先级高于 .is-expanded 规则，必须移除才能真正展开）
+        items().forEach(({ clip }) => { clip.style.maxHeight = ''; });
+      } else {
+        // 收起：重新计算并写回局部预览高度
+        fit();
+      }
+    });
+    items().forEach(({ img }) => { if (img) img.addEventListener('load', fit); });
+    if ('ResizeObserver' in window) new ResizeObserver(fit).observe(preview);
+    window.addEventListener('resize', fit);
+    fit();
+    return preview;
+  };
+
+  const group1 = setup('apple-annot-preview-1', 'apple-annot-toggle-1', 0.22, 0.18);
+  const group2 = setup('apple-annot-preview-2', 'apple-annot-toggle-2', 0.22, 0.18);
+
+  // 类别分布文字：至少有一组展开时才显示（两组互不影响）
+  const meta = document.getElementById('apple-annot-meta');
+  const syncMeta = () => {
+    if (!meta) return;
+    const anyExpanded = [group1, group2].some(g => g && g.classList.contains('is-expanded'));
+    meta.hidden = !anyExpanded;
+  };
+  ['apple-annot-toggle-1', 'apple-annot-toggle-2'].forEach(id => {
+    const b = document.getElementById(id);
+    if (b) b.addEventListener('click', syncMeta);
+  });
+  syncMeta();
+})();
+</script>
+</body>
+</html>
