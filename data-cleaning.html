@@ -64,7 +64,11 @@
     .table-acc[open] .apple-record-toggle .collapse-label{display:inline}
     .table-acc[open]>summary{margin-bottom:12px}
     .table-notes{margin-top:14px}
-  </style>
+      /* Project header icons: shared sizing, separate from the expand control. */
+    .cleaning-project>summary{display:grid;grid-template-columns:minmax(0,1fr) 160px 24px;gap:24px}.project-card-icon{display:block;width:88px;height:88px;object-fit:contain;justify-self:center;opacity:.9;pointer-events:none}.cleaning-project>summary>.project-toggle{justify-self:end}
+    @media(max-width:700px){.cleaning-project>summary{grid-template-columns:minmax(0,1fr) 64px 20px;gap:12px}.project-card-icon{width:60px;height:60px}}
+    .next-stage-link{color:#F6C85F;cursor:pointer;text-decoration:none}.next-stage-link:hover{color:#FFE09A;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}.next-stage-link span{font-size:.8em}.next-stage-link:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}
+</style>
 </head>
 <body>
   <header><nav class="container" aria-label="顶部导航"><a class="brand" href="index.html">AI DATA LAB</a><div class="nav-links"><a href="ai-data-training.html#workflow">← 返回流程</a><a href="index.html">首页</a></div></nav></header>
@@ -73,7 +77,7 @@
     <section aria-labelledby="projects-title">
       <div class="projects-heading"><p class="eyebrow">DATA CLEANING PROJECTS</p><h2 id="projects-title">清洗项目</h2></div>
       <details class="panel cleaning-project" open>
-        <summary><span class="project-heading"><span class="project-code">PROJECT 01 / E-COMMERCE REVIEW CLEANING</span><span class="project-name">电商客户评价数据清洗</span><span class="badge">已完成 / 可复现实验</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
+        <summary><span class="project-heading"><span class="project-code">PROJECT 01 / E-COMMERCE REVIEW CLEANING</span><span class="project-name">电商客户评价数据清洗</span><span class="badge">已完成 / 可复现实验</span></span><img class="project-card-icon" src="assets/icons/icon-ecommerce-cleaning.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
         <div class="project-content">
     <section class="panel" aria-labelledby="results-title"><h2 id="results-title">商业矩阵 · 清洗摘要</h2><div class="metrics"><div class="metric"><span>原始评价</span><strong>50条</strong></div><div class="metric"><span>清洗后</span><strong>50条</strong></div><div class="metric"><span>业务品类</span><strong>9类</strong></div></div><details class="results-accordion"><summary><span class="expand-label">+ 查看详细</span><span class="collapse-label">− 收起详细</span></summary><div class="breakdown"><div><h3>情绪标签</h3><dl><div><dt>非负面</dt><dd>39条</dd></div><div><dt>弱负面</dt><dd>3条</dd></div><div><dt>强负面</dt><dd>8条</dd></div></dl></div><div><h3>自动分流结果</h3><dl><div><dt>售后</dt><dd>1类</dd></div><div><dt>VIP 运营</dt><dd>2类</dd></div><div><dt>自动化</dt><dd>3类</dd></div><div><dt>常规监测</dt><dd>3类</dd></div></dl></div></div><p class="note">标签由关键词规则生成；“非负面”不等同于“满意”。业务分流统计单位为品类，不是客户人数。</p><p class="note">数据来源：本地 business_matrix_rebuild 恢复版于 2026-09-22 运行生成的清洗结果与业务分流 CSV（批次 20260922_094028）。本页展示已核验的静态汇总，不公开客户联系方式。</p></details></section>
     <section class="panel matrix-panel"><div class="matrix-heading"><h2>品类风险矩阵</h2><button id="matrix-toggle" type="button" aria-expanded="false" aria-controls="matrix-window">+ 查看矩阵</button></div><div id="matrix-window" class="matrix-window"><div id="matrix-full-content">
@@ -83,11 +87,11 @@
         </div>
       </details>
       <details class="panel cleaning-project">
-        <summary><span class="project-heading"><span class="project-code">PROJECT 02 / TRAFFIC IMAGE CLEANING</span><span class="project-name">交通图像数据清洗</span><span class="badge">数据已存在 / 待接入页面</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
+        <summary><span class="project-heading"><span class="project-code">PROJECT 02 / TRAFFIC IMAGE CLEANING</span><span class="project-name">交通图像数据清洗</span><span class="badge">数据已存在 / 待接入页面</span></span><img class="project-card-icon" src="assets/icons/icon-traffic-cleaning.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
         <div class="project-content"><p class="muted">对交通、行人等图片数据进行格式统一、命名整理、异常检查和标注完整性检查，为后续目标标注与训练做准备。</p><dl><div><dt>图片数据</dt><dd>85 张</dd></div><div><dt>标准化图片</dt><dd>85 张</dd></div><div><dt>已有 XML 标注</dt><dd>65 个</dd></div><div><dt>缺少标注</dt><dd>20 张</dd></div></dl><p class="note">数据来源：已有本地资产只读扫描结果；本项目暂未接入处理功能。</p></div>
       </details>
       <details class="panel cleaning-project" open>
-        <summary><span class="project-heading"><span class="project-code">PROJECT 03 / APPLE IMAGE CLEANING</span><span class="project-name">苹果图像数据清洗</span><span class="badge">已整理 / 可复现实验</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
+        <summary><span class="project-heading"><span class="project-code">PROJECT 03 / APPLE IMAGE CLEANING</span><span class="project-name">苹果图像数据清洗</span><span class="badge">已整理 / 可复现实验</span></span><img class="project-card-icon" src="assets/icons/icon-apple-cleaning.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
         <div class="project-content">
           <section class="panel apple-panel" aria-labelledby="apple-results-title">
             <h2 id="apple-results-title">苹果图像 · 清洗摘要</h2>
@@ -185,7 +189,7 @@
         </div>
       </details>
     </section>
-    <section class="next"><h2>下一阶段：标注训练</h2><p class="muted">以清洗后的结构化数据与规则标签，衔接后续标注训练。</p></section>
+    <section class="next"><h2><a class="next-stage-link" href="annotation-training.html">下一阶段：标注训练 <span aria-hidden="true">→</span></a></h2><p class="muted">以清洗后的结构化数据与规则标签，衔接后续标注训练。</p></section>
   </main>
   <footer><div class="container">© 2026 AI Data Lab · DATA CLEANING</div></footer>
 <script id="matrix-data" type="application/json">{

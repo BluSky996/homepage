@@ -64,7 +64,11 @@
     .table-acc[open] .apple-record-toggle .collapse-label{display:inline}
     .table-acc[open]>summary{margin-bottom:12px}
     .table-notes{margin-top:14px}
-  </style>
+      /* Project header icons: shared sizing, separate from the expand control. */
+    .cleaning-project>summary{display:grid;grid-template-columns:minmax(0,1fr) 160px 24px;gap:24px}.project-card-icon{display:block;width:88px;height:88px;object-fit:contain;justify-self:center;opacity:.9;pointer-events:none}.cleaning-project>summary>.project-toggle{justify-self:end}
+    @media(max-width:700px){.cleaning-project>summary{grid-template-columns:minmax(0,1fr) 64px 20px;gap:12px}.project-card-icon{width:60px;height:60px}}
+    .next>h2{color:#F6C85F}
+</style>
   <style>
     /* 04 页面补充样式（与 03 共用主体样式；这里只加少量本项目需要的规则） */
     .class-dist{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0 0 4px}
@@ -103,7 +107,7 @@
       <div class="projects-heading"><p class="eyebrow">ANNOTATION &amp; TRAINING PROJECTS</p><h2 id="projects-title">标注训练项目</h2></div>
 
       <details class="panel cleaning-project" open>
-        <summary><span class="project-heading"><span class="project-code">PROJECT 01 / APPLE ANNOTATION &amp; FEATURE CLASSIFICATION</span><span class="project-name">苹果图像标注与特征分类</span><span class="badge">已完成 / 可复现实验</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
+        <summary><span class="project-heading"><span class="project-code">PROJECT 01 / APPLE ANNOTATION &amp; FEATURE CLASSIFICATION</span><span class="project-name">苹果图像标注与特征分类</span><span class="badge">已完成 / 可复现实验</span></span><img class="project-card-icon" src="assets/icons/icon-apple-annotation.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
         <div class="project-content">
           <section class="panel apple-panel" aria-labelledby="apple-annot-title">
             <h3 id="apple-annot-title" class="annot-section-title">标注展示</h3>
@@ -179,7 +183,7 @@
       </details>
 
       <details class="panel cleaning-project">
-        <summary><span class="project-heading"><span class="project-code">PROJECT 02 / TRAFFIC OBJECT ANNOTATION</span><span class="project-name">交通目标框标注</span><span class="badge">数据已存在 / 待接入页面</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
+        <summary><span class="project-heading"><span class="project-code">PROJECT 02 / TRAFFIC OBJECT ANNOTATION</span><span class="project-name">交通目标框标注</span><span class="badge">数据已存在 / 待接入页面</span></span><img class="project-card-icon" src="assets/icons/icon-traffic-annotation.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
         <div class="project-content">
           <p class="muted">对交通场景图片进行目标框标注，覆盖行人、车辆、信号灯与自行车等类别；当前仅完成数据与标注结构统计，页面样例尚未接入。</p>
           <div class="metrics">
