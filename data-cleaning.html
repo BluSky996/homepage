@@ -16,6 +16,54 @@
     [aria-labelledby="results-title"] .results-accordion>summary{margin-left:auto;font-size:14px;line-height:1.6}.project-content>.matrix-panel{margin-top:24px;padding-top:24px;border-top:1px solid var(--line)}.matrix-panel>.matrix-heading>.expand-label,.matrix-panel>.matrix-heading>.collapse-label{padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.6;white-space:nowrap}.matrix-panel>.matrix-heading:hover>.expand-label,.matrix-panel>.matrix-heading:hover>.collapse-label{border-color:var(--green)}
     #results-title,.matrix-panel>.matrix-heading>h2{color:#c2d8d0}.matrix-panel>.matrix-heading{display:grid;grid-template-columns:minmax(0,1fr) auto}
     #matrix-toggle{font:inherit;font-size:14px;line-height:1.6;color:var(--green);background:transparent;border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;white-space:nowrap}#matrix-toggle:hover{border-color:var(--green)}#matrix-toggle:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}.matrix-window{position:relative;max-height:var(--matrix-preview-height,160px);overflow:hidden}.matrix-window:after{content:"";position:absolute;bottom:0;left:0;right:0;height:22px;background:linear-gradient(transparent,rgba(12,20,16,.94));pointer-events:none}.matrix-panel.is-expanded .matrix-window{max-height:none;overflow:visible}.matrix-panel.is-expanded .matrix-window:after{display:none}#matrix-full-content{display:flow-root}
+    /* PROJECT 03 · 苹果图像数据清洗（仅作用于 .apple-panel，不影响其他项目） */
+    .metrics-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .apple-panel h2{color:#c2d8d0}
+    .apple-panel .results-accordion>summary{margin-left:auto;font-size:14px;line-height:1.6}
+    .apple-panel h3{margin-top:20px;color:#c2d8d0}
+    .apple-shots{display:flex;flex-wrap:wrap;gap:16px;margin:0}
+    .apple-shots>div{flex:1 1 300px;min-width:0;padding:10px;border:1px solid var(--line);border-radius:10px;background:rgba(5,12,9,.6)}
+    .apple-panel img{display:block;width:100%;height:auto;border-radius:6px}
+    .apple-summary{max-width:760px;margin:0 auto}
+    .apple-cap{margin:8px 0 0;text-align:center;font-size:13px;color:var(--muted)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
+    .chips li{padding:5px 12px;border:1px solid var(--line);border-radius:99px;background:rgba(5,12,9,.5);font-size:13px;color:var(--muted)}
+    .table-label{margin:14px 0 6px;font-size:13px}
+    .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:rgba(5,12,9,.55)}
+    .sample-table{border-collapse:collapse;width:100%;min-width:520px;font-size:13px}
+    .sample-table th,.sample-table td{padding:7px 12px;text-align:left;white-space:nowrap;border-bottom:1px solid rgba(139,255,207,.12)}
+    .sample-table th{color:var(--cyan);font:12px Consolas,monospace;letter-spacing:.04em}
+    .sample-table tbody tr:last-child td{border-bottom:0}
+    @media(max-width:600px){.metrics-4{grid-template-columns:1fr}.apple-shots>div{flex-basis:100%}}
+    /* PROJECT 03 · 两级展开：局部预览（外层裁切，不缩放图片） + 查看原图 / 查看图表（逻辑同 PROJECT 01 矩阵预览） */
+    .sec-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px}
+    .sec-head h3{margin:0}
+    .sec-toggle{font:inherit;font-size:14px;line-height:1.6;color:var(--green);background:transparent;border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;white-space:nowrap}
+    .sec-toggle:hover{border-color:var(--green)}
+    .sec-toggle:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+    .sec-toggle .collapse-label{display:none}
+    .sec-toggle[aria-expanded="true"] .expand-label{display:none}
+    .sec-toggle[aria-expanded="true"] .collapse-label{display:inline}
+    .apple-preview{position:relative;max-height:var(--apple-preview-height,150px);overflow:hidden}
+    .apple-preview::after{content:"";position:absolute;left:0;right:0;bottom:0;height:26px;background:linear-gradient(transparent,rgba(12,20,16,.94));pointer-events:none}
+    .apple-preview:not(.is-expanded)>*{margin-top:calc(-1 * var(--apple-preview-shift,0px))}
+    .apple-preview.is-expanded{max-height:none}
+    .apple-preview.is-expanded::after{display:none}
+    /* PROJECT 03 · 结构化数据样例：记录行横向铺满（覆盖 .results-accordion summary 的 width:fit-content / 内边距 / 边框），左标题、右按钮 */
+    .table-acc{margin-top:12px;padding-top:4px;border-top:1px solid var(--line)}
+    .apple-panel .table-acc>summary.apple-record-row{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:none;box-sizing:border-box;gap:16px;padding:14px 0;border:0;border-radius:0;background:transparent;color:var(--text);list-style:none;cursor:pointer}
+    .apple-panel .table-acc>summary.apple-record-row::-webkit-details-marker{display:none}
+    .apple-panel .table-acc>summary.apple-record-row:focus-visible{outline:2px solid var(--cyan);outline-offset:4px;border-radius:6px}
+    .apple-record-info{flex:1 1 auto;min-width:0}
+    .apple-record-title{font-size:16px;font-weight:700}
+    .apple-record-meta{margin-top:2px;font-size:12px;color:var(--muted)}
+    .apple-record-toggle{margin-left:auto;flex:0 0 auto;font-size:14px;line-height:1.6;color:var(--green);border:1px solid var(--line);border-radius:8px;padding:7px 12px;white-space:nowrap;background:transparent}
+    .apple-record-row:hover .apple-record-toggle{border-color:var(--green)}
+    .apple-record-toggle .collapse-label{display:none}
+    .table-acc[open] .apple-record-toggle .expand-label{display:none}
+    .table-acc[open] .apple-record-toggle .collapse-label{display:inline}
+    .table-acc[open]>summary{margin-bottom:12px}
+    .table-notes{margin-top:14px}
   </style>
 </head>
 <body>
@@ -38,9 +86,103 @@
         <summary><span class="project-heading"><span class="project-code">PROJECT 02 / TRAFFIC IMAGE CLEANING</span><span class="project-name">交通图像数据清洗</span><span class="badge">数据已存在 / 待接入页面</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
         <div class="project-content"><p class="muted">对交通、行人等图片数据进行格式统一、命名整理、异常检查和标注完整性检查，为后续目标标注与训练做准备。</p><dl><div><dt>图片数据</dt><dd>85 张</dd></div><div><dt>标准化图片</dt><dd>85 张</dd></div><div><dt>已有 XML 标注</dt><dd>65 个</dd></div><div><dt>缺少标注</dt><dd>20 张</dd></div></dl><p class="note">数据来源：已有本地资产只读扫描结果；本项目暂未接入处理功能。</p></div>
       </details>
-      <details class="panel cleaning-project">
-        <summary><span class="project-heading"><span class="project-code">PROJECT 03 / APPLE IMAGE CLEANING</span><span class="project-name">苹果图像数据清洗</span><span class="badge">待整理</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
-        <div class="project-content"><p class="muted">对苹果图片、框选标注和颜色特征数据进行整理，为后续成熟度、好坏分类和测试评估做准备。</p></div>
+      <details class="panel cleaning-project" open>
+        <summary><span class="project-heading"><span class="project-code">PROJECT 03 / APPLE IMAGE CLEANING</span><span class="project-name">苹果图像数据清洗</span><span class="badge">已整理 / 可复现实验</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
+        <div class="project-content">
+          <section class="panel apple-panel" aria-labelledby="apple-results-title">
+            <h2 id="apple-results-title">苹果图像 · 清洗摘要</h2>
+            <div class="metrics metrics-4">
+              <div class="metric"><span>原始图片</span><strong>8张</strong></div>
+              <div class="metric"><span>JSON 标注</span><strong>8个</strong></div>
+              <div class="metric"><span>有效标注框</span><strong>68个</strong></div>
+              <div class="metric"><span>空标注</span><strong>1个</strong></div>
+            </div>
+            <details class="results-accordion">
+              <summary><span class="expand-label">+ 查看详细</span><span class="collapse-label">− 收起详细</span></summary>
+              <div class="sec-head">
+                <h3>代表性原始图片</h3>
+                <button class="sec-toggle" type="button" id="apple-shots-toggle" aria-expanded="false" aria-controls="apple-shots-preview"><span class="expand-label">+ 查看原图</span><span class="collapse-label">− 收起原图</span></button>
+              </div>
+              <div class="apple-preview" id="apple-shots-preview">
+                <div class="apple-shots">
+                  <div>
+                    <img src="assets/images/apple/apple-original-rotten.jpeg" alt="烂坏样张">
+                    <p class="apple-cap">烂坏样张</p>
+                  </div>
+                  <div>
+                    <img src="assets/images/apple/apple-original-ripe.jpg" alt="成熟样张">
+                    <p class="apple-cap">成熟样张</p>
+                  </div>
+                </div>
+              </div>
+              <h3>数据整理内容</h3>
+              <ul class="chips">
+                <li>JSON 标注解析</li>
+                <li>图片路径整理</li>
+                <li>标注框结构化</li>
+                <li>ROI 特征提取</li>
+                <li>空标注检查</li>
+                <li>异常样本检查</li>
+              </ul>
+              <div class="sec-head">
+                <h3>清洗结果</h3>
+                <button class="sec-toggle" type="button" id="apple-summary-toggle" aria-expanded="false" aria-controls="apple-summary-preview"><span class="expand-label">+ 查看图表</span><span class="collapse-label">− 收起图表</span></button>
+              </div>
+              <div class="apple-preview" id="apple-summary-preview">
+                <div class="apple-summary">
+                  <img src="assets/images/apple/apple-cleaning-summary.png" alt="清洗结果摘要图">
+                </div>
+              </div>
+              <h3>结构化数据样例</h3>
+              <details class="table-acc apple-record">
+                <summary class="apple-record-row">
+                  <div class="apple-record-info">
+                    <div class="apple-record-title">标注框结构</div>
+                    <div class="apple-record-meta">boxes_display.csv · 68 行</div>
+                  </div>
+                  <span class="apple-record-toggle"><span class="expand-label">+ 查看记录</span><span class="collapse-label">− 收起记录</span></span>
+                </summary>
+                <div class="table-scroll">
+                  <table class="sample-table">
+                    <thead><tr><th>image</th><th>label</th><th>x_min</th><th>y_min</th><th>x_max</th><th>y_max</th></tr></thead>
+                    <tbody>
+                      <tr><td>1.jpeg</td><td>烂坏</td><td>0</td><td>34</td><td>112</td><td>152</td></tr>
+                      <tr><td>3.jpg</td><td>烂坏</td><td>363</td><td>1230</td><td>747</td><td>1638</td></tr>
+                      <tr><td>3.jpg</td><td>成熟</td><td>179</td><td>2126</td><td>847</td><td>2670</td></tr>
+                      <tr><td>6.jpg</td><td>成熟</td><td>439</td><td>394</td><td>1292</td><td>1238</td></tr>
+                      <tr><td>8.jpeg</td><td>未熟</td><td>157</td><td>275</td><td>423</td><td>511</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+              <details class="table-acc apple-record">
+                <summary class="apple-record-row">
+                  <div class="apple-record-info">
+                    <div class="apple-record-title">ROI 颜色特征</div>
+                    <div class="apple-record-meta">roi_features_display.csv · 68 行</div>
+                  </div>
+                  <span class="apple-record-toggle"><span class="expand-label">+ 查看记录</span><span class="collapse-label">− 收起记录</span></span>
+                </summary>
+                <div class="table-scroll">
+                  <table class="sample-table">
+                    <thead><tr><th>image</th><th>label</th><th>brightness</th><th>RG_ratio</th><th>RB_ratio</th></tr></thead>
+                    <tbody>
+                      <tr><td>1.jpeg</td><td>烂坏</td><td>119.8501</td><td>1.2387</td><td>1.3741</td></tr>
+                      <tr><td>3.jpg</td><td>烂坏</td><td>117.2345</td><td>1.5637</td><td>2.2631</td></tr>
+                      <tr><td>3.jpg</td><td>成熟</td><td>141.8556</td><td>1.3884</td><td>1.6710</td></tr>
+                      <tr><td>6.jpg</td><td>成熟</td><td>120.2134</td><td>1.8869</td><td>2.1961</td></tr>
+                      <tr><td>8.jpeg</td><td>未熟</td><td>128.2673</td><td>1.1928</td><td>2.2618</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+              <div class="table-notes" id="apple-table-notes" hidden>
+                <p class="note">两张表各展示 5 行样例；完整文件见 assets/data/apple/。本页只覆盖“整理清洗”环节：原始图片 → JSON 标注整理 → 图片路径修复 → 标注框结构化 → ROI 特征整理 → 清洗结果。</p>
+                <p class="note">数据来源：本地 apple_intelligence_rebuild 恢复版于 2026-09-22 运行生成的结构化 CSV 与整理报告（批次 20260922_134104）。本页为已核验的静态汇总，仅覆盖整理清洗阶段。</p>
+              </div>
+            </details>
+          </section>
+        </div>
       </details>
     </section>
     <section class="next"><h2>下一阶段：标注训练</h2><p class="muted">以清洗后的结构化数据与规则标签，衔接后续标注训练。</p></section>
@@ -176,6 +318,47 @@
   window.addEventListener('resize',updatePreview);
   document.getElementById('matrix-fallback').addEventListener('load',updatePreview);
   updatePreview();
+})();
+</script>
+<script>
+(() => {
+  // PROJECT 03：两级展开 —— 查看原图 / 查看图表（外层容器裁切，不缩放图片本身）
+  const setup = (previewId, buttonId, ratio, shiftRatio) => {
+    const preview = document.getElementById(previewId);
+    const button = document.getElementById(buttonId);
+    if (!preview || !button) return;
+    const imgs = () => Array.from(preview.querySelectorAll('img'));
+    const fit = () => {
+      if (preview.classList.contains('is-expanded')) return;
+      let h = 0;
+      imgs().forEach(im => { const r = im.getBoundingClientRect(); if (r.height > h) h = r.height; });
+      if (h > 0) {
+        preview.style.setProperty('--apple-preview-height', Math.max(60, Math.round(h * ratio)) + 'px');
+        preview.style.setProperty('--apple-preview-shift', Math.round(h * shiftRatio) + 'px');
+      }
+    };
+    button.addEventListener('click', () => {
+      const expanded = preview.classList.toggle('is-expanded');
+      button.setAttribute('aria-expanded', String(expanded));
+      if (!expanded) fit();
+    });
+    imgs().forEach(im => im.addEventListener('load', fit));
+    if ('ResizeObserver' in window) new ResizeObserver(fit).observe(preview);
+    window.addEventListener('resize', fit);
+    fit();
+  };
+  // 照片：默认显示约 22% 高度，并下移露出偏中部区域；图表：默认显示约 22% 高度，下移露出标题下方柱状区
+  setup('apple-shots-preview', 'apple-shots-toggle', 0.22, 0.26);
+  setup('apple-summary-preview', 'apple-summary-toggle', 0.22, 0.16);
+
+  // 结构化数据样例：两张表各自独立折叠；仅当至少一条记录展开时才显示底部说明文字
+  const tableNotes = document.getElementById('apple-table-notes');
+  const tableAccs = Array.from(document.querySelectorAll('.apple-panel .table-acc'));
+  if (tableNotes && tableAccs.length) {
+    const syncNotes = () => { tableNotes.hidden = !tableAccs.some(a => a.open); };
+    tableAccs.forEach(a => a.addEventListener('toggle', syncNotes));
+    syncNotes();
+  }
 })();
 </script>
 </body>
