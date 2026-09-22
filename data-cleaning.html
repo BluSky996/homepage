@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050706">
+  <title>整理清洗｜AI Data Lab</title>
+  <meta name="description" content="数据清洗项目集合：电商客户评价、交通图像与苹果图像数据整理。">
+  <style>
+    :root{color-scheme:dark;--bg:#050706;--text:#f0f7f3;--muted:#a0b0a8;--green:#6dffb3;--cyan:#47d7ff;--line:rgba(139,255,207,.19)}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% 0,rgba(71,215,255,.08),transparent 45%),var(--bg);color:var(--text);font-family:Inter,system-ui,"Segoe UI","Microsoft YaHei",sans-serif;line-height:1.7}body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(109,255,179,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(109,255,179,.025) 1px,transparent 1px);background-size:48px 48px}.container{width:min(1060px,calc(100% - 36px));margin-inline:auto}header{border-bottom:1px solid var(--line);background:rgba(5,7,6,.85)}nav{min-height:72px;display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-weight:750;letter-spacing:.08em}a{color:inherit;text-decoration:none}a:hover{color:var(--green)}a:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}.nav-links{display:flex;gap:22px;font-size:14px;color:var(--muted)}.hero{padding:76px 0 40px}.eyebrow{color:var(--cyan);font:12px Consolas,monospace;letter-spacing:.12em}h1{margin:18px 0 10px;font-size:clamp(42px,7vw,72px);line-height:1.2;color:var(--green)}.subtitle{font-size:clamp(20px,3vw,28px);margin:0 0 16px}.muted{color:var(--muted)}.hero .muted{max-width:760px}.panel{padding:28px;margin-bottom:24px;border:1px solid var(--line);border-radius:16px;background:rgba(12,20,16,.75)}h2{font-size:22px;margin:0 0 16px}h3{font-size:16px;margin:0 0 12px}.case-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.badge{display:inline-block;font-size:12px;color:var(--green);border:1px solid var(--line);border-radius:99px;padding:4px 12px}.flow{list-style:none;padding:0;margin:20px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.flow li{border-top:1px solid var(--line);padding:14px 0}.flow span{display:block;font:12px Consolas,monospace;color:var(--cyan);margin-bottom:8px}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.metric{padding:18px;border:1px solid var(--line);border-radius:10px;background:rgba(109,255,179,.025)}.metric span{display:block;color:var(--muted);font-size:14px}.metric strong{font-size:32px;color:var(--green);font-variant-numeric:tabular-nums}.breakdown{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}dl{margin:0}dl div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(139,255,207,.08);padding:7px 0}dt{color:var(--muted)}dd{margin:0;color:var(--cyan);font-variant-numeric:tabular-nums}.note{font-size:13px;color:var(--muted);margin:18px 0 0}.next{padding:12px 0 36px}.next p{margin:6px 0}footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}code{overflow-wrap:anywhere}
+    @media(max-width:600px){nav{min-height:66px;gap:10px}.brand{font-size:13px}.nav-links{gap:14px;font-size:13px}.hero{padding-top:48px}.panel{padding:20px}.metrics{grid-template-columns:1fr}.metric{display:flex;justify-content:space-between;align-items:center}.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.breakdown{grid-template-columns:1fr}}
+    .results-accordion{margin-top:20px}.results-accordion summary{width:fit-content;padding:7px 12px;border:1px solid var(--line);border-radius:8px;color:var(--green);cursor:pointer;list-style:none}.results-accordion summary::-webkit-details-marker{display:none}.results-accordion summary:hover{border-color:var(--green)}.results-accordion summary:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}.collapse-label{display:none}.results-accordion[open] .expand-label{display:none}.results-accordion[open] .collapse-label{display:inline}.matrix-image{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;border-radius:8px}
+    .metric{padding:8px 14px;line-height:1.35}.metric span{font-size:12px}.metric strong{font-size:23px}.matrix-panel>.matrix-heading{width:100%;padding:0;border:0;display:flex;justify-content:space-between;gap:12px;align-items:center}.matrix-panel h2{margin:0}.matrix-insights{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0;font-size:13px;color:var(--muted)}.matrix-insights p{margin:0;flex:1;min-width:170px}.matrix-insights strong{color:var(--green)}.plot-wrap{position:relative}.plot-wrap svg{display:block;width:100%;height:auto;overflow:visible}.matrix-legend{display:flex;flex-wrap:wrap;gap:8px}.matrix-legend button{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--text);padding:6px 10px;cursor:pointer}.matrix-legend button:focus-visible{outline:2px solid var(--cyan)}#matrix-tip{position:absolute;left:12px;top:12px;max-width:calc(100% - 24px);padding:12px;border:1px solid var(--cyan);border-radius:8px;background:rgba(5,15,12,.97);color:var(--text);font-size:13px;white-space:pre-line;pointer-events:none}.matrix-image{margin-top:22px}[hidden]{display:none!important}
+    .projects-heading{margin-bottom:24px}.projects-heading .eyebrow{margin-bottom:8px}.cleaning-project>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;list-style:none}.cleaning-project>summary::-webkit-details-marker{display:none}.cleaning-project>summary:focus-visible{outline:2px solid var(--cyan);outline-offset:6px;border-radius:6px}.project-heading{min-width:0}.project-code{display:block;color:var(--cyan);font:11px/1.7 Consolas,monospace;letter-spacing:.06em;overflow-wrap:anywhere}.project-name{display:block;font-size:22px;font-weight:700;margin:6px 0 10px}.project-toggle{flex-shrink:0;color:var(--green);font:24px Consolas,monospace}.project-toggle:before{content:"+"}.cleaning-project[open]>summary .project-toggle:before{content:"−"}.project-content{margin-top:24px;border-top:1px solid var(--line);padding-top:24px}.project-content>.panel{padding:0;border:0;background:transparent;border-radius:0}.project-content>.panel:last-child{margin-bottom:0}@media(max-width:600px){.project-name{font-size:20px}}
+    [aria-labelledby="results-title"] .results-accordion>summary{margin-left:auto;font-size:14px;line-height:1.6}.project-content>.matrix-panel{margin-top:24px;padding-top:24px;border-top:1px solid var(--line)}.matrix-panel>.matrix-heading>.expand-label,.matrix-panel>.matrix-heading>.collapse-label{padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.6;white-space:nowrap}.matrix-panel>.matrix-heading:hover>.expand-label,.matrix-panel>.matrix-heading:hover>.collapse-label{border-color:var(--green)}
+    #results-title,.matrix-panel>.matrix-heading>h2{color:#c2d8d0}.matrix-panel>.matrix-heading{display:grid;grid-template-columns:minmax(0,1fr) auto}
+    #matrix-toggle{font:inherit;font-size:14px;line-height:1.6;color:var(--green);background:transparent;border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;white-space:nowrap}#matrix-toggle:hover{border-color:var(--green)}#matrix-toggle:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}.matrix-window{position:relative;max-height:var(--matrix-preview-height,160px);overflow:hidden}.matrix-window:after{content:"";position:absolute;bottom:0;left:0;right:0;height:22px;background:linear-gradient(transparent,rgba(12,20,16,.94));pointer-events:none}.matrix-panel.is-expanded .matrix-window{max-height:none;overflow:visible}.matrix-panel.is-expanded .matrix-window:after{display:none}#matrix-full-content{display:flow-root}
+  </style>
+</head>
+<body>
+  <header><nav class="container" aria-label="顶部导航"><a class="brand" href="index.html">AI DATA LAB</a><div class="nav-links"><a href="ai-data-training.html#workflow">← 返回流程</a><a href="index.html">首页</a></div></nav></header>
+  <main class="container">
+    <section class="hero"><p class="eyebrow">03 / DATA CLEANING</p><h1>整理清洗</h1><p class="subtitle">从原始数据到可用、规范、结构化的数据资产</p><p class="muted">通过不同类型的真实项目，展示数据清洗、规范整理和结构化处理。</p></section>
+    <section aria-labelledby="projects-title">
+      <div class="projects-heading"><p class="eyebrow">DATA CLEANING PROJECTS</p><h2 id="projects-title">清洗项目</h2></div>
+      <details class="panel cleaning-project" open>
+        <summary><span class="project-heading"><span class="project-code">PROJECT 01 / E-COMMERCE REVIEW CLEANING</span><span class="project-name">电商客户评价数据清洗</span><span class="badge">已完成 / 可复现实验</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
+        <div class="project-content">
+    <section class="panel" aria-labelledby="results-title"><h2 id="results-title">商业矩阵 · 清洗摘要</h2><div class="metrics"><div class="metric"><span>原始评价</span><strong>50条</strong></div><div class="metric"><span>清洗后</span><strong>50条</strong></div><div class="metric"><span>业务品类</span><strong>9类</strong></div></div><details class="results-accordion"><summary><span class="expand-label">+ 查看详细</span><span class="collapse-label">− 收起详细</span></summary><div class="breakdown"><div><h3>情绪标签</h3><dl><div><dt>非负面</dt><dd>39条</dd></div><div><dt>弱负面</dt><dd>3条</dd></div><div><dt>强负面</dt><dd>8条</dd></div></dl></div><div><h3>自动分流结果</h3><dl><div><dt>售后</dt><dd>1类</dd></div><div><dt>VIP 运营</dt><dd>2类</dd></div><div><dt>自动化</dt><dd>3类</dd></div><div><dt>常规监测</dt><dd>3类</dd></div></dl></div></div><p class="note">标签由关键词规则生成；“非负面”不等同于“满意”。业务分流统计单位为品类，不是客户人数。</p><p class="note">数据来源：本地 business_matrix_rebuild 恢复版于 2026-09-22 运行生成的清洗结果与业务分流 CSV（批次 20260922_094028）。本页展示已核验的静态汇总，不公开客户联系方式。</p></details></section>
+    <section class="panel matrix-panel"><div class="matrix-heading"><h2>品类风险矩阵</h2><button id="matrix-toggle" type="button" aria-expanded="false" aria-controls="matrix-window">+ 查看矩阵</button></div><div id="matrix-window" class="matrix-window"><div id="matrix-full-content">
+      <div id="interactive-matrix" hidden><div id="matrix-insights" class="matrix-insights"></div><div class="plot-wrap"><svg id="matrix-svg" viewBox="0 0 800 440" role="img" aria-label="品类风险矩阵，点大小表示客户数"></svg><div id="matrix-tip" role="status" hidden></div></div><div id="matrix-legend" class="matrix-legend"></div><p class="note" id="matrix-source"></p><p class="note">横轴：消费价值 / 总消费金额；纵轴：差评风险 / 差评比例（强负面占比）；气泡面积表示客户数。虚线采用各指标的 70% 分位数，与 CSV 象限划分一致。悬停、键盘聚焦或点击品类查看详情。unknown 表示未归入已知品类。</p></div>
+      <img id="matrix-fallback" class="matrix-image" src="assets/images/business_matrix.png" alt="真实品类风险矩阵备用图">
+    </div></div></section>
+        </div>
+      </details>
+      <details class="panel cleaning-project">
+        <summary><span class="project-heading"><span class="project-code">PROJECT 02 / TRAFFIC IMAGE CLEANING</span><span class="project-name">交通图像数据清洗</span><span class="badge">数据已存在 / 待接入页面</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
+        <div class="project-content"><p class="muted">对交通、行人等图片数据进行格式统一、命名整理、异常检查和标注完整性检查，为后续目标标注与训练做准备。</p><dl><div><dt>图片数据</dt><dd>85 张</dd></div><div><dt>标准化图片</dt><dd>85 张</dd></div><div><dt>已有 XML 标注</dt><dd>65 个</dd></div><div><dt>缺少标注</dt><dd>20 张</dd></div></dl><p class="note">数据来源：已有本地资产只读扫描结果；本项目暂未接入处理功能。</p></div>
+      </details>
+      <details class="panel cleaning-project">
+        <summary><span class="project-heading"><span class="project-code">PROJECT 03 / APPLE IMAGE CLEANING</span><span class="project-name">苹果图像数据清洗</span><span class="badge">待整理</span></span><span class="project-toggle" aria-hidden="true"></span></summary>
+        <div class="project-content"><p class="muted">对苹果图片、框选标注和颜色特征数据进行整理，为后续成熟度、好坏分类和测试评估做准备。</p></div>
+      </details>
+    </section>
+    <section class="next"><h2>下一阶段：标注训练</h2><p class="muted">以清洗后的结构化数据与规则标签，衔接后续标注训练。</p></section>
+  </main>
+  <footer><div class="container">© 2026 AI Data Lab · DATA CLEANING</div></footer>
+<script id="matrix-data" type="application/json">{
+  "source": "business_matrix_20260922_094028.csv",
+  "rows": [
+    {
+      "category": "unknown",
+      "customers": 30,
+      "total_amount_sum": 3100.0,
+      "order_count_sum": 32,
+      "strong_neg_count": 0,
+      "strong_neg_ratio": 0.0,
+      "quadrant": "低价值_低风险"
+    },
+    {
+      "category": "家居",
+      "customers": 3,
+      "total_amount_sum": 1597.0,
+      "order_count_sum": 10,
+      "strong_neg_count": 2,
+      "strong_neg_ratio": 0.6666666666666666,
+      "quadrant": "低价值_高风险"
+    },
+    {
+      "category": "家电",
+      "customers": 5,
+      "total_amount_sum": 11395.0,
+      "order_count_sum": 33,
+      "strong_neg_count": 2,
+      "strong_neg_ratio": 0.4,
+      "quadrant": "高价值_低风险"
+    },
+    {
+      "category": "手机",
+      "customers": 3,
+      "total_amount_sum": 4497.0,
+      "order_count_sum": 18,
+      "strong_neg_count": 1,
+      "strong_neg_ratio": 0.3333333333333333,
+      "quadrant": "高价值_低风险"
+    },
+    {
+      "category": "数码",
+      "customers": 1,
+      "total_amount_sum": 899.0,
+      "order_count_sum": 4,
+      "strong_neg_count": 0,
+      "strong_neg_ratio": 0.0,
+      "quadrant": "低价值_低风险"
+    },
+    {
+      "category": "日用品",
+      "customers": 2,
+      "total_amount_sum": 398.0,
+      "order_count_sum": 3,
+      "strong_neg_count": 1,
+      "strong_neg_ratio": 0.5,
+      "quadrant": "低价值_高风险"
+    },
+    {
+      "category": "服装",
+      "customers": 2,
+      "total_amount_sum": 1198.0,
+      "order_count_sum": 7,
+      "strong_neg_count": 1,
+      "strong_neg_ratio": 0.5,
+      "quadrant": "低价值_高风险"
+    },
+    {
+      "category": "电脑",
+      "customers": 2,
+      "total_amount_sum": 5898.0,
+      "order_count_sum": 17,
+      "strong_neg_count": 1,
+      "strong_neg_ratio": 0.5,
+      "quadrant": "高价值_高风险"
+    },
+    {
+      "category": "食品",
+      "customers": 2,
+      "total_amount_sum": 158.0,
+      "order_count_sum": 2,
+      "strong_neg_count": 0,
+      "strong_neg_ratio": 0.0,
+      "quadrant": "低价值_低风险"
+    }
+  ]
+}</script>
+<script>
+(async()=>{
+  try {
+    // file:// preview uses the same verified snapshot; HTTP uses replaceable JSON.
+    const data=location.protocol==='file:'?JSON.parse(document.getElementById('matrix-data').textContent):await fetch('assets/data/business-matrix.json').then(r=>{if(!r.ok)throw Error('data');return r.json()});
+    const rows=data.rows;
+    if(!Array.isArray(rows)||!rows.length||rows.some(r=>!Number.isFinite(r.total_amount_sum)||!Number.isFinite(r.strong_neg_ratio)||!(r.customers>0)))throw Error('Invalid data');
+    const money=n=>n.toLocaleString('zh-CN',{maximumFractionDigits:2}),pct=n=>(n*100).toFixed(2)+'%';
+    const quantile=values=>{const a=[...values].sort((a,b)=>a-b),i=(a.length-1)*.7,j=Math.floor(i);return a[j]+(a[Math.ceil(i)]-a[j])*(i-j)};
+    const vt=quantile(rows.map(r=>r.total_amount_sum)),rt=quantile(rows.map(r=>r.strong_neg_ratio));
+    const insights=document.getElementById('matrix-insights');
+    [['差评风险最高','strong_neg_ratio',pct],['消费价值最高','total_amount_sum',money],['客户覆盖最多','customers',n=>n+'人']].forEach(([label,key,fmt])=>{const max=Math.max(...rows.map(r=>r[key])),p=document.createElement('p');p.textContent=label+'：';const strong=document.createElement('strong');strong.textContent=rows.filter(r=>r[key]===max).map(r=>r.category).join('、')+' · '+fmt(max);p.append(strong);insights.append(p)});
+    const svg=document.getElementById('matrix-svg'),ns='http://www.w3.org/2000/svg';
+    const el=(tag,attrs,text)=>{const e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(text!==undefined)e.textContent=text;svg.append(e);return e};
+    const xmax=Math.max(...rows.map(r=>r.total_amount_sum))*1.12,ymax=Math.max(...rows.map(r=>r.strong_neg_ratio),.1)*1.15;
+    const x=n=>75+n/xmax*660,y=n=>365-n/ymax*310;
+    for(let i=0;i<=4;i++){const xx=x(xmax*i/4),yy=y(ymax*i/4);el('line',{x1:xx,x2:xx,y1:45,y2:365,stroke:'#234b40'});el('line',{x1:75,x2:735,y1:yy,y2:yy,stroke:'#234b40'});el('text',{x:xx,y:389,fill:'#a0b0a8','text-anchor':'middle','font-size':12},Math.round(xmax*i/4).toLocaleString());el('text',{x:64,y:yy+4,fill:'#a0b0a8','text-anchor':'end','font-size':12},(ymax*i/4*100).toFixed(0)+'%')}
+    el('line',{x1:x(vt),x2:x(vt),y1:45,y2:365,stroke:'#6dffb3','stroke-dasharray':'6 5'});el('line',{x1:75,x2:735,y1:y(rt),y2:y(rt),stroke:'#6dffb3','stroke-dasharray':'6 5'});
+    el('text',{x:405,y:429,fill:'#9ce8d1','text-anchor':'middle','font-size':14},'消费价值 / 总消费金额');el('text',{x:75,y:24,fill:'#9ce8d1','font-size':14},'差评风险 / 差评比例');
+    const tip=document.getElementById('matrix-tip'),colors=['#6dffb3','#ff9ab9','#47d7ff','#c4a4ff','#ffd66b','#80baff','#ffb58d','#d6ed9c','#94e9ed'];
+    const hide=()=>tip.hidden=true;
+    rows.forEach((r,i)=>{
+      const highV=r.total_amount_sum>=vt,highR=r.strong_neg_ratio>=rt;
+      const explanation=highV?(highR?'消费价值较高，但差评风险偏高':'消费价值较高，差评风险较低'):(highR?'消费价值较低，差评风险较高':'消费价值与风险均较低');
+      const text='品类：'+r.category+'\n消费金额：'+money(r.total_amount_sum)+'\n差评比例：'+pct(r.strong_neg_ratio)+'\n客户数：'+r.customers+'\n'+explanation;
+      const show=()=>{tip.textContent=text;tip.hidden=false};
+      const dot=el('circle',{cx:x(r.total_amount_sum),cy:y(r.strong_neg_ratio),r:5*Math.sqrt(r.customers),fill:colors[i%colors.length],'fill-opacity':.7,stroke:colors[i%colors.length],tabindex:0,role:'button','aria-label':text,style:'cursor:pointer'});
+      const b=document.createElement('button');b.type='button';b.textContent=r.category;b.style.borderColor=colors[i%colors.length];b.setAttribute('aria-label',text);document.getElementById('matrix-legend').append(b);
+      [dot,b].forEach(e=>{e.addEventListener('mouseenter',show);e.addEventListener('mouseleave',hide);e.addEventListener('focus',show);e.addEventListener('blur',hide);e.addEventListener('click',show);e.addEventListener('keydown',ev=>{if(ev.key==='Escape')hide();if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();show()}})});
+    });
+    document.getElementById('matrix-source').textContent='真实数据来源：'+data.source+'（9 个品类快照）';
+    document.getElementById('interactive-matrix').hidden=false;document.getElementById('matrix-fallback').hidden=true;
+  }catch(error){document.getElementById('interactive-matrix').hidden=true;document.getElementById('matrix-fallback').hidden=false;}
+})();
+</script>
+<script>
+(()=>{
+  const panel=document.querySelector('.matrix-panel'),button=document.getElementById('matrix-toggle'),content=document.getElementById('matrix-full-content'),windowEl=document.getElementById('matrix-window');
+  const updatePreview=()=>{const height=content.scrollHeight;if(height)windowEl.style.setProperty('--matrix-preview-height',Math.ceil(height*.25)+'px')};
+  button.addEventListener('click',()=>{const expanded=panel.classList.toggle('is-expanded');button.setAttribute('aria-expanded',String(expanded));button.textContent=expanded?'− 收起矩阵':'+ 查看矩阵';updatePreview()});
+  if('ResizeObserver' in window)new ResizeObserver(updatePreview).observe(content);
+  window.addEventListener('resize',updatePreview);
+  document.getElementById('matrix-fallback').addEventListener('load',updatePreview);
+  updatePreview();
+})();
+</script>
+</body>
+</html>

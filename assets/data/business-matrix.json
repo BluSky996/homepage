@@ -1,0 +1,86 @@
+{
+  "source": "business_matrix_20260922_094028.csv",
+  "rows": [
+    {
+      "category": "unknown",
+      "customers": 30,
+      "total_amount_sum": 3100.0,
+      "order_count_sum": 32,
+      "strong_neg_count": 0,
+      "strong_neg_ratio": 0.0,
+      "quadrant": "低价值_低风险"
+    },
+    {
+      "category": "家居",
+      "customers": 3,
+      "total_amount_sum": 1597.0,
+      "order_count_sum": 10,
+      "strong_neg_count": 2,
+      "strong_neg_ratio": 0.6666666666666666,
+      "quadrant": "低价值_高风险"
+    },
+    {
+      "category": "家电",
+      "customers": 5,
+      "total_amount_sum": 11395.0,
+      "order_count_sum": 33,
+      "strong_neg_count": 2,
+      "strong_neg_ratio": 0.4,
+      "quadrant": "高价值_低风险"
+    },
+    {
+      "category": "手机",
+      "customers": 3,
+      "total_amount_sum": 4497.0,
+      "order_count_sum": 18,
+      "strong_neg_count": 1,
+      "strong_neg_ratio": 0.3333333333333333,
+      "quadrant": "高价值_低风险"
+    },
+    {
+      "category": "数码",
+      "customers": 1,
+      "total_amount_sum": 899.0,
+      "order_count_sum": 4,
+      "strong_neg_count": 0,
+      "strong_neg_ratio": 0.0,
+      "quadrant": "低价值_低风险"
+    },
+    {
+      "category": "日用品",
+      "customers": 2,
+      "total_amount_sum": 398.0,
+      "order_count_sum": 3,
+      "strong_neg_count": 1,
+      "strong_neg_ratio": 0.5,
+      "quadrant": "低价值_高风险"
+    },
+    {
+      "category": "服装",
+      "customers": 2,
+      "total_amount_sum": 1198.0,
+      "order_count_sum": 7,
+      "strong_neg_count": 1,
+      "strong_neg_ratio": 0.5,
+      "quadrant": "低价值_高风险"
+    },
+    {
+      "category": "电脑",
+      "customers": 2,
+      "total_amount_sum": 5898.0,
+      "order_count_sum": 17,
+      "strong_neg_count": 1,
+      "strong_neg_ratio": 0.5,
+      "quadrant": "高价值_高风险"
+    },
+    {
+      "category": "食品",
+      "customers": 2,
+      "total_amount_sum": 158.0,
+      "order_count_sum": 2,
+      "strong_neg_count": 0,
+      "strong_neg_ratio": 0.0,
+      "quadrant": "低价值_低风险"
+    }
+  ]
+}
