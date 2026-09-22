@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="AI Data Lab 数据上传、数据采集、整理清洗、标注训练与测试评估流程入口。" />
   <meta name="theme-color" content="#050706" />
-  <title>AI 标注训练｜AI Data Lab</title>
+  <title>数据工程与标注｜AI Data Lab</title>
   <style>
     :root{--bg:#050706;--surface:#0b0f0d;--surface-2:#101613;--line:rgba(139,255,207,.13);--line-strong:rgba(139,255,207,.28);--text:#f0f7f3;--muted:#8d9c95;--green:#6dffb3;--cyan:#47d7ff;--violet:#9c7cff;--max-width:1160px}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);background:radial-gradient(circle at 82% 8%,rgba(71,215,255,.08),transparent 24rem),radial-gradient(circle at 12% 28%,rgba(109,255,179,.06),transparent 28rem),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6}body:before{position:fixed;inset:0;z-index:-1;content:"";pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(#000,transparent 85%)}a{color:inherit}.container{width:min(calc(100% - 36px),var(--max-width));margin-inline:auto}.site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(5,7,6,.8);backdrop-filter:blur(16px)}.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:inline-flex;align-items:center;gap:11px;font-size:15px;font-weight:760;letter-spacing:.08em;text-decoration:none}.brand-mark{width:11px;height:11px;border:2px solid var(--green);border-radius:3px;box-shadow:0 0 18px rgba(109,255,179,.65);transform:rotate(45deg)}.back-link{color:var(--muted);font-size:14px;text-decoration:none}.back-link:hover{color:var(--green)}
@@ -25,23 +25,23 @@
   </header>
   <main>
     <section class="hero container">
-      <p class="eyebrow">AI Data Training</p>
-      <h1>AI <span class="gradient-text">标注训练</span></h1>
-      <p class="hero-copy">从数据上传、数据采集、整理清洗，到标注训练与测试评估，整理 AI 标注训练的完整流程入口。</p>
+      <p class="eyebrow">DATA ENGINEERING &amp; ANNOTATION</p>
+      <h1>数据工程<span class="gradient-text">与标注</span></h1>
+      <p class="hero-copy">从数据采集、整理清洗到标注与评估</p>
     </section>
     <section class="workflow container" id="workflow" aria-labelledby="workflow-title" style="scroll-margin-top:90px">
       <p class="section-kicker">01 / Training Workflow</p>
       <div class="section-heading">
         <h2 id="workflow-title">完整流程</h2>
-        <p class="section-intro">从数据上传、数据采集、整理清洗，到标注训练与测试评估，形成一条完整的 AI 标注训练路径。</p>
+        <p class="section-intro">从数据上传、数据采集、整理清洗，到标注训练与测试评估，形成一条完整的数据工程与标注路径。</p>
       </div>
       <div class="workflow-shell">
-        <div class="stage-list" aria-label="AI 标注训练流程">
+        <div class="stage-list" aria-label="数据工程与标注流程">
           <article class="stage"><button class="stage-toggle" type="button" aria-expanded="false"><span class="stage-marker"></span><span><span class="stage-number">01 / DATA UPLOAD</span><span class="stage-title-row"><h3>数据上传</h3><span class="stage-phase">导入系统</span></span><p>将本地文件、采集数据或人工整理数据导入系统，进入后续整理清洗和处理流程。</p></span><span class="stage-symbol">+</span></button><div class="stage-detail"><div class="stage-detail-inner"><p>数据上传用于接收 CSV、Excel、文本、图片或其他结构化 / 半结构化数据，使原始数据进入后续整理清洗、字段检查、格式统一和标注训练准备流程。</p><div class="detail-entry"><a class="button" href="submit-data.html">进入数据上传 →</a></div></div></div></article>
-          <article class="stage"><button class="stage-toggle" type="button" aria-expanded="false"><span class="stage-marker"></span><span><span class="stage-number">02 / DATA COLLECTION</span><span class="stage-title-row"><h3>数据采集</h3><span class="stage-phase">基础数据</span></span><p>从传感器、网页、文件或人工方式获取原始数据，形成上传、整理清洗和标注训练的数据基础。</p></span><span class="stage-symbol">+</span></button><div class="stage-detail"><div class="stage-detail-inner"><p>环境数据采集是 AI 标注训练流程的起点之一。当前已整理光照、温度等传感器采集实验，后续可继续扩展体感运动传感器、舵机声控雷达监测、多机数据采集等项目。</p><div class="detail-entry"><a class="button" href="datasets/environment.html">查看环境数据采集 →</a></div></div></div></article>
+          <article class="stage"><button class="stage-toggle" type="button" aria-expanded="false"><span class="stage-marker"></span><span><span class="stage-number">02 / DATA COLLECTION</span><span class="stage-title-row"><h3>数据采集</h3><span class="stage-phase">基础数据</span></span><p>通过公开图片搜索与人工筛选获取原始数据，为整理清洗和标注训练准备数据来源。</p></span><span class="stage-symbol">+</span></button><div class="stage-detail"><div class="stage-detail-inner"><p>通过 Google / Bing 图片搜索，人工下载并筛选苹果与交通图片，保留原始文件，按清晰度、完整性和分辨率标准准备后续清洗与标注数据。</p><div class="detail-entry"><a class="button" href="data-collection.html">进入数据采集 →</a></div></div></div></article>
           <article class="stage"><button class="stage-toggle" type="button" aria-expanded="false"><span class="stage-marker"></span><span><span class="stage-number">03 / DATA CLEANING</span><span class="stage-title-row"><h3>整理清洗</h3><span class="stage-phase">结构处理</span></span><p>对上传或采集的数据进行去重、格式统一、字段整理、异常检查和结构化处理。</p></span><span class="stage-symbol">+</span></button><div class="stage-detail"><div class="stage-detail-inner"><p>整理清洗承接上传后的数据，对数据进行去重、缺失值检查、字段统一、格式转换、异常值识别和结构化整理，为后续标注与训练做准备。注意：整理清洗不是数据上传本身。</p><div class="detail-entry"><a class="button" href="data-cleaning.html">进入整理清洗 →</a></div></div></div></article>
           <article class="stage"><button class="stage-toggle" type="button" aria-expanded="false"><span class="stage-marker"></span><span><span class="stage-number">04 / ANNOTATION &amp; TRAINING</span><span class="stage-title-row"><h3>标注训练</h3><span class="stage-phase">标注与训练准备</span></span><p>将整理清洗后的数据用于标注质量检查、训练数据准备、微调配置或模型输入准备。</p></span><span class="stage-symbol">+</span></button><div class="stage-detail"><div class="stage-detail-inner"><p>导入已整理清洗的数据，检查标注字段并配置字段映射与训练参数，划分训练和验证数据，导出 JSONL 并保存本地任务草稿。当前不执行 GPU 训练。</p><div class="detail-entry"><a class="button" href="annotation-training.html">进入标注训练 →</a></div></div></div></article>
-          <article class="stage"><button class="stage-toggle" type="button" aria-expanded="false"><span class="stage-marker"></span><span><span class="stage-number">05 / TESTING &amp; EVALUATION</span><span class="stage-title-row"><h3>测试与评估</h3><span class="stage-phase">评估验证</span></span><p>对训练数据、标注结果和模型输出进行验证，检查准确性、一致性、异常样本与改进方向，形成后续优化依据。</p><span class="stage-soon">COMING SOON / 建设中</span></span><span class="stage-symbol">+</span></button><div class="stage-detail"><div class="stage-detail-inner"><p>测试与评估是 AI 标注训练流程的验证阶段，后续可用于展示测试结果、异常样本、评估记录和优化依据。</p><div class="detail-entry"><span class="status">COMING SOON / 建设中</span></div></div></div></article>
+          <article class="stage"><button class="stage-toggle" type="button" aria-expanded="false"><span class="stage-marker"></span><span><span class="stage-number">05 / TESTING &amp; EVALUATION</span><span class="stage-title-row"><h3>测试与评估</h3><span class="stage-phase">评估验证</span></span><p>对训练数据、标注结果和模型输出进行验证，检查准确性、一致性、异常样本与改进方向，形成后续优化依据。</p><span class="stage-soon">COMING SOON / 建设中</span></span><span class="stage-symbol">+</span></button><div class="stage-detail"><div class="stage-detail-inner"><p>测试与评估是 数据工程与标注流程的验证阶段，后续可用于展示测试结果、异常样本、评估记录和优化依据。</p><div class="detail-entry"><span class="status">COMING SOON / 建设中</span></div></div></div></article>
         </div>
       </div>
       <p class="boundary">标注训练已提供本地实验版：数据准备、配置、导出与任务草稿；实际训练和测试评估仍在建设中。</p>

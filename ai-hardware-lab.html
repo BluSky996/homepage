@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AI Data Lab 传感器、控制器与边缘设备硬件实验项目集合">
+  <title>AI 硬件实验｜AI Data Lab</title>
+  <link rel="stylesheet" href="datasets/styles.css">
+  <style>
+    .project-cover {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding-block: 116px;
+      text-align: center;
+    }
+    .project-cover::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle closest-side at center,
+        rgba(109,255,179,.012) 0%,
+        rgba(109,255,179,.022) 52%,
+        rgba(109,255,179,.055) 72%,
+        rgba(71,215,220,.085) 80%,
+        rgba(109,255,179,.18) 82%,
+        rgba(109,255,179,.18) 82.4%,
+        rgba(71,215,220,.085) 84%,
+        rgba(109,255,179,.04) 91%,
+        transparent 100%);
+    }
+    .cover-content { position: relative; z-index: 1; }
+    .cover-content .crumbs { margin-bottom: 48px; }
+    .cover-content .kicker { justify-content: center; }
+    .cover-content h1 { max-width: none; font-size: clamp(54px,8vw,102px); }
+    .cover-lead { max-width: 760px; margin: 24px auto 0; color: var(--muted); font-size: 16px; }
+    .cover-code { margin-top: 28px; color: var(--muted); font: 11px Consolas,monospace; letter-spacing: .18em; }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(24px,4vw,38px);
+      border: 1px solid var(--strong);
+      border-radius: 18px;
+      background: linear-gradient(135deg,rgba(14,25,20,.96),rgba(7,13,10,.92));
+      box-shadow: 0 28px 80px rgba(0,0,0,.2);
+    }
+    .project-card::after {
+      position: absolute;
+      top: -90px;
+      right: -70px;
+      width: 240px;
+      height: 240px;
+      content: "";
+      border-radius: 50%;
+      background: rgba(71,215,255,.065);
+      filter: blur(8px);
+    }
+    .project-card-head { position: relative; z-index: 1; display: flex; align-items: flex-start; justify-content: space-between; gap: 28px; }
+    .project-id { display: block; margin-bottom: 10px; color: var(--cyan); font: 12px Consolas,monospace; letter-spacing: .13em; }
+    .project-card h3 { margin: 0; font-size: clamp(25px,3vw,34px); }
+    .project-card p { max-width: 760px; margin: 14px 0 0; color: var(--muted); }
+    .project-status { flex: 0 0 auto; padding: 7px 12px; border: 1px solid rgba(109,255,179,.3); border-radius: 999px; color: var(--green); background: rgba(109,255,179,.045); font-size: 12px; }
+    .project-tags { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .project-tags span { padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; color: #bdcbc4; background: rgba(255,255,255,.018); font-size: 12px; }
+
+    .project-details { position: relative; z-index: 1; display: grid; gap: 12px; margin-top: 18px; }
+    .fold { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: rgba(11,16,13,.76); }
+    .fold summary { display: flex; align-items: center; justify-content: space-between; min-height: 62px; padding: 14px 20px; color: #d3e0d9; font-weight: 700; cursor: pointer; list-style: none; }
+    .fold summary::-webkit-details-marker { display: none; }
+    .fold summary:hover { color: var(--green); }
+    .fold .opened { display: none; }
+    .fold[open] .closed { display: none; }
+    .fold[open] .opened { display: inline; }
+    .fold-content { padding: 4px 20px 22px; border-top: 1px solid var(--line); }
+    .equipment-lines { display: grid; gap: 10px; padding-top: 14px; }
+    .equipment-line { color: #bdcbc4; line-height: 1.65; }
+    .equipment-line strong { color: #e3ebe7; font-weight: 650; }
+
+    .experiment-history { display: grid; gap: 14px; }
+    .experiment-record { overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: rgba(11,16,13,.86); }
+    .experiment-record-head { display: flex; align-items: center; gap: 18px; padding: 15px 20px; border-bottom: 1px solid var(--line); }
+    .experiment-record-head strong { font-size: 15px; font-weight: 650; }
+    .experiment-files { display: grid; }
+    .experiment-file-row { display: grid; grid-template-columns: 100px minmax(0,1fr) 128px; align-items: center; gap: 18px; min-height: 66px; padding: 12px 20px; border-bottom: 1px solid var(--line); }
+    .experiment-file-row:last-child { border-bottom: 0; }
+    .experiment-file-label { color: #c8d4ce; font-size: 13px; font-weight: 650; }
+    .experiment-file-name { overflow: hidden; color: var(--muted); font: 12px Consolas,monospace; text-overflow: ellipsis; white-space: nowrap; }
+    .archive-date { color: var(--cyan); font: 12px Consolas,monospace; }
+    .record-action { min-height: 38px; display: inline-flex; align-items: center; justify-content: center; padding-inline: 13px; border: 1px solid var(--strong); border-radius: 7px; color: #b8c6be; background: rgba(255,255,255,.02); font-size: 12px; text-decoration: none; transition: .18s ease; }
+    .record-action:hover { border-color: var(--green); color: var(--green); }
+    .archive-note { display: flex; align-items: center; gap: 8px; margin-top: 14px; color: #69776f; font-size: 12px; }
+    .archive-note::before { width: 6px; height: 6px; content: ""; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
+
+    .future-project-list { display: grid; gap: 16px; }
+    .future-project { min-height: 0; }
+    .fan-entry { display: grid; justify-items: end; gap: 6px; margin-top: 22px; text-align: right; }
+    .fan-entry-main { display: flex; align-items: center; justify-content: flex-end; gap: 18px; }
+    .fan-entry h3 { margin: 0; color: #cbd7d1; font-size: 15px; }
+    .fan-entry p { margin: 0; color: #68766f; font-size: 11px; }
+    .resource-link { color: var(--green); font-size: 12px; text-decoration: none; }
+    .resource-link:hover { color: #a7ffd0; }
+
+    @media(max-width:860px) {
+      .project-card-head { flex-direction: column; gap: 14px; }
+    }
+    @media(max-width:800px) {
+      .project-cover { min-height: 480px; padding-block: 88px; }
+      .experiment-file-row { grid-template-columns: 1fr auto; gap: 7px 16px; padding: 14px 18px; }
+      .experiment-file-label,.experiment-file-name { grid-column: 1; }
+      .record-action { grid-column: 2; grid-row: 1 / span 2; }
+    }
+    @media(max-width:520px) {
+      .project-cover { min-height: 430px; }
+      .cover-content .crumbs { margin-bottom: 34px; }
+      .cover-content h1 { font-size: clamp(44px,14vw,66px); }
+      .experiment-record-head { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .experiment-file-row { grid-template-columns: 1fr; }
+      .record-action { width: 100%; grid-column: 1; grid-row: auto; margin-top: 7px; }
+      .fold summary { padding-inline: 16px; }
+      .fold-content { padding-inline: 16px; }
+    }
+  </style>
+<style>
+.workflow-nav{display:flex;align-items:center;gap:20px;flex-shrink:0;font-size:14px;color:var(--muted)}.workflow-nav a{color:inherit;text-decoration:none;white-space:nowrap;display:inline-flex;align-items:center;min-height:44px}.workflow-nav a:hover,.workflow-nav a:focus-visible{color:var(--green)}
+@media(max-width:600px){.header .nav{flex-wrap:wrap;gap:4px 16px;padding-top:10px;padding-bottom:10px}.workflow-nav{gap:16px;font-size:12px}}
+</style>
+  <style>
+    .light-temp-overview{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:center;gap:clamp(20px,3vw,34px)}
+    .light-temp-copy{min-width:0}
+    .light-temp-preview{min-width:0;display:flex;flex-direction:column;gap:10px}
+    .light-temp-preview .project-status{align-self:flex-end}
+    .light-temp-photo{position:relative;margin:0;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(109,255,179,.18);border-radius:12px;background:rgba(5,12,9,.3);box-shadow:0 0 16px rgba(109,255,179,.045)}
+    .light-temp-photo img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
+    .light-temp-photo:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 72%,rgba(3,19,12,.16))}
+    @media(max-width:760px){.light-temp-overview{grid-template-columns:1fr;gap:20px}.light-temp-preview{width:100%}}
+  </style>
+  <style>#additional-collection-projects .light-temp-photo img{object-fit:cover;object-position:center}</style>
+  <style>
+    .hardware-png-dialog{padding:0;border:1px solid rgba(109,255,179,.35);border-radius:12px;background:#09110e;color:#effaf5;max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);overflow:auto;box-shadow:0 12px 48px rgba(0,0,0,.4)}
+    .hardware-png-dialog::backdrop{background:rgba(0,8,5,.8)}
+    .hardware-png-dialog[open]{animation:hardware-png-in .15s ease-out}
+    .hardware-png-toolbar{display:flex;justify-content:flex-end;padding:5px 8px}
+    .hardware-png-close{width:36px;height:36px;padding:0;border:1px solid rgba(109,255,179,.3);border-radius:7px;color:#b8f5d6;background:transparent;font:28px/1 system-ui;cursor:pointer}
+    .hardware-png-close:hover{background:rgba(109,255,179,.08)}
+    .hardware-png-close:focus-visible{outline:2px solid #6dffb3;outline-offset:2px}
+    .hardware-png-image{display:block;width:auto;height:auto;max-width:85vw;max-height:min(85vh,calc(100dvh - 78px));object-fit:contain;margin:0 auto}
+    .hardware-png-error{padding:16px;color:#d5e8de}
+    @keyframes hardware-png-in{from{opacity:0}to{opacity:1}}
+    @media(prefers-reduced-motion:reduce){.hardware-png-dialog[open]{animation:none}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+      <a class="brand" href="index.html"><span class="mark"></span>AI DATA LAB</a>
+      <div class="workflow-nav" role="navigation" aria-label="流程导航"><a href="index.html#ai-agents">← 返回 AI 应用</a><a href="index.html">首页</a></div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="project-cover container">
+      <div class="cover-content">
+        <div class="crumbs"><a href="index.html">AI Data Lab</a> / <a href="index.html#ai-agents">AI 应用</a> / AI HARDWARE LAB</div>
+        <p class="kicker">AI HARDWARE LAB</p>
+        <h1>AI <span class="gradient">硬件实验</span></h1>
+        <p class="cover-lead">从传感器、控制器到边缘设备，记录真实硬件实验与数据交互过程</p>
+        <div class="cover-code">SENSOR DATA · HARDWARE COLLECTION · CSV · PYTHON · VISUALIZATION</div>
+      </div>
+    </section>
+
+    <section class="section container" aria-labelledby="projects-title">
+      <div class="section-head">
+        <div><p class="kicker">HARDWARE EXPERIMENTS</p><h2 id="projects-title">硬件实验项目</h2></div>
+        <p class="section-intro">以项目为单位记录真实世界数据采集实验。每个项目包含采集目标、使用设备、数据流程和历史记录，后续可持续扩展新的传感器实验。</p>
+      </div>
+
+      <article class="project-card">
+        <div class="light-temp-overview">
+          <div class="light-temp-copy">
+            <div class="project-card-head">
+              <div><span class="project-id">PROJECT 01 / LIGHT &amp; TEMPERATURE</span><h3>光照与温度环境监测</h3><p>基于 ESP32、温度传感器、光照传感器和 LCD 显示屏，采集环境中的温度与光照变化，并保存为 CSV 数据用于后续分析和可视化。</p></div>
+            </div>
+            <div class="project-tags"><span>ESP32</span><span>温度传感器</span><span>光照传感器</span><span>CSV 数据</span><span>Python 分析</span><span>可视化报告</span></div>
+          </div>
+          <div class="light-temp-preview">
+            <span class="project-status">已接入历史记录</span>
+            <figure class="light-temp-photo"><img src="assets/images/light-temp-lab.png" alt="光照与温度环境监测实验：ESP32 主板、LCD 显示屏、光照传感器和温度传感器" loading="lazy" decoding="async"></figure>
+          </div>
+        </div>
+        <div class="project-details">
+        <details class="fold">
+          <summary><span class="closed">查看实验设备介绍 ＋</span><span class="opened">收起实验设备介绍 −</span></summary>
+          <div class="fold-content">
+            <div class="equipment-lines">
+              <div class="equipment-line"><strong>硬件 Hardware：</strong>ESP32 开发板 / 温度传感器 / 光照传感器 / LCD 显示屏</div>
+              <div class="equipment-line"><strong>软件 Software：</strong>Arduino IDE / Python</div>
+            </div>
+          </div>
+        </details>
+        <details class="fold">
+          <summary><span class="closed">查看历史记录 ＋</span><span class="opened">收起历史记录 −</span></summary>
+          <div class="fold-content">
+            <p class="section-intro">展示该采集项目最近的实验数据和分析报告。原始数据与可视化结果保存在本地项目目录中，页面仅展示最近记录。</p>
+      <div class="experiment-history">
+        <!-- EXPERIMENT_RECORDS_START -->
+        <article class="experiment-record"><div class="experiment-record-head"><span class="archive-date">2026-08-12</span><strong>ESP32 温度与光照环境监测实验</strong></div><div class="experiment-files"><div class="experiment-file-row"><span class="experiment-file-label">原始数据</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260812_075654.csv</span><a class="record-action" href="datasets/environment/data/esp32_light_temp_LED_behavior_20260812_075654.csv" download>下载 CSV</a></div><div class="experiment-file-row"><span class="experiment-file-label">分析报告</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260812_075654.png</span><a class="record-action" href="datasets/environment/reports/esp32_light_temp_LED_behavior_20260812_075654.png">查看 PNG</a></div></div></article>
+        <article class="experiment-record"><div class="experiment-record-head"><span class="archive-date">2026-08-11</span><strong>ESP32 温度与光照环境监测实验</strong></div><div class="experiment-files"><div class="experiment-file-row"><span class="experiment-file-label">原始数据</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260709_233950.csv</span><a class="record-action" href="datasets/environment/data/esp32_light_temp_LED_behavior_20260709_233950.csv" download>下载 CSV</a></div><div class="experiment-file-row"><span class="experiment-file-label">分析报告</span><span class="experiment-file-name">esp32_light_temp_LED_behavior_20260622_111116.png</span><a class="record-action" href="datasets/environment/reports/esp32_light_temp_LED_behavior_20260622_111116.png">查看 PNG</a></div></div></article>
+        <!-- EXPERIMENT_RECORDS_END -->
+      </div>
+      <p class="archive-note">新文件由人工放入对应目录；更新后按批次展示最近记录，不删除任何历史文件。</p>
+          </div>
+        </details>
+        </div>
+      </article>
+      <div class="future-project-list" id="additional-collection-projects"></div>
+      <aside class="fan-entry">
+        <div class="fan-entry-main"><h3>发烧友资源入口</h3><a class="resource-link" href="#">前往第三方资源 →</a></div>
+        <p>第三方资源仅供学习参考，不代表本站立场。</p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>DATA_02 / ENVIRONMENT COLLECTION</span></div></footer>
+  <script>
+    // 新增采集项目只需追加配置；图片统一保存在 assets/images。
+    const collectionProjects = [
+      { number: '02', code: 'SERVO ROBOTIC ARM', title: '舵机机械臂', status: '已接入 / 已有实验硬件', description: '基于多自由度舵机机械结构与控制主板，记录机械臂动作、角度变化和控制过程，用于运动控制、机械结构实验和后续数据采集。', tags: ['舵机', '机械臂', '运动控制', '硬件实验', '动作数据'], image: 'assets/images/servo-robotic-arm.png' },
+      { number: '03', code: 'SERVO RADAR MONITORING', title: '舵机声控雷达监测', status: '已接入 / 已有实验硬件', description: '基于 ESP32、超声波传感器、舵机云台与 OLED 显示模块，实现距离感知、环境扫描和实时雷达式数据展示，用于传感器数据采集、控制与可视化实验。', tags: ['ESP32', '超声波传感器', '舵机', '雷达扫描', 'OLED', '环境感知', '数据可视化'], image: 'assets/images/servo-radar-monitor.png' },
+      { number: '04', code: 'MOTION SENSOR', title: '体感运动传感器', status: '规划中', description: '用于记录人体动作、姿态变化或脚步压力等传感器数据，后续可用于运动数据采集、行为识别和 AI 标注实验。', tags: ['体感数据', '动作采集', '姿态识别', '传感器实验', 'AI 标注'], image: null }
+    ];
+    Object.assign(collectionProjects[0], {
+      hardware: ['多自由度舵机机械臂', 'SG90 舵机 × 4', '控制主板', '旋转底座', 'USB 5V 电源'],
+      software: ['Arduino IDE', 'Python'],
+      history: []
+    });
+    Object.assign(collectionProjects[1], {
+      hardware: ['ESP32 开发板', '超声波测距传感器', '舵机云台', 'OLED 显示屏', '面包板与杜邦线', 'USB 供电'],
+      software: ['Arduino IDE', 'Python'],
+      history: []
+    });
+    const collectionList = document.getElementById('additional-collection-projects');
+    function projectElement(tag, className, text) {
+      const element = document.createElement(tag);
+      element.className = className;
+      if (text) element.textContent = text;
+      return element;
+    }
+    collectionProjects.forEach(project => {
+      const card = projectElement('article', 'project-card' + (project.image ? '' : ' future-project'));
+      const copy = projectElement('div', 'light-temp-copy');
+      const head = projectElement('div', 'project-card-head');
+      const text = projectElement('div', '');
+      text.append(projectElement('span', 'project-id', 'PROJECT ' + project.number + ' / ' + project.code), projectElement('h3', '', project.title), projectElement('p', '', project.description));
+      head.append(text);
+      const status = projectElement('span', 'project-status', project.status);
+      const tags = projectElement('div', 'project-tags');
+      project.tags.forEach(tag => tags.append(projectElement('span', '', tag)));
+      copy.append(head, tags);
+      if (project.image) {
+        const overview = projectElement('div', 'light-temp-overview');
+        const preview = projectElement('div', 'light-temp-preview');
+        const figure = projectElement('figure', 'light-temp-photo');
+        const image = projectElement('img', '');
+        image.src = project.image; image.alt = project.title + '实验硬件'; image.loading = 'lazy'; image.decoding = 'async';
+        figure.append(image); preview.append(status, figure); overview.append(copy, preview); card.append(overview);
+      } else { head.append(status); card.append(copy); }
+      if (project.hardware) {
+        const details = projectElement('div', 'project-details');
+        function fold(label) {
+          const element = projectElement('details', 'fold');
+          const summary = projectElement('summary', '');
+          summary.append(projectElement('span', 'closed', '查看' + label + ' ＋'), projectElement('span', 'opened', '收起' + label + ' −'));
+          const content = projectElement('div', 'fold-content');
+          element.append(summary, content); details.append(element);
+          return content;
+        }
+        const equipment = fold('实验设备介绍');
+        const lines = projectElement('div', 'equipment-lines');
+        [['硬件 Hardware：', project.hardware], ['软件 Software：', project.software]].forEach(([label, items]) => {
+          const line = projectElement('div', 'equipment-line');
+          line.append(projectElement('strong', '', label), document.createTextNode(items.join(' / ')));
+          lines.append(line);
+        });
+        equipment.append(lines);
+        const history = fold('历史记录');
+        if (!project.history.length) {
+          history.append(projectElement('p', 'section-intro', '暂无历史实验记录'), projectElement('p', 'archive-note', '后续实验数据接入后，将在这里展示采集时间、设备状态、数据文件和分析结果。'));
+        } else {
+          project.history.forEach(record => {
+            const item = projectElement('article', 'experiment-record');
+            item.append(projectElement('strong', '', record.title), projectElement('p', 'archive-note', record.description));
+            history.append(item);
+          });
+        }
+        card.append(details);
+      }
+      collectionList.append(card);
+    });
+  </script>
+  <dialog id="hardware-png-preview" class="hardware-png-dialog" aria-label="实验报告 PNG 预览">
+    <div class="hardware-png-toolbar"><button class="hardware-png-close" type="button" aria-label="关闭图片预览" autofocus>×</button></div>
+    <img class="hardware-png-image" alt="实验报告">
+    <p class="hardware-png-error" hidden>图片加载失败，请关闭后重试。</p>
+  </dialog>
+  <script>
+    (() => {
+      const dialog = document.getElementById('hardware-png-preview');
+      const image = dialog.querySelector('img');
+      const error = dialog.querySelector('.hardware-png-error');
+      let trigger, scrollX = 0, scrollY = 0, previousOverflow = '';
+      image.addEventListener('load', () => { image.style.visibility = 'visible'; });
+      image.addEventListener('error', () => { error.hidden = false; });
+      document.addEventListener('click', event => {
+        const link = event.target.closest('a.record-action');
+        if (!link || link.hasAttribute('download') || !/\.png(?:[?#]|$)/i.test(link.getAttribute('href') || '')) return;
+        event.preventDefault();
+        if (dialog.open) return;
+        trigger = link;
+        scrollX = window.scrollX; scrollY = window.scrollY;
+        previousOverflow = document.documentElement.style.overflow;
+        image.style.visibility = 'hidden'; error.hidden = true;
+        image.alt = '实验报告：' + link.getAttribute('href').split('/').pop();
+        image.src = link.href;
+        dialog.showModal();
+        document.documentElement.style.overflow = 'hidden';
+      });
+      dialog.querySelector('button').addEventListener('click', () => dialog.close());
+      let backdropPress = false;
+      const outside = event => {
+        const rect = dialog.getBoundingClientRect();
+        return event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+      };
+      dialog.addEventListener('pointerdown', event => { backdropPress = event.target === dialog && outside(event); });
+      dialog.addEventListener('click', event => { if (backdropPress && event.target === dialog && outside(event)) dialog.close(); backdropPress = false; });
+      // Native dialog handles Escape and keeps keyboard focus inside the preview.
+      dialog.addEventListener('close', () => {
+        document.documentElement.style.overflow = previousOverflow;
+        image.style.visibility = 'hidden'; image.removeAttribute('src');
+        if (trigger) trigger.focus({preventScroll:true});
+        window.scrollTo({left:scrollX, top:scrollY, behavior:'instant'});
+      });
+    })();
+  </script>
+</body>
+</html>

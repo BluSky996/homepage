@@ -106,8 +106,51 @@
     <section aria-labelledby="projects-title">
       <div class="projects-heading"><p class="eyebrow">ANNOTATION &amp; TRAINING PROJECTS</p><h2 id="projects-title">标注训练项目</h2></div>
 
+      <details class="panel cleaning-project">
+        <summary><span class="project-heading"><span class="project-code">PROJECT 01 / TRAFFIC OBJECT ANNOTATION</span><span class="project-name">交通目标框标注</span><span class="badge">数据已存在 / 待接入页面</span></span><img class="project-card-icon" src="assets/icons/icon-traffic-annotation.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
+        <div class="project-content">
+          <p class="muted">对交通场景图片进行目标框标注，覆盖行人、车辆、信号灯与自行车等类别；当前仅完成数据与标注结构统计，页面样例尚未接入。</p>
+          <div class="metrics">
+            <div class="metric"><span>图片</span><strong>85张</strong></div>
+            <div class="metric"><span>XML 标注</span><strong>65个</strong></div>
+            <div class="metric"><span>缺少标注</span><strong>20张</strong></div>
+          </div>
+          <p class="muted table-label">主要类别</p>
+          <ul class="class-dist">
+            <li>person</li>
+            <li>car</li>
+            <li>traffic_light</li>
+            <li>bicycle</li>
+          </ul>
+
+          <details class="table-acc apple-record">
+            <summary class="apple-record-row">
+              <div class="apple-record-info">
+                <div class="apple-record-title">查看标注</div>
+                <div class="apple-record-meta">待接入 · 精选样例图与框选展示</div>
+              </div>
+              <span class="apple-record-toggle"><span class="expand-label">+ 查看标注</span><span class="collapse-label">− 收起标注</span></span>
+            </summary>
+            <div class="placeholder">接入计划：从 85 张图片中精选 6～8 张样例（含已标注与缺少标注各若干），展示原图与 XML 目标框叠加效果；本轮不复制 60 多张原图。</div>
+          </details>
+
+          <details class="table-acc apple-record">
+            <summary class="apple-record-row">
+              <div class="apple-record-info">
+                <div class="apple-record-title">查看统计</div>
+                <div class="apple-record-meta">待接入 · 类别分布与标注完整度统计</div>
+              </div>
+              <span class="apple-record-toggle"><span class="expand-label">+ 查看统计</span><span class="collapse-label">− 收起统计</span></span>
+            </summary>
+            <div class="placeholder">接入计划：类别分布（person / car / traffic_light / bicycle）、每图平均框数、缺失标注清单（20 张）、标注完整度统计。</div>
+          </details>
+
+          <p class="note">数据来源：已有本地资产只读扫描结果（图片 85 张 / XML 标注 65 个 / 缺少标注 20 张）；本项目暂未接入处理功能。</p>
+        </div>
+      </details>
+
       <details class="panel cleaning-project" open>
-        <summary><span class="project-heading"><span class="project-code">PROJECT 01 / APPLE ANNOTATION &amp; FEATURE CLASSIFICATION</span><span class="project-name">苹果图像标注与特征分类</span><span class="badge">已完成 / 可复现实验</span></span><img class="project-card-icon" src="assets/icons/icon-apple-annotation.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
+        <summary><span class="project-heading"><span class="project-code">PROJECT 02 / APPLE ANNOTATION &amp; FEATURE CLASSIFICATION</span><span class="project-name">苹果图像标注与特征分类</span><span class="badge">已完成 / 可复现实验</span></span><img class="project-card-icon" src="assets/icons/icon-apple-annotation.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
         <div class="project-content">
           <section class="panel apple-panel" aria-labelledby="apple-annot-title">
             <h3 id="apple-annot-title" class="annot-section-title">标注展示</h3>
@@ -179,49 +222,6 @@
               <p class="note">阈值来自原项目脚本中的真实规则；本实验不包含训练过程，也没有模型权重文件。</p>
             </details>
           </section>
-        </div>
-      </details>
-
-      <details class="panel cleaning-project">
-        <summary><span class="project-heading"><span class="project-code">PROJECT 02 / TRAFFIC OBJECT ANNOTATION</span><span class="project-name">交通目标框标注</span><span class="badge">数据已存在 / 待接入页面</span></span><img class="project-card-icon" src="assets/icons/icon-traffic-annotation.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
-        <div class="project-content">
-          <p class="muted">对交通场景图片进行目标框标注，覆盖行人、车辆、信号灯与自行车等类别；当前仅完成数据与标注结构统计，页面样例尚未接入。</p>
-          <div class="metrics">
-            <div class="metric"><span>图片</span><strong>85张</strong></div>
-            <div class="metric"><span>XML 标注</span><strong>65个</strong></div>
-            <div class="metric"><span>缺少标注</span><strong>20张</strong></div>
-          </div>
-          <p class="muted table-label">主要类别</p>
-          <ul class="class-dist">
-            <li>person</li>
-            <li>car</li>
-            <li>traffic_light</li>
-            <li>bicycle</li>
-          </ul>
-
-          <details class="table-acc apple-record">
-            <summary class="apple-record-row">
-              <div class="apple-record-info">
-                <div class="apple-record-title">查看标注</div>
-                <div class="apple-record-meta">待接入 · 精选样例图与框选展示</div>
-              </div>
-              <span class="apple-record-toggle"><span class="expand-label">+ 查看标注</span><span class="collapse-label">− 收起标注</span></span>
-            </summary>
-            <div class="placeholder">接入计划：从 85 张图片中精选 6～8 张样例（含已标注与缺少标注各若干），展示原图与 XML 目标框叠加效果；本轮不复制 60 多张原图。</div>
-          </details>
-
-          <details class="table-acc apple-record">
-            <summary class="apple-record-row">
-              <div class="apple-record-info">
-                <div class="apple-record-title">查看统计</div>
-                <div class="apple-record-meta">待接入 · 类别分布与标注完整度统计</div>
-              </div>
-              <span class="apple-record-toggle"><span class="expand-label">+ 查看统计</span><span class="collapse-label">− 收起统计</span></span>
-            </summary>
-            <div class="placeholder">接入计划：类别分布（person / car / traffic_light / bicycle）、每图平均框数、缺失标注清单（20 张）、标注完整度统计。</div>
-          </details>
-
-          <p class="note">数据来源：已有本地资产只读扫描结果（图片 85 张 / XML 标注 65 个 / 缺少标注 20 张）；本项目暂未接入处理功能。</p>
         </div>
       </details>
     </section>
