@@ -68,7 +68,19 @@
     .cleaning-project>summary{display:grid;grid-template-columns:minmax(0,1fr) 160px 24px;gap:24px}.project-card-icon{display:block;width:88px;height:88px;object-fit:contain;justify-self:center;opacity:.9;pointer-events:none}.cleaning-project>summary>.project-toggle{justify-self:end}
     @media(max-width:700px){.cleaning-project>summary{grid-template-columns:minmax(0,1fr) 64px 20px;gap:12px}.project-card-icon{width:60px;height:60px}}
     .next>h2{color:#F6C85F}
-.next-stage-link{color:#F6C85F;cursor:pointer;text-decoration:none}.next-stage-link:hover{color:#FFE09A;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}.next-stage-link span{font-size:.8em}.next-stage-link:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}</style>
+.next-stage-link{color:#F6C85F;cursor:pointer;text-decoration:none}.next-stage-link:hover{color:#FFE09A;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}.next-stage-link span{font-size:.8em}.next-stage-link:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}
+    /* Traffic annotation only; preserve the existing apple project styles. */
+    .traffic-annotation>h3{margin-top:24px;color:#c2d8d0}
+    .traffic-annotation .results-accordion>summary{margin-left:auto;font-size:14px;line-height:1.6}
+    .traffic-annotation-shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:14px}
+    .traffic-annotation-shots figure{margin:0;min-width:0;padding:10px;border:1px solid var(--line);border-radius:10px;background:rgba(5,12,9,.6)}
+    .traffic-annotation-clip{position:relative;overflow:hidden}
+    .traffic-annotation-clip img{display:block;width:100%;height:auto;border-radius:6px}
+    .traffic-annotation-clip::after{content:"";position:absolute;inset:auto 0 0;height:20px;background:linear-gradient(transparent,rgba(12,20,16,.9));pointer-events:none}
+    .traffic-annotation-shots.is-expanded .traffic-annotation-clip{aspect-ratio:auto!important}
+    .traffic-annotation-shots.is-expanded .traffic-annotation-clip::after{display:none}
+    @media(max-width:600px){.traffic-annotation-shots{grid-template-columns:1fr}}
+</style>
   <style>
     /* 04 页面补充样式（与 03 共用主体样式；这里只加少量本项目需要的规则） */
     .class-dist{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0 0 4px}
@@ -107,48 +119,8 @@
       <div class="projects-heading"><p class="eyebrow">ANNOTATION &amp; TRAINING PROJECTS</p><h2 id="projects-title">标注训练项目</h2></div>
 
       <details class="panel cleaning-project">
-        <summary><span class="project-heading"><span class="project-code">PROJECT 01 / TRAFFIC OBJECT ANNOTATION</span><span class="project-name">交通目标框标注</span><span class="badge">数据已存在 / 待接入页面</span></span><img class="project-card-icon" src="assets/icons/icon-traffic-annotation.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
-        <div class="project-content">
-          <p class="muted">对交通场景图片进行目标框标注，覆盖行人、车辆、信号灯与自行车等类别；当前仅完成数据与标注结构统计，页面样例尚未接入。</p>
-          <div class="metrics">
-            <div class="metric"><span>图片</span><strong>85张</strong></div>
-            <div class="metric"><span>XML 标注</span><strong>65个</strong></div>
-            <div class="metric"><span>缺少标注</span><strong>20张</strong></div>
-          </div>
-          <p class="muted table-label">主要类别</p>
-          <ul class="class-dist">
-            <li>person</li>
-            <li>car</li>
-            <li>traffic_light</li>
-            <li>bicycle</li>
-          </ul>
-
-          <details class="table-acc apple-record">
-            <summary class="apple-record-row">
-              <div class="apple-record-info">
-                <div class="apple-record-title">查看标注</div>
-                <div class="apple-record-meta">待接入 · 精选样例图与框选展示</div>
-              </div>
-              <span class="apple-record-toggle"><span class="expand-label">+ 查看标注</span><span class="collapse-label">− 收起标注</span></span>
-            </summary>
-            <div class="placeholder">接入计划：从 85 张图片中精选 6～8 张样例（含已标注与缺少标注各若干），展示原图与 XML 目标框叠加效果；本轮不复制 60 多张原图。</div>
-          </details>
-
-          <details class="table-acc apple-record">
-            <summary class="apple-record-row">
-              <div class="apple-record-info">
-                <div class="apple-record-title">查看统计</div>
-                <div class="apple-record-meta">待接入 · 类别分布与标注完整度统计</div>
-              </div>
-              <span class="apple-record-toggle"><span class="expand-label">+ 查看统计</span><span class="collapse-label">− 收起统计</span></span>
-            </summary>
-            <div class="placeholder">接入计划：类别分布（person / car / traffic_light / bicycle）、每图平均框数、缺失标注清单（20 张）、标注完整度统计。</div>
-          </details>
-
-          <p class="note">数据来源：已有本地资产只读扫描结果（图片 85 张 / XML 标注 65 个 / 缺少标注 20 张）；本项目暂未接入处理功能。</p>
-        </div>
-      </details>
-
+        <summary><span class="project-heading"><span class="project-code">PROJECT 01 / TRAFFIC OBJECT ANNOTATION</span><span class="project-name">交通目标框标注</span><span class="badge">已有人工标注 / 待补标注与复核</span></span><img class="project-card-icon" src="assets/icons/icon-traffic-annotation.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
+<div class="project-content traffic-annotation"><div class="metrics metrics-4"><div class="metric"><span>已标注图片</span><strong>65张</strong></div><div class="metric"><span>目标框</span><strong>1166个</strong></div><div class="metric"><span>目标类别</span><strong>6类</strong></div><div class="metric"><span>待补标注</span><strong>20张</strong></div></div><h3>类别分布</h3><ul class="class-dist"><li>person<strong>777</strong></li><li>car<strong>251</strong></li><li>traffic_light<strong>101</strong></li><li>bicycle<strong>30</strong></li><li>bus<strong>4</strong></li><li>motorcycle<strong>3</strong></li></ul><h3>标注展示</h3><p class="note">依据现有人工 XML 标注生成展示副本；框坐标按图片尺寸同步缩放，英文标签仅去除首尾空白，原标注文件保持不变。</p><div class="sec-head"><h3>代表性标注 · 第 1 组</h3><button class="sec-toggle" type="button" data-traffic-annotation-toggle aria-expanded="false" aria-controls="traffic-annotation-1">+ 查看标注</button></div><div class="traffic-annotation-shots" id="traffic-annotation-1"><figure><div class="traffic-annotation-clip" style="aspect-ratio:4800/771"><img src="assets/images/traffic/annotation/pedestrian_009-annotation.jpg" width="1200" height="771" alt="pedestrian_009.jpg 人工目标框标注" loading="lazy"></div><figcaption class="apple-cap">pedestrian_009.jpg · 多类别密集场景 · 71 个框</figcaption></figure><figure><div class="traffic-annotation-clip" style="aspect-ratio:4800/903"><img src="assets/images/traffic/annotation/pedestrian_034-annotation.jpg" width="1200" height="903" alt="pedestrian_034.jpg 人工目标框标注" loading="lazy"></div><figcaption class="apple-cap">pedestrian_034.jpg · 行人场景 · 32 个 person 框</figcaption></figure></div><div class="sec-head"><h3>代表性标注 · 第 2 组</h3><button class="sec-toggle" type="button" data-traffic-annotation-toggle aria-expanded="false" aria-controls="traffic-annotation-2">+ 查看标注</button></div><div class="traffic-annotation-shots" id="traffic-annotation-2"><figure><div class="traffic-annotation-clip" style="aspect-ratio:4800/800"><img src="assets/images/traffic/annotation/pedestrian_013-annotation.jpg" width="1200" height="800" alt="pedestrian_013.jpg 人工目标框标注" loading="lazy"></div><figcaption class="apple-cap">pedestrian_013.jpg · 汽车与信号灯 · car 12 / traffic_light 11</figcaption></figure><figure><div class="traffic-annotation-clip" style="aspect-ratio:4800/675"><img src="assets/images/traffic/annotation/pedestrian_053-annotation.jpg" width="1200" height="675" alt="pedestrian_053.jpg 人工目标框标注" loading="lazy"></div><figcaption class="apple-cap">pedestrian_053.jpg · 少数类别 · bicycle 7 / bus 1</figcaption></figure></div><details class="results-accordion"><summary><span class="expand-label">+ 查看标注质量</span><span class="collapse-label">− 收起标注质量</span></summary><dl><div><dt>空标注</dt><dd>0</dd></div><div><dt>无效框</dt><dd>0</dd></div><div><dt>越界框</dt><dd>0</dd></div><div><dt>极小框 · 待人工复核</dt><dd>27个</dd></div><div><dt>标签尾部换行 · 待规范</dt><dd>10个（person 5 / traffic_light 5）</dd></div></dl><p class="note">27 个极小框待人工复核，不直接判定为错误框；20 张无 XML 的图片为待补标注。以上质量统计不代表人工逐框复核已经完成。</p></details></div></details>
       <details class="panel cleaning-project" open>
         <summary><span class="project-heading"><span class="project-code">PROJECT 02 / APPLE ANNOTATION &amp; FEATURE CLASSIFICATION</span><span class="project-name">苹果图像标注与特征分类</span><span class="badge">已完成 / 可复现实验</span></span><img class="project-card-icon" src="assets/icons/icon-apple-annotation.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
         <div class="project-content">
@@ -282,6 +254,17 @@
   });
   syncMeta();
 })();
+</script>
+
+<script>
+document.querySelectorAll('[data-traffic-annotation-toggle]').forEach(function(button){
+  button.addEventListener('click',function(){
+    var expanded=button.getAttribute('aria-expanded')!=='true';
+    button.setAttribute('aria-expanded',String(expanded));
+    button.textContent=expanded?'− 收起标注':'+ 查看标注';
+    document.getElementById(button.getAttribute('aria-controls')).classList.toggle('is-expanded',expanded);
+  });
+});
 </script>
 </body>
 </html>

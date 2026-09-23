@@ -68,6 +68,19 @@
     .cleaning-project>summary{display:grid;grid-template-columns:minmax(0,1fr) 160px 24px;gap:24px}.project-card-icon{display:block;width:88px;height:88px;object-fit:contain;justify-self:center;opacity:.9;pointer-events:none}.cleaning-project>summary>.project-toggle{justify-self:end}
     @media(max-width:700px){.cleaning-project>summary{grid-template-columns:minmax(0,1fr) 64px 20px;gap:12px}.project-card-icon{width:60px;height:60px}}
     .next-stage-link{color:#F6C85F;cursor:pointer;text-decoration:none}.next-stage-link:hover{color:#FFE09A;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}.next-stage-link span{font-size:.8em}.next-stage-link:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}
+
+    /* Traffic display windows crop the full-width image; no thumbnail scaling. */
+    .traffic-images{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:14px}
+    .traffic-images figure{margin:0;min-width:0;padding:10px;border:1px solid var(--line);border-radius:10px;background:rgba(5,12,9,.6)}
+    .traffic-image-window{position:relative;overflow:hidden;aspect-ratio:calc(var(--traffic-ratio) * 4)}
+    .traffic-image-window img{display:block;width:100%;height:auto;max-width:100%}
+    .traffic-image-window::after{content:"";position:absolute;inset:auto 0 0;height:20px;background:linear-gradient(transparent,rgba(12,20,16,.85));pointer-events:none}
+    .traffic-images.is-expanded .traffic-image-window{aspect-ratio:auto}
+    .traffic-images.is-expanded .traffic-image-window::after{display:none}
+    [aria-labelledby="traffic-results-title"]>.results-accordion>summary{margin-left:auto;width:fit-content;font-size:14px;line-height:1.6;white-space:nowrap}
+    #traffic-results-title{color:#c4ded4}
+    #traffic-results-title~.chips{margin-top:18px}
+    @media(max-width:600px){.traffic-images{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -87,9 +100,8 @@
         </div>
       </details>
       <details class="panel cleaning-project">
-        <summary><span class="project-heading"><span class="project-code">PROJECT 02 / TRAFFIC IMAGE CLEANING</span><span class="project-name">交通图像数据清洗</span><span class="badge">数据已存在 / 待接入页面</span></span><img class="project-card-icon" src="assets/icons/icon-traffic-cleaning.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
-        <div class="project-content"><p class="muted">对交通、行人等图片数据进行格式统一、命名整理、异常检查和标注完整性检查，为后续目标标注与训练做准备。</p><dl><div><dt>图片数据</dt><dd>85 张</dd></div><div><dt>标准化图片</dt><dd>85 张</dd></div><div><dt>已有 XML 标注</dt><dd>65 个</dd></div><div><dt>缺少标注</dt><dd>20 张</dd></div></dl><p class="note">数据来源：已有本地资产只读扫描结果；本项目暂未接入处理功能。</p></div>
-      </details>
+        <summary><span class="project-heading"><span class="project-code">PROJECT 02 / TRAFFIC IMAGE CLEANING</span><span class="project-name">交通图像数据清洗</span><span class="badge">已完成清洗检查 / 待补标注与复核</span></span><img class="project-card-icon" src="assets/icons/icon-traffic-cleaning.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
+<div class="project-content"><section class="panel" aria-labelledby="traffic-results-title"><h2 id="traffic-results-title">交通图像 · 清洗摘要</h2><div class="metrics metrics-4"><div class="metric"><span>原始图片</span><strong>85张</strong></div><div class="metric"><span>标准化图片</span><strong>85张</strong></div><div class="metric"><span>XML 标注</span><strong>65个</strong></div><div class="metric"><span>待补标注</span><strong>20张</strong></div></div><details class="results-accordion"><summary><span class="expand-label">+ 查看详细</span><span class="collapse-label">− 收起详细</span></summary><div class="breakdown"><div><h3>数据格式整理</h3><dl><div><dt>JPG</dt><dd>81张</dd></div><div><dt>JPEG</dt><dd>1张</dd></div><div><dt>WebP</dt><dd>2张</dd></div><div><dt>PNG</dt><dd>1张</dd></div><div><dt>整理后</dt><dd>85 张统一 JPG</dd></div><div><dt>目标框</dt><dd>1166个</dd></div><div><dt>目标类别</dt><dd>6类</dd></div></dl></div><div><h3>目标类别</h3><dl><div><dt>person</dt><dd>777个</dd></div><div><dt>car</dt><dd>251个</dd></div><div><dt>traffic_light</dt><dd>101个</dd></div><div><dt>bicycle</dt><dd>30个</dd></div><div><dt>bus</dt><dd>4个</dd></div><div><dt>motorcycle</dt><dd>3个</dd></div></dl></div></div><div class="breakdown"><div><h3>清洗检查</h3><dl><div><dt>XML 引用图片缺失</dt><dd>0</dd></div><div><dt>文件名主体不匹配</dt><dd>0</dd></div><div><dt>尺寸不一致</dt><dd>0</dd></div><div><dt>空标注</dt><dd>0</dd></div><div><dt>无效框</dt><dd>0</dd></div><div><dt>越界框</dt><dd>0</dd></div></dl></div><div><h3>待人工复核</h3><dl><div><dt>极小框</dt><dd>27个</dd></div></dl><p class="note">宽或高小于 20px；尚待人工复核，不直接判定为错误框。</p><h3>标签格式待规范</h3><dl><div><dt>person 尾部换行</dt><dd>5个</dd></div><div><dt>traffic_light 尾部换行</dt><dd>5个</dd></div><div><dt>合计</dt><dd>10个</dd></div></dl></div></div><p class="note">20 张图片尚无 XML，属于待补标注。类别计数按规范化名称汇总，原始标签未改写。</p></details><ul class="chips"><li>图片格式统一</li><li>XML 解析</li><li>图片/XML 配对</li><li>尺寸一致性检查</li><li>标签规范检查</li><li>框坐标检查</li><li>极小框筛查</li></ul><div class="sec-head"><h3>代表性图片 · 第 1 组</h3><button type="button" class="sec-toggle" data-traffic-toggle aria-expanded="false" aria-controls="traffic-images-1">+ 查看图片</button></div><div class="traffic-images" id="traffic-images-1"><figure><div class="traffic-image-window" style="--traffic-ratio:1200/896"><img src="assets/images/traffic/cleaning/pedestrian_011.jpg" width="1200" height="896" alt="交通场景展示：pedestrian_011" loading="lazy"></div><figcaption class="apple-cap">pedestrian_011</figcaption></figure><figure><div class="traffic-image-window" style="--traffic-ratio:1200/677"><img src="assets/images/traffic/cleaning/pedestrian_065.jpg" width="1200" height="677" alt="交通场景展示：pedestrian_065" loading="lazy"></div><figcaption class="apple-cap">pedestrian_065</figcaption></figure></div><div class="sec-head"><h3>代表性图片 · 第 2 组</h3><button type="button" class="sec-toggle" data-traffic-toggle aria-expanded="false" aria-controls="traffic-images-2">+ 查看图片</button></div><div class="traffic-images" id="traffic-images-2"><figure><div class="traffic-image-window" style="--traffic-ratio:1200/800"><img src="assets/images/traffic/cleaning/pedestrian_012.jpg" width="1200" height="800" alt="交通场景展示：pedestrian_012" loading="lazy"></div><figcaption class="apple-cap">pedestrian_012</figcaption></figure><figure><div class="traffic-image-window" style="--traffic-ratio:1200/675"><img src="assets/images/traffic/cleaning/pedestrian_053.jpg" width="1200" height="675" alt="交通场景展示：pedestrian_053" loading="lazy"></div><figcaption class="apple-cap">pedestrian_053</figcaption></figure></div><p class="note">数据来源：现有交通 03 清洗展示资产包的 cleaning_summary.json 与 cleaning_notes.md；本页仅展示既有统计及展示副本。</p></section></div></details>
       <details class="panel cleaning-project" open>
         <summary><span class="project-heading"><span class="project-code">PROJECT 03 / APPLE IMAGE CLEANING</span><span class="project-name">苹果图像数据清洗</span><span class="badge">已整理 / 可复现实验</span></span><img class="project-card-icon" src="assets/icons/icon-apple-cleaning.svg" width="88" height="88" alt="" aria-hidden="true"><span class="project-toggle" aria-hidden="true"></span></summary>
         <div class="project-content">
@@ -364,6 +376,17 @@
     syncNotes();
   }
 })();
+</script>
+
+<script>
+document.querySelectorAll('[data-traffic-toggle]').forEach(function(button){
+  button.addEventListener('click',function(){
+    var open=button.getAttribute('aria-expanded')!=='true';
+    button.setAttribute('aria-expanded',String(open));
+    button.textContent=open?'− 收起图片':'+ 查看图片';
+    document.getElementById(button.getAttribute('aria-controls')).classList.toggle('is-expanded',open);
+  });
+});
 </script>
 </body>
 </html>
