@@ -7,7 +7,7 @@
 .apple-evaluation .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.apple-evaluation .prediction-counts{font-size:18px}.apple-evaluation .fold>summary{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}.apple-evaluation .fold>summary:before{content:none}.apple-evaluation .fold-close{display:none}.apple-evaluation .fold[open]>summary .fold-open{display:none}.apple-evaluation .fold[open]>summary .fold-close{display:inline}.eval-picture{margin-top:20px}.eval-picture-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.eval-picture-head h4{color:#c2d8d0}.eval-image-toggle{font:inherit;font-size:14px;background:transparent;color:var(--green);border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer}.eval-image-toggle:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}.eval-image-window{max-height:var(--preview-height,150px);overflow:hidden;position:relative}.eval-image-window img{display:block;width:100%;height:auto}.eval-image-window:not(.expanded):after{content:'';position:absolute;bottom:0;left:0;right:0;height:20px;background:linear-gradient(transparent,rgba(12,20,16,.9));pointer-events:none}.eval-image-window.expanded{max-height:none}.eval-table{overflow-x:auto}.eval-table table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}.eval-table th,.eval-table td{padding:10px;border-bottom:1px solid var(--line)}@media(max-width:600px){.apple-evaluation .metrics{grid-template-columns:1fr}}
 .traffic-detection-entry{display:inline-flex;align-items:center;justify-content:center;min-height:46px;max-width:100%;margin-top:22px;padding:10px 20px;border:1px solid var(--green);border-radius:8px;background:var(--green);color:#06140c;font-size:14px;font-weight:700}.traffic-detection-entry:hover{color:#06140c;filter:brightness(1.06)}
 .traffic-detection-entry{font-family:inherit;cursor:pointer}
-.traffic-modal{width:90vw;max-width:1200px;height:85vh;height:85dvh;max-height:90vh;padding:0;border:1px solid var(--green);border-radius:14px;background:#0b100d;color:var(--text);overflow:hidden}
+.traffic-modal{width:82vw;max-width:1180px;height:84vh;max-height:900px;padding:0;border:1px solid var(--green);border-radius:14px;background:#0b100d;color:var(--text);overflow:hidden}
 .traffic-modal::backdrop{background:rgba(0,0,0,.75)}
 .traffic-modal-layout{display:flex;flex-direction:column;height:100%}
 .traffic-modal-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px;border-bottom:1px solid var(--line)}
@@ -24,7 +24,7 @@
 <div class="project-content">
 <p class="muted">使用成熟预训练 YOLO 模型对交通场景图片进行目标检测，验证人、车辆、自行车、交通灯等目标的识别效果。</p>
 <div class="tags"><span>YOLO</span><span>目标检测</span><span>Person</span><span>Car</span><span>测试评估</span></div>
-<a class="traffic-detection-entry" id="traffic-detection-open" href="https://traffic-detection-proxy.vercel.app" target="_blank" rel="noopener noreferrer">打开交通目标检测 →</a>
+<button class="traffic-detection-entry" id="traffic-detection-open" type="button" aria-haspopup="dialog" aria-controls="traffic-detection-modal">打开交通目标检测 →</button>
 <p class="note">本地实验服务运行后可上传单张交通场景图片，查看带框检测结果与类别统计。</p>
 </div></details>
 </section><p class="note" style="margin-bottom:40px">交通检测入口连接本机实验服务，需在本机服务运行时使用。</p></main><footer><div class="container">© 2026 AI Data Lab · TESTING &amp; EVALUATION</div></footer><script>
@@ -35,4 +35,34 @@ document.querySelectorAll('.apple-evaluation .eval-image-toggle').forEach(button
  button.addEventListener('click',()=>{const open=frame.classList.toggle('expanded');button.setAttribute('aria-expanded',String(open));button.textContent=open?'− 收起图片':'+ '+button.dataset.label;measure()});
 });
 </script>
-</body></html>
+<dialog class="traffic-modal" id="traffic-detection-modal" aria-labelledby="traffic-modal-title">
+<div class="traffic-modal-layout">
+<div class="traffic-modal-heading"><h2 id="traffic-modal-title">交通目标检测实验</h2><button class="traffic-modal-close" type="button" aria-label="关闭交通目标检测实验">×</button></div>
+<div class="traffic-modal-body"><iframe id="traffic-detection-frame" title="交通目标检测上传与结果界面"></iframe></div>
+</div></dialog>
+<script>
+(()=>{
+ const trigger=document.getElementById('traffic-detection-open');
+ const modal=document.getElementById('traffic-detection-modal');
+ const frame=document.getElementById('traffic-detection-frame');
+ let previousOverflow='';
+ trigger.addEventListener('click',()=>{
+   if(modal.open)return;
+   previousOverflow=document.body.style.overflow;
+   modal.showModal();
+   document.body.style.overflow='hidden';
+   frame.src='https://traffic-detection-proxy.vercel.app';
+ });
+ modal.querySelector('.traffic-modal-close').addEventListener('click',()=>modal.close());
+ modal.addEventListener('click',event=>{
+   if(event.target!==modal)return;
+   const box=modal.getBoundingClientRect();
+   if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)modal.close();
+ });
+ modal.addEventListener('close',()=>{
+   frame.removeAttribute('src');
+   document.body.style.overflow=previousOverflow;
+   trigger.focus({preventScroll:true});
+ });
+})();
+</script></body></html>
