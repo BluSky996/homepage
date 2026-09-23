@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AI Product Intelligence 产品市场智能分析 Agent 本地交互入口。" />
+  <meta name="description" content="AI 智能体实验集合页：产品市场调研 Agent 与工具调用实验。" />
   <meta name="theme-color" content="#050706" />
-  <title>AI Product Intelligence · AI Data Lab</title>
+  <title>AI 智能体实验 · AI Data Lab</title>
   <style>
     :root {
       --bg:#050706; --surface:#0b0f0d; --surface-2:#101613; --line:rgba(139,255,207,.13);
@@ -34,6 +34,10 @@
     .panel-head { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; margin-bottom:28px; }
     .panel-kicker { margin:0 0 6px; color:var(--green); font:11px Consolas,monospace; letter-spacing:.12em; text-transform:uppercase; }
     h2 { margin:0; font-size:23px; }
+    .panel-description { margin:5px 0 0; color:var(--muted); font-size:13px; }
+    .task-heading { margin:22px 0 0; font-size:16px; }
+    .route-tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+    .route-tags span { padding:4px 9px; border:1px solid var(--line); border-radius:999px; color:#aebdb5; background:rgba(109,255,179,.035); font-size:11px; }
     .quota { min-width:190px; padding:10px 14px; border:1px solid var(--line); border-radius:8px; color:#b9c6c0; font-size:12px; text-align:center; }
     .quota strong { color:var(--green); font-size:20px; }
     .quota-note { display:block; margin-top:4px; color:#82918a; font-size:10px; line-height:1.45; }
@@ -78,21 +82,21 @@
   <header class="site-header">
     <nav class="nav container" aria-label="项目导航">
       <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>AI DATA LAB</a>
-      <a class="back" href="index.html#ai-agents">← 返回 AI Agent 项目</a>
+      <a class="back" href="index.html#ai-agents">← 返回 AI 应用</a>
     </nav>
   </header>
   <main>
     <div class="container">
       <section aria-labelledby="page-title">
-        <p class="eyebrow">AI Agent 01 / Product Intelligence</p>
-        <h1 id="page-title">AI Product Intelligence<span class="subtitle">产品市场智能分析 Agent</span></h1>
-        <p class="intro">输入一个产品或品类，建立产品事实、外部证据与可解释分析结果的研究任务。本地页面当前仅完成交互结构，正式分析服务将在后续阶段接入。</p>
+        <p class="eyebrow">AI AGENT LAB / EXPERIMENTS</p>
+        <h1 id="page-title">AI 智能体实验<span class="subtitle">围绕真实任务验证智能体、工具调用与自动化流程</span></h1>
+        <p class="intro">AI 智能体实验集合页，当前接入产品市场调研 Agent，用于验证商品搜索、信息整理与证据报告任务。</p>
       </section>
 
       <div class="workspace">
         <section class="panel" aria-labelledby="query-title">
           <div class="panel-head">
-            <div><p class="panel-kicker">01 / Research Report</p><h2 id="query-title">创建研究任务</h2></div>
+            <div><p class="panel-kicker">PROJECT 01 / PRODUCT MARKET RESEARCH AGENT</p><h2 id="query-title">产品市场调研</h2><p class="panel-description">商品与市场调研 Agent</p><p class="panel-description">围绕商品搜索、竞品发现、市场信息整理与证据报告开展调研任务。</p><div class="route-tags" aria-label="产品市场调研能力"><span>商品搜索</span><span>竞品发现</span><span>市场评价</span><span>证据报告</span></div><h3 class="task-heading">创建调研任务</h3></div>
             <div class="quota"><span id="quota-label">当前体验额度：</span><strong id="quota-count">—</strong><span id="quota-suffix">次</span><span class="quota-note" id="quota-note">正在读取本地访问配置…</span></div>
           </div>
           <form id="analysis-form">
@@ -113,7 +117,7 @@
                 <span class="progress-value" id="progress-value">0%</span>
               </div>
               <div class="progress-track" role="progressbar" aria-label="分析进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar" id="progress-bar"></div></div>
-              <p class="progress-stage" id="progress-stage">正在创建研究任务…</p>
+              <p class="progress-stage" id="progress-stage">正在创建调研任务…</p>
               <div class="report-actions" id="report-actions">
                 <a class="report-action" id="view-report" href="#">查看研究报告<br />VIEW REPORT</a>
               </div>
@@ -146,7 +150,7 @@
     let pollTimer = null;
 
     const stageMap = {
-      TASK_CREATED: [5, "创建研究任务"],
+      TASK_CREATED: [5, "创建调研任务"],
       PRODUCT_REALITY: [20, "正在采集产品事实"],
       MARKET_EVIDENCE: [45, "正在搜索市场证据"],
       EVIDENCE_QUALITY: [65, "正在验证和整理证据"],
@@ -171,7 +175,7 @@
 
     function setProgress(status) {
       const stage = status.current_stage || "TASK_CREATED";
-      const mapped = stageMap[stage] || [5, "正在处理研究任务"];
+      const mapped = stageMap[stage] || [5, "正在处理调研任务"];
       let value = Number.isFinite(status.stage_progress) ? status.stage_progress : mapped[0];
       if (status.status !== "completed") value = Math.min(value, 96);
       if (status.status === "completed") value = 100;

@@ -736,7 +736,12 @@
     }
   
     #ai-agents .application-categories .agent-card + .agent-card{margin-top:20px}
+    #ai-agents .application-categories{width:72%}
+    #ai-agents .section-heading{width:72%;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:clamp(28px,5vw,64px);align-items:end}
+    #ai-agents .section-heading .application-note{width:max-content;max-width:none;margin:0;justify-self:start;color:var(--muted);font-size:14px;text-align:left;white-space:nowrap}
+    #ai-agents .application-categories .agent-entry{width:200px;justify-self:end}
     #ai-agents .application-categories .agent-card h3{font-size:31px;font-weight:850;line-height:1.12;letter-spacing:-.025em}
+    @media(max-width:900px){#ai-agents .application-categories,#ai-agents .section-heading{width:100%}#ai-agents .section-heading{grid-template-columns:1fr;gap:12px}#ai-agents .section-heading .application-note{width:max-content;justify-self:start;text-align:left}#ai-agents .application-categories .agent-entry{width:100%;justify-self:stretch}}
     @media(max-width:700px){#ai-agents .application-categories .agent-card h3{font-size:27px}}
 </style>
 </head>
@@ -832,14 +837,14 @@
         <p class="section-kicker">02 / AI APPLICATIONS</p>
         <div class="section-heading">
           <h2>商业分析与 AI 应用</h2>
-          <p class="section-intro">围绕真实场景持续验证 AI 工具与应用方法。</p>
+          <p class="application-note">围绕真实场景持续验证 AI 工具与应用方法。</p>
         </div>
         <div class="application-categories">
           <a class="agent-card" href="commercial-ai-solutions.html" aria-label="进入商业项目与 AI 落地">
             <div>
               <span class="agent-label">01 / COMMERCIAL AI SOLUTIONS</span>
               <h3>商业项目与 AI 落地</h3>
-              <p>从真实商业问题与客户需求出发，组合数据、智能体与硬件能力形成可交付方案。</p>
+              <p>从真实商业问题与客户需求出发，使用智能体与硬件能力形成交付方案。</p>
               <div class="route-tags" aria-label="商业项目能力"><span>市场需求</span><span>客户询价</span><span>方案报价</span><span>AI 能力落地</span></div>
             </div>
             <span class="button primary agent-entry">查看项目 →</span>
@@ -856,8 +861,9 @@
           <a class="agent-card" href="ai-hardware-lab.html" aria-label="进入 AI 硬件实验">
             <div>
               <span class="agent-label">03 / AI HARDWARE LAB</span>
-              <h3>AI 硬件实验<span>传感器 · 控制 · 边缘设备 · 硬件实验</span></h3>
+              <h3>AI 硬件实验</h3>
               <p>从传感器、控制器到边缘设备，记录真实硬件实验与数据交互过程。</p>
+              <div class="route-tags" aria-label="硬件实验能力"><span>传感器</span><span>设备控制</span><span>边缘设备</span><span>硬件实验</span></div>
             </div>
             <span class="button primary agent-entry">查看项目 →</span>
           </a>
