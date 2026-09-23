@@ -32,7 +32,7 @@
     <section class="workflow container" id="workflow" aria-labelledby="workflow-title" style="scroll-margin-top:90px">
       <p class="section-kicker">01 / Training Workflow</p>
       <div class="section-heading">
-        <h2 id="workflow-title">完整流程</h2>
+        <h2 id="workflow-title">流程结构</h2>
         <p class="section-intro">从数据上传、数据采集、整理清洗，到标注训练与测试评估，形成一条完整的数据工程与标注路径。</p>
       </div>
       <div class="workflow-shell">
@@ -41,10 +41,10 @@
           <article class="stage"><button class="stage-toggle" type="button" aria-expanded="false"><span class="stage-marker"></span><span><span class="stage-number">02 / DATA COLLECTION</span><span class="stage-title-row"><h3>数据采集</h3><span class="stage-phase">基础数据</span></span><p>通过公开图片搜索与人工筛选获取原始数据，为整理清洗和标注训练准备数据来源。</p></span><span class="stage-symbol">+</span></button><div class="stage-detail"><div class="stage-detail-inner"><p>通过 Google / Bing 图片搜索，人工下载并筛选苹果与交通图片，保留原始文件，按清晰度、完整性和分辨率标准准备后续清洗与标注数据。</p><div class="detail-entry"><a class="button" href="data-collection.html">进入数据采集 →</a></div></div></div></article>
           <article class="stage"><button class="stage-toggle" type="button" aria-expanded="false"><span class="stage-marker"></span><span><span class="stage-number">03 / DATA CLEANING</span><span class="stage-title-row"><h3>整理清洗</h3><span class="stage-phase">结构处理</span></span><p>对上传或采集的数据进行去重、格式统一、字段整理、异常检查和结构化处理。</p></span><span class="stage-symbol">+</span></button><div class="stage-detail"><div class="stage-detail-inner"><p>整理清洗承接上传后的数据，对数据进行去重、缺失值检查、字段统一、格式转换、异常值识别和结构化整理，为后续标注与训练做准备。注意：整理清洗不是数据上传本身。</p><div class="detail-entry"><a class="button" href="data-cleaning.html">进入整理清洗 →</a></div></div></div></article>
           <article class="stage"><button class="stage-toggle" type="button" aria-expanded="false"><span class="stage-marker"></span><span><span class="stage-number">04 / ANNOTATION &amp; TRAINING</span><span class="stage-title-row"><h3>标注训练</h3><span class="stage-phase">标注与训练准备</span></span><p>将整理清洗后的数据用于标注质量检查、训练数据准备、微调配置或模型输入准备。</p></span><span class="stage-symbol">+</span></button><div class="stage-detail"><div class="stage-detail-inner"><p>导入已整理清洗的数据，检查标注字段并配置字段映射与训练参数，划分训练和验证数据，导出 JSONL 并保存本地任务草稿。当前不执行 GPU 训练。</p><div class="detail-entry"><a class="button" href="annotation-training.html">进入标注训练 →</a></div></div></div></article>
-          <article class="stage"><button class="stage-toggle" type="button" aria-expanded="false"><span class="stage-marker"></span><span><span class="stage-number">05 / TESTING &amp; EVALUATION</span><span class="stage-title-row"><h3>测试与评估</h3><span class="stage-phase">评估验证</span></span><p>对训练数据、标注结果和模型输出进行验证，检查准确性、一致性、异常样本与改进方向，形成后续优化依据。</p><span class="stage-soon">COMING SOON / 建设中</span></span><span class="stage-symbol">+</span></button><div class="stage-detail"><div class="stage-detail-inner"><p>测试与评估是 数据工程与标注流程的验证阶段，后续可用于展示测试结果、异常样本、评估记录和优化依据。</p><div class="detail-entry"><span class="status">COMING SOON / 建设中</span></div></div></div></article>
+          <article class="stage"><button class="stage-toggle" type="button" aria-expanded="false"><span class="stage-marker"></span><span><span class="stage-number">05 / TESTING &amp; EVALUATION</span><span class="stage-title-row"><h3>测试与评估</h3><span class="stage-phase">评估验证</span></span><p>对训练数据、标注结果和模型输出进行验证，检查准确性、一致性、异常样本与改进方向，形成后续优化依据。</p></span><span class="stage-symbol">+</span></button><div class="stage-detail"><div class="stage-detail-inner"><p>测试与评估展示已有预测分布与标注资产概况；当前提供静态页面，在线实验与动态评估尚未接入。</p><div class="detail-entry"><a class="button" href="testing-evaluation.html">进入测试与评估 →</a></div></div></div></article>
         </div>
       </div>
-      <p class="boundary">标注训练已提供本地实验版：数据准备、配置、导出与任务草稿；实际训练和测试评估仍在建设中。</p>
+      <p class="boundary">标注训练已提供本地实验版：数据准备、配置、导出与任务草稿；测试与评估已提供静态页面，实际训练与在线评估尚未接入。</p>
     </section>
   </main>
   <footer class="footer"><div class="container footer-inner"><span>© 2026 AI Data Lab</span><span>DATA · TRAINING · MODEL</span></div></footer>

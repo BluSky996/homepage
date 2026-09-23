@@ -68,7 +68,7 @@
     .cleaning-project>summary{display:grid;grid-template-columns:minmax(0,1fr) 160px 24px;gap:24px}.project-card-icon{display:block;width:88px;height:88px;object-fit:contain;justify-self:center;opacity:.9;pointer-events:none}.cleaning-project>summary>.project-toggle{justify-self:end}
     @media(max-width:700px){.cleaning-project>summary{grid-template-columns:minmax(0,1fr) 64px 20px;gap:12px}.project-card-icon{width:60px;height:60px}}
     .next>h2{color:#F6C85F}
-</style>
+.next-stage-link{color:#F6C85F;cursor:pointer;text-decoration:none}.next-stage-link:hover{color:#FFE09A;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}.next-stage-link span{font-size:.8em}.next-stage-link:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}</style>
   <style>
     /* 04 页面补充样式（与 03 共用主体样式；这里只加少量本项目需要的规则） */
     .class-dist{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0 0 4px}
@@ -226,7 +226,7 @@
       </details>
     </section>
 
-    <section class="next"><h2>下一阶段：测试与评估</h2><p class="muted">以标注结果与特征实验为基础，衔接后续测试与评估。</p></section>
+    <section class="next"><h2><a class="next-stage-link" href="testing-evaluation.html">下一阶段：测试与评估 <span aria-hidden="true">→</span></a></h2><p class="muted">以标注结果与特征实验为基础，衔接后续测试与评估。</p></section>
   </main>
   <footer><div class="container">© 2026 AI Data Lab · ANNOTATION &amp; TRAINING</div></footer>
 <script>
