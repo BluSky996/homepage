@@ -391,6 +391,7 @@
       border-radius: 20px;
       background: linear-gradient(120deg, rgba(13, 21, 17, 0.94), rgba(8, 10, 9, 0.92));
     }
+    .application-panel { padding: 0; }
 
     .agent-card {
       display: grid;
@@ -733,7 +734,11 @@
       .agenda-cta, .agenda-lens-button { transition: none; }
       .agenda-cta:hover, .agenda-lens-button:hover { transform: none; }
     }
-  </style>
+  
+    #ai-agents .application-categories .agent-card + .agent-card{margin-top:20px}
+    #ai-agents .application-categories .agent-card h3{font-size:31px;font-weight:850;line-height:1.12;letter-spacing:-.025em}
+    @media(max-width:700px){#ai-agents .application-categories .agent-card h3{font-size:27px}}
+</style>
 </head>
 <body>
   <header class="site-header">
@@ -823,31 +828,40 @@
     </section>
 
     <section id="ai-agents">
-      <div class="container lab-panel">
+      <div class="container application-panel">
         <p class="section-kicker">02 / AI APPLICATIONS</p>
         <div class="section-heading">
           <h2>商业分析与 AI 应用</h2>
           <p class="section-intro">围绕真实场景持续验证 AI 工具与应用方法。</p>
         </div>
-        <a class="agent-card" href="product-intelligence.html" aria-label="进入 AI 商品调研智能体">
-          <div>
-            <span class="agent-label">AGENT 01 / PRODUCT RESEARCH / V0.1.1</span>
-            <h3>AI 商品调研智能体<span>商品搜索与市场评价 Agent</span></h3>
-            <p>围绕商品搜索、竞品发现、市场评价与信息整理开展的 AI Agent 实验项目。</p>
-            <div class="route-tags" aria-label="商品调研能力"><span>商品搜索</span><span>竞品发现</span><span>市场评价</span><span>证据报告</span></div>
-          </div>
-          <span class="button primary agent-entry">查看项目 →</span>
-        </a>
-
-        <a class="agent-card" href="ai-hardware-lab.html" aria-label="进入 AI 硬件实验" style="margin-top:20px">
-          <div>
-            <span class="agent-label">AI HARDWARE LAB</span>
-            <h3>AI 硬件实验<span>传感器 · 控制 · 边缘设备 · 硬件实验</span></h3>
-            <p>从传感器、控制器到边缘设备，记录真实硬件实验与数据交互过程。</p>
-          </div>
-          <span class="button primary agent-entry">查看项目 →</span>
-        </a>
-
+        <div class="application-categories">
+          <a class="agent-card" href="commercial-ai-solutions.html" aria-label="进入商业项目与 AI 落地">
+            <div>
+              <span class="agent-label">01 / COMMERCIAL AI SOLUTIONS</span>
+              <h3>商业项目与 AI 落地</h3>
+              <p>从真实商业问题与客户需求出发，组合数据、智能体与硬件能力形成可交付方案。</p>
+              <div class="route-tags" aria-label="商业项目能力"><span>市场需求</span><span>客户询价</span><span>方案报价</span><span>AI 能力落地</span></div>
+            </div>
+            <span class="button primary agent-entry">查看项目 →</span>
+          </a>
+          <a class="agent-card" href="product-intelligence.html" aria-label="进入 AI 智能体实验">
+            <div>
+              <span class="agent-label">02 / AI AGENT LAB</span>
+              <h3>AI 智能体实验</h3>
+              <p>智能体、工具调用与自动化任务实验</p>
+              <div class="route-tags" aria-label="智能体实验能力"><span>商品调研</span><span>工具调用</span><span>信息整理</span><span>Agent 实验</span></div>
+            </div>
+            <span class="button primary agent-entry">查看项目 →</span>
+          </a>
+          <a class="agent-card" href="ai-hardware-lab.html" aria-label="进入 AI 硬件实验">
+            <div>
+              <span class="agent-label">03 / AI HARDWARE LAB</span>
+              <h3>AI 硬件实验<span>传感器 · 控制 · 边缘设备 · 硬件实验</span></h3>
+              <p>从传感器、控制器到边缘设备，记录真实硬件实验与数据交互过程。</p>
+            </div>
+            <span class="button primary agent-entry">查看项目 →</span>
+          </a>
+        </div>
       </div>
     </section>
 
