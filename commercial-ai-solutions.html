@@ -12,7 +12,7 @@
     .commercial-hero h1{max-width:760px;font-size:clamp(38px,6vw,66px);line-height:1.12;letter-spacing:-.045em}
     .commercial-hero .lead{max-width:720px}
     .commercial-code{color:var(--green);font:13px Consolas,monospace}
-    .commercial-projects{padding:18px 0 96px}
+    .commercial-projects{padding:18px 0 0}
     .commercial-projects h2{margin-top:10px}
     .case-grid{width:min(100%,980px);display:grid;grid-template-columns:1fr;gap:16px;margin:34px auto 0}
     .case-card{position:relative;min-width:0;padding:24px 26px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(16,23,19,.78),rgba(7,10,8,.94));cursor:pointer;overflow:hidden;transition:transform .25s ease,border-color .25s ease,background .25s ease,box-shadow .25s ease;animation:fade-up .6s ease both}
@@ -39,9 +39,38 @@
     .case-content{position:relative;max-height:0;opacity:0;overflow:hidden;transform:translateY(8px);transition:max-height .42s ease,opacity .28s ease,transform .35s ease,margin-top .35s ease}
     .case-card.active .case-content{max-height:70px;margin-top:18px;opacity:1;transform:translateY(0)}
     .case-content p{margin:0;padding:13px 0 0 136px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    .contact-section{width:100%;margin:108px 0 0;padding:70px 0 96px;border-top:1px solid rgba(109,255,179,.16)}
+    .contact-section h2{max-width:820px;margin:0;font-size:clamp(30px,4vw,43px)}
+    .contact-section .commercial-code{display:block;margin:0 0 10px;letter-spacing:.08em}
+    .contact-section-intro{max-width:790px;margin:16px 0 0;color:var(--muted);font-size:15px}
+    .contact-entry{width:min(100%,980px);margin:30px auto 0;padding:26px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(14,21,17,.76),rgba(7,10,8,.9))}
+    .contact-entry h3{margin:0 0 7px;font-size:clamp(19px,2.2vw,24px)}
+    .contact-entry>p{margin:0;color:var(--muted);font-size:13px}
+    .contact-message{width:100%;min-height:128px;margin-top:18px;padding:15px 16px;resize:vertical;border:1px solid rgba(109,255,179,.28);border-radius:10px;outline:none;color:var(--text);background:rgba(3,8,5,.78);font:inherit;line-height:1.65;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
+    .contact-message::placeholder{color:#63736a}
+    .contact-message:focus{border-color:rgba(109,255,179,.68);background:rgba(5,13,8,.9);box-shadow:0 0 0 3px rgba(109,255,179,.07)}
+    .contact-actions{display:flex;align-items:center;gap:18px;margin-top:14px}
+    .contact-button{min-height:44px;padding:0 20px;border:1px solid var(--green);border-radius:8px;color:#05130b;background:var(--green);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
+    .contact-button:hover{transform:translateY(-2px);box-shadow:0 0 25px rgba(109,255,179,.2)}
+    .contact-button:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+    .contact-note{color:#6d7c73;font-size:11px}
+    .contact-modal{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:16px;background:rgba(0,0,0,.76);backdrop-filter:blur(7px)}
+    .contact-modal.is-open{display:grid}
+    .contact-modal-panel{width:min(500px,calc(100% - 32px));padding:26px;border:1px solid rgba(109,255,179,.38);border-radius:15px;background:linear-gradient(145deg,rgba(16,26,20,.99),rgba(6,10,8,.99));box-shadow:0 28px 90px rgba(0,0,0,.62),0 0 40px rgba(109,255,179,.06);animation:modal-in .22s ease both}
+    .contact-modal-panel h3{margin:8px 0 12px;font-size:23px}
+    .contact-modal-copy{margin:0;color:var(--muted);font-size:14px}
+    .contact-preview{max-height:180px;margin-top:18px;padding:14px;border:1px solid var(--line);border-radius:9px;overflow:auto;color:#bfd0c7;background:rgba(0,0,0,.22);font-size:13px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+    .contact-preview:empty{display:none}
+    .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+    .modal-button{min-height:42px;padding:0 17px;border:1px solid var(--strong);border-radius:8px;color:var(--text);background:rgba(255,255,255,.025);font-family:inherit;font-size:13px;font-weight:650;cursor:pointer;transition:border-color .2s ease,background .2s ease,box-shadow .2s ease}
+    .modal-button:hover{border-color:var(--green)}
+    .modal-button.primary{border-color:var(--green);color:#05130b;background:var(--green)}
+    .modal-button.primary:hover{box-shadow:0 0 22px rgba(109,255,179,.18)}
+    .modal-button:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+    @keyframes modal-in{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
     @keyframes fade-up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
     a:focus-visible{outline:2px solid var(--green);outline-offset:5px}
-    @media(max-width:760px){.commercial-hero{padding:58px 0 44px}.commercial-projects{padding-bottom:68px}.case-grid{gap:14px}.case-card{padding:20px}.case-main{grid-template-columns:62px minmax(0,1fr) auto;align-items:start;gap:14px}.case-identity{gap:10px}.case-icon{width:44px;height:44px;border-radius:11px;font-size:21px}.case-identity .commercial-code{font-size:10px}.case-tags{margin-top:12px}.case-content p{padding-left:76px}}
+    @media(max-width:760px){.commercial-hero{padding:58px 0 44px}.commercial-projects{padding-bottom:0}.case-grid{gap:14px}.case-card{padding:20px}.case-main{grid-template-columns:62px minmax(0,1fr) auto;align-items:start;gap:14px}.case-identity{gap:10px}.case-icon{width:44px;height:44px;border-radius:11px;font-size:21px}.case-identity .commercial-code{font-size:10px}.case-tags{margin-top:12px}.case-content p{padding-left:76px}.contact-section{margin-top:64px;padding:48px 0 68px}.contact-entry{margin-top:24px;padding:20px}.contact-actions{align-items:stretch;flex-direction:column}.contact-button{width:100%}.contact-note{line-height:1.6}.contact-modal-panel{padding:22px}.modal-actions{align-items:stretch;flex-direction:column}.modal-button{width:100%}}
     @media(prefers-reduced-motion:reduce){.commercial-hero,.case-card{animation:none}.case-card,.case-card:before,.case-arrow,.case-content{transition:none}}
   </style>
 </head>
@@ -91,8 +120,34 @@
         </article>
       </div>
     </section>
+    <section class="contact-section" aria-labelledby="contact-section-title">
+      <span class="commercial-code">CONTACT</span>
+      <h2 id="contact-section-title">联系方式</h2>
+      <p class="contact-section-intro">如果你有科技硬件、AI 硬件、开源硬件、海外众筹产品或相关项目线索，可以留下联系方式或简单说明交流方向。</p>
+      <div class="contact-entry">
+        <h3>项目交流 / 商业对接</h3>
+        <p>可留下联系方式、项目方向、产品线索或想交流的问题。</p>
+        <textarea class="contact-message" id="contact-message" aria-label="联系方式或项目交流内容" placeholder="可以写下你的联系方式、项目方向、产品线索或想交流的问题。例如：微信 / 邮箱 / 科技硬件方向 / AI 硬件项目 / 海外众筹案例等。"></textarea>
+        <div class="contact-actions">
+          <button class="contact-button" id="contact-button" type="button">留下联系方式</button>
+          <span class="contact-note">当前为轻量联系入口，适合项目交流、案例讨论、资料整理和学习参与。</span>
+        </div>
+      </div>
+    </section>
   </main>
   <footer class="footer"><div class="container">AI DATA LAB</div></footer>
+  <div class="contact-modal" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" aria-describedby="contact-modal-copy" hidden>
+    <div class="contact-modal-panel">
+      <span class="commercial-code">CONTACT STATUS</span>
+      <h3 id="contact-modal-title">联系方式提交功能待接入</h3>
+      <p class="contact-modal-copy" id="contact-modal-copy"></p>
+      <div class="contact-preview" id="contact-preview"></div>
+      <div class="modal-actions">
+        <button class="modal-button" id="copy-contact" type="button">复制填写内容</button>
+        <button class="modal-button primary" id="close-contact-modal" type="button">我知道了</button>
+      </div>
+    </div>
+  </div>
   <script>
     const caseCards = Array.from(document.querySelectorAll('.case-card'));
 
@@ -112,6 +167,61 @@
           activateCase(card);
         }
       });
+    });
+
+    const contactMessage = document.getElementById('contact-message');
+    const contactModal = document.getElementById('contact-modal');
+    const contactModalCopy = document.getElementById('contact-modal-copy');
+    const contactPreview = document.getElementById('contact-preview');
+    const copyContactButton = document.getElementById('copy-contact');
+    const closeContactButton = document.getElementById('close-contact-modal');
+    let lastFocusedElement = null;
+
+    function openContactModal() {
+      const message = contactMessage.value.trim();
+      lastFocusedElement = document.activeElement;
+      contactModalCopy.textContent = message
+        ? '当前页面先作为轻量联系入口，留言提交功能后续再接入。你可以先通过微信、邮箱或其他联系方式沟通，也可以复制你填写的内容后直接发送给我。'
+        : '你可以先在输入框中写下联系方式、项目方向或想交流的问题。当前提交功能待接入，后续可接入邮件或表单服务。';
+      contactPreview.textContent = message;
+      copyContactButton.disabled = !message;
+      copyContactButton.textContent = '复制填写内容';
+      contactModal.hidden = false;
+      contactModal.classList.add('is-open');
+      closeContactButton.focus();
+    }
+
+    function closeContactModal() {
+      contactModal.classList.remove('is-open');
+      contactModal.hidden = true;
+      if (lastFocusedElement) lastFocusedElement.focus();
+    }
+
+    async function copyContactMessage() {
+      const message = contactMessage.value.trim();
+      if (!message) return;
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(message);
+        } else {
+          contactMessage.focus();
+          contactMessage.select();
+          if (!document.execCommand('copy')) throw new Error('copy_failed');
+        }
+        copyContactButton.textContent = '已复制';
+      } catch (error) {
+        copyContactButton.textContent = '请手动复制';
+      }
+    }
+
+    document.getElementById('contact-button').addEventListener('click', openContactModal);
+    copyContactButton.addEventListener('click', copyContactMessage);
+    closeContactButton.addEventListener('click', closeContactModal);
+    contactModal.addEventListener('click', (event) => {
+      if (event.target === contactModal) closeContactModal();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !contactModal.hidden) closeContactModal();
     });
   </script>
 </body>
