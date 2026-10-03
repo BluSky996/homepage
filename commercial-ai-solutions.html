@@ -4,67 +4,115 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#050706">
-  <title>科技产品供需与采购落地｜AI Data Lab</title>
-  <meta name="description" content="整理采购需求与厂家产品供给，开展产品匹配、信息核验、沟通询价与采购协助。">
+  <title>科技硬件商业机会观察｜AI Data Lab</title>
+  <meta name="description" content="关注开源硬件、深圳供应链、本地 AI 硬件与海外市场之间的真实落地路径。">
   <link rel="stylesheet" href="datasets/styles.css">
   <style>
-    .commercial-hero{padding:80px 0 48px}
-    .commercial-hero h1{font-size:clamp(32px,5vw,56px);line-height:1.3}
-    .commercial-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:24px}
-    .commercial-grid h3{font-size:20px;margin:14px 0}
+    .commercial-hero{max-width:820px;padding:88px 0 58px;animation:fade-up .6s ease both}
+    .commercial-hero h1{max-width:760px;font-size:clamp(38px,6vw,66px);line-height:1.12;letter-spacing:-.045em}
+    .commercial-hero .lead{max-width:720px}
     .commercial-code{color:var(--green);font:13px Consolas,monospace}
-    .commercial-status{color:var(--muted);font-size:13px}
-    .commercial-projects{padding-bottom:72px}
-    .supply-card{min-width:0;border-color:var(--strong)}
-    .supply-card>p{color:var(--muted)}
-    .supply-card summary{display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;list-style:none;color:var(--green)}
-    .supply-card summary::-webkit-details-marker{display:none}
-    .supply-card summary h3{color:var(--text);font-size:26px}
-    .supply-card summary:focus-visible{outline:2px solid var(--green);outline-offset:5px}
-    .supply-card[open] summary .entry-arrow{transform:rotate(90deg)}
-    .supply-fields{margin:20px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px}
-    .supply-fields li{padding:12px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
-    .procurement-process{margin-top:36px}
-    .procurement-steps{display:flex;flex-wrap:wrap;gap:12px;list-style:none;padding:0;margin:22px 0;color:var(--green)}
-    .procurement-steps li:not(:last-child)::after{content:'→';margin-left:12px;color:var(--muted)}
-    .capability-note{color:var(--muted);line-height:1.8}
+    .commercial-projects{padding:18px 0 96px}
+    .commercial-projects h2{margin-top:10px}
+    .case-grid{width:min(100%,980px);display:grid;grid-template-columns:1fr;gap:16px;margin:34px auto 0}
+    .case-card{position:relative;min-width:0;padding:24px 26px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(16,23,19,.78),rgba(7,10,8,.94));cursor:pointer;overflow:hidden;transition:transform .25s ease,border-color .25s ease,background .25s ease,box-shadow .25s ease;animation:fade-up .6s ease both}
+    .case-card:nth-child(2){animation-delay:.08s}
+    .case-card:nth-child(3){animation-delay:.16s}
+    .case-card:nth-child(4){animation-delay:.24s}
+    .case-card:before{position:absolute;inset:-40% -30% auto;width:85%;height:75%;content:"";border-radius:50%;background:radial-gradient(circle,rgba(109,255,179,.13),transparent 68%);opacity:0;transform:translate(20px,-12px);transition:opacity .25s ease,transform .35s ease;pointer-events:none}
+    .case-card:hover{transform:translateY(-6px);border-color:var(--strong);box-shadow:0 18px 48px rgba(0,0,0,.28)}
+    .case-card:hover:before,.case-card.active:before{opacity:1;transform:translate(0,0)}
+    .case-card.active{transform:translateY(-4px);border-color:rgba(109,255,179,.72);background:linear-gradient(145deg,rgba(21,39,30,.96),rgba(8,15,12,.98));box-shadow:0 20px 55px rgba(0,0,0,.32),0 0 0 1px rgba(109,255,179,.08)}
+    .case-card:focus-visible{outline:2px solid var(--green);outline-offset:5px}
+    .case-main{position:relative;display:grid;grid-template-columns:112px minmax(0,1fr) auto;align-items:center;gap:24px}
+    .case-identity{display:grid;justify-items:start;gap:13px}
+    .case-icon{width:52px;height:52px;display:grid;place-items:center;border:1px solid rgba(109,255,179,.26);border-radius:13px;background:rgba(109,255,179,.065);font-size:24px;filter:saturate(.75);transition:border-color .25s ease,background .25s ease,box-shadow .25s ease,transform .25s ease}
+    .case-card:hover .case-icon,.case-card.active .case-icon{border-color:rgba(109,255,179,.58);background:rgba(109,255,179,.12);box-shadow:0 0 24px rgba(109,255,179,.12);transform:translateY(-1px)}
+    .case-card h3{position:relative;margin:0 0 5px;font-size:clamp(21px,2.2vw,27px);line-height:1.25;transition:color .25s ease}
+    .case-card.active .commercial-code,.case-card.active h3{color:var(--green)}
+    .case-arrow{position:relative;color:var(--green);font-size:21px;line-height:1;transition:transform .3s ease}
+    .case-card.active .case-arrow{transform:rotate(90deg)}
+    .case-subtitle{position:relative;margin:0;color:#bdcbc4;font-size:14px}
+    .case-tags{position:relative;display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+    .case-tag{padding:4px 9px;border:1px solid rgba(109,255,179,.28);border-radius:999px;color:#b9dcca;background:rgba(109,255,179,.055);font:11px Consolas,monospace}
+    .case-status{display:inline-block;margin-top:14px;color:#74867c;font:11px Consolas,monospace;letter-spacing:.06em}
+    .case-content{position:relative;max-height:0;opacity:0;overflow:hidden;transform:translateY(8px);transition:max-height .42s ease,opacity .28s ease,transform .35s ease,margin-top .35s ease}
+    .case-card.active .case-content{max-height:70px;margin-top:18px;opacity:1;transform:translateY(0)}
+    .case-content p{margin:0;padding:13px 0 0 136px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    @keyframes fade-up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
     a:focus-visible{outline:2px solid var(--green);outline-offset:5px}
-    @media(max-width:760px){.commercial-grid{grid-template-columns:1fr}.commercial-hero{padding-top:52px}}
+    @media(max-width:760px){.commercial-hero{padding:58px 0 44px}.commercial-projects{padding-bottom:68px}.case-grid{gap:14px}.case-card{padding:20px}.case-main{grid-template-columns:62px minmax(0,1fr) auto;align-items:start;gap:14px}.case-identity{gap:10px}.case-icon{width:44px;height:44px;border-radius:11px;font-size:21px}.case-identity .commercial-code{font-size:10px}.case-tags{margin-top:12px}.case-content p{padding-left:76px}}
+    @media(prefers-reduced-motion:reduce){.commercial-hero,.case-card{animation:none}.case-card,.case-card:before,.case-arrow,.case-content{transition:none}}
   </style>
 </head>
 <body>
   <header class="header"><nav class="container nav" aria-label="顶部导航"><a class="brand" href="index.html">AI DATA LAB</a><div class="navlinks"><a href="index.html#ai-agents">← 返回上一级</a><a href="index.html">首页</a></div></nav></header>
   <main class="container">
     <section class="commercial-hero">
-      <p class="commercial-code">TECH PRODUCT SUPPLY &amp; PROCUREMENT</p>
-      <h1>科技产品供需与采购落地</h1>
-      <p class="lead">围绕真实采购需求与产品供给，开展产品匹配、询价、沟通与采购协助。</p>
+      <p class="commercial-code">TECH HARDWARE · SUPPLY CHAIN · MARKET</p>
+      <h1>科技硬件商业机会观察</h1>
+      <p class="lead">关注开源硬件、深圳供应链、本地 AI 硬件与海外市场之间的真实落地路径。</p>
     </section>
     <section class="commercial-projects" aria-labelledby="commercial-title">
-      <p class="commercial-code">DEMAND &amp; SUPPLY</p>
-      <h2 id="commercial-title">采购需求与产品供给</h2>
-      <div class="commercial-grid">
-        <details class="panel supply-card" open>
-          <summary><div><span class="commercial-code">01 / PROCUREMENT DEMAND</span><h3>采购方找产品</h3></div><span class="entry-arrow" aria-hidden="true">→</span></summary>
-          <p>整理真实采购需求，寻找合适产品与供应厂家。</p>
-          <p class="commercial-status">采购需求整理中 · 待录入</p>
-          <ul class="supply-fields"><li>采购需求</li><li>产品类别</li><li>规格要求</li><li>采购数量</li><li>预算区间</li><li>应用场景</li><li>交期要求</li><li>目标市场</li></ul>
-        </details>
-        <details class="panel supply-card" open>
-          <summary><div><span class="commercial-code">02 / PRODUCT SUPPLY</span><h3>厂家方有产品</h3></div><span class="entry-arrow" aria-hidden="true">→</span></summary>
-          <p>整理厂家产品供给信息，寻找潜在采购需求。</p>
-          <p class="commercial-status">产品供给整理中 · 待录入</p>
-          <ul class="supply-fields"><li>产品名称</li><li>核心规格</li><li>价格区间</li><li>MOQ</li><li>产能</li><li>交期</li><li>认证</li><li>主要优势</li><li>目标客户</li></ul>
-        </details>
+      <p class="commercial-code">LIVE OPPORTUNITY WATCH</p>
+      <h2 id="commercial-title">行业真实案例</h2>
+      <div class="case-grid">
+        <article class="case-card active" tabindex="0" role="button" aria-expanded="true" data-case="01">
+          <div class="case-main">
+            <div class="case-identity"><span class="commercial-code">CASE 01</span><span class="case-icon" aria-hidden="true">🤖</span></div>
+            <div><h3>开源机器人国产化</h3><p class="case-subtitle">机器人 / 开源硬件 / 国产供应链案例</p><div class="case-tags" aria-label="案例标签"><span class="case-tag">机器人</span><span class="case-tag">电机</span><span class="case-tag">舵机</span><span class="case-tag">开源硬件</span><span class="case-tag">国产替代</span></div><span class="case-status">点击查看案例</span></div>
+            <span class="case-arrow" aria-hidden="true">→</span>
+          </div>
+          <div class="case-content"><p>案例详情待补充</p></div>
+        </article>
+        <article class="case-card" tabindex="0" role="button" aria-expanded="false" data-case="02">
+          <div class="case-main">
+            <div class="case-identity"><span class="commercial-code">CASE 02</span><span class="case-icon" aria-hidden="true">⌨️</span></div>
+            <div><h3>CardputerZero 硬件出海</h3><p class="case-subtitle">开发者硬件 / Linux 设备 / 海外众筹案例</p><div class="case-tags" aria-label="案例标签"><span class="case-tag">Linux</span><span class="case-tag">开发者工具</span><span class="case-tag">众筹</span><span class="case-tag">硬件出海</span><span class="case-tag">海外市场</span></div><span class="case-status">点击查看案例</span></div>
+            <span class="case-arrow" aria-hidden="true">→</span>
+          </div>
+          <div class="case-content"><p>案例详情待补充</p></div>
+        </article>
+        <article class="case-card" tabindex="0" role="button" aria-expanded="false" data-case="03">
+          <div class="case-main">
+            <div class="case-identity"><span class="commercial-code">CASE 03</span><span class="case-icon" aria-hidden="true">🖥️</span></div>
+            <div><h3>本地 AI 硬件价格档位与能力差异</h3><p class="case-subtitle">免费 AI Server / AI 小主机 / 本地 AI 工作站 / 企业级设备案例</p><div class="case-tags" aria-label="案例标签"><span class="case-tag">本地 AI</span><span class="case-tag">AI Server</span><span class="case-tag">AI 小主机</span><span class="case-tag">AI 工作站</span><span class="case-tag">硬件档位</span></div><span class="case-status">点击查看案例</span></div>
+            <span class="case-arrow" aria-hidden="true">→</span>
+          </div>
+          <div class="case-content"><p>案例详情待补充</p></div>
+        </article>
+        <article class="case-card" tabindex="0" role="button" aria-expanded="false" data-case="04">
+          <div class="case-main">
+            <div class="case-identity"><span class="commercial-code">CASE 04</span><span class="case-icon" aria-hidden="true">🧩</span></div>
+            <div><h3>桌面机器人产品改造</h3><p class="case-subtitle">蓝牙音箱 / PCBA 改造 / 大模型接入 / 代工案例</p><div class="case-tags" aria-label="案例标签"><span class="case-tag">桌面机器人</span><span class="case-tag">蓝牙音箱</span><span class="case-tag">PCBA</span><span class="case-tag">联网模块</span><span class="case-tag">大模型接入</span><span class="case-tag">产品改造</span></div><span class="case-status">点击查看案例</span></div>
+            <span class="case-arrow" aria-hidden="true">→</span>
+          </div>
+          <div class="case-content"><p>案例详情待补充</p></div>
+        </article>
       </div>
-      <section class="intro-panel procurement-process" aria-labelledby="process-title">
-        <h2 id="process-title">对接流程</h2>
-        <ol class="procurement-steps"><li>需求整理</li><li>产品匹配</li><li>信息核验</li><li>沟通询价</li><li>采购协助</li></ol>
-        <p>围绕科技产品供需开展采购对接与协助。</p>
-      </section>
-      <p class="capability-note">AI 智能体实验和 AI 硬件实验作为能力样本，未来可辅助供需匹配、信息整理、询价分析与项目交付。</p>
     </section>
   </main>
   <footer class="footer"><div class="container">AI DATA LAB</div></footer>
+  <script>
+    const caseCards = Array.from(document.querySelectorAll('.case-card'));
+
+    function activateCase(selectedCard) {
+      caseCards.forEach((card) => {
+        const isActive = card === selectedCard;
+        card.classList.toggle('active', isActive);
+        card.setAttribute('aria-expanded', String(isActive));
+      });
+    }
+
+    caseCards.forEach((card) => {
+      card.addEventListener('click', () => activateCase(card));
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          activateCase(card);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
