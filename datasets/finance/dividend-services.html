@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>分红派息数据｜AI Data Lab</title>
+  <style>
+    :root { color-scheme: dark; --green: #6bffbd; --muted: #a0b2a9; --line: rgba(107,255,189,.18); }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #050a07; color: #eaf2ed; font-family: "Segoe UI", "Microsoft YaHei", sans-serif; line-height: 1.65; }
+    .container { width: min(1080px, calc(100% - 40px)); margin-inline: auto; }
+    header { border-bottom: 1px solid var(--line); }
+    nav { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-block: 22px; }
+    a { color: inherit; text-decoration: none; }
+    .brand { font-weight: 800; letter-spacing: .08em; }
+    .back { color: var(--muted); font-size: 14px; }
+    main { padding-block: 58px 72px; }
+    .kicker { color: var(--green); font: 12px Consolas, monospace; letter-spacing: .13em; }
+    h1 { font-size: clamp(32px, 5vw, 48px); margin: 12px 0 36px; line-height: 1.2; }
+    .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .project-card { min-height: 292px; padding: 26px; border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(145deg, rgba(16,22,19,.74), rgba(8,11,9,.88)); transition: transform .2s, border-color .2s, background .2s; }
+    .project-card:hover, .project-card:focus-within { transform: translateY(-3px); border-color: rgba(107,255,189,.5); background: linear-gradient(145deg, rgba(24,43,33,.8), rgba(8,11,9,.88)); }
+    .logo { height: 136px; display: flex; justify-content: center; align-items: center; padding: 22px; border-radius: 9px; background: rgba(107,255,189,.025); margin-bottom: 22px; }
+    .logo.light { background: #eef3ef; }
+    .logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .card-name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+    h2 { margin: 0; font-size: 23px; line-height: 1.4; }
+    .identifier { color: #43E8B6; font: 600 18px/1 Consolas, monospace; white-space: nowrap; }
+    .fund-links { display: grid; gap: 4px; margin-top: 12px; font-size: 13px; line-height: 1.4; color: var(--muted); }
+    .fund-links a { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; }
+    .fund-links .identifier { font-size: 17px; }
+    a:hover { color: var(--green); }
+    a:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+    .archive { display: inline-block; margin-top: 26px; color: var(--muted); font-size: 14px; }
+    @media(max-width:600px) { .projects { grid-template-columns: 1fr; gap: 18px; } .project-card { padding: 22px; } nav { flex-wrap: wrap; } }
+    @media(prefers-reduced-motion:reduce) { .project-card { transition: none; } .project-card:hover, .project-card:focus-within { transform: none; } }
+  </style>
+</head>
+<body>
+  <header><nav class="container" aria-label="页面导航"><a class="brand" href="../../index.html">AI DATA LAB</a><a class="back" href="../../index.html#datasets">返回金融数据与研究服务 →</a></nav></header>
+  <main class="container">
+    <p class="kicker">DIVIDEND DATA</p>
+    <h1>分红派息数据</h1>
+    <section class="projects" aria-label="分红派息项目">
+      <a class="project-card" href="./moutai-dividends.html">
+        <div class="logo light"><img src="../../assets/images/dividend-brands/moutai.png" alt="贵州茅台酒股份有限公司标志"></div>
+        <div class="card-name"><h2>贵州茅台</h2><span class="identifier">600519.SH</span></div>
+      </a>
+      <a class="project-card" href="./haitian-dividends.html">
+        <div class="logo"><img src="../../assets/images/dividend-brands/haday.png" alt="海天标志"></div>
+        <div class="card-name"><h2>海天味业</h2><span class="identifier">603288.SH</span></div>
+      </a>
+      <article class="project-card" aria-labelledby="cio-title">
+        <div class="logo light"><img src="../../assets/images/dividend-brands/standard-chartered.svg" alt="渣打银行官方Logo（仅作展示标识，不表示基金归属）"></div>
+        <div class="card-name"><h2 id="cio-title">CIO海外基金</h2></div>
+        <div class="fund-links">
+          <a href="./cio-conservative-fund.html" title="港币月度派息份额 · ISIN">精选保守基金 <span class="identifier">LU2627322584</span></a>
+          <a href="./cio-balanced-fund.html" title="港币月度派息份额 · ISIN">精选均衡基金 <span class="identifier">LU2627319952</span></a>
+        </div>
+      </article>
+      <a class="project-card" href="./bond-fund-yifangda.html">
+        <div class="logo"><img src="../../assets/images/dividend-brands/efunds.png" alt="易方达基金标志"></div>
+        <div class="card-name"><h2>易方达债券基金</h2><span class="identifier" title="易方达稳健收益债券B">110008</span></div>
+      </a>
+    </section>
+    <a class="archive" href="index.html">原金融市场资料 →</a>
+  </main>
+</body>
+</html>

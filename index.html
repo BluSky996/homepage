@@ -166,7 +166,7 @@
       -webkit-background-clip: text;
     }
 
-    .hero-positioning {
+    .hero-positioning, .hero-location {
       display: inline-flex;
       align-items: center;
       margin: 26px 0 0;
@@ -195,6 +195,49 @@
     @keyframes positioning-gradient-flow {
       0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
+    }
+
+    .hero-labels {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 11px 12px;
+      margin-top: 26px;
+    }
+
+    .hero-labels > p { margin: 0; }
+
+    .hero-location {
+      display: flex;
+      width: fit-content;
+      max-width: 100%;
+      gap: 8px;
+      margin: 11px 0 0;
+    }
+
+    .hero-location span {
+      color: transparent;
+      background: linear-gradient(105deg, #55efb8 0%, #39dfcc 25%, #9c7cff 31%, #9c7cff 37%, #47d7ff 44%, #68bfff 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero-location svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+      color: #6bffbd;
+      filter: drop-shadow(0 0 6px rgba(107, 255, 189, .22));
+      animation: location-pin-float 3s ease-in-out infinite;
+    }
+
+    @keyframes location-pin-float {
+      0%, 12%, 40%, 100% { transform: translateY(0); }
+      25% { transform: translateY(-3px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-location svg { animation: none; }
     }
 
     .hero-copy {
@@ -296,6 +339,7 @@
 
     section { padding-block: 94px; scroll-margin-top: 72px; }
     #datasets { padding-top: 56px; }
+    #datasets .finance-existing-link { display: inline-block; margin-top: 18px; color: var(--muted); font-size: 13px; }
 
     .section-heading {
       display: flex;
@@ -352,6 +396,14 @@
     .data-card:hover .compass-decoration { opacity: .94; transform: scale(1.025); filter: drop-shadow(0 0 10px rgba(99,245,210,.46)) drop-shadow(0 0 25px rgba(88,247,255,.24)); }
     .compass-needle { transform-origin: 80px 80px; animation: compass-sway 4s ease-in-out infinite; }
     @keyframes compass-sway { 0%,100% { transform: rotate(-10deg); } 25% { transform: rotate(0deg); } 50% { transform: rotate(10deg); } 75% { transform: rotate(0deg); } }
+
+    .balance-beam { transform-box: view-box; transform-origin: 80px 49px; animation: balance-rock 4s ease-in-out infinite; }
+    .balance-pan { transform-box: view-box; animation: balance-hang 4s ease-in-out infinite; }
+    .balance-pan-left { transform-origin: 38px 49px; }
+    .balance-pan-right { transform-origin: 122px 49px; }
+    @keyframes balance-rock { 0%,100% { transform: rotate(7deg); } 50% { transform: rotate(-7deg); } }
+    @keyframes balance-hang { 0%,100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg); } }
+    @media (prefers-reduced-motion: reduce) { .balance-beam, .balance-pan { animation: none; } }
 
     .status {
       display: inline-flex;
@@ -762,8 +814,11 @@
       <div>
         <p class="eyebrow">DATA INTELLIGENCE LABORATORY</p>
         <h1 id="hero-title">让数据成为<br /><span class="gradient-text">智能的燃料</span></h1>
+        <div class="hero-labels">
         <p class="hero-positioning"><span>金融数据 × 商业分析 × AI 应用</span></p>
-        <p class="hero-copy">AI Data Lab 是一个围绕金融市场数据、分析研究与人工智能应用持续建设的个人研究与实践平台，结合金融分析、市场营销与人工智能训练背景，沉淀真实数据、项目经验与应用实践。</p>
+        <p class="hero-location"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg><span>深圳 · 粤港澳大湾区</span></p>
+        </div>
+        <p class="hero-copy">AI Data Lab 聚焦金融市场数据、商业分析与人工智能应用，围绕金融研究、AI应用集成及数据工程，开展数据分析、技术实践与项目协作，推动专业能力向实际业务服务转化。</p>
       </div>
 
       <div class="hero-console" aria-label="专业背景">
@@ -797,18 +852,18 @@
       <div class="container">
         <p class="section-kicker">01 / Dataset Library</p>
         <div class="section-heading">
-          <h2>数据资源库</h2>
-          <p class="section-intro">聚焦金融市场数据，沉淀可用于分析、建模和复盘的真实数据资源。</p>
+          <h2>金融数据与研究服务</h2>
+          <p class="section-intro">聚焦金融市场数据整理与研究，为分析、建模、复盘和项目研究提供支持。</p>
         </div>
 
         <div class="dataset-grid">
-          <a class="data-card" href="datasets/finance/index.html">
+          <a class="data-card" href="datasets/finance/dividend-services.html">
             <div class="market-card-copy">
               <div class="card-top"><span class="card-index">DATA_01</span></div>
-              <span class="card-en">Financial Market</span>
-              <h3>金融市场数据</h3>
-              <p>围绕金融一级市场与二级市场，整理可用于分析、复盘、建模与风险观察的金融数据资源。当前重点建设二级市场内容，包括股票、基金、期货与期权等；一级市场内容将围绕股权投资、企业融资与项目尽调逐步完善。</p>
-              <div class="market-chips" aria-label="金融市场数据分类"><span>金融二级市场</span><span>金融一级市场</span><span>股票基金</span><span>期货期权</span><span>数字资产</span><span>股权投资</span></div>
+              <span class="card-en">SPOT MARKET / INCOME DATA</span>
+              <h3>分红派息数据</h3>
+              <p>上市公司股息、基金分红及债券付息数据的整理与分析。</p>
+              <div class="market-chips" aria-label="分红派息数据分类"><span>股票股息</span><span>基金分红</span><span>债券付息</span></div>
             </div>
             <svg class="compass-decoration" viewBox="0 0 160 160" fill="none" aria-hidden="true">
               <defs><linearGradient id="compass-ring" x1="24" y1="24" x2="136" y2="136" gradientUnits="userSpaceOnUse"><stop stop-color="#6bffbd"/><stop offset="1" stop-color="#58f7ff"/></linearGradient><linearGradient id="compass-needle" x1="62" y1="118" x2="99" y2="42" gradientUnits="userSpaceOnUse"><stop stop-color="#ff6b4a"/><stop offset=".46" stop-color="#58f7ff"/><stop offset="1" stop-color="#6bffbd"/></linearGradient></defs>
@@ -826,9 +881,64 @@
                 <circle cx="80" cy="80" r="2.4" fill="#58f7ff"/>
               </g>
             </svg>
-            <span class="future-link">OPEN CATEGORY <span>→</span></span>
+            <span class="future-link">查看数据服务 <span>→</span></span>
+          </a>
+          <a class="data-card" href="datasets/finance/derivatives.html">
+            <div class="market-card-copy">
+              <div class="card-top"><span class="card-index">DATA_02</span></div>
+              <span class="card-en">STRATEGY RESEARCH</span>
+              <h3>衍生品套利研究</h3>
+              <p>研究市场价差、衍生品定价关系与套利策略，提供策略分析及研究支持。</p>
+              <div class="market-chips" aria-label="衍生品套利研究分类"><span>价差分析</span><span>套利策略</span><span>策略研究</span></div>
+            </div>
+            <svg class="compass-decoration" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+              <defs><linearGradient id="strategy-balance" x1="22" y1="48" x2="140" y2="128" gradientUnits="userSpaceOnUse"><stop stop-color="#6bffbd"/><stop offset=".5" stop-color="#58f7ff"/><stop offset="1" stop-color="#9c7cff"/></linearGradient></defs>
+              <circle cx="80" cy="80" r="67" stroke="#58f7ff" stroke-opacity=".16" stroke-dasharray="2 7"/>
+              <path d="M80 28v99M60 132h40M68 126h24" stroke="url(#strategy-balance)" stroke-width="2.6" stroke-linecap="round"/>
+              <g class="balance-beam">
+                <path d="M30 49h100" stroke="url(#strategy-balance)" stroke-width="3" stroke-linecap="round"/>
+                <g class="balance-pan balance-pan-left">
+                  <circle cx="38" cy="49" r="2.5" fill="#6bffbd"/>
+                  <path d="M38 52 20 92m18-40 18 40" stroke="#6bffbd" stroke-width="1.7" stroke-linecap="round"/>
+                  <path d="M18 92h40c-3 11-10 16-20 16s-17-5-20-16Z" fill="#6bffbd" fill-opacity=".12" stroke="#6bffbd" stroke-width="2" stroke-linejoin="round"/>
+                </g>
+                <g class="balance-pan balance-pan-right">
+                  <circle cx="122" cy="49" r="2.5" fill="#9c7cff"/>
+                  <path d="M122 52 104 92m18-40 18 40" stroke="#8bafff" stroke-width="1.7" stroke-linecap="round"/>
+                  <path d="M102 92h40c-3 11-10 16-20 16s-17-5-20-16Z" fill="#9c7cff" fill-opacity=".12" stroke="#8bafff" stroke-width="2" stroke-linejoin="round"/>
+                </g>
+              </g>
+              <circle cx="80" cy="49" r="5" fill="#07110d" stroke="#58f7ff" stroke-width="2"/>
+            </svg>
+            <span class="future-link">查看策略研究 <span>→</span></span>
+          </a>
+          <a class="data-card" href="datasets/finance/web3-framework.html">
+            <div class="market-card-copy">
+              <div class="card-top"><span class="card-index">DATA_03</span></div>
+              <span class="card-en">BLOCKCHAIN FINANCE</span>
+              <h3>区块链金融</h3>
+              <p>聚焦数字资产、加密货币与 Web3 相关的数据研究及应用探索。</p>
+              <div class="market-chips" aria-label="区块链金融分类"><span>数字资产</span><span>加密货币</span><span>Web3</span></div>
+            </div>
+            <svg class="compass-decoration" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+              <defs><linearGradient id="blockchain-network" x1="25" y1="25" x2="135" y2="135" gradientUnits="userSpaceOnUse"><stop stop-color="#6bffbd"/><stop offset=".5" stop-color="#58f7ff"/><stop offset="1" stop-color="#9c7cff"/></linearGradient></defs>
+              <circle cx="80" cy="80" r="67" stroke="#58f7ff" stroke-opacity=".16" stroke-dasharray="2 7"/>
+              <g stroke="url(#blockchain-network)" stroke-width="1.8" stroke-linejoin="round">
+                <path d="M80 28 128 56v48l-48 28-48-28V56l48-28ZM80 28v52m48-24L80 80m48 24L80 80m0 52V80m-48 24 48-24M32 56l48 24" stroke-opacity=".65"/>
+                <path d="m80 62 16 9v18l-16 9-16-9V71l16-9Z" fill="#102a23"/>
+                <path d="m64 71 16 9 16-9M80 80v18"/>
+              </g>
+              <g fill="#091b16" stroke="url(#blockchain-network)" stroke-width="2.2">
+                <circle cx="80" cy="28" r="7"/><circle cx="128" cy="56" r="7"/><circle cx="128" cy="104" r="7"/><circle cx="80" cy="132" r="7"/><circle cx="32" cy="104" r="7"/><circle cx="32" cy="56" r="7"/>
+              </g>
+              <g fill="#6bffbd"><circle cx="80" cy="28" r="2"/><circle cx="32" cy="56" r="2"/></g>
+              <g fill="#58f7ff"><circle cx="128" cy="56" r="2"/><circle cx="32" cy="104" r="2"/></g>
+              <g fill="#9c7cff"><circle cx="128" cy="104" r="2"/><circle cx="80" cy="132" r="2"/></g>
+            </svg>
+            <span class="future-link">查看区块链研究 <span>→</span></span>
           </a>
         </div>
+        <a class="finance-existing-link" href="datasets/finance/index.html">金融一级 / 二级市场资料 →</a>
       </div>
     </section>
 
@@ -836,18 +946,18 @@
       <div class="container application-panel">
         <p class="section-kicker">02 / AI APPLICATIONS</p>
         <div class="section-heading">
-          <h2>科技产品与 AI 应用</h2>
-          <p class="application-note">围绕真实场景持续验证 AI 工具与应用方法。</p>
+          <h2>AI 应用集成与工程实施</h2>
+          <p class="application-note">围绕真实需求开展 AI 工具选型、应用集成与落地验证。</p>
         </div>
         <div class="application-categories">
           <a class="agent-card" href="commercial-ai-solutions.html" aria-label="进入科技产品供需与采购落地">
             <div>
-              <span class="agent-label">01 / TECH PRODUCT SUPPLY &amp; PROCUREMENT</span>
-              <h3>科技产品供需与采购落地</h3>
-              <p>围绕真实采购需求与产品供给，开展产品匹配、询价、沟通与采购协助。</p>
-              <div class="route-tags" aria-label="供需对接方向"><span>采购需求</span><span>产品供给</span><span>询价匹配</span><span>采购协助</span></div>
+              <span class="agent-label">01 / AI APPLICATION ENGINEERING</span>
+              <h3>AI 应用工程与项目交付</h3>
+              <p>面向真实业务需求，开展需求分析、工具选型、应用集成、部署测试与落地验证。</p>
+              <div class="route-tags" aria-label="AI 应用工程方向"><span>需求分析</span><span>工具选型</span><span>应用集成</span><span>部署测试</span></div>
             </div>
-            <span class="button primary agent-entry">供需匹配 →</span>
+            <span class="button primary agent-entry">了解工程方向 →</span>
           </a>
           <a class="agent-card" href="product-intelligence.html" aria-label="进入 AI 智能体实验">
             <div>

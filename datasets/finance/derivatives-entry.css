@@ -1,0 +1,53 @@
+/* Local derivatives navigation; original strategy styles and content remain intact. */
+.container { width:min(1380px,calc(100% - 10%)); }
+body { background:radial-gradient(ellipse at 80% 15%,#00382f66,transparent 55%),radial-gradient(ellipse at 20% 75%,#00362333,transparent 55%),#020c09; }
+body::before { background-size:51px 51px; opacity:.55; }
+.header { position:relative; background:transparent; border-bottom:1px solid #245447; }
+.nav { min-height:82px; position:relative; }
+.brand { font-size:26px; gap:20px; }.mark { width:17px; height:17px; border-width:4px; border-radius:0; }
+.navlinks { position:absolute; left:50%; transform:translateX(-50%); display:flex; font-size:20px; gap:40px; }
+.preview-badge { font-size:15px; padding:7px 18px; border-radius:28px; }
+.derivatives-head { text-align:left; padding-block:45px 44px; }
+.derivatives-head .crumbs { font-size:18px; margin-bottom:43px; color:#adc4c5; }
+.derivatives-head .kicker { justify-content:flex-start; font-size:18px; margin-bottom:18px; letter-spacing:.12em; }
+.derivatives-head .kicker::before { width:36px; }
+.derivatives-head h1 { font-size:80px; line-height:1.15; letter-spacing:-.035em; margin:0; }
+.derivatives-head .gradient { background-image:linear-gradient(105deg,#b1ffe5,#38efc9,#28c9ed); }
+.entry-lead { font-size:24px; color:#aac2c5; margin:22px 0 0; line-height:1.6; }
+.entry-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+.research-entry { position:relative; padding:36px 30px 30px; min-height:516px; border:1px solid rgba(0,235,168,.34); border-radius:15px; background:linear-gradient(145deg,#00301e66,#00140f88 65%,#00372766); min-width:0; display:flex; flex-direction:column; }
+.entry-heading { position:relative; display:grid; grid-template-columns:154px minmax(0,1fr); gap:42px; align-items:center; min-height:144px; }
+.company-logo { display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(135deg,#fafbf9,#dedfdd); border-radius:12px; height:144px; padding:8px; box-shadow:0 5px 12px #0004; color:#111; }
+.company-logo img { width:100%; height:70px; object-fit:contain; }
+.company-logo strong { font-size:19px; line-height:1.3; }.company-logo small { font-size:10px; color:#59655f; margin-top:10px; }
+.entry-category { color:#45f3c4; font:16px/1.6 Consolas,monospace; letter-spacing:.03em; margin:0 0 16px; white-space:nowrap; }
+.entry-category::before { content:'— '; }
+.research-entry h2 { font-size:40px; line-height:1.25; margin:0 0 12px; color:#f0fff8; letter-spacing:-.03em; white-space:nowrap; }
+.company-name { color:#aac4c8; font-size:24px; margin:0; }
+.entry-circle { position:absolute; right:0; top:50%; transform:translateY(-50%); width:50px; height:50px; border:1px solid #00f0b4; color:#00f0b4; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+.entry-circle svg { width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.entry-description { margin:34px 0 26px; color:#b3cdcd; font-size:20px; line-height:1.8; min-height:72px; }
+.entry-code { display:inline-block; color:#43e8b6; font:600 15px Consolas,monospace; margin-top:10px; }
+.entry-actions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; border-top:1px solid rgba(45,225,170,.3); padding-top:30px; margin-top:0; }
+.entry-actions button { border:0; background:transparent; color:#eafcf4; cursor:pointer; padding:0 4px; text-align:left; display:grid; grid-template-columns:62px 1fr; gap:4px 14px; align-items:center; }
+.entry-actions button>span { grid-row:span 2; display:grid; place-items:center; height:62px; border:1px solid rgba(30,236,169,.4); border-radius:13px; color:#35edbf; background:rgba(0,82,55,.2); }
+.entry-actions svg { width:33px; height:33px; fill:none; stroke:currentColor; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+.entry-actions strong { font-size:21px; white-space:nowrap; }.entry-actions small { font-size:14px; color:#aac0c4; white-space:nowrap; }
+.entry-actions button:hover>span { box-shadow:0 0 16px #20dfa62b; background:#064833; }
+.entry-actions button:focus-visible,.company-site:focus-visible { outline:2px solid #43e8b6; outline-offset:5px; }
+.company-site { color:#36d6fc; text-decoration:none; font-size:19px; margin-top:auto; padding-top:42px; }
+.company-site::before { content:'↗'; display:inline-block; font-size:25px; margin-right:16px; }
+.entry-notice { grid-column:1/-1; color:#8d9c95; font-size:12px; margin:0 0 20px; }
+body:not(.strategy-detail) .topic-section { display:none; }
+body:not(.strategy-detail) main>.container:has(.risk-note),body:not(.strategy-detail) .return-row,body:not(.strategy-detail) .footer { display:none; }
+.strategy-detail .entry-grid { display:none; }
+.strategy-return { margin-bottom:20px; color:#43e8b6; }
+#entry-dialog { width:min(520px,calc(100% - 32px)); box-sizing:border-box; padding:32px; color:#eafcf4; background:linear-gradient(135deg,#0b221a,#060e0a); border:1px solid #268664; border-radius:16px; box-shadow:0 24px 80px #0009; }
+#entry-dialog::backdrop { background:#000b; backdrop-filter:blur(4px); }
+#entry-dialog h2 { font-size:24px; margin:0 28px 18px 0; }
+#entry-dialog p { color:#a7c2b7; font-size:15px; }
+#entry-dialog a { display:block; border:1px solid #28634e; padding:14px; border-radius:9px; margin-top:12px; color:#52edc5; text-decoration:none; }
+.dialog-close { position:absolute; top:12px; right:14px; border:0; background:transparent; color:#a7c2b7; font-size:28px; cursor:pointer; }
+@media(min-width:1101px) and (max-width:1450px) { .entry-heading { gap:22px; grid-template-columns:130px 1fr; }.company-logo { height:134px; }.research-entry h2 { font-size:32px; }.entry-category { font-size:12px; }.company-name { font-size:20px; }.entry-circle { width:36px; height:36px; right:-8px; }.entry-actions button { grid-template-columns:48px 1fr; gap:8px; }.entry-actions button>span { height:50px; }.entry-actions strong { font-size:18px; }.entry-actions small { font-size:11px; } }
+@media(max-width:1100px) { .entry-grid { grid-template-columns:1fr; }.derivatives-head h1 { font-size:60px; }.navlinks { font-size:16px; gap:20px; }.brand { font-size:20px; } }
+@media(max-width:600px) { .container { width:calc(100% - 32px); }.nav { min-height:72px; flex-wrap:wrap; gap:10px; padding-block:12px; }.navlinks { position:static; transform:none; order:3; width:100%; justify-content:center; font-size:14px; }.preview-badge { font-size:11px; }.derivatives-head { padding-block:28px 30px; }.derivatives-head .crumbs { font-size:12px; margin-bottom:28px; }.derivatives-head .kicker { font-size:12px; }.derivatives-head h1 { font-size:42px; }.entry-lead { font-size:17px; }.research-entry { padding:24px 18px; min-height:0; }.entry-heading { grid-template-columns:90px minmax(0,1fr); gap:16px; min-height:104px; }.company-logo { height:104px; padding:7px; }.company-logo strong { font-size:14px; }.company-logo small { font-size:9px; }.company-logo img { height:48px; }.company-name { font-size:15px; }.entry-category { font-size:9px; white-space:normal; margin-bottom:10px; }.research-entry h2 { font-size:24px; white-space:normal; }.entry-circle { display:none; }.entry-description { font-size:16px; margin:24px 0; min-height:0; }.entry-actions { gap:8px; padding-top:22px; }.entry-actions button { grid-template-columns:1fr; gap:6px; padding:0; }.entry-actions button>span { grid-row:auto; width:52px; height:52px; }.entry-actions strong { font-size:17px; }.entry-actions small { font-size:10px; }.company-site { font-size:14px; padding-top:28px; } }
