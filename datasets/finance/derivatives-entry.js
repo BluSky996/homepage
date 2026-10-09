@@ -18,7 +18,6 @@
     if (deliveries[kind]) {
       const [label, description, url] = deliveries[kind]; title.textContent = label;
       const p = document.createElement('p'); p.textContent = description; content.append(p);
-      link('查看原有交付内容 ↗', url, true);
     } else if (kind === 'trade') {
       title.textContent = '选择尿素策略';
       link('尿素期货一号策略', '#strategy_01');
