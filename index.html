@@ -519,7 +519,7 @@
     .submission-step p { margin: 5px 0 0; color: #718078; font-size: 11px; line-height: 1.55; }
     .training-visual {
       position: relative;
-      width: min(100%, 390px);
+      width: min(100%, 342px);
       aspect-ratio: 1.45;
       color: var(--green);
       pointer-events: none;
@@ -534,6 +534,11 @@
       animation: training-breathe 4.5s ease-in-out infinite;
     }
     .training-visual svg { position: relative; width: 100%; height: 100%; overflow: visible; }
+    .training-visual.is-framed { width: min(100%, 236px); aspect-ratio: 1 / 1; overflow: hidden; border: 1px solid rgba(109, 255, 179, .12); border-radius: 18px; background: radial-gradient(circle at 50% 45%, rgba(109, 255, 179, .055), rgba(5, 10, 8, .55)); }
+    .training-visual img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    /* 仅 01 数据工程与标注：该素材自带黑色圆角框与大量留白，用 cover + 轻微放大裁掉素材自带的框，主体大小与另外三张一致（不改图片文件） */
+    .ai-row[href*="ai-data-training"] .training-visual.is-framed img { object-fit: cover; transform: scale(1.22); }
+    .training-visual.is-framed svg { width: 100%; height: 100%; }
     .training-core { transform-origin: 210px 135px; animation: training-core-pulse 3.8s ease-in-out infinite; }
     .training-stream { stroke-dasharray: 7 11; animation: training-stream 5s linear infinite; }
     .training-stream.reverse { animation-direction: reverse; animation-duration: 6s; }
@@ -552,6 +557,21 @@
     .route-item p { margin: 0; color: var(--muted); font-size: 14px; }
     .route-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 24px; }
     .route-tags span { padding: 4px 8px; border: 1px solid var(--line); border-radius: 4px; color: #aebbb5; font-size: 11px; }
+    /* 02 / AI 应用与智能硬件：统一大板块（四个子模块纵向大横条，右侧配大图标） */
+    .ai-rows { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
+    .ai-row-item { display: flex; }
+    .ai-row { flex: 1 1 auto; display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(320px, .88fr); gap: clamp(22px, 3vw, 44px); align-items: center; padding: clamp(20px, 2.4vw, 30px); border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(125deg, rgba(13, 21, 17, .9), rgba(7, 11, 9, .92)); color: inherit; text-decoration: none; cursor: pointer; transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease; }
+    .ai-row:hover, .ai-row:focus-visible { transform: translateY(-4px); border-color: rgba(109, 255, 179, .55); background: linear-gradient(125deg, rgba(17, 29, 23, .96), rgba(8, 15, 12, .94)); box-shadow: 0 20px 54px rgba(0, 0, 0, .28), 0 0 0 1px rgba(109, 255, 179, .08); outline: none; }
+    .ai-row-index { display: block; margin-bottom: 10px; color: var(--green); font: 12px Consolas, monospace; letter-spacing: .16em; }
+    .ai-row h3 { margin: 0; font-size: clamp(22px, 2.3vw, 30px); line-height: 1.2; letter-spacing: -.03em; }
+    .ai-row p { max-width: 720px; margin: 12px 0 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
+    .ai-row-tags { display: flex; flex-wrap: wrap; gap: 9px; margin: 16px 0 0; padding: 0; list-style: none; }
+    .ai-row-tags li { padding: 6px 13px; border: 1px solid rgba(109, 255, 179, .18); border-radius: 999px; color: #a8c3b6; background: rgba(109, 255, 179, .04); font-size: 12.5px; }
+    .ai-row-side { display: grid; place-items: center; }
+    .ai-row-delivery { border-color: rgba(88, 247, 255, .45); background: linear-gradient(125deg, rgba(12, 32, 28, .88), rgba(7, 13, 15, .92)); }
+    .ai-row-delivery:hover, .ai-row-delivery:focus-visible { border-color: rgba(88, 247, 255, .75); box-shadow: 0 22px 56px rgba(0, 0, 0, .3), 0 0 30px rgba(88, 247, 255, .13); }
+    @media (max-width: 1000px) { .ai-row { grid-template-columns: 1fr; gap: 20px; } .ai-row-side { order: -1; justify-items: start; } }
+    @media (max-width: 700px) { .ai-row { padding: 20px 18px; border-radius: 16px; } .ai-row p { font-size: 14px; } .ai-row-tags { gap: 8px; } }
 
     .about-grid { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: 70px; align-items: start; }
     .about-statement { margin: 0; font-size: clamp(26px, 3.4vw, 42px); line-height: 1.35; letter-spacing: -0.03em; }
@@ -806,14 +826,7 @@
       .agenda-cta:hover, .agenda-lens-button:hover { transform: none; }
     }
   
-    #ai-agents .application-categories .agent-card + .agent-card{margin-top:20px}
-    #ai-agents .application-categories{width:72%}
-    #ai-agents .section-heading{width:72%;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:clamp(28px,5vw,64px);align-items:end}
-    #ai-agents .section-heading .application-note{width:max-content;max-width:none;margin:0;justify-self:start;color:var(--muted);font-size:14px;text-align:left;white-space:nowrap}
-    #ai-agents .application-categories .agent-entry{width:200px;justify-self:end}
-    #ai-agents .application-categories .agent-card h3{font-size:31px;font-weight:850;line-height:1.12;letter-spacing:-.025em}
-    @media(max-width:900px){#ai-agents .application-categories,#ai-agents .section-heading{width:100%}#ai-agents .section-heading{grid-template-columns:1fr;gap:12px}#ai-agents .section-heading .application-note{width:max-content;justify-self:start;text-align:left}#ai-agents .application-categories .agent-entry{width:100%;justify-self:stretch}}
-    @media(max-width:700px){#ai-agents .application-categories .agent-card h3{font-size:27px}}
+    /* 原 AI 应用区块的分散布局规则已随本次重构移除；本板块标题行沿用与「金融数据与研究服务」一致的 .section-heading 默认样式 */
 </style>
 </head>
 <body>
@@ -962,77 +975,75 @@
     </section>
 
     <section id="ai-agents">
-      <div class="container application-panel">
-        <p class="section-kicker">02 / AI APPLICATIONS</p>
+      <div class="container">
+        <p class="section-kicker">02 / AI APPLICATIONS &amp; INTELLIGENT HARDWARE</p>
         <div class="section-heading">
-          <h2>AI 应用集成与工程实施</h2>
-          <p class="application-note">围绕真实需求开展 AI 工具选型、应用集成与落地验证。</p>
+          <h2>AI 应用与智能硬件</h2>
+          <p class="section-intro">围绕数据准备、智能体实验、硬件接入与应用部署，探索 AI 技术在真实场景中的安装、调试与落地。</p>
         </div>
-        <div class="application-categories">
-          <a class="agent-card" href="commercial-ai-solutions.html" aria-label="进入科技产品供需与采购落地">
-            <div>
-              <span class="agent-label">01 / AI APPLICATION ENGINEERING</span>
-              <h3>AI 应用工程与项目交付</h3>
-              <p>面向真实业务需求，开展需求分析、工具选型、应用集成、部署测试与落地验证。</p>
-              <div class="route-tags" aria-label="AI 应用工程方向"><span>需求分析</span><span>工具选型</span><span>应用集成</span><span>部署测试</span></div>
-            </div>
-            <span class="button primary agent-entry">了解工程方向 →</span>
-          </a>
-          <a class="agent-card" href="product-intelligence.html" aria-label="进入 AI 智能体实验">
-            <div>
-              <span class="agent-label">02 / AI AGENT LAB</span>
-              <h3>AI 智能体实验</h3>
-              <p>智能体、工具调用与自动化任务实验</p>
-              <div class="route-tags" aria-label="智能体实验能力"><span>商品调研</span><span>工具调用</span><span>信息整理</span><span>Agent 实验</span></div>
-            </div>
-            <span class="button primary agent-entry">查看项目 →</span>
-          </a>
-          <a class="agent-card" href="ai-hardware-lab.html" aria-label="进入 AI 硬件实验">
-            <div>
-              <span class="agent-label">03 / AI HARDWARE LAB</span>
-              <h3>AI 硬件实验</h3>
-              <p>从传感器、控制器到边缘设备，记录真实硬件实验与数据交互过程。</p>
-              <div class="route-tags" aria-label="硬件实验能力"><span>传感器</span><span>设备控制</span><span>边缘设备</span><span>硬件实验</span></div>
-            </div>
-            <span class="button primary agent-entry">查看项目 →</span>
-          </a>
-        </div>
+        <ol class="ai-rows">
+          <li class="ai-row-item">
+            <a class="ai-row" href="ai-data-training.html">
+              <div class="ai-row-copy">
+                <span class="ai-row-index">01 / DATA ENGINEERING &amp; ANNOTATION</span>
+                <h3>数据工程与标注</h3>
+                <p>围绕数据清洗、结构化整理、标注规范与质量检查，为模型训练、智能体调用和业务分析提供可用数据基础。</p>
+                <ul class="ai-row-tags"><li>数据清洗</li><li>数据标注</li><li>质量检查</li><li>结构化整理</li></ul>
+              </div>
+              <div class="ai-row-side">
+                <div class="training-visual is-framed" aria-hidden="true">
+                  <img src="assets/images/ai-hardware/data-engineering-annotation-visual.png?v=data-visual-1" alt="">
+                </div>
+              </div>
+            </a>
+          </li>
+          <li class="ai-row-item">
+            <a class="ai-row" href="product-intelligence.html">
+              <div class="ai-row-copy">
+                <span class="ai-row-index">02 / AI AGENT LAB</span>
+                <h3>AI 智能体实验</h3>
+                <p>测试不同智能体、工作流与工具调用方式，探索 AI 在资料整理、任务执行、内容生成和流程自动化中的应用。</p>
+                <ul class="ai-row-tags"><li>Agent 实验</li><li>工具调用</li><li>自动化流程</li><li>知识库应用</li></ul>
+              </div>
+              <div class="ai-row-side">
+                <div class="training-visual is-framed" aria-hidden="true">
+                  <img src="assets/images/ai-hardware/ai-agent-lab.png" alt="">
+                </div>
+              </div>
+            </a>
+          </li>
+          <li class="ai-row-item">
+            <a class="ai-row" href="ai-hardware-lab.html">
+              <div class="ai-row-copy">
+                <span class="ai-row-index">03 / AI HARDWARE LAB</span>
+                <h3>AI 硬件实验</h3>
+                <p>围绕本地模型、AI 小主机、移动端模型、传感器与智能硬件，测试 AI 在本地环境和设备端的运行方式。</p>
+                <ul class="ai-row-tags"><li>本地模型</li><li>AI 小主机</li><li>智能硬件</li><li>设备接入</li></ul>
+              </div>
+              <div class="ai-row-side">
+                <div class="training-visual is-framed" aria-hidden="true">
+                  <img src="assets/images/ai-hardware/ai-hardware-lab.png" alt="">
+                </div>
+              </div>
+            </a>
+          </li>
+          <li class="ai-row-item">
+            <a class="ai-row ai-row-delivery" href="commercial-ai-solutions.html">
+              <div class="ai-row-copy">
+                <span class="ai-row-index">04 / AI DEPLOYMENT</span>
+                <h3>AI 应用部署</h3>
+                <p>面向小型应用场景，提供 AI 工具安装、模型调用配置、数据接口接入、前端页面部署与使用流程调试。</p>
+                <ul class="ai-row-tags"><li>安装部署</li><li>模型调用</li><li>系统调试</li><li>项目交付</li></ul>
+              </div>
+              <div class="ai-row-side">
+                <div class="training-visual is-framed" aria-hidden="true">
+                  <img src="assets/images/ai-hardware/ai-deployment-network.png" alt="">
+                </div>
+              </div>
+            </a>
+          </li>
+        </ol>
       </div>
-    </section>
-
-    <section id="data-training">
-      <a class="container submission-card" href="ai-data-training.html" aria-label="进入 数据工程与标注流程">
-        <div class="submission-copy">
-          <p class="section-kicker">03 / DATA ENGINEERING &amp; ANNOTATION</p>
-          <h2>数据工程与标注</h2>
-          <p>从数据采集、整理清洗到标注与评估</p>
-          <span class="button primary submission-action">示范与承接 →</span>
-        </div>
-        <div class="submission-side">
-          <div class="training-visual" aria-hidden="true">
-            <svg viewBox="0 0 420 270" fill="none">
-              <defs>
-                <linearGradient id="training-line" x1="50" y1="35" x2="370" y2="235" gradientUnits="userSpaceOnUse"><stop stop-color="#58f7ff"/><stop offset=".52" stop-color="#6bffbd"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
-                <linearGradient id="training-chip" x1="162" y1="87" x2="258" y2="183" gradientUnits="userSpaceOnUse"><stop stop-color="#10261f"/><stop offset="1" stop-color="#07100d"/></linearGradient>
-              </defs>
-              <g opacity=".2" stroke="#6bffbd" stroke-width="1"><circle cx="210" cy="135" r="112"/><circle cx="210" cy="135" r="92" stroke-dasharray="3 8"/><path d="M210 13v24M210 233v24M88 135H64M356 135h-24"/></g>
-              <g stroke="url(#training-line)" stroke-width="1.7" stroke-linecap="round">
-                <path class="training-stream" d="M42 55h58l35 35h39"/><path class="training-stream reverse" d="M42 135h132"/><path class="training-stream" d="M42 215h58l35-35h39"/>
-                <path class="training-stream reverse" d="M246 90h40l34-35h58"/><path class="training-stream" d="M246 135h132"/><path class="training-stream reverse" d="M246 180h40l34 35h58"/>
-              </g>
-              <g fill="#09130f" stroke="#58f7ff" stroke-width="1.5"><circle class="training-node-dot" cx="42" cy="55" r="5"/><circle class="training-node-dot delay-1" cx="42" cy="135" r="5"/><circle class="training-node-dot delay-2" cx="42" cy="215" r="5"/></g>
-              <g fill="#09130f" stroke="#a78bfa" stroke-width="1.5"><circle class="training-node-dot delay-2" cx="378" cy="55" r="5"/><circle class="training-node-dot" cx="378" cy="135" r="5"/><circle class="training-node-dot delay-1" cx="378" cy="215" r="5"/></g>
-              <g class="training-core">
-                <rect x="162" y="87" width="96" height="96" rx="19" fill="url(#training-chip)" stroke="#6bffbd" stroke-width="2"/>
-                <rect x="178" y="103" width="64" height="64" rx="13" stroke="#58f7ff" stroke-opacity=".55"/>
-                <path d="M188 142c9-20 18-20 27 0s18 20 27 0M190 123h9m22 24h10" stroke="#9affdd" stroke-width="2.2" stroke-linecap="round"/>
-                <circle cx="188" cy="142" r="3.5" fill="#58f7ff"/><circle cx="215" cy="142" r="3.5" fill="#6bffbd"/><circle cx="242" cy="142" r="3.5" fill="#a78bfa"/>
-                <path d="M178 112h-12m12 18h-12m12 18h-12m12 18h-12M242 112h12m-12 18h12m-12 18h12m-12 18h12" stroke="#6bffbd" stroke-opacity=".65"/>
-              </g>
-            </svg>
-          </div>
-        </div>
-      </a>
     </section>
 
   </main>
