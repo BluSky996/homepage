@@ -827,6 +827,83 @@
     }
   
     /* 原 AI 应用区块的分散布局规则已随本次重构移除；本板块标题行沿用与「金融数据与研究服务」一致的 .section-heading 默认样式 */
+    /* 企业经营与融资：与金融数据 / AI 应用同级的大模块；四张横向长条卡片，一行一个（尺寸与 AI 模块卡片同级） */
+    #business-financing { padding-top: 56px; }
+    #business-financing .section-intro { max-width: 620px; }
+    .biz-list { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .biz-row { min-height: 248px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(22px, 3vw, 44px); align-items: center; padding: clamp(24px, 2.6vw, 32px); border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(125deg, rgba(13, 21, 17, .9), rgba(7, 11, 9, .92)); transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease; }
+    .biz-row:hover { transform: translateY(-4px); border-color: rgba(109, 255, 179, .55); background: linear-gradient(125deg, rgba(17, 29, 23, .96), rgba(8, 15, 12, .94)); box-shadow: 0 20px 54px rgba(0, 0, 0, .28), 0 0 0 1px rgba(109, 255, 179, .08); }
+    .biz-identity { display: grid; gap: 10px; align-content: center; }
+    .biz-identity .card-index { letter-spacing: .16em; }
+    .biz-identity .card-en { margin-top: 0; font-size: 11.5px; letter-spacing: .12em; }
+    .biz-row--entry { grid-template-columns: minmax(0, 1fr) auto; gap: clamp(24px, 3vw, 48px); }
+    .biz-row h3 { margin: 0; font-size: clamp(22px, 2.3vw, 30px); line-height: 1.2; letter-spacing: -.03em; }
+    @media (max-width: 900px) { .biz-row { min-height: 0; grid-template-columns: 1fr; gap: 18px; padding: 20px 18px; border-radius: 16px; } .biz-row h3 { font-size: 21px; } }
+    /* 企业经营与融资 01 卡片：三个能力入口 + 轻量弹窗 */
+    .biz-note { margin: 2px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.7; }
+    .biz-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 16px; padding-right: clamp(16px, 3vw, 52px); }
+    .biz-action { display: inline-flex; align-items: center; justify-content: center; min-height: 58px; padding: 0 34px; border: 1px solid var(--line-strong); border-radius: 14px; color: var(--text); background: rgba(255, 255, 255, .025); font-family: inherit; font-size: 15px; font-weight: 700; letter-spacing: .01em; text-decoration: none; cursor: pointer; transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease, color .2s ease; }
+    .biz-dot { width: 7px; height: 7px; flex: none; border-radius: 50%; background: linear-gradient(135deg, #9dffd6, #7fe6ff); box-shadow: 0 0 12px rgba(109, 255, 179, .45); }
+    .biz-action--theory, .biz-action--c1 { border-color: rgba(109, 255, 179, .42); color: #e4fff3; }
+    .biz-action--theory:hover, .biz-action--theory:focus-visible, .biz-action--theory[aria-expanded="true"], .biz-action--c1:hover, .biz-action--c1:focus-visible, .biz-action--c1[aria-expanded="true"] { transform: translateY(-2px); border-color: rgba(109, 255, 179, .72); color: var(--green); background: rgba(109, 255, 179, .09); box-shadow: 0 0 24px rgba(109, 255, 179, .16); outline: none; }
+    .biz-action--cases, .biz-action--c2 { border-color: rgba(71, 215, 255, .42); color: #e2f5ff; }
+    .biz-action--cases:hover, .biz-action--cases:focus-visible, .biz-action--cases[aria-expanded="true"], .biz-action--c2:hover, .biz-action--c2:focus-visible, .biz-action--c2[aria-expanded="true"] { transform: translateY(-2px); border-color: rgba(71, 215, 255, .74); color: var(--cyan); background: rgba(71, 215, 255, .09); box-shadow: 0 0 24px rgba(71, 215, 255, .16); outline: none; }
+    .biz-action--delivery, .biz-action--c3 { border-color: rgba(156, 124, 255, .44); color: #ece6ff; }
+    .biz-action--delivery:hover, .biz-action--delivery:focus-visible, .biz-action--delivery[aria-expanded="true"], .biz-action--c3:hover, .biz-action--c3:focus-visible, .biz-action--c3[aria-expanded="true"] { transform: translateY(-2px); border-color: rgba(156, 124, 255, .76); color: var(--violet); background: rgba(156, 124, 255, .1); box-shadow: 0 0 24px rgba(156, 124, 255, .17); outline: none; }
+    .info-modal { position: fixed; inset: 0; z-index: 60; display: none; place-items: center; padding: 18px; background: rgba(0, 0, 0, .78); backdrop-filter: blur(7px); }
+    .info-modal.is-open { display: grid; }
+    .info-modal-panel { width: min(520px, 100%); max-height: min(84vh, 720px); overflow-y: auto; padding: 28px; border: 1px solid rgba(109, 255, 179, .32); border-radius: 16px; background: linear-gradient(145deg, rgba(16, 26, 20, .99), rgba(6, 10, 8, .99)); box-shadow: 0 26px 70px rgba(0, 0, 0, .5); }
+    .info-modal-panel h3 { margin: 0; font-size: 20px; line-height: 1.4; }
+    .info-modal-copy { margin: 12px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.75; }
+    .info-list { display: grid; gap: 10px; margin: 16px 0 0; padding: 0; list-style: none; }
+    .info-list li { position: relative; padding-left: 18px; color: #b6c6bf; font-size: 13.5px; line-height: 1.7; }
+    .info-list li:before { position: absolute; left: 0; top: .62em; width: 6px; height: 6px; content: ""; border-radius: 50%; background: var(--green); opacity: .8; }
+    .info-modal-note { display: block; margin-top: 18px; color: #6e7c75; font-size: 11.5px; line-height: 1.7; }
+    .info-modal-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; color: var(--green); font-size: 13px; text-decoration: none; transition: color .18s ease; }
+    .info-modal-link:hover { color: #a9ffd4; }
+    .case-options { display: grid; gap: 12px; margin-top: 18px; }
+    .case-option { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; padding: 15px 17px; border: 1px solid var(--line); border-radius: 12px; color: inherit; background: rgba(255, 255, 255, .02); font-family: inherit; font-size: 14px; text-align: left; text-decoration: none; cursor: pointer; transition: transform .2s ease, border-color .2s ease, background .2s ease; }
+    .case-option:hover { transform: translateY(-2px); border-color: rgba(109, 255, 179, .55); background: rgba(109, 255, 179, .06); }
+    .case-option-title { min-width: 0; }
+    .case-option-meta { display: inline-flex; align-items: center; gap: 12px; }
+    .case-option-arrow { color: var(--green); }
+    .case-option-note { color: #6e7c75; font-size: 11.5px; white-space: nowrap; }
+    .info-modal-actions { display: flex; justify-content: flex-end; margin-top: 20px; }
+    .info-modal-close { min-height: 42px; padding: 0 18px; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--text); background: rgba(255, 255, 255, .025); font-family: inherit; font-size: 13.5px; cursor: pointer; transition: border-color .2s ease, color .2s ease; }
+    .info-modal-close:hover { border-color: var(--green); color: var(--green); }
+    @media (max-width: 900px) { .biz-row--entry { grid-template-columns: 1fr; } .biz-actions { justify-content: flex-start; gap: 12px; padding-right: 0; } .biz-action { flex: 1 1 auto; } .biz-dot { display: none; } }
+    /* 旧版资料查看器（复刻 datasets/finance/primary-market.html 的 .document-viewer，用于首页弹窗调用） */
+    .document-viewer { width: min(1060px, calc(100% - 32px)); max-height: calc(100vh - 32px); padding: 0; color: var(--text); border: 1px solid rgba(109, 255, 179, .34); border-radius: 16px; background: #080d0a; box-shadow: 0 34px 100px rgba(0, 0, 0, .7), 0 0 38px rgba(109, 255, 179, .1); overflow: hidden; }
+    .document-viewer::backdrop { background: rgba(1, 5, 3, .82); backdrop-filter: blur(8px); }
+    .viewer-shell { display: grid; grid-template-rows: auto minmax(300px, 1fr) auto; max-height: calc(100vh - 34px); }
+    .viewer-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; padding: 20px 24px; border-bottom: 1px solid var(--line); background: rgba(13, 22, 17, .92); }
+    .viewer-kicker { display: block; margin-bottom: 4px; color: var(--green); font: 10px Consolas, monospace; letter-spacing: .12em; }
+    .viewer-header h2 { margin: 0; font-size: 22px; }
+    .viewer-subtitle { margin: 4px 0 0; color: #b9c7c0; font-size: 13px; }
+    .viewer-close { display: grid; place-items: center; width: 36px; height: 36px; flex: none; color: #c7d5ce; font-size: 25px; cursor: pointer; border: 1px solid var(--line); border-radius: 50%; background: rgba(255, 255, 255, .025); }
+    .viewer-close:hover { color: var(--green); border-color: rgba(109, 255, 179, .5); }
+    .viewer-stage { position: relative; display: grid; place-items: center; min-height: 480px; padding: 60px 116px; background: radial-gradient(circle at 50% 42%, rgba(109, 255, 179, .055), transparent 48%), #050806; }
+    .viewer-image { display: block; width: min(100%, 960px); height: auto; aspect-ratio: 16 / 9; object-fit: contain; border: 1px solid rgba(109, 255, 179, .18); box-shadow: 0 14px 46px rgba(0, 0, 0, .45), 0 0 24px rgba(109, 255, 179, .08); }
+    .viewer-image[hidden] { display: none; }
+    .viewer-placeholder { max-width: 540px; text-align: center; color: #c6d3cc; }
+    .viewer-placeholder strong { display: block; margin-bottom: 10px; font-size: 20px; }
+    .viewer-placeholder span { color: var(--muted); font-size: 13px; }
+    .viewer-nav { position: absolute; top: 50%; min-width: 98px; padding: 10px 13px; color: #c6d3cc; font-size: 12px; cursor: pointer; border: 1px solid var(--line); border-radius: 999px; background: rgba(8, 15, 11, .86); transform: translateY(-50%); }
+    .viewer-nav:hover:not(:disabled) { color: var(--green); border-color: rgba(109, 255, 179, .5); }
+    .viewer-nav:disabled { cursor: not-allowed; opacity: .32; }
+    .viewer-prev { left: 18px; }
+    .viewer-next { right: 18px; }
+    .viewer-footer { display: flex; align-items: center; justify-content: center; min-height: 52px; padding: 10px 24px; border-top: 1px solid var(--line); color: var(--muted); font: 12px Consolas, monospace; background: rgba(10, 16, 12, .92); }
+    @media (max-width: 900px) { .viewer-stage { min-height: 430px; padding: 42px 18px 92px; } .viewer-nav { top: auto; bottom: 22px; transform: none; } .viewer-header { padding: 17px 18px; } }
+    /* 竖版文档案例（「室内设计公司，化身民宿厂家」）：窄容器 + 大图 + 底部翻页，减少左右黑边 */
+    .document-viewer.is-portrait-doc { width: min(600px, calc(100% - 32px)); }
+    .document-viewer.is-portrait-doc .viewer-shell { grid-template-rows: auto minmax(0, 1fr) auto; }
+    .document-viewer.is-portrait-doc .viewer-stage { min-height: 0; padding: 20px 22px 76px; }
+    .document-viewer.is-portrait-doc .viewer-image { width: auto; max-width: 100%; height: auto; max-height: min(74vh, calc(100vh - 280px)); aspect-ratio: auto; border-color: rgba(109, 255, 179, .22); }
+    .document-viewer.is-portrait-doc .viewer-nav { top: auto; bottom: 18px; transform: none; }
+    .document-viewer.is-portrait-doc .viewer-prev { left: 22px; }
+    .document-viewer.is-portrait-doc .viewer-next { right: 22px; }
+    @media (max-width: 700px) { .document-viewer.is-portrait-doc .viewer-stage { padding: 14px 12px 72px; } .document-viewer.is-portrait-doc .viewer-image { max-height: min(66vh, calc(100vh - 260px)); } }
 </style>
 </head>
 <body>
@@ -974,9 +1051,81 @@
       </div>
     </section>
 
+    <section id="business-financing">
+      <div class="container">
+        <p class="section-kicker">02 / BUSINESS OPERATIONS &amp; FINANCING</p>
+        <div class="section-heading">
+          <h2>企业经营与融资</h2>
+          <p class="section-intro">围绕企业创立、股权设计、经营融资、团队激励与投资并购中的关键问题，整理案例、方案与决策参考。</p>
+        </div>
+        <div class="biz-list">
+          <article class="data-card biz-row biz-row--entry">
+            <div class="biz-identity">
+              <span class="card-index">BIZ_01</span>
+              <span class="card-en">FOUNDER EQUITY ALLOCATION</span>
+              <h3>创始股东股权分配</h3>
+              <p class="biz-note">创始股东怎么分股、怎么控权、怎么约定退出。</p>
+            </div>
+            <div class="biz-actions">
+              <button class="biz-action biz-action--theory" type="button" data-doc="founder-equity-allocation">理论框架</button>
+              <span class="biz-dot" aria-hidden="true"></span>
+              <button class="biz-action biz-action--cases" type="button" data-modal="case-modal" aria-expanded="false">案例观察</button>
+              <span class="biz-dot" aria-hidden="true"></span>
+              <button class="biz-action biz-action--delivery" type="button" data-agenda aria-haspopup="dialog">交付方式</button>
+            </div>
+          </article>
+                    <article class="data-card biz-row biz-row--entry">
+            <div class="biz-identity">
+              <span class="card-index">BIZ_02</span>
+              <span class="card-en">BUSINESS FINANCING</span>
+              <h3>企业经营融资</h3>
+              <p class="biz-note">经营中如何组织资金需求、融资方案和材料准备。</p>
+            </div>
+            <div class="biz-actions">
+              <button class="biz-action biz-action--c1" type="button" data-doc="equity-financing-basics">融资逻辑</button>
+              <span class="biz-dot" aria-hidden="true"></span>
+              <button class="biz-action biz-action--c2" type="button" data-modal="financing-cases" aria-expanded="false">案例观察</button>
+              <span class="biz-dot" aria-hidden="true"></span>
+              <button class="biz-action biz-action--c3" type="button" data-doc="on-site-guidance-delivery">交付方式</button>
+            </div>
+          </article>
+                    <article class="data-card biz-row biz-row--entry">
+            <div class="biz-identity">
+              <span class="card-index">BIZ_03</span>
+              <span class="card-en">EMPLOYEE EQUITY INCENTIVE</span>
+              <h3>员工股权激励</h3>
+              <p class="biz-note">如何通过股权、期权或项目权益绑定关键团队。</p>
+            </div>
+            <div class="biz-actions">
+              <button class="biz-action biz-action--c1" type="button" data-doc="employee-equity-incentive">激励机制</button>
+              <span class="biz-dot" aria-hidden="true"></span>
+              <button class="biz-action biz-action--c2" type="button" data-modal="incentive-plan">方案要点</button>
+              <span class="biz-dot" aria-hidden="true"></span>
+              <button class="biz-action biz-action--c3" type="button" data-doc="on-site-guidance-delivery">交付方式</button>
+            </div>
+          </article>
+                    <article class="data-card biz-row biz-row--entry">
+            <div class="biz-identity">
+              <span class="card-index">BIZ_04</span>
+              <span class="card-en">INVESTMENT &amp; M&amp;A</span>
+              <h3>企业投资并购</h3>
+              <p class="biz-note">企业投资、收购项目、引入投资方时如何判断交易结构和风险边界。</p>
+            </div>
+            <div class="biz-actions">
+              <button class="biz-action biz-action--c1" type="button" data-doc="equity-layout-design">交易结构</button>
+              <span class="biz-dot" aria-hidden="true"></span>
+              <button class="biz-action biz-action--c2" type="button" data-modal="ma-cases" aria-expanded="false">案例观察</button>
+              <span class="biz-dot" aria-hidden="true"></span>
+              <button class="biz-action biz-action--c3" type="button" data-doc="on-site-guidance-delivery">交付方式</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="ai-agents">
       <div class="container">
-        <p class="section-kicker">02 / AI APPLICATIONS &amp; INTELLIGENT HARDWARE</p>
+        <p class="section-kicker">03 / AI APPLICATIONS &amp; INTELLIGENT HARDWARE</p>
         <div class="section-heading">
           <h2>AI 应用与智能硬件</h2>
           <p class="section-intro">围绕数据准备、智能体实验、硬件接入与应用部署，探索 AI 技术在真实场景中的安装、调试与落地。</p>
@@ -1048,6 +1197,67 @@
 
   </main>
 
+    <div class="info-modal" id="case-modal" role="dialog" aria-modal="true" aria-labelledby="case-modal-title" hidden>
+      <div class="info-modal-panel">
+        <h3 id="case-modal-title">创始股东股权分配｜案例观察</h3>
+        <p class="info-modal-copy">请选择一个股权案例查看：</p>
+        <div class="case-options">
+          <button class="case-option" type="button" data-doc="small-capital-control-case"><span class="case-option-title">小资金当大股东，是福还是祸？</span><span class="case-option-meta"><span class="case-option-arrow" aria-hidden="true">→</span></span></button>
+          <button class="case-option" type="button" data-doc="shareholder-exit-equity-refinancing-demo"><span class="case-option-title">股东退出、公司股权重新融资</span><span class="case-option-meta"><span class="case-option-arrow" aria-hidden="true">→</span></span></button>
+        </div>
+        <div class="info-modal-actions"><button class="info-modal-close" type="button">关闭</button></div>
+      </div>
+    </div>
+    <div class="info-modal" id="financing-cases" role="dialog" aria-modal="true" aria-labelledby="financing-cases-title" hidden>
+      <div class="info-modal-panel">
+        <h3 id="financing-cases-title">企业经营融资｜案例观察</h3>
+        <p class="info-modal-copy">请选择一个经营融资案例查看：</p>
+        <div class="case-options">
+          <button class="case-option" type="button" data-doc="restaurant-equity-expansion-case"><span class="case-option-title">餐饮行业的扩张，是自掏腰包还是股权规划？</span><span class="case-option-meta"><span class="case-option-arrow" aria-hidden="true">→</span></span></button>
+          <button class="case-option" type="button" data-doc="interior-design-to-homestay-manufacturer"><span class="case-option-title">室内设计公司，化身民宿厂家</span><span class="case-option-meta"><span class="case-option-arrow" aria-hidden="true">→</span></span></button>
+        </div>
+        <div class="info-modal-actions"><button class="info-modal-close" type="button">关闭</button></div>
+      </div>
+    </div>
+    <div class="info-modal" id="incentive-plan" role="dialog" aria-modal="true" aria-labelledby="incentive-plan-title" hidden>
+      <div class="info-modal-panel">
+        <h3 id="incentive-plan-title">员工股权激励｜方案要点</h3>
+        <p class="info-modal-copy">内容整理中。</p>
+        <div class="info-modal-actions"><button class="info-modal-close" type="button">关闭</button></div>
+      </div>
+    </div>
+    <div class="info-modal" id="ma-cases" role="dialog" aria-modal="true" aria-labelledby="ma-cases-title" hidden>
+      <div class="info-modal-panel">
+        <h3 id="ma-cases-title">企业投资并购｜案例观察</h3>
+        <p class="info-modal-copy">请选择一个投资并购案例查看：</p>
+        <div class="case-options">
+          <button class="case-option" type="button" data-doc="state-owned-ma-asset-loss-case"><span class="case-option-title">国企并购如何规避国有资产流失？</span><span class="case-option-meta"><span class="case-option-arrow" aria-hidden="true">→</span></span></button>
+          <button class="case-option" type="button" data-doc="traditional-food-supply-chain-to-consumer"><span class="case-option-title">传统食品供应链，走向消费终端</span><span class="case-option-meta"><span class="case-option-arrow" aria-hidden="true">→</span></span></button>
+        </div>
+        <div class="info-modal-actions"><button class="info-modal-close" type="button">关闭</button></div>
+      </div>
+    </div>
+
+    <dialog class="document-viewer" id="doc-viewer" aria-labelledby="doc-viewer-title">
+      <div class="viewer-shell">
+        <header class="viewer-header">
+          <div>
+            <span class="viewer-kicker">EQUITY FINANCING MATERIAL</span>
+            <h2 id="doc-viewer-title">资料查看器</h2>
+            <p class="viewer-subtitle" id="doc-viewer-subtitle"></p>
+          </div>
+          <button class="viewer-close" type="button" aria-label="关闭资料查看器">×</button>
+        </header>
+        <div class="viewer-stage">
+          <button class="viewer-nav viewer-prev" type="button" aria-label="上一页">← 上一页</button>
+          <img class="viewer-image" alt="" hidden>
+          <div class="viewer-placeholder"><strong>资料图片整理中</strong><span>后续将以逐页图片形式展示。</span></div>
+          <button class="viewer-nav viewer-next" type="button" aria-label="下一页">下一页 →</button>
+        </div>
+        <footer class="viewer-footer"><span class="viewer-page">0 / 0</span></footer>
+      </div>
+    </dialog>
+
   <aside class="agenda-confirmation-widget" aria-label="议题确认与预约会议" hidden>
     <div class="agenda-trigger">
       <span class="agenda-trigger-desktop">
@@ -1060,6 +1270,9 @@
       </span>
     </div>
     <div class="agenda-overlay" aria-hidden="true"></div>
+
+
+
     <section class="agenda-panel" id="agenda-panel" role="dialog" aria-modal="true" aria-labelledby="agenda-panel-title" aria-hidden="true">
       <button class="agenda-close" type="button" aria-label="关闭预约窗口">×</button>
       <div class="agenda-view agenda-overview">
@@ -1435,6 +1648,187 @@
       updateAvailability();
       if (!agendaScheduler.hidden) renderBookingGrid();
     }, 60000);
-  </script>
+  
+
+    
+    const infoTriggers = [...document.querySelectorAll("[data-modal]")];
+    const infoModals = [...document.querySelectorAll(".info-modal")];
+    const infoTriggersByModal = new WeakMap();
+
+    function closeInfoModal(modal) {
+      modal.classList.remove("is-open");
+      modal.hidden = true;
+      const trigger = infoTriggersByModal.get(modal);
+      if (trigger) {
+        trigger.setAttribute("aria-expanded", "false");
+        trigger.focus();
+      }
+    }
+
+    function openInfoModal(modal, trigger) {
+      infoTriggersByModal.set(modal, trigger);
+      infoModals.forEach((other) => {
+        if (other !== modal && !other.hidden) closeInfoModal(other);
+      });
+      modal.hidden = false;
+      modal.classList.add("is-open");
+      trigger.setAttribute("aria-expanded", "true");
+      const closeButton = modal.querySelector(".info-modal-close");
+      if (closeButton) closeButton.focus();
+    }
+
+    infoTriggers.forEach((trigger) => {
+      const modal = document.getElementById(trigger.getAttribute("data-modal"));
+      if (!modal) return;
+      trigger.addEventListener("click", () => openInfoModal(modal, trigger));
+    });
+
+    infoModals.forEach((modal) => {
+      const closeButton = modal.querySelector(".info-modal-close");
+      if (closeButton) closeButton.addEventListener("click", () => closeInfoModal(modal));
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeInfoModal(modal);
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      infoModals.forEach((modal) => {
+        if (!modal.hidden) closeInfoModal(modal);
+      });
+    });
+
+    
+    // 旧版资料查看器（复刻 primary-market.html 的 documentSets / renderViewer / openViewer 逻辑与素材路径）
+    const financeDocSets = {
+      "founder-equity-allocation": { title: "创始股权分配", description: "解决潜在的纷争问题", basePath: "assets/docs/finance/equity-financing/founder-equity-allocation/", images: ["page-01.png", "page-02.png", "page-03.png", "page-04.png"] },
+      "small-capital-control-case": { title: "小资金当大股东，是福还是祸？", description: "", basePath: "assets/docs/finance/equity-financing/small-capital-control-case/", images: ["small-capital-control-case.png"] },
+      "shareholder-exit-equity-refinancing-demo": { title: "股东退出、公司股权重新融资流程示范", description: "仅作示范用途", basePath: "assets/docs/finance/equity-financing/shareholder-exit-equity-refinancing-demo/", images: ["shareholder-exit-equity-refinancing-demo-01.png"] },
+      "equity-financing-basics": { title: "企业股权融资", description: "解决经营的资金问题", basePath: "assets/docs/finance/equity-financing/enterprise-equity-financing/", images: ["page-01.png", "page-02.png", "page-03.png", "page-04.png"] },
+      "restaurant-equity-expansion-case": { title: "餐饮行业的扩张，是自掏腰包还是股权规划？", description: "", basePath: "assets/docs/finance/equity-financing/restaurant-equity-expansion-case/", images: ["restaurant-equity-expansion-case.png.png"] },
+      "interior-design-to-homestay-manufacturer": { title: "室内设计公司，化身民宿厂家", description: "", portrait: true, basePath: "assets/docs/finance/equity-financing/interior-design-to-homestay-manufacturer/", images: ["interior-design-to-homestay-manufacturer-01.png", "interior-design-to-homestay-manufacturer-02.png"] },
+      "employee-equity-incentive": { title: "员工股权激励", description: "解决齐心协力的问题", basePath: "assets/docs/finance/equity-financing/employee-equity-incentive/", images: ["employee-equity-incentive-01.png", "employee-equity-incentive-02.png", "employee-equity-incentive-03.png", "employee-equity-incentive-04.png", "employee-equity-incentive-05.png"] },
+      "equity-layout-design": { title: "股权布局设计", description: "解决长远规划的问题", basePath: "assets/docs/finance/equity-financing/equity-structure-design/", images: ["equity-structure-design-01.png", "equity-structure-design-02.png"] },
+      "state-owned-ma-asset-loss-case": { title: "国企并购如何规避国有资产流失？", description: "", basePath: "assets/docs/finance/equity-financing/state-owned-ma-asset-loss-case/", images: ["state-owned-ma-asset-loss-case.png"] },
+      "traditional-food-supply-chain-to-consumer": { title: "传统食品供应链，走向消费终端", description: "", basePath: "assets/docs/finance/equity-financing/traditional-food-supply-chain-to-consumer/", images: ["traditional-food-supply-chain-to-consumer-01.png", "traditional-food-supply-chain-to-consumer-02.png"] },
+      "on-site-guidance-delivery": { title: "现场辅导交付", description: "", portrait: true, basePath: "assets/docs/finance/equity-financing/on-site-guidance-delivery/", images: ["on-site-guidance-delivery-01.png", "on-site-guidance-delivery-02.png"] }
+    };
+    const docViewer = document.getElementById("doc-viewer");
+
+    if (docViewer) {
+      const docViewerTitle = docViewer.querySelector("#doc-viewer-title");
+      const docViewerSubtitle = docViewer.querySelector("#doc-viewer-subtitle");
+      const docViewerImage = docViewer.querySelector(".viewer-image");
+      const docViewerPlaceholder = docViewer.querySelector(".viewer-placeholder");
+      const docViewerPage = docViewer.querySelector(".viewer-page");
+      const docPrevButton = docViewer.querySelector(".viewer-prev");
+      const docNextButton = docViewer.querySelector(".viewer-next");
+      let activeDoc = null;
+      let activePage = 0;
+      let docReturnFocus = null;
+
+      const renderDocViewer = () => {
+        const images = activeDoc ? activeDoc.images : [];
+        const hasImages = images.length > 0;
+        docViewerPlaceholder.hidden = hasImages;
+        docViewerImage.hidden = !hasImages;
+        docPrevButton.disabled = !hasImages || activePage === 0;
+        docNextButton.disabled = !hasImages || activePage === images.length - 1;
+        docViewerPage.textContent = hasImages ? activePage + 1 + " / " + images.length : "0 / 0";
+        if (hasImages) {
+          docViewerImage.src = activeDoc.basePath + images[activePage];
+          docViewerImage.alt = activeDoc.title + "，第 " + (activePage + 1) + " 页";
+        } else {
+          docViewerImage.removeAttribute("src");
+          docViewerImage.alt = "";
+        }
+      };
+
+      const openDocViewer = (key, trigger) => {
+        const set = financeDocSets[key];
+        if (!set) return;
+        activeDoc = set;
+        activePage = 0;
+        docReturnFocus = trigger || document.activeElement;
+        docViewerTitle.textContent = set.title;
+        docViewerSubtitle.textContent = set.description;
+        docViewer.classList.toggle("is-portrait-doc", Boolean(set.portrait));
+        renderDocViewer();
+        if (!docViewer.open) docViewer.showModal();
+      };
+
+      document.querySelectorAll("[data-doc]").forEach((button) => {
+        button.addEventListener("click", () => {
+          let returnTo = button;
+          infoModals.forEach((modal) => {
+            if (!modal.hidden) {
+              const origin = infoTriggersByModal.get(modal);
+              if (origin) returnTo = origin;
+              closeInfoModal(modal);
+            }
+          });
+          openDocViewer(button.getAttribute("data-doc"), returnTo);
+        });
+      });
+
+      docViewer.querySelector(".viewer-close").addEventListener("click", () => docViewer.close());
+      docPrevButton.addEventListener("click", () => {
+        if (activeDoc && activePage > 0) {
+          activePage -= 1;
+          renderDocViewer();
+        }
+      });
+      docNextButton.addEventListener("click", () => {
+        if (activeDoc && activePage < activeDoc.images.length - 1) {
+          activePage += 1;
+          renderDocViewer();
+        }
+      });
+      docViewer.addEventListener("click", (event) => {
+        if (event.target === docViewer) docViewer.close();
+      });
+      docViewer.addEventListener("close", () => {
+        if (docReturnFocus) {
+          docReturnFocus.focus();
+          docReturnFocus = null;
+        }
+      });
+      document.addEventListener("keydown", (event) => {
+        if (!docViewer.open) return;
+        if (event.key === "ArrowLeft" && !docPrevButton.disabled) docPrevButton.click();
+        if (event.key === "ArrowRight" && !docNextButton.disabled) docNextButton.click();
+      });
+    }
+
+    // 交付方式：复用首页已有的旧版预约 / 会议预约窗口
+    // 说明：旧版预约组件默认带 hidden 属性（首页未启用其浮动入口），直接调用 setAgendaOpen() 看不到任何东西，
+    // 因此这里在点击时临时解除 hidden，面板关闭后由 MutationObserver 自动还原，避免改变页面默认状态。
+    const deliveryTriggers = [...document.querySelectorAll("[data-agenda]")];
+    const agendaWidgetEl = document.querySelector(".agenda-confirmation-widget");
+
+    if (deliveryTriggers.length && agendaWidgetEl && typeof setAgendaOpen === "function") {
+      const restoreAgendaHidden = () => {
+        if (!agendaWidgetEl.classList.contains("is-open") && agendaWidgetEl.dataset.agendaTemp === "open") {
+          agendaWidgetEl.setAttribute("hidden", "");
+          delete agendaWidgetEl.dataset.agendaTemp;
+        }
+      };
+      const agendaObserver = new MutationObserver(restoreAgendaHidden);
+      agendaObserver.observe(agendaWidgetEl, { attributes: true, attributeFilter: ["class"] });
+
+      deliveryTriggers.forEach((trigger) => {
+        trigger.setAttribute("aria-expanded", "false");
+        agendaOpenButtons.push(trigger);
+        trigger.addEventListener("click", () => {
+          if (agendaWidgetEl.hasAttribute("hidden")) {
+            agendaWidgetEl.removeAttribute("hidden");
+            agendaWidgetEl.dataset.agendaTemp = "open";
+          }
+          setAgendaOpen(true);
+        });
+      });
+    }
+
+    </script>
 </body>
 </html>
