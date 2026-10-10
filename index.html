@@ -357,6 +357,9 @@
     }
 
     .section-intro { max-width: 520px; margin: 0; color: var(--muted); }
+    /* 金融数据与研究服务：加宽右侧说明容器，避免“支持”被拆成单字换行（仅作用于本模块） */
+    #datasets .section-intro { max-width: 600px; }
+    .nowrap { white-space: nowrap; }
 
     .dataset-grid {
       display: grid;
@@ -394,6 +397,22 @@
     .market-card-copy { position: relative; z-index: 1; max-width: calc(100% - 220px); }
     .compass-decoration { position: absolute; z-index: 0; top: 34px; right: 54px; width: 154px; height: 154px; pointer-events: none; opacity: .78; filter: drop-shadow(0 0 8px rgba(99,245,210,.34)) drop-shadow(0 0 20px rgba(88,247,255,.16)); transition: opacity .18s ease, transform .18s ease, filter .18s ease; }
     .data-card:hover .compass-decoration { opacity: .94; transform: scale(1.025); filter: drop-shadow(0 0 10px rgba(99,245,210,.46)) drop-shadow(0 0 25px rgba(88,247,255,.24)); }
+    /* 区块链金融卡片：hover 时六边形轻微“解锁”转动（只作用于该卡片，分红派息/衍生品两张不受影响） */
+    .data-card[href*="web3-framework"] .compass-decoration { transform-origin: 50% 50%; transition: opacity .18s ease, transform .52s cubic-bezier(.2, .85, .28, 1.06), filter .18s ease; }
+    .data-card[href*="web3-framework"]:hover .compass-decoration { transform: scale(1.025) rotate(14deg); }
+    @media (prefers-reduced-motion: reduce) { .data-card[href*="web3-framework"]:hover .compass-decoration { transform: scale(1.025); } }
+    /* 区块链金融：内层六边形/节点组默认自动轻微“校准”摆动（外圈虚线环不动；仅此卡片，另两张图标不受影响） */
+    .blockchain-icon { transform-box: fill-box; transform-origin: center; animation: blockchain-calibrate 6s ease-in-out infinite; }
+    @keyframes blockchain-calibrate {
+      0% { transform: rotate(0deg); }
+      18% { transform: rotate(-4deg); }
+      36% { transform: rotate(0deg); }
+      54% { transform: rotate(4deg); }
+      72% { transform: rotate(0deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .data-card[href*="web3-framework"]:hover .blockchain-icon { filter: drop-shadow(0 0 9px rgba(107, 255, 189, .5)); }
+    @media (prefers-reduced-motion: reduce) { .blockchain-icon { animation: none; } }
     .compass-needle { transform-origin: 80px 80px; animation: compass-sway 4s ease-in-out infinite; }
     @keyframes compass-sway { 0%,100% { transform: rotate(-10deg); } 25% { transform: rotate(0deg); } 50% { transform: rotate(10deg); } 75% { transform: rotate(0deg); } }
 
@@ -853,7 +872,7 @@
         <p class="section-kicker">01 / Dataset Library</p>
         <div class="section-heading">
           <h2>金融数据与研究服务</h2>
-          <p class="section-intro">聚焦金融市场数据整理与研究，为分析、建模、复盘和项目研究提供支持。</p>
+          <p class="section-intro">聚焦金融市场数据整理与研究，为分析、建模、复盘和项目研究<span class="nowrap">提供支持。</span></p>
         </div>
 
         <div class="dataset-grid">
@@ -923,7 +942,7 @@
             <svg class="compass-decoration" viewBox="0 0 160 160" fill="none" aria-hidden="true">
               <defs><linearGradient id="blockchain-network" x1="25" y1="25" x2="135" y2="135" gradientUnits="userSpaceOnUse"><stop stop-color="#6bffbd"/><stop offset=".5" stop-color="#58f7ff"/><stop offset="1" stop-color="#9c7cff"/></linearGradient></defs>
               <circle cx="80" cy="80" r="67" stroke="#58f7ff" stroke-opacity=".16" stroke-dasharray="2 7"/>
-              <g stroke="url(#blockchain-network)" stroke-width="1.8" stroke-linejoin="round">
+              <g class="blockchain-icon"><g stroke="url(#blockchain-network)" stroke-width="1.8" stroke-linejoin="round">
                 <path d="M80 28 128 56v48l-48 28-48-28V56l48-28ZM80 28v52m48-24L80 80m48 24L80 80m0 52V80m-48 24 48-24M32 56l48 24" stroke-opacity=".65"/>
                 <path d="m80 62 16 9v18l-16 9-16-9V71l16-9Z" fill="#102a23"/>
                 <path d="m64 71 16 9 16-9M80 80v18"/>
@@ -933,7 +952,7 @@
               </g>
               <g fill="#6bffbd"><circle cx="80" cy="28" r="2"/><circle cx="32" cy="56" r="2"/></g>
               <g fill="#58f7ff"><circle cx="128" cy="56" r="2"/><circle cx="32" cy="104" r="2"/></g>
-              <g fill="#9c7cff"><circle cx="128" cy="104" r="2"/><circle cx="80" cy="132" r="2"/></g>
+              <g fill="#9c7cff"><circle cx="128" cy="104" r="2"/><circle cx="80" cy="132" r="2"/></g></g>
             </svg>
             <span class="future-link">查看区块链研究 <span>→</span></span>
           </a>
