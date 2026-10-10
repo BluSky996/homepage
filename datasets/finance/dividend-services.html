@@ -23,6 +23,9 @@
     .logo { height: 136px; display: flex; justify-content: center; align-items: center; padding: 22px; border-radius: 9px; background: rgba(107,255,189,.025); margin-bottom: 22px; }
     .logo.light { background: #eef3ef; }
     .logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    /* 易方达蓝色 logo 图片自带白色背景：让它铺满白底图片区，避免在白底板里再出现一层“更白的矩形” */
+    .logo.bleed { padding: 0; overflow: hidden; }
+    .logo.bleed img { width: 100%; height: 100%; object-fit: cover; }
     .card-name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
     h2 { margin: 0; font-size: 23px; line-height: 1.4; }
     .identifier { color: #43E8B6; font: 600 18px/1 Consolas, monospace; white-space: nowrap; }
@@ -47,7 +50,7 @@
         <div class="card-name"><h2>贵州茅台</h2><span class="identifier">600519.SH</span></div>
       </a>
       <a class="project-card" href="./haitian-dividends.html">
-        <div class="logo"><img src="../../assets/images/dividend-brands/haday.png" alt="海天标志"></div>
+        <div class="logo light"><img src="../../assets/images/dividend-brands/haday.png" alt="海天标志"></div>
         <div class="card-name"><h2>海天味业</h2><span class="identifier">603288.SH</span></div>
       </a>
       <article class="project-card" aria-labelledby="cio-title">
@@ -59,8 +62,20 @@
         </div>
       </article>
       <a class="project-card" href="./bond-fund-yifangda.html">
-        <div class="logo"><img src="../../assets/images/dividend-brands/efunds.png" alt="易方达基金标志"></div>
+        <div class="logo light bleed"><img src="../../assets/images/dividend-brands/efunds-logo-blue.png" alt="易方达基金标志"></div>
         <div class="card-name"><h2>易方达债券基金</h2><span class="identifier" title="易方达稳健收益债券B">110008</span></div>
+      </a>
+      <a class="project-card" href="./hk-hkt-dividends.html">
+        <div class="logo light"><img src="../../assets/images/dividend-brands/hkt-logo.png" alt="香港电讯 HKT 标志"></div>
+        <div class="card-name"><h2>香港电讯-SS</h2><span class="identifier">6823.HK</span></div>
+      </a>
+      <a class="project-card" href="./hk-mtr-dividends.html">
+        <div class="logo light"><img src="../../assets/images/dividend-brands/mtr-logo.png" alt="港铁公司 MTR 标志"></div>
+        <div class="card-name"><h2>港铁公司</h2><span class="identifier">0066.HK</span></div>
+      </a>
+      <a class="project-card" href="./hk-cki-dividends.html">
+        <div class="logo light"><img src="../../assets/images/dividend-brands/ck-infrastructure-logo.png" alt="长江基建集团 CK Infrastructure 标志"></div>
+        <div class="card-name"><h2>长江基建集团</h2><span class="identifier">1038.HK</span></div>
       </a>
     </section>
     <a class="archive" href="index.html">原金融市场资料 →</a>
